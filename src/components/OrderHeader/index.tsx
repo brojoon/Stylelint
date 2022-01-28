@@ -1,4 +1,4 @@
-import React, { useEffect, useState, VFC } from 'react'
+import React, { useEffect, useState, VFC } from 'react';
 
 const IndexPage = () => {
   return (
@@ -11,7 +11,7 @@ const IndexPage = () => {
       <div className="w-full">6</div>
       <div className="w-full">7</div>
     </div>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
