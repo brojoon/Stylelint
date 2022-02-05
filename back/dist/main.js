@@ -206,6 +206,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppModule = void 0;
 const common_1 = __webpack_require__(6);
@@ -216,6 +219,8 @@ const logger_middleware_1 = __webpack_require__(18);
 const users_service_1 = __webpack_require__(14);
 const users_module_1 = __webpack_require__(19);
 const auth_module_1 = __webpack_require__(21);
+const typeorm_1 = __webpack_require__(27);
+const ormconfig_1 = __importDefault(__webpack_require__(28));
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -223,7 +228,12 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot(), users_module_1.UsersModule, auth_module_1.AuthModule],
+        imports: [
+            config_1.ConfigModule.forRoot(),
+            users_module_1.UsersModule,
+            auth_module_1.AuthModule,
+            typeorm_1.TypeOrmModule.forRoot(ormconfig_1.default),
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, users_service_1.UsersService],
     })
@@ -260,47 +270,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AppController = void 0;
-const local_auth_guard_1 = __webpack_require__(9);
 const common_1 = __webpack_require__(6);
-const swagger_1 = __webpack_require__(11);
 const auth_service_1 = __webpack_require__(12);
-const jwt_auth_guard_1 = __webpack_require__(15);
-const user_decorator_1 = __webpack_require__(16);
 let AppController = class AppController {
     constructor(authService) {
         this.authService = authService;
     }
-    async login(user) {
-        return this.authService.login(user);
-    }
-    getProfile(user) {
-        return user;
-    }
 };
-__decorate([
-    (0, swagger_1.ApiOperation)({ summary: '로그인' }),
-    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
-    (0, common_1.Post)('auth/login'),
-    __param(0, (0, user_decorator_1.User)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], AppController.prototype, "login", null);
-__decorate([
-    (0, swagger_1.ApiOperation)({ summary: '프로필' }),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Get)('profile'),
-    __param(0, (0, user_decorator_1.User)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getProfile", null);
 AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" ? _a : Object])
@@ -571,12 +550,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UsersModule = void 0;
 const common_1 = __webpack_require__(6);
+const auth_module_1 = __webpack_require__(21);
 const users_controller_1 = __webpack_require__(20);
 const users_service_1 = __webpack_require__(14);
 let UsersModule = class UsersModule {
 };
 UsersModule = __decorate([
     (0, common_1.Module)({
+        imports: [auth_module_1.AuthModule],
         controllers: [users_controller_1.UsersController],
         providers: [users_service_1.UsersService],
         exports: [users_service_1.UsersService],
@@ -597,13 +578,54 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UsersController = void 0;
 const common_1 = __webpack_require__(6);
+const swagger_1 = __webpack_require__(11);
+const jwt_auth_guard_1 = __webpack_require__(15);
+const local_auth_guard_1 = __webpack_require__(9);
+const user_decorator_1 = __webpack_require__(16);
+const auth_service_1 = __webpack_require__(12);
 let UsersController = class UsersController {
+    constructor(authService) {
+        this.authService = authService;
+    }
+    async login(user) {
+        return this.authService.login(user);
+    }
+    getProfile(user) {
+        return user;
+    }
 };
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: '로그인' }),
+    (0, common_1.UseGuards)(local_auth_guard_1.LocalAuthGuard),
+    (0, common_1.Post)('login'),
+    __param(0, (0, user_decorator_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "login", null);
+__decorate([
+    (0, swagger_1.ApiOperation)({ summary: '프로필' }),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('profile'),
+    __param(0, (0, user_decorator_1.User)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "getProfile", null);
 UsersController = __decorate([
-    (0, common_1.Controller)('users')
+    (0, swagger_1.ApiTags)('USER'),
+    (0, common_1.Controller)('api/users'),
+    __metadata("design:paramtypes", [typeof (_a = typeof auth_service_1.AuthService !== "undefined" && auth_service_1.AuthService) === "function" ? _a : Object])
 ], UsersController);
 exports.UsersController = UsersController;
 
@@ -626,10 +648,10 @@ const jwt_strategy_1 = __webpack_require__(22);
 const constant_1 = __webpack_require__(23);
 const common_1 = __webpack_require__(6);
 const auth_service_1 = __webpack_require__(12);
-const users_module_1 = __webpack_require__(19);
 const passport_1 = __webpack_require__(10);
 const jwt_1 = __webpack_require__(13);
 const local_strategy_1 = __webpack_require__(25);
+const users_module_1 = __webpack_require__(19);
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
@@ -758,6 +780,203 @@ exports.LocalStrategy = LocalStrategy;
 "use strict";
 module.exports = require("passport-local");
 
+/***/ }),
+/* 27 */
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@nestjs/typeorm");
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const dotenv_1 = __importDefault(__webpack_require__(29));
+const Coats_1 = __webpack_require__(30);
+const Users_1 = __webpack_require__(32);
+dotenv_1.default.config();
+const config = {
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    entities: [Users_1.Users, Coats_1.Coats],
+    migrations: [__dirname + '/src/migrations/*.ts'],
+    cli: { migrationsDir: 'src/migrations' },
+    autoLoadEntities: true,
+    charset: 'utf8mb4',
+    synchronize: true,
+    logging: true,
+    keepConnectionAlive: true,
+};
+module.exports = config;
+
+
+/***/ }),
+/* 29 */
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("dotenv");
+
+/***/ }),
+/* 30 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Coats = void 0;
+const typeorm_1 = __webpack_require__(31);
+let Coats = class Coats {
+};
+__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)({ type: 'int', name: 'id' }),
+    __metadata("design:type", Number)
+], Coats.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'coatName', length: 30 }),
+    __metadata("design:type", String)
+], Coats.prototype, "coatName", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'color', length: 15 }),
+    __metadata("design:type", String)
+], Coats.prototype, "color", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'size', length: 15 }),
+    __metadata("design:type", String)
+], Coats.prototype, "size", void 0);
+__decorate([
+    (0, typeorm_1.Column)('int', { name: 'price', nullable: false }),
+    __metadata("design:type", Number)
+], Coats.prototype, "price", void 0);
+__decorate([
+    (0, typeorm_1.Column)('int', { name: 'quantity', nullable: false }),
+    __metadata("design:type", Number)
+], Coats.prototype, "quantity", void 0);
+__decorate([
+    (0, typeorm_1.Column)('text', { name: 'image' }),
+    __metadata("design:type", String)
+], Coats.prototype, "image", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", typeof (_a = typeof Date !== "undefined" && Date) === "function" ? _a : Object)
+], Coats.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", typeof (_b = typeof Date !== "undefined" && Date) === "function" ? _b : Object)
+], Coats.prototype, "updatedAt", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)(),
+    __metadata("design:type", typeof (_c = typeof Date !== "undefined" && Date) === "function" ? _c : Object)
+], Coats.prototype, "deletedAt", void 0);
+Coats = __decorate([
+    (0, typeorm_1.Entity)({ schema: 'stylelint', name: 'Coats' })
+], Coats);
+exports.Coats = Coats;
+
+
+/***/ }),
+/* 31 */
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("typeorm");
+
+/***/ }),
+/* 32 */
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a, _b, _c;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Users = void 0;
+const swagger_1 = __webpack_require__(11);
+const typeorm_1 = __webpack_require__(31);
+let Users = class Users {
+};
+__decorate([
+    (0, typeorm_1.PrimaryGeneratedColumn)({ type: 'int', name: 'id' }),
+    __metadata("design:type", Number)
+], Users.prototype, "id", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'userId', unique: true, length: 15 }),
+    __metadata("design:type", String)
+], Users.prototype, "userId", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'userName', length: 15 }),
+    __metadata("design:type", String)
+], Users.prototype, "userName", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        example: '123123',
+        description: '비밀번호',
+        required: true,
+    }),
+    (0, typeorm_1.Column)('varchar', { name: 'password', length: 100, select: false }),
+    __metadata("design:type", String)
+], Users.prototype, "password", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'zender', length: 2 }),
+    __metadata("design:type", String)
+], Users.prototype, "zender", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'address', length: 100 }),
+    __metadata("design:type", String)
+], Users.prototype, "address", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'phoneNumber', length: 20 }),
+    __metadata("design:type", String)
+], Users.prototype, "phoneNumber", void 0);
+__decorate([
+    (0, typeorm_1.Column)('varchar', { name: 'email', unique: true, length: 30 }),
+    __metadata("design:type", String)
+], Users.prototype, "email", void 0);
+__decorate([
+    (0, typeorm_1.CreateDateColumn)(),
+    __metadata("design:type", typeof (_a = typeof Date !== "undefined" && Date) === "function" ? _a : Object)
+], Users.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", typeof (_b = typeof Date !== "undefined" && Date) === "function" ? _b : Object)
+], Users.prototype, "updatedAt", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)(),
+    __metadata("design:type", typeof (_c = typeof Date !== "undefined" && Date) === "function" ? _c : Object)
+], Users.prototype, "deletedAt", void 0);
+Users = __decorate([
+    (0, typeorm_1.Entity)({ schema: 'stylelint', name: 'users' })
+], Users);
+exports.Users = Users;
+
+
 /***/ })
 /******/ 	]);
 /************************************************************************/
@@ -820,7 +1039,7 @@ module.exports = require("passport-local");
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("8c640313be8f7f8e7b3b")
+/******/ 		__webpack_require__.h = () => ("a01deecd34d7ee026516")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

@@ -9,18 +9,4 @@ import { User } from './common/decorators/user.decorator';
 @Controller()
 export class AppController {
   constructor(private readonly authService: AuthService) {}
-
-  @ApiOperation({ summary: '로그인' })
-  @UseGuards(LocalAuthGuard)
-  @Post('auth/login')
-  async login(@User() user) {
-    return this.authService.login(user);
-  }
-
-  @ApiOperation({ summary: '프로필' })
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@User() user) {
-    return user;
-  }
 }

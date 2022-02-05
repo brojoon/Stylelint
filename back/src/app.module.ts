@@ -6,9 +6,16 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import ormconfig from '../ormconfig';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UsersModule, AuthModule],
+  imports: [
+    ConfigModule.forRoot(),
+    UsersModule,
+    AuthModule,
+    TypeOrmModule.forRoot(ormconfig),
+  ],
   controllers: [AppController],
   providers: [AppService, UsersService],
 })
