@@ -1,27 +1,26 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { LocalAuthGuard } from './auth/local-auth.guard';
+import { Controller, Post, UseGuards, Request, Get } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ApiResponse, ApiOperation } from '@nestjs/swagger';
-import { AppService } from './app.service';
+import { AuthService } from './auth/auth.service';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { User } from './common/decorators/user.decorator';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly authService: AuthService) {}
 
-  @ApiResponse({
-    status: 201,
-    description: '성공',
-  })
-  @ApiResponse({
-    status: 510,
-    description: '서버에러',
-  })
-  @ApiOperation({ summary: 'test' })
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @ApiOperation({ summary: '로그인' })
+  @UseGuards(LocalAuthGuard)
+  @Post('auth/login')
+  async login(@User() user) {
+    return this.authService.login(user);
   }
 
-  @Post('hi')
-  postHello(): string {
-    return this.appService.postHello();
+  @ApiOperation({ summary: '프로필' })
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@User() user) {
+    return user;
   }
 }
