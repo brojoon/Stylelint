@@ -16,8 +16,8 @@ import ormconfig from '../ormconfig';
     AuthModule,
     TypeOrmModule.forRoot(ormconfig),
   ],
-  controllers: [AppController],
-  providers: [AppService, UsersService],
+
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {

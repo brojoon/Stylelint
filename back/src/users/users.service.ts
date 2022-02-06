@@ -1,21 +1,35 @@
-import { Injectable } from '@nestjs/common';
-import { JoinRequestDto } from './dto/join.request.dto';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Connection, Repository } from 'typeorm';
+import bcrypt from 'bcrypt';
+import { Users } from 'src/entities/UsersInformaiton/Users';
+import { UserLoginDto } from './dto/user.login.dto';
+
 @Injectable()
 export class UsersService {
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
+  constructor(
+    @InjectRepository(Users) private usersRepository: Repository<Users>,
+    private connection: Connection,
+  ) {}
 
-  async findOne(username: string): Promise<JoinRequestDto | undefined> {
-    return this.users.find((user) => user.username === username);
+  async info(userId: string) {
+    const result = await this.usersRepository.findOne({
+      select: [
+        'userId',
+        'userName',
+        'password',
+        'zender',
+        'address',
+        'phoneNumber',
+        'email',
+      ],
+      where: { userId },
+    });
+    if (!result) throw new NotFoundException('유저 정보 없음');
+    return result;
   }
 }

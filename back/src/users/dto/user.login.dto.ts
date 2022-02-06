@@ -1,14 +1,9 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { PickType } from '@nestjs/swagger';
 import { Users } from '../../entities/UsersInformaiton/Users';
 
-export class JoinRequestDto extends PickType(Users, [
+export class UserLoginDto extends PickType(Users, [
   'userId',
-  'userName',
   'password',
-  'zender',
-  'address',
-  'phoneNumber',
-  'email',
 ] as const) {
   // @ApiProperty({
   //   example: 1,

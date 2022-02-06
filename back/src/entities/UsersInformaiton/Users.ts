@@ -27,7 +27,7 @@ export class Users {
   @Column('varchar', { name: 'password', length: 100, select: false })
   password: string;
 
-  @Column('varchar', { name: 'zender', length: 2 })
+  @Column('varchar', { name: 'zender', length: 5 })
   zender: string;
 
   @Column('varchar', { name: 'address', length: 100 })
