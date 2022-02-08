@@ -1,11 +1,11 @@
-import Link from 'next/link'
-import { useRecoilState } from 'recoil'
-import { pageNameState } from '@states/Atom'
+import Link from 'next/link';
+import { useRecoilState } from 'recoil';
+import { pageNameState } from '@states/Atom';
 
 const IndexPage = () => {
-  const [pageName, setPageName] = useRecoilState(pageNameState)
+  const [pageName, setPageName] = useRecoilState(pageNameState);
 
-  return <div className="lg:flex grid grid-rows-4 grid-flow-col gap-4"></div>
-}
+  return <div></div>;
+};
 
-export default IndexPage
+export default IndexPage;

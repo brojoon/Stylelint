@@ -1,11 +1,14 @@
 import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
 import React, { useCallback } from 'react';
+import Link from 'next/link';
 
 function MemberLogin() {
   const onSubmitLogin = useCallback(() => {
     console.log('submit!!');
   }, []);
+  const onClickKakaoBtn = useCallback(() => {}, []);
+  const onClickGoogleBtn = useCallback(() => {}, []);
   return (
     <div className="flex flex-col justify-center items-center">
       <BasicInput
@@ -32,8 +35,12 @@ function MemberLogin() {
           &nbsp;아이디 저장
         </label>
         <div className="flex justify-center items-betweem text-[0.75rem] ">
-          <span className="pr-1">아이디 · 비밀번호 찾기</span>
-          <span className="pl-1">회원가입</span>
+          <Link href="/id-password-retrieve">
+            <span className="pr-1 cursor-pointer">아이디 · 비밀번호 찾기</span>
+          </Link>
+          <Link href="/signup">
+            <span className="pl-1 cursor-pointer">회원가입</span>
+          </Link>
         </div>
       </div>
       <BasicBtn
@@ -42,12 +49,12 @@ function MemberLogin() {
         style="w-full bg-blue-600 rounded text-white py-3 font-semibold"
       />
       <BasicBtn
-        onClickBtn={onSubmitLogin}
+        onClickBtn={onClickKakaoBtn}
         Content="카카오 로그인"
         style="flex justify-center items-center w-full bg-[#fee500]  rounded text-black my-3 text-white py-3 font-semibold before:bg-[url('~@../../../img/kakao-logo.png')] before:w-[1.875rem] before:h-[1.875rem] before:bg-[length:60px_30px] before:inline-block"
       />
       <BasicBtn
-        onClickBtn={onSubmitLogin}
+        onClickBtn={onClickGoogleBtn}
         Content="구글 로그인"
         style="flex justify-center items-center w-full bg-indigo-50  border rounded text-black py-3 font-semibold before:bg-[url('~@../../../img/google-logo.png')] before:bg-cover before:w-[1.875rem] before:h-[1.875rem] before:inline-block"
       />
