@@ -51,12 +51,12 @@ function MemberLogin() {
       <BasicBtn
         onClickBtn={onClickKakaoBtn}
         Content="카카오 로그인"
-        style="flex justify-center items-center w-full bg-[#fee500]  rounded text-black my-3 text-white py-3 font-semibold before:bg-[url('~@../../../img/kakao-logo.png')] before:w-[1.875rem] before:h-[1.875rem] before:bg-[length:60px_30px] before:inline-block"
+        style="flex justify-center items-center w-full bg-[#fee500]  rounded text-black my-3 text-white py-3 font-semibold before:bg-[url('~@../../../public/img/kakao-logo.png')] before:w-[1.875rem] before:h-[1.875rem] before:bg-[length:60px_30px] before:inline-block"
       />
       <BasicBtn
         onClickBtn={onClickGoogleBtn}
         Content="구글 로그인"
-        style="flex justify-center items-center w-full bg-indigo-50  border rounded text-black py-3 font-semibold before:bg-[url('~@../../../img/google-logo.png')] before:bg-cover before:w-[1.875rem] before:h-[1.875rem] before:inline-block"
+        style="flex justify-center items-center w-full bg-indigo-50  border rounded text-black py-3 font-semibold before:bg-[url('~@../../../public/img/google-logo.png')] before:bg-cover before:w-[1.875rem] before:h-[1.875rem] before:inline-block"
       />
       <p className="font-medium text-[#8E929F] mt-10">© StyleLint Corp.</p>
     </div>
