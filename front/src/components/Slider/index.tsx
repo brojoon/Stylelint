@@ -24,11 +24,11 @@ const Slider = () => {
       <div
         className={`flex w-[100%] h-[800px] translate-x-[${slidePosition}%] transition duration-500 ease-in-iut overflow-hidden`}
       >
-        <div className="w-full bg-no-repeat bg-cover bg-[length:100%_100%]  bg-[url('~@../../../public/img/page1.webp')]"></div>
-        <div className="w-full bg-no-repeat bg-cover bg-[length:100%_100%] bg-[url('~@../../../public/img/page2.webp')]"></div>
-        <div className="w-full bg-no-repeat bg-cover bg-[length:100%_100%] bg-[url('~@../../../public/img/page3.webp')]"></div>
-        <div className="w-full bg-no-repeat bg-cover bg-[length:100%_100%] bg-[url('~@../../../public/img/page4.jpg')]"></div>
-        <div className="w-full bg-no-repeat bg-cover bg-[length:100%_100%] bg-[url('~@../../../public/img/page4.webp')]"></div>
+        <div className="w-full bg-no-repeat bg-[length:100%_100%]  bg-[url('~@../../../public/img/page1.webp')]"></div>
+        <div className="w-full bg-no-repeat bg-[length:100%_100%] bg-[url('~@../../../public/img/page2.webp')]"></div>
+        <div className="w-full bg-no-repeat bg-[length:100%_100%] bg-[url('~@../../../public/img/page3.webp')]"></div>
+        <div className="w-full bg-no-repeat bg-[length:100%_100%] bg-[url('~@../../../public/img/page4.jpg')]"></div>
+        <div className="w-full bg-no-repeat bg-[length:100%_100%] bg-[url('~@../../../public/img/page4.webp')]"></div>
       </div>
       <button
         onClick={onClickPrev}
