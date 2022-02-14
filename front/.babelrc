@@ -16,6 +16,7 @@
           "@pages": "./pages"
         }
       }
-    ]
+    ],
+    ["styled-components", { "ssr": true }]
   ]
 }

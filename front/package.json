@@ -14,15 +14,18 @@
     "next-images": "^1.8.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "recoil": "^0.5.2"
+    "recoil": "^0.5.2",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@types/node": "^17.0.10",
     "@types/react": "^17.0.38",
+    "@types/styled-components": "^5.1.22",
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
     "autoprefixer": "^10.4.2",
     "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-styled-components": "^1.13.3",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8",
     "eslint-config-prettier": "^8.3.0",
