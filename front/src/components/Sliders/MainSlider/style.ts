@@ -1,7 +1,9 @@
-import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-export const SlideWrapper = styled.div<{ posX: string; IsTransition: boolean }>`
+export const SlideWrapper = styled.section<{
+  posX: string;
+  IsTransition: boolean;
+}>`
   width: 100%;
   height: 100%;
   display: flex;

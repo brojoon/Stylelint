@@ -1,7 +1,7 @@
 import React from 'react';
 import ProductCard from '@components/ProductCard';
 
-const ProductsWrapper = () => {
+const ProductsGridWrapper = () => {
   return (
     <div className="grid grid-flow-col grid-rows-4 sm:grid-rows-2 md:grid-rows-2 lg:grid-rows-1 gap-[20px] p-[15px]">
       <ProductCard />
@@ -12,4 +12,4 @@ const ProductsWrapper = () => {
   );
 };
 
-export default ProductsWrapper;
+export default ProductsGridWrapper;

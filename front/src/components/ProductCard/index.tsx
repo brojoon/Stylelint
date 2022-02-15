@@ -5,7 +5,7 @@ const ProductCard = () => {
   return (
     <div>
       <div
-        className="relative z-10 rounded-[10px] w-[100%] h-[365px]"
+        className="relative z-10 rounded-[10px] w-[100%]"
         onMouseEnter={() => {
           setQuickview(true);
         }}
@@ -14,7 +14,7 @@ const ProductCard = () => {
         }}
       >
         <img
-          className=" w-[100%] h-[100%] rounded-[10px]"
+          className=" w-[100%] h-[100%] rounded-[10px] bg-contain"
           src="/img/product3.gif"
         />
         <div

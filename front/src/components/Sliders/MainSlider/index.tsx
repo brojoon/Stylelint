@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { SlideWrapper } from './style';
 import { asleep } from '@utils/utils1';
 
-const Slider = () => {
+const MainSlider = () => {
   const slideImgCount = 7;
   const slideImgRatio = 100 / slideImgCount;
   const [slidePosition, setSlidePosition] = useState(-slideImgRatio);
@@ -82,7 +82,7 @@ const Slider = () => {
         );
       }
     },
-    [slidePosition, isSlide, savePosValue],
+    [slidePosition, isSlide, savePosValue, isMouseEnter],
   );
 
   const onMouseUpSlide = useCallback(async () => {
@@ -90,7 +90,7 @@ const Slider = () => {
     setIsTransition(true);
     const curPage = Math.floor(slidePosition / slideImgCount / 2);
 
-    if (savePosValue > 3) {
+    if (savePosValue > 2) {
       if (slidePosition + slideImgRatio >= -5) {
         setSlidePosition((curPage + 1) * slideImgRatio);
         await asleep(500, '성공');
@@ -99,7 +99,7 @@ const Slider = () => {
         await asleep(100, '성공');
         setIsTransition(true);
       } else setSlidePosition((curPage + 1) * slideImgRatio);
-    } else if (savePosValue < -3) {
+    } else if (savePosValue < -2) {
       if (slidePosition - slideImgRatio < -80) {
         setSlidePosition(curPage * slideImgRatio);
         await asleep(500, '성공');
@@ -108,7 +108,7 @@ const Slider = () => {
         await asleep(100, '성공');
       } else setSlidePosition(curPage * slideImgRatio);
     } else {
-      savePosValue < 0
+      savePosValue <= 0
         ? setSlidePosition((curPage + 1) * slideImgRatio)
         : setSlidePosition(curPage * slideImgRatio);
     }
@@ -151,6 +151,9 @@ const Slider = () => {
 
   const onMouseLeave = useCallback(() => {
     setIsMouseEnter(false);
+    setIsTransition(true);
+    setIsSlide(false);
+    setSavePosValue(0);
   }, []);
 
   useEffect(() => {
@@ -199,4 +202,4 @@ const Slider = () => {
   );
 };
 
-export default Slider;
+export default MainSlider;

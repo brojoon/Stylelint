@@ -3,8 +3,9 @@ import { useRecoilState } from 'recoil';
 import { pageNameState } from '@states/Atom';
 import PreHeader from '@components/layouts/PreHeader';
 import Header from '@components/layouts/Header';
-import Slider from '@components/Slider';
-import ProductsWrapper from '@components/ProductsWrapper';
+import MainSlider from '@components/Sliders/MainSlider';
+import ProductsGridWrapper from '@components/ProductCardsGridWrapper';
+import ProductsCardSlider from '@components/Sliders/ProductCardsSlider';
 
 const IndexPage = () => {
   const [pageName, setPageName] = useRecoilState(pageNameState);
@@ -15,9 +16,11 @@ const IndexPage = () => {
         <PreHeader />
         <Header />
       </header>
-      <Slider />
-      <ProductsWrapper />
-      <ProductsWrapper />
+      <MainSlider />
+      <ProductsCardSlider />
+      <ProductsCardSlider />
+      <ProductsCardSlider />
+      <ProductsCardSlider />
     </>
   );
 };
