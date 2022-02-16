@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
+import { ProductCardIconWrapper } from './style';
 
 const ProductCard = () => {
   const [quickview, setQuickview] = useState(false);
+  const [isProductDibs, setIsProductDibs] = useState(false);
+  const onClickProductDibs = useCallback(() => {
+    setIsProductDibs((prev) => !prev);
+  }, []);
   return (
     <div>
       <div
@@ -57,10 +62,16 @@ const ProductCard = () => {
             </span>
             <span>리뷰수 207</span>
           </div>
-          <div className="flex items-center">
-            <span className="w-[23px] h-[20px] bg-[position:-45px_-177px] bg-[url('~@../../../public/img/imags.png')] inline-block"></span>
+          <ProductCardIconWrapper
+            IsProductDibs={isProductDibs}
+            className="flex items-center"
+          >
+            <span
+              onClick={onClickProductDibs}
+              className="w-[23px] h-[20px] bg-[position:-45px_-177px] bg-[url('~@../../../public/img/imags.png')] inline-block"
+            ></span>
             <span className="ml-[10px] w-[23px] h-[24px] bg-[position:-123px_-174px] bg-[url('~@../../../public/img/imags.png')] inline-block"></span>
-          </div>
+          </ProductCardIconWrapper>
         </div>
       </div>
     </div>
