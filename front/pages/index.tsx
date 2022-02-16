@@ -12,10 +12,6 @@ const IndexPage = () => {
 
   return (
     <>
-      <header>
-        <PreHeader />
-        <Header />
-      </header>
       <MainSlider />
       <ProductsCardSlider />
       <ProductsCardSlider />

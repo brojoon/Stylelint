@@ -1,5 +1,4 @@
 import ProductCard from '@components/ProductCard';
-import { asleep } from '@utils/utils1';
 import React, { useCallback, useState } from 'react';
 import { ProductCardSlideWrapper } from './style';
 
@@ -33,7 +32,7 @@ const ProductsCardSlider = () => {
         );
       }
     },
-    [slidePosition, isSlide, savePosValue, isMouseEnter],
+    [slidePosition, isSlide, savePosValue],
   );
 
   const onMouseUpSlide = useCallback(async () => {
@@ -49,13 +48,10 @@ const ProductsCardSlider = () => {
     if (timeCompenstaion && timeCompenstaion > 500) timeCompenstaion = 0;
     if (timeCompenstaion) timeCompenstaion = (500 - timeCompenstaion) / 60;
 
-    console.log('timeCompenstaion: ', timeCompenstaion);
-
-    console.log('savePosValue: ', savePosValue);
     if (slidePosition + savePosValue * timeCompenstaion > 0) {
       setSlidePosition(0);
-    } else if (slidePosition + savePosValue * timeCompenstaion < -233) {
-      setSlidePosition(-233);
+    } else if (slidePosition + savePosValue * timeCompenstaion < -228) {
+      setSlidePosition(-228);
     } else if (savePosValue > 0) {
       setSlidePosition(slidePosition + savePosValue * timeCompenstaion);
     } else if (savePosValue < 0) {

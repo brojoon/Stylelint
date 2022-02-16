@@ -1,49 +1,94 @@
-import BasicInput from '@components/Basic/BasicInput';
+import { useScroll } from '@utils/Hooks';
 import Link from 'next/link';
-import React from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
+import { MainHeader, BackgroundHeader, Banner } from './style';
 
 const Header = () => {
+  const [isMenuActive, setIsMenuActive] = useState(false);
+  const { scrollY } = useScroll();
+
+  const onClickMenuBtn = useCallback(() => {
+    setIsMenuActive((prev) => !prev);
+  }, []);
   return (
-    <div className="flex justify-between px-[4%] items-center h-[70px] border-b ">
-      <div className="flex items-center font-bold cursor-pointer before:bg-[url('/img/햄버거바.png')] text-[1rem] text-[#73675c] before:mr-[2px] before:bg-cover before:w-[1.2rem] before:h-[1.2rem] before:inline-block">
-        전체 카테고리
-      </div>
-      <h1 className="flex flex-col items-center text-[1.5rem] font-bold">
-        STYLELINT
-      </h1>
-      <nav className="flex items-center">
-        {/* <div className="mr-[1.5rem]">
-          <form className="flex">
-            <BasicInput
-              type="text"
-              name="search"
-              placeholder="상품명으로 찾아보세요"
-              maxLength={20}
-              style="w-full bg-[url('~@../../../public/img/search.svg')] bg-[#f6f6f6] bg-[center_left_0.3rem] bg-[length:1.3rem_1.3rem] bg-no-repeat border outline-none pl-[2rem] pr-[0.3rem] py-[6px] text-[0.9rem] text-[#73675c] text-justify"
-            />
-          </form>
-        </div> */}
-        <ul className="flex items-center text-[0.6rem]">
-          <li className="ml-[1rem]">
-            <Link href="/profile">
-              <div className="flex justify-center items-center flex-col">
-                <img width="24px" height="24px" src="/img/profile.svg" />
-                <span>내정보</span>
-              </div>
-            </Link>
-          </li>
-          <div className="after:border-r after:inline-block after:w-[1px] mx-[0.5rem] after:h-[1rem]"></div>
-          <li>
-            <Link href="/cart">
-              <div className="flex justify-center items-center flex-col">
-                <img width="24px" height="24px" src="/img/cart.svg" />
-                <span>장바구니</span>
-              </div>
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <>
+      <Banner>
+        <span>
+          스타일린트는 <b>당일배송</b>이 원칙입니다
+        </span>
+      </Banner>
+      <BackgroundHeader />
+      <MainHeader IsScrollTop={scrollY}>
+        <div className="wrapper">
+          <button
+            className={`all-menu ${isMenuActive ? 'active' : 'none'}`}
+            onClick={onClickMenuBtn}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div className="logo">
+            <h1>STYLELINT</h1>
+          </div>
+
+          <ul className="category">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+          </ul>
+
+          <div className="info">
+            <ul>
+              <li>
+                <div>
+                  <img width="26px" height="26px" src="/img/search.svg" />
+                </div>
+              </li>
+              <li>
+                <Link href="/basket">
+                  <div>
+                    <img width="26px" height="26px" src="/img/cart.svg" />
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link href="/profile">
+                  <div>
+                    <img width="26px" height="26px" src="/img/profile.svg" />
+                  </div>
+                </Link>
+
+                <ul className="subBox">
+                  <li>
+                    <Link href="/profile">로그인</Link>
+                  </li>
+                  <li>
+                    <Link href="/profile">회원가입</Link>
+                  </li>
+                  <li>
+                    <Link href="/profile">배송조회</Link>
+                  </li>
+                </ul>
+                {/* <ul className="subBox">
+                  <li>
+                    <Link href="/profile">회원정보</Link>
+                  </li>
+                  <li>
+                    <Link href="/profile">배송조회</Link>
+                  </li>
+                  <li>
+                    <Link href="/profile">로그아웃</Link>
+                  </li>
+                </ul> */}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </MainHeader>
+    </>
   );
 };
 
