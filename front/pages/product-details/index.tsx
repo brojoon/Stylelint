@@ -1,10 +1,13 @@
-import React from 'react';
+import ProductDetailSlider from '@components/Sliders/ProductDetailSlider';
+import React, { useCallback, useState } from 'react';
 
 const productDetails = () => {
   return (
-    <main className="flex justify-between">
-      <div className="w-full">슬라이드</div>
-      <div className="w-full flex justify-center">
+    <main className="flex justify-between m-[3rem]">
+      <div className="flex flex-col w-[50%]">
+        <ProductDetailSlider />
+      </div>
+      <div className="w-[50%] flex justify-center ml-[1rem] ">
         <div>
           <h3 className="text-[1.125rem] text-[#7E7E7E] font-semibold">
             스타일린트

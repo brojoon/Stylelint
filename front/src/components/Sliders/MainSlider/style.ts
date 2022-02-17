@@ -8,6 +8,6 @@ export const SlideWrapper = styled.section<{
   height: 100%;
   display: flex;
   transform: ${(props) => `translateX(${props.posX}%)`};
-  transition: ${(props) => (props.IsTransition ? 'ease-in-out' : '')};
-  transition-duration: ${(props) => (props.IsTransition ? '0.5s' : '')};
+  transition: ${(props) =>
+    props.IsTransition ? 'transform ease-in-out 0.5s' : ''};
 `;

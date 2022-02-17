@@ -11,6 +11,6 @@ export const ProductCardSlideWrapper = styled.section<{
   grid-template-columns: repeat(100, minmax(20%, auto));
   gap: 0.8rem;
   transform: ${(props) => `translateX(${props.PosX}%)`};
-  transition: ${(props) => (props.IsTransition ? 'ease-out' : '')};
-  transition-duration: ${(props) => (props.IsTransition ? '0.5s' : '')};
+  transition: ${(props) =>
+    props.IsTransition ? 'transform ease-in-out 0.5s' : ''};
 `;
