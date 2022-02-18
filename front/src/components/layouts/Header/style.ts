@@ -95,7 +95,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   .logo {
     margin-left: 2rem;
     width: 11%;
-    font-weight: 600;
+    font-weight: 700;
   }
   .logo h1 {
     font-size: 1.5rem;

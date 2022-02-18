@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const ProductCardIconWrapper = styled.div<{ IsProductDibs: boolean }>`
-  ${(props) => (props.IsProductDibs ? '' : '')};
-
   @keyframes scale2 {
     0% {
       transform: scale(1, 1);
