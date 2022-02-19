@@ -1,3 +1,4 @@
+import ProductDescTab from '@components/RroductDetailDescTabs/ProductDescTab';
 import React, { useCallback, useState } from 'react';
 import { ProductDetailDescWrapper } from './style';
 
@@ -18,7 +19,7 @@ const ProductDetailDesc = () => {
             </li>
             <li>
               <span onClick={onClickProductDescNav} data-index="2">
-                상품명
+                상품평
               </span>
             </li>
             <li>
@@ -31,59 +32,7 @@ const ProductDetailDesc = () => {
       </div>
       <div className="product-desc-content-container">
         <div className="product-desc-content-wrapper">
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
-          <div>sdf</div>
+          <ProductDescTab />
         </div>
       </div>
     </ProductDetailDescWrapper>

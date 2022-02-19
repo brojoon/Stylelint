@@ -67,7 +67,7 @@ const productDetails = () => {
                       <option value="M">M</option>
                       <option value="L">L</option>
                     </select>
-                    <span className="icoArrow">
+                    <span className="icoArrow arrow1">
                       <img src="./img/select_dropdown.png" alt="" />
                     </span>
                   </div>
@@ -80,7 +80,7 @@ const productDetails = () => {
                       <option value="White">White</option>
                       <option value="Red">Red</option>
                     </select>
-                    <span className="icoArrow">
+                    <span className="icoArrow arrow2">
                       <img src="./img/select_dropdown.png" alt="" />
                     </span>
                   </div>

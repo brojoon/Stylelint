@@ -39,7 +39,7 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
 
   & .icoArrow {
     position: absolute;
-    top: 41px;
+
     right: 5px;
     z-index: 1;
     width: 35px;
@@ -49,6 +49,13 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
     align-items: center;
   }
 
+  & .arrow1 {
+    top: 50px;
+  }
+
+  & .arrow2 {
+    top: 15px;
+  }
   & .icoArrow img {
     width: 50%;
     transition: 0.3s;

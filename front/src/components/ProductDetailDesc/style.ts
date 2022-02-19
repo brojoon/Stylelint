@@ -48,12 +48,13 @@ export const ProductDetailDescWrapper = styled.section<{
     border-radius: 3.125rem;
   }
 
-  .product-desc-nav-wrapper > ul > li & .product-desc-content-container {
+  & .product-desc-content-container {
     max-width: 1920px;
     margin: 0 auto;
+    display: flex;
   }
 
   & .product-desc-content-wrapper {
-    margin: 1.6rem;
+    width: 100%;
   }
 `;
