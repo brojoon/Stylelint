@@ -33,13 +33,7 @@ const Header = () => {
               <h1>STYLELINT</h1>
             </div>
 
-            <ul className="category">
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
-            </ul>
+            <ul className="category"></ul>
 
             <div className="info">
               <ul>

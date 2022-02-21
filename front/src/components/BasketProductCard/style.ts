@@ -34,6 +34,11 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
     display: none;
   }
 
+  .basket-product-info > div > img {
+    width: 80px;
+    height: 80px;
+  }
+
   .basket-product-desc {
     font-size: 15px;
     letter-spacing: -0.5px;
@@ -73,6 +78,10 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
     height: 21px;
     background: url('./img/basket_product_count.png') no-repeat;
     background-position: -26px 0;
+  }
+
+  .basket-justfy-between-div {
+    flex: 1;
   }
 
   .basket-product-price {

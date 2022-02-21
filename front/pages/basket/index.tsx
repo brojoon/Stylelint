@@ -4,8 +4,24 @@ import { BasketContainer } from './style';
 
 const Basket = () => {
   const [isCheckedAll, setIsCheckedAllSelct] = useState(false);
+  const [productCardArr, setProductCardArr] = useState<number[]>([0, 0, 0, 0]);
   const onCheckedAllSelect = useCallback((e) => {
     setIsCheckedAllSelct(e.target.checked);
+    setProductCardArr((prev) => {
+      return prev.map((value) => {
+        if (value == 2) return value;
+        return e.target.checked ? 1 : 0;
+      });
+    });
+  }, []);
+
+  const onClickProductDelete = useCallback(() => {
+    setProductCardArr((prev) => {
+      return prev.map((value) => {
+        if (value == 1) return 2;
+        else return value;
+      });
+    });
   }, []);
   return (
     <BasketContainer IsCheckedAll={isCheckedAll} className="basket-container">
@@ -41,7 +57,7 @@ const Basket = () => {
                   </span>
                 </li>
                 <li>
-                  <button>선택삭제</button>
+                  <button onClick={onClickProductDelete}>선택삭제</button>
                 </li>
               </ul>
             </div>
@@ -50,17 +66,17 @@ const Basket = () => {
         <section className="basket-products-container">
           <div className="basket-products-wrapper">
             <div>
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
-              <BasketProductCard />
+              {productCardArr.map((value, index) => {
+                if (value == 2) return;
+                return (
+                  <BasketProductCard
+                    key={index}
+                    index={index}
+                    setProductCardArr={setProductCardArr}
+                    productCardArr={productCardArr}
+                  />
+                );
+              })}
             </div>
             <div className="basket-product-order-container">
               <div className="basket-product-order-wrapper">

@@ -78,7 +78,7 @@ export const FooterContainer = styled.footer`
     color: #94989f;
   }
 
-  .footer-legal-info > div > ul > li:nth-child(1) {
+  .footer-legal-info > div > ul:nth-child(1) > li:nth-child(1) {
     margin-right: 10px;
   }
 
@@ -88,18 +88,17 @@ export const FooterContainer = styled.footer`
     height: 10px;
     margin-left: 5px;
     display: inline-block;
-    background: url(//pics.gmarket.co.kr/pc/sprite/kr/common/sprite__common.png)
-      no-repeat;
+    background: url('./img/footer_arrow.png') no-repeat;
     background-position: -238px -34px;
     background-size: 400px auto;
     text-indent: -9999px;
   }
 
-  .footer-legal-info > div > ul > li:nth-child(2):after {
+  .footer-legal-info > div:nth-child(1) > ul > li:nth-child(2):after {
     display: none;
   }
 
-  .footer-legal-info > div > ul:nth-child(1) {
+  .footer-legal-info > div:nth-child(1) > ul {
     margin-bottom: 2px;
   }
 
