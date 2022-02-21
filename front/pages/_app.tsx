@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 import PreHeader from '@components/layouts/PreHeader';
 import Header from '@components/layouts/Header';
+import Footer from '@components/layouts/Footer';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header />
       </header>
       <Component {...pageProps} />
+      <Footer />
     </RecoilRoot>
   );
 }

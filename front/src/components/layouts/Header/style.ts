@@ -19,6 +19,7 @@ export const BackgroundHeader = styled.div`
 `;
 
 export const MainHeader = styled.header<{ IsScrollTop: number }>`
+
   position: fixed;
   top: 0;
   left: 0;
@@ -33,14 +34,21 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   transform: ${(props) =>
     props.IsScrollTop > 200 ? 'translateY(0)' : 'translateY(35px)'};
   .wrapper {
-    display: flex;
-    width: 100%;
 
+    max-width: 1330px;
     margin: 0 auto;
-    padding: 0 3%;
+    padding: 0 1%;
     background: #fff;
-    z-index: 40;
+    height: ${(props) => (props.IsScrollTop > 200 ? '65px' : '89px')};
+    transition: all 500ms ease;
     align-items: center;
+  }
+
+  .container {
+    width: 1320px;
+    display: flex;
+    align-items: center;
+    justify-content: between;
   }
 
   .all-menu {
@@ -54,7 +62,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   button.all-menu span {
     display: block;
     position: absolute;
-    left: 1.3rem;
+
     width: 1.3rem;
     height: 0.1875rem;
     background: #3c3c3c;
@@ -63,7 +71,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
 
   button.all-menu.active span:nth-child(1) {
     top: 19px;
-    left: 20px;
+
     width: 23px;
     transform: rotate(45deg);
   }
@@ -75,7 +83,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
 
   button.all-menu.active span:nth-child(3) {
     top: 19px;
-    left: 20px;
+
     width: 23px;
     transform: rotate(-45deg);
   }
@@ -93,7 +101,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   }
 
   .logo {
-    margin-left: 2rem;
+
     width: 11%;
     font-weight: 700;
   }
@@ -102,7 +110,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   }
 
   .category {
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
     text-align: center;
   }

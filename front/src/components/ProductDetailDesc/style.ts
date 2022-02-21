@@ -15,7 +15,8 @@ export const ProductDetailDescWrapper = styled.section<{
   }
 
   & .product-desc-nav-wrapper {
-    max-width: 1920px;
+    max-width: 1300px;
+    padding: 0 1%;
     margin: 0 auto;
   }
 
@@ -49,7 +50,8 @@ export const ProductDetailDescWrapper = styled.section<{
   }
 
   & .product-desc-content-container {
-    max-width: 1920px;
+    max-width: 1300px;
+    padding: 0 1%;
     margin: 0 auto;
     display: flex;
   }
