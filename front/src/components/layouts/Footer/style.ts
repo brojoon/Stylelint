@@ -61,7 +61,7 @@ export const FooterContainer = styled.footer`
     width: 50%;
   }
 
-  .footer-info > div > p > h3 {
+  .footer-info > div > h3 {
     font-weight: 700;
     font-size: 14px;
     color: #000000;
