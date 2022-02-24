@@ -30,7 +30,9 @@ const Header = () => {
               <span></span>
             </button>
             <div className="logo">
-              <h1>STYLELINT</h1>
+              <Link href="/">
+                <h1>STYLELINT</h1>
+              </Link>
             </div>
 
             <ul className="category"></ul>

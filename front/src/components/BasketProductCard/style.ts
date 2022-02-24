@@ -5,14 +5,16 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
   min-width: 800px;
   width: 70%;
   margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
 
   .basket-product-content {
     display: flex;
     padding: 30px 20px;
-    border-bottom: 1px solid #ddd;
     background-color: #ffffff;
     height: 130px;
     justify-content: space-between;
+    border-radius: 6px;
   }
 
   .basket-product-info {

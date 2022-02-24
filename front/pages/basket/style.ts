@@ -161,6 +161,8 @@ export const BasketContainer = styled.section<{ IsCheckedAll: boolean }>`
     width: 30%;
     height: 200px;
     margin-left: 15px;
+    border: 1px solid #000;
+    border-radius: 6px;
   }
 
   .basket-product-order-wrapper > ul > li {
