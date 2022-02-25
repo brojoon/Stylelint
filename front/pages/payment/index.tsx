@@ -2,6 +2,7 @@ import Postcode from '@components/Modals/PostcodeModal';
 import React, { useCallback, useState } from 'react';
 import { PaymentContainer } from './style';
 import Link from 'next/link';
+import PaymentSlider from '@components/Sliders/PaymentSlider';
 
 const Payment = () => {
   const [isPostCode, setIsPostCode] = useState(false);
@@ -77,24 +78,7 @@ const Payment = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="payment-slide-container">
-                    <div>
-                      <h3>결제수단</h3>
-                    </div>
-                    <div>
-                      <div>
-                        <ul>
-                          <li></li>
-                          <li></li>
-                          <li></li>
-                          <li></li>
-                          <li></li>
-                        </ul>
-                      </div>
-                      <button></button>
-                      <button></button>
-                    </div>
-                  </div>
+                  <PaymentSlider />
                 </div>
                 <div>
                   <div className="payment-purchase-card">

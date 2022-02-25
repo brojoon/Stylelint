@@ -74,7 +74,7 @@ export const PaymentContainer = styled.section`
     height: 24px;
     overflow: hidden;
     display: inline-block;
-    background: url(//pics.gmarket.co.kr/pc/sprite/kr/checkout/sprite__checkout.png)
+    background: url(./img/g_sprite__checkout.png)
       no-repeat;
     background-position: -52px -26px;
     font-size: 0;
