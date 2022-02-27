@@ -88,7 +88,7 @@ export const FooterContainer = styled.footer`
     height: 10px;
     margin-left: 5px;
     display: inline-block;
-    background: url('./img/footer_arrow.png') no-repeat;
+    background: url('/img/footer_arrow.png') no-repeat;
     background-position: -238px -34px;
     background-size: 400px auto;
     text-indent: -9999px;

@@ -34,13 +34,13 @@ const Payment = () => {
                   <div className="payment-info-card">
                     <div>
                       <div>
-                        <h3>김형준</h3>
+                        <h3>홍길동</h3>
                       </div>
                     </div>
                     <div>
                       <div className="payment-address-name">
-                        <span>김형준</span>
-                        <span> 010-9420-8042</span>
+                        <span>홍길동</span>
+                        <span> 010-3333-4444</span>
                       </div>
                       <div className="payment-address-text">
                         <input type="text" disabled value={addressInputValue} />

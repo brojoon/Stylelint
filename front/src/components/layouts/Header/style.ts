@@ -23,7 +23,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   position: fixed;
   top: 0;
   left: 0;
-  height: ${(props) => (props.IsScrollTop > 200 ? '66px' : '90px')};
+  height: ${(props) => (props.IsScrollTop > 60 ? '66px' : '90px')};
   display: flex;
   width: 100%;
   align-items: center;
@@ -32,14 +32,14 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   z-index: 60;
   transition: all 500ms ease;
   transform: ${(props) =>
-    props.IsScrollTop > 200 ? 'translateY(0)' : 'translateY(35px)'};
+    props.IsScrollTop > 60 ? 'translateY(0)' : 'translateY(35px)'};
   .wrapper {
 
     max-width: 1330px;
     margin: 0 auto;
     padding: 0 1%;
     background: #fff;
-    height: ${(props) => (props.IsScrollTop > 200 ? '65px' : '89px')};
+    height: ${(props) => (props.IsScrollTop > 60 ? '65px' : '89px')};
     transition: all 500ms ease;
     align-items: center;
   }
@@ -148,7 +148,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   .info > ul > li:nth-child(3) {
     margin-left: 2rem;
     position: relative;
-    padding: ${(props) => (props.IsScrollTop > 200 ? '19px 0' : '32px 0')};
+    padding: ${(props) => (props.IsScrollTop > 60 ? '19px 0' : '32px 0')};
 
   }
 
@@ -173,7 +173,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
     right: 0;
     transition: all 500ms ease;
     transform: ${(props) =>
-      props.IsScrollTop > 200
+      props.IsScrollTop > 60
         ? 'translate(40%, 20px);'
         : 'translate(40%, 32px);'}
     background: #fff;

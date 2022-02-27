@@ -11,7 +11,7 @@ const signup = () => {
   }, []);
 
   return (
-    <SignupContainer className="flex justify-center items-center bg-[#f1f1f1] h-[100vh] ">
+    <SignupContainer className="flex justify-center items-center bg-[#f1f1f1] py-[150px] ">
       <div className="flex justify-center items-center flex-col bg-[#ffffff] p-[50px] w-[600px]">
         <h2 className="font-extrabold text-[2rem] mb-5">STYLELINT</h2>
         <section className="flex flex-col">
