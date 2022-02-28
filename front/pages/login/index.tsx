@@ -4,7 +4,7 @@ import React from 'react';
 
 function Login() {
   return (
-    <div className="flex flex-nowrap justify-center h-screen py-8">
+    <div className="flex flex-nowrap justify-center py-8">
       <div className="flex flex-col items-center border-[#eceef2] border rounded-[4px] px-10 py-12 w-[500px]">
         <h2 className="font-bold text-xl mb-[20px]">로그인</h2>
         <section>

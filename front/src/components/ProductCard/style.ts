@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export const ProductCardContainer = styled.div``;
+
 export const ProductCardIconWrapper = styled.div<{ IsProductDibs: boolean }>`
   @keyframes scale2 {
     0% {

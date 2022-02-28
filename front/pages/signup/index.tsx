@@ -1,6 +1,7 @@
 import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
 import React, { useCallback, useState } from 'react';
+import { SignupContainer } from './style';
 
 const signup = () => {
   const [select, setSelect] = useState('');
@@ -10,7 +11,7 @@ const signup = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center bg-[#f1f1f1] h-[100vh] ">
+    <SignupContainer className="flex justify-center items-center bg-[#f1f1f1] py-[150px] ">
       <div className="flex justify-center items-center flex-col bg-[#ffffff] p-[50px] w-[600px]">
         <h2 className="font-extrabold text-[2rem] mb-5">STYLELINT</h2>
         <section className="flex flex-col">
@@ -61,17 +62,22 @@ const signup = () => {
               />
             </div>
           </label>
-          <select
-            className="border rounded mt-5 h-[50px]"
-            name="email"
-            onChange={onChangeEmailSelect}
-          >
-            <option>직접입력</option>
-            <option value="naver.com">naver.com</option>
-            <option value="gmail.com">gmail.com</option>
-            <option value="nate.com">nate.com</option>
-            <option value="daum.com">daum.com</option>
-          </select>
+          <div className="option-container">
+            <select
+              className="border rounded outline-neutral-400 mt-5 h-[50px] option-email-sub"
+              name="email"
+              onChange={onChangeEmailSelect}
+            >
+              <option>직접입력</option>
+              <option value="naver.com">naver.com</option>
+              <option value="gmail.com">gmail.com</option>
+              <option value="nate.com">nate.com</option>
+              <option value="daum.com">daum.com</option>
+            </select>
+            <span className="icoArrow">
+              <img src="./img/select_dropdown.png" alt="" />
+            </span>
+          </div>
           <BasicBtn
             onClickBtn={onSubmitSinup}
             Content="회원가입"
@@ -79,7 +85,7 @@ const signup = () => {
           />
         </section>
       </div>
-    </div>
+    </SignupContainer>
   );
 };
 

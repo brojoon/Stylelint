@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ProductCardIconWrapper } from './style';
+import { ProductCardContainer, ProductCardIconWrapper } from './style';
 
 const ProductCard = () => {
   const [quickview, setQuickview] = useState(false);
@@ -8,7 +8,7 @@ const ProductCard = () => {
     setIsProductDibs((prev) => !prev);
   }, []);
   return (
-    <div>
+    <ProductCardContainer>
       <div
         className="relative z-10 rounded-[10px] w-[100%]"
         onMouseEnter={() => {
@@ -38,9 +38,12 @@ const ProductCard = () => {
           <span className="w-[17px] h-[9px] ml-[3px] bg-[#B6E0EF] border border-[#efefef] rounded-[3px] block"></span>
           <span className="w-[17px] h-[9px] ml-[3px] bg-[#464646] border border-[#efefef] rounded-[3px] block"></span>
           <span className="w-[17px] h-[9px] ml-[3px] bg-[#923B55] border border-[#efefef] rounded-[3px] block"></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span className="w-[17px] h-[9px] ml-[3px] bg-[#79B0E4] border border-[#efefef] rounded-[3px] block"></span>
+          <span className="w-[17px] h-[9px] ml-[3px] bg-[#E0A564] border border-[#efefef] rounded-[3px] block"></span>
+          <span className="w-[17px] h-[9px] ml-[3px] bg-[#BF95C7] border border-[#efefef] rounded-[3px] block"></span>
+          <span className="w-[17px] h-[9px] ml-[3px] bg-[#FFF5A0] border border-[#efefef] rounded-[3px] block"></span>
+          <span className="w-[17px] h-[9px] ml-[3px] bg-[#FFFDF0] border border-[#efefef] rounded-[3px] block"></span>
+          <span className="w-[17px] h-[9px] ml-[3px] bg-[#E4CBAD] border border-[#efefef] rounded-[3px] block"></span>
         </div>
         <h3 className="text-[#969696] text-[0.75rem]">스타일린트[자체제작]</h3>
         <p className="text-[#212121] text-[0.85rem] tracking-[-0.5px]">
@@ -74,7 +77,7 @@ const ProductCard = () => {
           </ProductCardIconWrapper>
         </div>
       </div>
-    </div>
+    </ProductCardContainer>
   );
 };
 

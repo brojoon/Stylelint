@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProductDetailContainer = styled.main`
-  max-width: 1920px;
+  max-width: 1280px;
   margin: 0 auto;
 
   & .product-Deital-wrapper {
@@ -26,11 +26,16 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
   }
 
   & .option-size {
-    border: 1px solid #000000;
-    border-radius: 2px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
     height: 50px;
     padding: 0 5px;
     appearance: none;
+    padding-left: 10px;
+  }
+
+  & .option-size:focus {
+    outline-color: #a3a3a3;
   }
 
   & .option-size:focus + .icoArrow img {
