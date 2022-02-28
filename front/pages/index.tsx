@@ -7,6 +7,7 @@ import MainSlider from '@components/Sliders/MainSlider';
 import ProductsGridWrapper from '@components/ProductCardsGridWrapper';
 import ProductsCardSlider from '@components/Sliders/ProductCardsSlider';
 import { HomeContainer } from './style';
+import MainEventSlider from '@components/Sliders/MainEventSlider';
 
 const IndexPage = () => {
   const [pageName, setPageName] = useRecoilState(pageNameState);
@@ -58,6 +59,8 @@ const IndexPage = () => {
           <a>더보기</a>
         </Link>
       </div>
+
+      <MainEventSlider />
     </HomeContainer>
   );
 };

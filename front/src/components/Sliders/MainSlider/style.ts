@@ -42,7 +42,6 @@ export const SlideContainer = styled.div`
   }
 
 
-
   #slide-radio-1: checked ~.pagination label:nth-child(1),
   #slide-radio-2: checked ~.pagination label:nth-child(2),
   #slide-radio-3: checked ~.pagination label:nth-child(3),
