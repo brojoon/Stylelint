@@ -3,6 +3,30 @@ import { MainEventSliderContainer } from './style';
 
 const MainEventSlider = () => {
   const [paginationIndex, setPaginationIndex] = useState(1);
+  const [isTransition, setIsTransition] = useState(true);
+  const [isSlide, setIsSlide] = useState(false);
+  const [slideStartX, setSlideStartX] = useState(0);
+  const [savePosValue, setSavePosValue] = useState(0);
+
+  // const OnMouseDownSlide = useCallback((e) => {
+  //   setIsTransition(false);
+  //   setSlideStartX(e.clientX);
+  //   setIsSlide(true);
+  // }, []);
+
+  // const onMouseMoveSlide = useCallback(
+  //   (e) => {
+  //     if (isSlide) {
+  //       setPaginationIndex(
+  //         ((slideStartX - e.clientX) / window.innerWidth) * paginationIndex -
+  //           savePosValue,
+  //       );
+  //       setSavePosValue((slideStartX - e.clientX) / window.innerWidth);
+  //     }
+  //   },
+  //   [paginationIndex, isSlide, savePosValue],
+  // );
+
   const onChangePaginationIndex = useCallback((e) => {
     setPaginationIndex(Number(e.target.id.substr(-1)));
     console.log(Number(e.target.id.substr(-1)));

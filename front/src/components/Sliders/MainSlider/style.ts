@@ -12,7 +12,7 @@ export const SlideContainer = styled.div`
     left: 7%;
     transform: translateX(-50%);
     bottom: 3%;
-    z-index: 1000;
+    z-index: 50;
   }
   .pagination label {
     width: 24px;

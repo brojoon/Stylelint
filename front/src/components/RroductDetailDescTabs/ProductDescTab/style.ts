@@ -18,8 +18,8 @@ export const ProductDescTabContainer = styled.section<{
     margin: 30px 0;
     background: ${(props) =>
         props.IsMoreProductInfo
-          ? 'url(./img/product-info-btn1.png)'
-          : 'url(./img/product-info-btn2.png)'}
+          ? 'url(/img/product-info-btn1.png)'
+          : 'url(/img/product-info-btn2.png)'}
       no-repeat center;
     width: 100%;
     height: 120px;

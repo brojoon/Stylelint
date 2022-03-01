@@ -4,16 +4,15 @@ export const ProductDetailSlide = styled.div`
   width: 100%;
 
   position: relative;
+  background-color: #000;
   & > img {
     border-radius: 0.625rem;
   }
 
   & > div {
     position: absolute;
-    left: 0;
-    top: 0;
+    top: 50%;
     width: 100%;
-    padding-bottom: 40vw;
   }
 
   & > div > img:nth-child(1) {
@@ -52,7 +51,6 @@ export const ProductDetailSubSlide = styled.div<{
   & .sub-slide-wrapper {
     position: relative;
     width: 100%;
-    height: 8vw;
   }
 
   & .sub-slide-img-container {
@@ -106,7 +104,7 @@ export const ProductDetailSubSlide = styled.div<{
     width: 48px;
     height: 48px;
     position: absolute;
-    background-image: url(./img/product_sub_slide_left.png);
+    background-image: url(/img/product_sub_slide_left.png);
     background-repeat: no-repeat;
     left: 10px;
     top: 50%;
@@ -122,7 +120,7 @@ export const ProductDetailSubSlide = styled.div<{
     height: 48px;
     transform: translateY(-50%) scale(1, 1);
     position: absolute;
-    background-image: url(./img/product_sub_slide_right.png);
+    background-image: url(/img/product_sub_slide_right.png);
     background-repeat: no-repeat;
     right: 10px;
     top: 50%;

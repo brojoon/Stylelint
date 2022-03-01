@@ -118,7 +118,12 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
   & .product-dibs {
     display: inline-block;
     width: 100%;
-    background: url('./img/product_detail_dibs.png') center center no-repeat;
+    ${(props) =>
+      props.IsProductDibs
+        ? `background: url('/img/product_detail_dibs_fill.png') center center no-repeat;
+        animation-name: scale2;
+        animation-duration: 1s;`
+        : `background: url('/img/product_detail_dibs.png') center center no-repeat`};
     height: 32px;
     background-size: contain;
   }

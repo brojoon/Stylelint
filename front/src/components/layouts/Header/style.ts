@@ -29,7 +29,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   align-items: center;
   background: #fff;
   border-bottom: 1px solid #eeeeee;
-  z-index: 60;
+  z-index: 2000;
   transition: all 500ms ease;
   transform: ${(props) =>
     props.IsScrollTop > 60 ? 'translateY(0)' : 'translateY(35px)'};

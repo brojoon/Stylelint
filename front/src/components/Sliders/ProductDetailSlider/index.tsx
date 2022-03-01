@@ -45,15 +45,15 @@ const ProductDetailSlider = () => {
   return (
     <>
       <ProductDetailSlide>
-        <img src={`./img/1572349747_${productSlideIndex}.jpg`} />
+        <img src={`/img/1572349747_${productSlideIndex}.jpg`} />
         <div>
           <img
             onClick={onClickProductSlideLeft}
-            src="./img/product_slide_left.png"
+            src="/img/product_slide_left.png"
           />
           <img
             onClick={onClickProductSlideRight}
-            src="./img/product_slide_right.png"
+            src="/img/product_slide_right.png"
           />
         </div>
       </ProductDetailSlide>
@@ -73,56 +73,56 @@ const ProductDetailSlider = () => {
                   <img
                     onClick={onClickSubSlideImg}
                     data-index="2"
-                    src="./img/1572349747_2.jpg"
+                    src="/img/1572349747_2.jpg"
                   />
                 </div>
                 <div>
                   <img
                     onClick={onClickSubSlideImg}
                     data-index="3"
-                    src="./img/1572349747_3.jpg"
+                    src="/img/1572349747_3.jpg"
                   />
                 </div>
                 <div>
                   <img
                     onClick={onClickSubSlideImg}
                     data-index="4"
-                    src="./img/1572349747_4.jpg"
+                    src="/img/1572349747_4.jpg"
                   />
                 </div>
                 <div>
                   <img
                     onClick={onClickSubSlideImg}
                     data-index="5"
-                    src="./img/1572349747_5.jpg"
+                    src="/img/1572349747_5.jpg"
                   />
                 </div>
                 <div>
                   <img
                     onClick={onClickSubSlideImg}
                     data-index="6"
-                    src="./img/1572349747_6.jpg"
+                    src="/img/1572349747_6.jpg"
                   />
                 </div>
                 <div>
                   <img
                     onClick={onClickSubSlideImg}
                     data-index="7"
-                    src="./img/1572349747_7.jpg"
+                    src="/img/1572349747_7.jpg"
                   />
                 </div>
                 <div>
                   <img
                     onClick={onClickSubSlideImg}
                     data-index="8"
-                    src="./img/1572349747_8.jpg"
+                    src="/img/1572349747_8.jpg"
                   />
                 </div>
                 <div>
                   <img
                     onClick={onClickSubSlideImg}
                     data-index="9"
-                    src="./img/1572349747_9.jpg"
+                    src="/img/1572349747_9.jpg"
                   />
                 </div>
               </div>

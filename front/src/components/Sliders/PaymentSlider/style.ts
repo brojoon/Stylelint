@@ -4,7 +4,7 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
   margin-top: 20px;
   background-color: #ffffff;
   padding: 30px;
-  width: 100%;
+  width: 727px;
   border-radius: 8px;
   border: 1px solid #e0e0e0;
   box-sizing: border-box;
@@ -17,7 +17,7 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
 
   .slide-container {
     position: relative;
-    height: 331px;
+    height: 265px;
     overflow: hidden;
   }
 
@@ -44,13 +44,13 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
     position: absolute;
     inset: 0px auto auto
       ${(props) => {
-        return props.SlideIndex == 1 ? -170 : 170 - props.SlideIndex * 348.8;
+        return props.SlideIndex == 1 ? -179 : 170 - props.SlideIndex * 349;
       }}px;
 
     transition: inset 0.3s;
     margin: 0px;
     width: 6288px;
-    height: 285px;
+    height: 100%;
     z-index: auto;
     display: flex;
     align-items: center;
@@ -158,11 +158,11 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
     background-position: -163px -92px;
     background-size: 300px auto;
     font-size: 0;
-    right: 163px;
+    right: 21%;
     position: absolute;
     z-index: 50;
-    top: 140px;
-    transform: translateY(-50%);
+    top: 50%;
+    transform: translate(50%, -50%);
     width: 32px;
     height: 32px;
   }
@@ -177,13 +177,14 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
       no-repeat;
     background-position: -197px -92px;
     background-size: 300px auto;
-    transform: translateY(-50%);
+    transform: translate(50%, -50%);
+
     font-size: 0;
     position: absolute;
     z-index: 5;
-    top: 140px;
+    top: 50%;
     width: 32px;
     height: 32px;
-    left: 158px;
+    left: 20%;
   }
 `;

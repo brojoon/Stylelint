@@ -26,7 +26,7 @@ export const MainEventSliderContainer = styled.div<{ PaginationIndex: number }>`
     position: absolute;
     left: 50%;
     bottom: 6%;
-    z-index: 1000;
+    z-index: 1;
     transform: translateX(-50%);
   }
   .pagination label {

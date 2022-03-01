@@ -68,7 +68,7 @@ const productDetails = () => {
                       <option value="L">L</option>
                     </select>
                     <span className="icoArrow arrow1">
-                      <img src="./img/select_dropdown.png" alt="" />
+                      <img src="/img/select_dropdown.png" alt="" />
                     </span>
                   </div>
                   <div className="option-container">
@@ -81,7 +81,7 @@ const productDetails = () => {
                       <option value="Red">Red</option>
                     </select>
                     <span className="icoArrow arrow2">
-                      <img src="./img/select_dropdown.png" alt="" />
+                      <img src="/img/select_dropdown.png" alt="" />
                     </span>
                   </div>
                   <div className="product-purchase-payment">

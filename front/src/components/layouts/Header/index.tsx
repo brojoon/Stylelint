@@ -1,3 +1,4 @@
+import HamburgerMenu from '@components/HamburgerMenu';
 import { useScroll } from '@utils/Hooks';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState, useRef } from 'react';
@@ -85,6 +86,11 @@ const Header = () => {
             </div>
           </div>
         </div>
+        <HamburgerMenu
+          IsScrollTop={scrollY}
+          IsMenuActive={isMenuActive}
+          setIsMenuActive={setIsMenuActive}
+        />
       </MainHeader>
     </>
   );
