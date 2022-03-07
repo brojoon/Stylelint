@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import logger from 'redux-logger';
-import reducer from './modules';
+import reducer from './modules/counter';
 const makeStore = (context: any) =>
   configureStore({
     reducer,

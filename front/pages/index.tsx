@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { useRecoilState } from 'recoil';
-import { pageNameState } from '@states/Atom';
+
 import PreHeader from '@components/layouts/PreHeader';
 import Header from '@components/layouts/Header';
 import MainSlider from '@components/Sliders/MainSlider';
@@ -8,10 +7,9 @@ import ProductsGridWrapper from '@components/ProductCardsGridWrapper';
 import ProductsCardSlider from '@components/Sliders/ProductCardsSlider';
 import { HomeContainer } from './style';
 import MainEventSlider from '@components/Sliders/MainEventSlider';
+import axios from 'axios';
 
 const IndexPage = () => {
-  const [pageName, setPageName] = useRecoilState(pageNameState);
-
   return (
     <HomeContainer>
       <MainSlider />

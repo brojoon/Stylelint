@@ -6,6 +6,8 @@ interface Props {
   placeholder: string;
   maxLength: number;
   style: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  inputValue: string;
 }
 
 const BasicInput: VFC<Props> = ({
@@ -14,24 +16,28 @@ const BasicInput: VFC<Props> = ({
   placeholder,
   maxLength,
   style,
+  inputValue,
+  setInputValue,
 }) => {
-  const [inputValue, setInputValue] = useState('');
-
-  const onChangeInputValue = useCallback((e) => {
-    setInputValue(e.target.value);
-  }, []);
+  const onChangeInputValue = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setInputValue(e.target.value);
+      console.log(e.target.value);
+    },
+    [],
+  );
 
   return (
     <input
       className={style}
       type={type}
       name={name}
-      placeholder={placeholder}
       value={inputValue}
+      placeholder={placeholder}
       onChange={onChangeInputValue}
       maxLength={maxLength}
     />
   );
 };
 
-export default BasicInput;
+export default React.memo(BasicInput);

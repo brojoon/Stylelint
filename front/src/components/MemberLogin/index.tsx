@@ -1,9 +1,11 @@
 import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 
 function MemberLogin() {
+  const [userIdInputValue, setUserIdInputValue] = useState('');
+  const [userPasswordInputValue, setUserPasswordInputValue] = useState('');
   const onSubmitLogin = useCallback(() => {
     console.log('submit!!');
   }, []);
@@ -12,6 +14,8 @@ function MemberLogin() {
   return (
     <div className="flex flex-col justify-center items-center">
       <BasicInput
+        setInputValue={setUserIdInputValue}
+        inputValue={userIdInputValue}
         type="text"
         name="id"
         placeholder="아이디를 입력해 주세요."
@@ -19,6 +23,8 @@ function MemberLogin() {
         style="h-[50px] w-full my-5 outline-neutral-400 border rounded px-3"
       />
       <BasicInput
+        setInputValue={setUserPasswordInputValue}
+        inputValue={userPasswordInputValue}
         type="password"
         name="password"
         placeholder="비밀번호를 입력해 주세요."

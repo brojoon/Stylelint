@@ -7,7 +7,7 @@
       {
         "root": ["./src"],
         "alias": {
-          "@states": "./src/states",
+          "@store": "./src/store",
           "@utils": "./src/utils",
           "@hooks": "./src/hooks",
           "@components": "./src/components",

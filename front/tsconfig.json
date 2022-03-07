@@ -21,10 +21,15 @@
       "@layouts/*": ["src/layouts/*"],
       "@utils/*": ["src/utils/*"],
       "@typings/*": ["src/typings/*"],
-      "@states/*": ["src/states/*"],
+      "@store/*": ["src/store/*"],
       "@pages/*": ["pages/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/counter/counter.tsx"
+  ],
   "exclude": ["node_modules"]
 }

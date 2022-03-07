@@ -13,7 +13,7 @@
           ["@layouts", "./src/layouts/*"],
           ["@utils", "./src/utils/*"],
           ["@typings", "./src/typings/*"],
-          ["@states", "./src/states/*"],
+          ["@store", "./src/store/*"],
           ["@pages", "./src/pages/*"]
         ]
       }
@@ -27,5 +27,11 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "extends": ["airbnb", "plugin:@typescript-eslint/recommended", "next", "next/core-web-vitals", "plugin:prettier/recommended"]
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "next",
+    "next/core-web-vitals",
+    "plugin:prettier/recommended"
+  ]
 }

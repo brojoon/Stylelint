@@ -14,4 +14,4 @@ const BasicBtn: VFC<Props> = ({ onClickBtn, Content, style }) => {
   );
 };
 
-export default BasicBtn;
+export default React.memo(BasicBtn);
