@@ -2,6 +2,8 @@ import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
 import React, { useCallback, useState } from 'react';
 import { SignupContainer } from './style';
+import { useDispatch } from 'react-redux';
+import { SignupFetch } from '@store/modules/signup';
 
 const signup = () => {
   const [inputIdValue, setInputIdValue] = useState('');
@@ -9,6 +11,8 @@ const signup = () => {
   const [inputPasswordCheck, setInputPasswordCheck] = useState('');
   const [inputEmailHead, setInputEmailHead] = useState('');
   const [inputEmailSub, setInputEmailSub] = useState('');
+  const dispatch = useDispatch();
+
   const onSubmitSinup = useCallback(() => {
     console.log(inputIdValue);
     if (!inputIdValue) {
@@ -31,6 +35,13 @@ const signup = () => {
       alert('이메일을 입력 해주세요');
       return;
     }
+    dispatch(
+      SignupFetch({
+        userId: inputIdValue,
+        userPassword: inputPassword,
+        userEmail: inputEmailHead + '@' + inputEmailSub,
+      }),
+    );
   }, [
     inputIdValue,
     inputPassword,

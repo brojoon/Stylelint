@@ -2,13 +2,23 @@ import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
 import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
+import { LoginFetch } from '@store/modules/login';
+import { useDispatch } from 'react-redux';
 
 function MemberLogin() {
   const [userIdInputValue, setUserIdInputValue] = useState('');
   const [userPasswordInputValue, setUserPasswordInputValue] = useState('');
+  const dispatch = useDispatch();
+
   const onSubmitLogin = useCallback(() => {
-    console.log('submit!!');
-  }, []);
+    dispatch(
+      LoginFetch({
+        userId: userIdInputValue,
+        userPassword: userPasswordInputValue,
+      }),
+    );
+    console.log('login!!');
+  }, [userIdInputValue, userPasswordInputValue]);
   const onClickKakaoBtn = useCallback(() => {}, []);
   const onClickGoogleBtn = useCallback(() => {}, []);
   return (

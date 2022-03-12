@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import logger from 'redux-logger';
-import reducer from './modules/counter';
+import loginReducer from './modules/login';
+import logoutReducer from './modules/logout';
+import signupReducer from './modules/signup';
 const makeStore = (context: any) =>
   configureStore({
-    reducer,
+    reducer: {
+      login: loginReducer,
+      logout: logoutReducer,
+      signup: signupReducer,
+    },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
     devTools: process.env.NODE_ENV !== 'production',
   });
