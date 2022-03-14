@@ -14,7 +14,7 @@ function MemberLogin() {
     dispatch(
       LoginFetch({
         userId: userIdInputValue,
-        userPassword: userPasswordInputValue,
+        password: userPasswordInputValue,
       }),
     );
     console.log('login!!');

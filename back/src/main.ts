@@ -10,8 +10,12 @@ declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  const port = process.env.PORT || 3094;
+  const port = process.env.PORT || 3095;
 
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  });
   const config = new DocumentBuilder()
     .setTitle('API')
     .setDescription('개발을 위한 API 문서입니다.')

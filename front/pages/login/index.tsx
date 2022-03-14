@@ -2,6 +2,8 @@ import MemberLogin from '@components/MemberLogin';
 import NonMemberOrder from '@components/NonMemberOrder';
 import React from 'react';
 
+import cookies from 'next-cookies';
+
 function Login() {
   return (
     <div className="flex flex-nowrap justify-center py-8">

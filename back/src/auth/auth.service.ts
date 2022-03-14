@@ -38,15 +38,7 @@ export class AuthService {
     };
   }
 
-  async join(
-    userId: string,
-    userName: string,
-    password: string,
-    zender: string,
-    address: string,
-    phoneNumber: string,
-    email: string,
-  ) {
+  async join(userId: string, password: string, address: string, email: string) {
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -60,11 +52,8 @@ export class AuthService {
     try {
       const returned = await queryRunner.manager.getRepository(Users).save({
         userId,
-        userName,
         password: hashedPassword,
-        zender,
         address,
-        phoneNumber,
         email,
       });
       await queryRunner.commitTransaction();

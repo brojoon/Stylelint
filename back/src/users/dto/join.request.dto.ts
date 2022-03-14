@@ -3,11 +3,8 @@ import { Users } from '../../entities/UsersInformaiton/Users';
 
 export class JoinRequestDto extends PickType(Users, [
   'userId',
-  'userName',
   'password',
-  'zender',
   'address',
-  'phoneNumber',
   'email',
 ] as const) {
   // @ApiProperty({

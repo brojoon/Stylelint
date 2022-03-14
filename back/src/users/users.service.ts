@@ -18,15 +18,7 @@ export class UsersService {
 
   async info(userId: string) {
     const result = await this.usersRepository.findOne({
-      select: [
-        'userId',
-        'userName',
-        'password',
-        'zender',
-        'address',
-        'phoneNumber',
-        'email',
-      ],
+      select: ['userId', 'password', 'address', 'email'],
       where: { userId },
     });
     if (!result) throw new NotFoundException('유저 정보 없음');

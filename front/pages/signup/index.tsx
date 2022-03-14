@@ -5,6 +5,12 @@ import { SignupContainer } from './style';
 import { useDispatch } from 'react-redux';
 import { SignupFetch } from '@store/modules/signup';
 
+interface signupRequest {
+  userId: string;
+  password: string;
+  email: string;
+}
+
 const signup = () => {
   const [inputIdValue, setInputIdValue] = useState('');
   const [inputPassword, setInputPassword] = useState('');
@@ -35,11 +41,13 @@ const signup = () => {
       alert('이메일을 입력 해주세요');
       return;
     }
+    console.log(`inputIdValue: ${inputEmailHead + '@' + inputEmailSub}`);
     dispatch(
       SignupFetch({
         userId: inputIdValue,
-        userPassword: inputPassword,
-        userEmail: inputEmailHead + '@' + inputEmailSub,
+        password: inputPassword,
+        email: inputEmailHead + '@' + inputEmailSub,
+        address: '',
       }),
     );
   }, [

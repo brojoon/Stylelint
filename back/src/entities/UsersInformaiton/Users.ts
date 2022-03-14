@@ -16,8 +16,8 @@ export class Users {
   @Column('varchar', { name: 'userId', unique: true, length: 15 })
   userId: string;
 
-  @Column('varchar', { name: 'userName', length: 15 })
-  userName: string;
+  // @Column('varchar', { name: 'userName', length: 15 })
+  // userName: string;
 
   @ApiProperty({
     example: '123123',
@@ -27,14 +27,14 @@ export class Users {
   @Column('varchar', { name: 'password', length: 100, select: false })
   password: string;
 
-  @Column('varchar', { name: 'zender', length: 5 })
-  zender: string;
+  // @Column('varchar', { name: 'zender', length: 5 })
+  // zender: string;
 
   @Column('varchar', { name: 'address', length: 100 })
   address: string;
 
-  @Column('varchar', { name: 'phoneNumber', length: 20 })
-  phoneNumber: string;
+  // @Column('varchar', { name: 'phoneNumber', length: 20 })
+  // phoneNumber: string;
 
   @Column('varchar', { name: 'email', unique: true, length: 30 })
   email: string;

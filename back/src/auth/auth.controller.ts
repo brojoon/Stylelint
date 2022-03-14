@@ -54,11 +54,8 @@ export class AuthController {
   async join(@Body() body: JoinRequestDto) {
     const result = await this.authService.join(
       body.userId,
-      body.userName,
       body.password,
-      body.zender,
       body.address,
-      body.phoneNumber,
       body.email,
     );
     if (result) {

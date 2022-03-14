@@ -184,6 +184,12 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
     color: #111111;
   }
 
+  .subBox > li > button {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #111111;
+  }
+
   .subBox li {
     white-space: nowrap;
     margin: 0.45rem 0;

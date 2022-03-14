@@ -3,14 +3,24 @@ import { useScroll } from '@utils/Hooks';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { MainHeader, BackgroundHeader, Banner } from './style';
+import { useSelector } from 'react-redux';
+import { LogoutFetch } from '@store/modules/logout';
+import { removeToken } from '@store/modules/login';
+import { useAppDispatch } from '@store/index';
 
 const Header = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const { scrollY } = useScroll();
+  const dispatch = useAppDispatch();
 
+  const isLogin = useSelector((state: any) => state.login.token);
   const onClickMenuBtn = useCallback(() => {
     setIsMenuActive((prev) => !prev);
   }, []);
+
+  const onClickLogout = useCallback(() => {
+    dispatch(LogoutFetch());
+  }, [dispatch, LogoutFetch, removeToken]);
   return (
     <>
       <Banner>
@@ -58,29 +68,31 @@ const Header = () => {
                       <img width="26px" height="26px" src="/img/profile.svg" />
                     </div>
                   </Link>
-
-                  <ul className="subBox">
-                    <li>
-                      <Link href="/login">로그인</Link>
-                    </li>
-                    <li>
-                      <Link href="/signup">회원가입</Link>
-                    </li>
-                    <li>
-                      <Link href="/profile">배송조회</Link>
-                    </li>
-                  </ul>
-                  {/* <ul className="subBox">
-                  <li>
-                    <Link href="/profile">회원정보</Link>
-                  </li>
-                  <li>
-                    <Link href="/profile">배송조회</Link>
-                  </li>
-                  <li>
-                    <Link href="/profile">로그아웃</Link>
-                  </li>
-                </ul> */}
+                  {isLogin ? (
+                    <ul className="subBox">
+                      <li>
+                        <Link href="/profile">회원정보</Link>
+                      </li>
+                      <li>
+                        <Link href="/profile">배송조회</Link>
+                      </li>
+                      <li>
+                        <button onClick={onClickLogout}>로그아웃</button>
+                      </li>
+                    </ul>
+                  ) : (
+                    <ul className="subBox">
+                      <li>
+                        <Link href="/login">로그인</Link>
+                      </li>
+                      <li>
+                        <Link href="/signup">회원가입</Link>
+                      </li>
+                      <li>
+                        <Link href="/profile">배송조회</Link>
+                      </li>
+                    </ul>
+                  )}
                 </li>
               </ul>
             </div>
@@ -97,3 +109,6 @@ const Header = () => {
 };
 
 export default Header;
+function AppDispatch(arg0: AsyncThunkAction<any, void, {}>) {
+  throw new Error('Function not implemented.');
+}

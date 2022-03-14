@@ -1,10 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { removeToken } from '../login';
 
-export const LogoutFetch = createAsyncThunk('user/LogoutFetch', async () => {
-  const response = await axios.get('http://localhost:3095/logout');
-  return response?.data;
-});
+export const LogoutFetch = createAsyncThunk(
+  'user/LogoutFetch',
+  async (_, thunkAPI) => {
+    const response = await axios.get('http://localhost:3095/api/auth/logout', {
+      withCredentials: true,
+    });
+
+    if (!response?.data) {
+      thunkAPI.dispatch(removeToken());
+    }
+    return response?.data;
+  },
+);
 
 interface typeLogout {
   status: string;
