@@ -2,7 +2,6 @@ import { jwtConstants } from '../constant';
 import { Injectable } from '@nestjs/common';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { UserDto } from 'src/common/dto/user.dto';
 import { JoinRequestDto } from 'src/users/dto/join.request.dto';
 
 const cookieExtractor = function (req) {
