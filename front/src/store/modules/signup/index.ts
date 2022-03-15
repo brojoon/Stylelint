@@ -17,7 +17,7 @@ export const SignupFetch = createAsyncThunk(
   'user/SignupFetch',
   async (data: signupRequest) => {
     console.log(`data: ${data}`);
-    const response = await axios.post('http://localhost:3095/api/auth/signup', {
+    const response = await axios.post('/api/auth/signup', {
       userId: data.userId,
       password: data.password,
       email: data.email,

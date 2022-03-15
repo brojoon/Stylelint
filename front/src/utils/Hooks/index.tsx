@@ -11,7 +11,6 @@ export function useScroll() {
   // const [scrollDirection, setScrollDirection] = useState();
 
   const listener = () => {
-    console.log(window.pageYOffset);
     // setBodyOffset(document.body.getBoundingClientRect());
     setScrollY(window.pageYOffset);
     // setScrollX(bodyOffset.left);

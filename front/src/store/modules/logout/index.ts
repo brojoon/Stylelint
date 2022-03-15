@@ -5,9 +5,7 @@ import { removeToken } from '../login';
 export const LogoutFetch = createAsyncThunk(
   'user/LogoutFetch',
   async (_, thunkAPI) => {
-    const response = await axios.get('http://localhost:3095/api/auth/logout', {
-      withCredentials: true,
-    });
+    const response = await axios.get('/api/auth/logout');
 
     if (!response?.data) {
       thunkAPI.dispatch(removeToken());

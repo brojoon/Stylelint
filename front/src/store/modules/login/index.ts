@@ -16,16 +16,10 @@ const initialState: typeLogin = { status: '', token: '' }; // 초기 상태 정�
 export const LoginFetch = createAsyncThunk(
   'user/LoginFetch',
   async (data: loginRequest) => {
-    const response = await axios.post(
-      'http://localhost:3095/api/auth/login',
-      {
-        userId: data.userId,
-        password: data.password,
-      },
-      {
-        withCredentials: true, // 클라이언트에서 요청 보낼 때는 브라우저가 쿠키를 같이 동봉
-      },
-    );
+    const response = await axios.post('/api/auth/login', {
+      userId: data.userId,
+      password: data.password,
+    });
     return response?.data;
   },
 );
@@ -46,6 +40,8 @@ const loginSlice = createSlice({
     builder.addCase(LoginFetch.fulfilled, (state, action) => {
       state.status = 'success';
       state.token = action.payload;
+      console.log(state.token);
+
       Router.push('/');
     });
     builder.addCase(LoginFetch.rejected, (state, action) => {

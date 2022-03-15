@@ -3,24 +3,26 @@ import { useScroll } from '@utils/Hooks';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { MainHeader, BackgroundHeader, Banner } from './style';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LogoutFetch } from '@store/modules/logout';
 import { removeToken } from '@store/modules/login';
 import { useAppDispatch } from '@store/index';
+import { useQuery } from 'react-query';
+import fetcher from '@utils/utils/fetcher';
 
 const Header = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const { scrollY } = useScroll();
-  const dispatch = useAppDispatch();
-
+  const dispatch = useDispatch();
   const isLogin = useSelector((state: any) => state.login.token);
+
   const onClickMenuBtn = useCallback(() => {
     setIsMenuActive((prev) => !prev);
   }, []);
 
   const onClickLogout = useCallback(() => {
     dispatch(LogoutFetch());
-  }, [dispatch, LogoutFetch, removeToken]);
+  }, [dispatch, LogoutFetch, removeToken, useQuery]);
   return (
     <>
       <Banner>
@@ -109,6 +111,3 @@ const Header = () => {
 };
 
 export default Header;
-function AppDispatch(arg0: AsyncThunkAction<any, void, {}>) {
-  throw new Error('Function not implemented.');
-}

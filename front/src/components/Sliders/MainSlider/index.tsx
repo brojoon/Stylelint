@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SlideContainer, SlideWrapper } from './style';
-import { asleep } from '@utils/utils1';
+import { asleep } from '@utils/utils/asleep';
 
 const MainSlider = () => {
   const slideImgCount = 7;

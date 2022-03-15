@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-import PreHeader from '@components/layouts/PreHeader';
 import Header from '@components/layouts/Header';
 import MainSlider from '@components/Sliders/MainSlider';
 import ProductsGridWrapper from '@components/ProductCardsGridWrapper';
@@ -8,6 +7,8 @@ import ProductsCardSlider from '@components/Sliders/ProductCardsSlider';
 import { HomeContainer } from './style';
 import MainEventSlider from '@components/Sliders/MainEventSlider';
 import axios from 'axios';
+import { useQuery } from 'react-query';
+import fetcher from '@utils/utils/fetcher';
 
 const IndexPage = () => {
   return (
