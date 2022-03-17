@@ -7,6 +7,7 @@ import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProductsModule } from './products/products.module';
 import ormconfig from '../ormconfig';
 
 @Module({
@@ -15,6 +16,7 @@ import ormconfig from '../ormconfig';
     UsersModule,
     AuthModule,
     TypeOrmModule.forRoot(ormconfig),
+    ProductsModule,
   ],
 
   providers: [AppService],

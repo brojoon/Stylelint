@@ -12,7 +12,7 @@ import {
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { undefinedToNullIntercepter } from 'src/common/interceptors/undefinedToNull.interceptor';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from 'src/entities/UsersInformaiton/Users';
+import { Users } from 'src/entities/users/users.info';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { User } from 'src/common/decorators/user.decorator';

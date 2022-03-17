@@ -1,3 +1,4 @@
+import { Users } from 'src/entities/users/users.info';
 import {
   BadRequestException,
   ForbiddenException,
@@ -7,7 +8,6 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
 import bcrypt from 'bcrypt';
-import { Users } from 'src/entities/UsersInformaiton/Users';
 import { UserLoginDto } from './dto/user.login.dto';
 
 @Injectable()

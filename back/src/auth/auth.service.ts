@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from 'src/entities/UsersInformaiton/Users';
+import { Users } from 'src/entities/users/users.info';
 import { Connection, Repository } from 'typeorm';
 import bcrypt from 'bcrypt';
 import { UserLoginDto } from 'src/users/dto/user.login.dto';

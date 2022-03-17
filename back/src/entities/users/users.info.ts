@@ -7,21 +7,29 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { IsNotEmpty, IsString } from 'class-validator';
 
-@Entity({ schema: 'stylelint', name: 'users' })
+@Entity({ schema: 'stylelint', name: 'user' })
 export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
-  @Column('varchar', { name: 'userId', unique: true, length: 15 })
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
+    description: '유저아이디',
+    example: 'brojoon',
+    required: true,
+  })
+  @Column('char', { name: 'userId', unique: true, length: 15 })
   userId: string;
 
   // @Column('varchar', { name: 'userName', length: 15 })
   // userName: string;
 
   @ApiProperty({
-    example: '123123',
     description: '비밀번호',
+    example: '123123',
     required: true,
   })
   @Column('varchar', { name: 'password', length: 100, select: false })
@@ -30,13 +38,13 @@ export class Users {
   // @Column('varchar', { name: 'zender', length: 5 })
   // zender: string;
 
-  @Column('varchar', { name: 'address', length: 100 })
+  @Column('char', { name: 'address', length: 100, nullable: true })
   address: string;
 
   // @Column('varchar', { name: 'phoneNumber', length: 20 })
   // phoneNumber: string;
 
-  @Column('varchar', { name: 'email', unique: true, length: 30 })
+  @Column('char', { name: 'email', unique: true, length: 30 })
   email: string;
 
   @CreateDateColumn()

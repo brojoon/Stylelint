@@ -1,5 +1,5 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
-import { Users } from 'src/entities/UsersInformaiton/Users';
+import { Users } from 'src/entities/users/users.info';
 
 export class UserInfoDto extends PickType(Users, [
   'userId',
