@@ -4,10 +4,10 @@ import ProductCard from '@components/ProductCard';
 const ProductsGridWrapper = () => {
   return (
     <div className="grid grid-flow-col grid-rows-4 sm:grid-rows-2 md:grid-rows-2 lg:grid-rows-1 gap-[20px] p-[15px]">
+      {/* <ProductCard />
       <ProductCard />
       <ProductCard />
-      <ProductCard />
-      <ProductCard />
+      <ProductCard /> */}
     </div>
   );
 };

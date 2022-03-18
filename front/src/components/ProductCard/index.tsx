@@ -1,15 +1,29 @@
-import React, { useCallback, useState } from 'react';
+import { IProducts } from '@typings/db';
+import { baseURL } from '@utils/utils/const';
+import React, { useCallback, useState, VFC } from 'react';
 import { ProductCardContainer, ProductCardIconWrapper } from './style';
+import { useRouter } from 'next/router';
 
-const ProductCard = () => {
+interface Props {
+  data: IProducts;
+}
+
+const ProductCard: VFC<Props> = ({ data }) => {
   const [quickview, setQuickview] = useState(false);
   const [isProductDibs, setIsProductDibs] = useState(false);
   const onClickProductDibs = useCallback(() => {
     setIsProductDibs((prev) => !prev);
   }, []);
+
+  const onClickProductCardImg = useCallback(() => {
+    const router = useRouter();
+    router.push(href);
+  }, []);
+
   return (
     <ProductCardContainer>
       <div
+        onClick={onClickProductCardImg}
         className="relative z-10 rounded-[10px] w-[100%]"
         onMouseEnter={() => {
           setQuickview(true);
@@ -20,7 +34,7 @@ const ProductCard = () => {
       >
         <img
           className=" w-[100%] h-[100%] rounded-[10px] bg-contain"
-          src="/img/product3.gif"
+          src={`${baseURL}${data.image}`}
         />
         <div
           className={`${
@@ -47,7 +61,7 @@ const ProductCard = () => {
         </div>
         <h3 className="text-[#969696] text-[0.75rem]">스타일린트[자체제작]</h3>
         <p className="text-[#212121] text-[0.85rem] tracking-[-0.5px]">
-          bs5437 리리 언발란스 코튼 셔츠
+          {data.name}
         </p>
         <div className="flex tracking-[-0.5px] justify-between my-[10px] py-[12px] border-b-[1px] border-[#F7F7F7]">
           <div className="">

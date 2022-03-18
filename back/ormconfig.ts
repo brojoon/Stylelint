@@ -1,8 +1,10 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import dotenv from 'dotenv';
+import { Product } from 'src/entities/product/product.info';
+
 // import { ProductSailInfo } from './src/entities/product/product.sale.info';
 import { ProductSubImg } from './src/entities/product/product.sub.img';
-import { Product } from './src/entities/product/product';
+
 import { Users } from './src/entities/users/users.info';
 
 dotenv.config();

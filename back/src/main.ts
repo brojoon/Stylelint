@@ -5,6 +5,7 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import path from 'path';
 
 declare const module: any;
 
@@ -15,6 +16,10 @@ async function bootstrap() {
   app.enableCors({
     origin: 'http://localhost:3000',
     credentials: true,
+  });
+
+  app.useStaticAssets(path.join(__dirname, '..', 'imgs'), {
+    prefix: '/imgs',
   });
   const config = new DocumentBuilder()
     .setTitle('API')

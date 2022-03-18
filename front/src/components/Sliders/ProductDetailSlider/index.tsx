@@ -1,9 +1,20 @@
+import fetcher from '@utils/utils/fetcher';
 import React, { useCallback, useState } from 'react';
+import { useQuery } from 'react-query';
 import { ProductDetailSlide, ProductDetailSubSlide } from './style';
+import { useRouter } from 'next/router';
 
 const ProductDetailSlider = () => {
   const [productSlideIndex, setProductSlideIndex] = useState(2);
   const [productSubSlidePosX, setProductSubSlidePosX] = useState('0');
+  const router = useRouter();
+  const { code } = router.query;
+
+  const { data, isLoading, error } = useQuery('queryKey', () =>
+    fetcher(`/api/product/${code}`),
+  );
+
+  console.log(data);
 
   const onClickProductSlideLeft = useCallback(() => {
     setProductSlideIndex((prev) => {

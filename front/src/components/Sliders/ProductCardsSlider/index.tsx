@@ -1,6 +1,9 @@
 import ProductCard from '@components/ProductCard';
 import React, { useCallback, useState } from 'react';
 import { ProductCardSlideWrapper } from './style';
+import { useQuery } from 'react-query';
+import fetcher from '@utils/utils/fetcher';
+import { IProducts } from '@typings/db';
 
 const ProductsCardSlider = () => {
   const ProductCards = 100;
@@ -11,6 +14,12 @@ const ProductsCardSlider = () => {
   const [savePosValue, setSavePosValue] = useState(0);
   const [slideStartX, setSlideStartX] = useState(0);
   const [slideClickedTime, setSlideClickedTime] = useState<Date>();
+
+  const { data, isLoading, error } = useQuery<IProducts[]>('queryKey', () =>
+    fetcher(`/api/product`),
+  );
+
+  console.log(data);
 
   const OnMouseDownSlide = useCallback((e) => {
     setSlideClickedTime(new Date());
@@ -113,22 +122,28 @@ const ProductsCardSlider = () => {
       PosX={`${slidePosition}`}
       IsTransition={isTransition}
     >
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+      {data && data[0] ? (
+        <>
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+          <ProductCard data={data[0]} />
+        </>
+      ) : (
+        ''
+      )}
     </ProductCardSlideWrapper>
   );
 };

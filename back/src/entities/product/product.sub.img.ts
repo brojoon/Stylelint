@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Product } from './product';
+import { Product } from './product.info';
 
 @Entity({ schema: 'stylelint', name: 'productSubImg' })
 export class ProductSubImg {
@@ -23,11 +23,10 @@ export class ProductSubImg {
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'code', length: 40 })
-  code: string;
+  // @Column('char', { name: 'code', length: 40 })
+  // code: string;
 
   ///////////////////
-
   @ManyToOne(() => Product, (product) => product.productSubImgCode, {
     onDelete: 'NO ACTION',
     onUpdate: 'CASCADE',
