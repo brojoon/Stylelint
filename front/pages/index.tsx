@@ -11,6 +11,10 @@ import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 
 const IndexPage = () => {
+  // const { data, isLoading, error } = useQuery('queryKey1', () =>
+  //   fetcher(`/api/product/${code}`),
+  // );
+
   return (
     <HomeContainer>
       <MainSlider />

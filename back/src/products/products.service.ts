@@ -19,11 +19,24 @@ export class ProductsService {
   async productDetaiInfo(code) {
     const ret = await getRepository(Product)
       .createQueryBuilder('p')
-      .where(`p.code = ${code}`)
-      .leftJoinAndSelect('p.productSubImgCode', 'subImgs')
-      .where('p.code = subImgs.code')
-      .select(['p.code', 'p.name', 'p.type', 'subImgs.subimage'])
-      .getMany();
+      .leftJoinAndSelect('p.productSailInfo', 'sailInfo')
+      .leftJoinAndSelect('p.productSubImg', 'subImgs')
+      .where(`p.code = :code`, { code: code })
+      .andWhere(`p.code = subImgs.code`)
+      .andWhere(`p.code = sailInfo.code`)
+      .select([
+        'p.code',
+        'p.name',
+        'p.type',
+        'p.price',
+        'p.dibs',
+        'p.perchase_quantity',
+        'sailInfo.color',
+        'sailInfo.size',
+        'sailInfo.quantity',
+        'subImgs.subimage',
+      ])
+      .getOne();
     return ret;
   }
 }

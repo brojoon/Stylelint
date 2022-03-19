@@ -15,9 +15,9 @@ import axios from 'axios';
 import fetcher from '@utils/utils/fetcher';
 import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event';
 import { IProductsWithSubImg } from '@typings/db';
-import { baseURL } from '@utils/utils/const';
+import { baseApiUrl } from '@utils/utils/const';
 
-axios.defaults.baseURL = baseURL;
+axios.defaults.baseURL = baseApiUrl;
 axios.defaults.withCredentials = true;
 
 function MyApp({ Component, pageProps }: AppProps) {

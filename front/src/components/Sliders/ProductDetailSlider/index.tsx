@@ -3,18 +3,20 @@ import React, { useCallback, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ProductDetailSlide, ProductDetailSubSlide } from './style';
 import { useRouter } from 'next/router';
+import { baseApiUrl } from '@utils/utils/const';
+import { IProductsWithSubImg } from '@typings/db';
 
 const ProductDetailSlider = () => {
   const [productSlideIndex, setProductSlideIndex] = useState(2);
   const [productSubSlidePosX, setProductSubSlidePosX] = useState('0');
   const router = useRouter();
-  const { code } = router.query;
+  const { type, code } = router.query;
 
-  const { data, isLoading, error } = useQuery('queryKey', () =>
+  const { data, isLoading, error } = useQuery('productDetailInfo', () =>
     fetcher(`/api/product/${code}`),
   );
 
-  console.log(data);
+  console.log('data', data);
 
   const onClickProductSlideLeft = useCallback(() => {
     setProductSlideIndex((prev) => {
@@ -56,7 +58,15 @@ const ProductDetailSlider = () => {
   return (
     <>
       <ProductDetailSlide>
-        <img src={`/img/1572349747_${productSlideIndex}.jpg`} />
+        {/* {data ? (
+          <img
+            src={`${
+              baseApiUrl +
+              data.productSubImgCode[productSlideIndex - 2]?.subimage
+            }`}
+          />
+        ) : null} */}
+
         <div>
           <img
             onClick={onClickProductSlideLeft}
@@ -80,62 +90,19 @@ const ProductDetailSlider = () => {
             ></button>
             <div className="sub-slide-img-container">
               <div className="sub-slide-img-wrapper">
-                <div>
-                  <img
-                    onClick={onClickSubSlideImg}
-                    data-index="2"
-                    src="/img/1572349747_2.jpg"
-                  />
-                </div>
-                <div>
-                  <img
-                    onClick={onClickSubSlideImg}
-                    data-index="3"
-                    src="/img/1572349747_3.jpg"
-                  />
-                </div>
-                <div>
-                  <img
-                    onClick={onClickSubSlideImg}
-                    data-index="4"
-                    src="/img/1572349747_4.jpg"
-                  />
-                </div>
-                <div>
-                  <img
-                    onClick={onClickSubSlideImg}
-                    data-index="5"
-                    src="/img/1572349747_5.jpg"
-                  />
-                </div>
-                <div>
-                  <img
-                    onClick={onClickSubSlideImg}
-                    data-index="6"
-                    src="/img/1572349747_6.jpg"
-                  />
-                </div>
-                <div>
-                  <img
-                    onClick={onClickSubSlideImg}
-                    data-index="7"
-                    src="/img/1572349747_7.jpg"
-                  />
-                </div>
-                <div>
-                  <img
-                    onClick={onClickSubSlideImg}
-                    data-index="8"
-                    src="/img/1572349747_8.jpg"
-                  />
-                </div>
-                <div>
-                  <img
-                    onClick={onClickSubSlideImg}
-                    data-index="9"
-                    src="/img/1572349747_9.jpg"
-                  />
-                </div>
+                {/* {data
+                  ? data.productSubImgCode.map((subImg: any, index: number) => {
+                      return (
+                        <div>
+                          <img
+                            onClick={onClickSubSlideImg}
+                            data-index={`${index + 2}`}
+                            src={`${baseApiUrl + subImg.subimage}`}
+                          />
+                        </div>
+                      );
+                    })
+                  : null} */}
               </div>
             </div>
             <button

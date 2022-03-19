@@ -27,7 +27,7 @@ export class ProductSubImg {
   // code: string;
 
   ///////////////////
-  @ManyToOne(() => Product, (product) => product.productSubImgCode, {
+  @ManyToOne(() => Product, (product) => product.productSubImg, {
     onDelete: 'NO ACTION',
     onUpdate: 'CASCADE',
   })

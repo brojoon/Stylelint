@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { ProductSailInfo } from './product.sale.info';
 
 import { ProductSubImg } from './product.sub.img';
 
@@ -18,7 +19,7 @@ export class Product {
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'code', length: 40, unique: true })
+  @Column('char', { name: 'code', length: 20, unique: true })
   code: string;
 
   @IsString()
@@ -28,8 +29,23 @@ export class Product {
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'type', length: 40 })
+  @Column('char', { name: 'type', length: 20 })
   type: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Column('char', { name: 'price', length: 20 })
+  price: number;
+
+  @IsString()
+  @IsNotEmpty()
+  @Column('char', { name: 'dibs', length: 20 })
+  dibs: number;
+
+  @IsString()
+  @IsNotEmpty()
+  @Column('char', { name: 'perchase_quantity', length: 20 })
+  perchase_quantity: number;
 
   @IsString()
   @IsNotEmpty()
@@ -38,12 +54,12 @@ export class Product {
 
   //////////////////////////////////////
 
-  // @OneToMany(
-  //   () => ProductSailInfo,
-  //   (ProductSailInfo) => ProductSailInfo.product,
-  // )
-  // productSailInfo: ProductSailInfo[];
+  @OneToMany(
+    () => ProductSailInfo,
+    (ProductSailInfo) => ProductSailInfo.ProductSailInfoCode,
+  )
+  productSailInfo: ProductSailInfo[];
 
   @OneToMany(() => ProductSubImg, (productSubImg) => productSubImg.SubImgcode)
-  productSubImgCode: ProductSubImg[];
+  productSubImg: ProductSubImg[];
 }

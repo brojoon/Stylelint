@@ -1,2 +1,3 @@
 export const baseApiUrl = 'http://localhost:3095';
-export const baseFrontUrl = 'http://localohst:3000';
+
+export const baseFrontUrl = 'http://localhost:3000';

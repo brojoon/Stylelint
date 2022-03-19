@@ -1,5 +1,5 @@
 import { IProducts } from '@typings/db';
-import { baseURL } from '@utils/utils/const';
+import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
 import React, { useCallback, useState, VFC } from 'react';
 import { ProductCardContainer, ProductCardIconWrapper } from './style';
 import { useRouter } from 'next/router';
@@ -11,13 +11,13 @@ interface Props {
 const ProductCard: VFC<Props> = ({ data }) => {
   const [quickview, setQuickview] = useState(false);
   const [isProductDibs, setIsProductDibs] = useState(false);
+  const router = useRouter();
   const onClickProductDibs = useCallback(() => {
     setIsProductDibs((prev) => !prev);
   }, []);
 
   const onClickProductCardImg = useCallback(() => {
-    const router = useRouter();
-    router.push(href);
+    router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
   }, []);
 
   return (
@@ -34,7 +34,7 @@ const ProductCard: VFC<Props> = ({ data }) => {
       >
         <img
           className=" w-[100%] h-[100%] rounded-[10px] bg-contain"
-          src={`${baseURL}${data.image}`}
+          src={`${baseApiUrl}${data.image}`}
         />
         <div
           className={`${
@@ -65,7 +65,7 @@ const ProductCard: VFC<Props> = ({ data }) => {
         </p>
         <div className="flex tracking-[-0.5px] justify-between my-[10px] py-[12px] border-b-[1px] border-[#F7F7F7]">
           <div className="">
-            <span className="font-semibold">43,900</span>
+            <span className="font-semibold">{data.price}</span>
             <span className="ml-[5px] text-[17px] text-[#FF9995]">35%</span>
           </div>
           <span>
@@ -75,7 +75,7 @@ const ProductCard: VFC<Props> = ({ data }) => {
         <div className="flex justify-between items-center text-[#969696] text-[7.5px]">
           <div className="flex">
             <span className="flex items-center after:w-[1px] after:h-[6.25px] after:bg-[#e8e8e8] after:mx-[5px] after:inline-block">
-              구매수 3,716
+              구매수 {data.perchase_quantity}
             </span>
             <span>리뷰수 207</span>
           </div>
