@@ -19,7 +19,7 @@ export class Product {
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'code', length: 20, unique: true })
+  @Column('char', { name: 'code', length: 10, unique: true })
   code: string;
 
   @IsString()
@@ -51,6 +51,15 @@ export class Product {
   @IsNotEmpty()
   @Column('text', { name: 'image' })
   image: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date | null;
 
   //////////////////////////////////////
 

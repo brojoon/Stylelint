@@ -23,8 +23,13 @@ export class ProductSubImg {
 
   @IsString()
   @IsNotEmpty()
-  // @Column('char', { name: 'code', length: 40 })
-  // code: string;
+  @Column('char', { name: 'kind', length: 10 })
+  kind: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Column('char', { name: 'code', length: 10 })
+  code: string;
 
   ///////////////////
   @ManyToOne(() => Product, (product) => product.productSubImg, {

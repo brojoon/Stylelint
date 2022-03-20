@@ -31,6 +31,11 @@ export class ProductSailInfo {
   @Column('int', { name: 'quantity', nullable: false })
   quantity: number;
 
+  @IsString()
+  @IsNotEmpty()
+  @Column('char', { name: 'code', length: 10 })
+  code: string;
+
   //////////////////////////////
 
   @ManyToOne(() => Product, (product) => product.productSailInfo, {
