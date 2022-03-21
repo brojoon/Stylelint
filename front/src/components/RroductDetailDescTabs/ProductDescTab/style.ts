@@ -10,6 +10,10 @@ export const ProductDescTabContainer = styled.section<{
   justify-content: center;
 
   & .info-body-container {
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     overflow: hidden;
     height: ${(props) => (props.IsMoreProductInfo ? 'inherit' : '1000px')};
   }

@@ -1,26 +1,33 @@
+import { baseApiUrl } from '@utils/utils/const';
+import fetcher from '@utils/utils/fetcher';
+import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
+import { useQuery } from 'react-query';
 import { ProductDescTabContainer } from './style';
 
 const ProductDescTab = () => {
   const [isMoreProductInfo, setIsMoreProductInfo] = useState(false);
+  const router = useRouter();
+  const { type, code } = router.query;
+  const { data, isLoading, error } = useQuery('productDetailInfo', () =>
+    fetcher(`/api/product/${code}`),
+  );
   const onClickInfoBtn = useCallback(() => {
     setIsMoreProductInfo((prev) => !prev);
   }, []);
   return (
     <ProductDescTabContainer IsMoreProductInfo={isMoreProductInfo}>
       <div className="info-body-container">
-        <div>
-          <img src="/img/product1/product_detail_1.jpg" />
-        </div>
-        <div className="flex justify-center">
-          <img src="/img/product1/product_detail_2.jpg" />
-        </div>
-        <div>
-          <img src="/img/product1/product_detail_3.jpg" />
-        </div>
-        <div>
-          <img src="/img/product1/product_detail_4.jpg" />
-        </div>
+        {data &&
+          data?.productSubImg?.map((subimg: any, index: number) => {
+            if (index <= 7) return;
+
+            return (
+              <div>
+                <img src={`${baseApiUrl + subimg.subimage}`} />
+              </div>
+            );
+          })}
       </div>
       <div className="info-btn-wrapper" onClick={onClickInfoBtn}></div>
     </ProductDescTabContainer>

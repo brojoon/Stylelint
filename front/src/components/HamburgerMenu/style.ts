@@ -60,7 +60,7 @@ export const HamburgerMenuContainer = styled.div<{
 
   .menu-wrapper > ul > li:nth-child(1) {
     color: #000;
-    font-size: 15px;
+    font-size: 17px;
     margin-bottom: 15px;
     font-weight: 600;
   }

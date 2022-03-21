@@ -8,7 +8,7 @@ export const ProductCardSlideWrapper = styled.section<{
   height: 100%;
   display: grid;
   padding: 1rem;
-  grid-template-columns: repeat(100, minmax(20%, auto));
+  grid-template-columns: repeat(100, minmax(21%, auto));
   gap: 0.8rem;
   transform: ${(props) => `translateX(${props.PosX}%)`};
   transition: ${(props) =>

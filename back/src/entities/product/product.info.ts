@@ -34,17 +34,17 @@ export class Product {
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'price', length: 20 })
+  @Column('int', { name: 'price' })
   price: number;
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'dibs', length: 20 })
+  @Column('int', { name: 'dibs' })
   dibs: number;
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'perchase_quantity', length: 20 })
+  @Column('int', { name: 'perchase_quantity' })
   perchase_quantity: number;
 
   @IsString()

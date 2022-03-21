@@ -11,58 +11,51 @@ import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 
 const IndexPage = () => {
-  // const { data, isLoading, error } = useQuery('queryKey1', () =>
-  //   fetcher(`/api/product/${code}`),
-  // );
+  const { data, isLoading, error } = useQuery('products', () =>
+    fetcher(`/api/product`),
+  );
+
+  console.log(data);
 
   return (
     <HomeContainer>
       <MainSlider />
       <div>
-        <Link href="/test1">
-          <h3>단 하나만 사도 배송비 무료</h3>
-        </Link>
+        <h3>단 하나만 사도 배송비 무료 🚚</h3>
       </div>
-      <ProductsCardSlider />
+      <ProductsCardSlider products={data?.slice(0, 5)} />
       <div className="product-more-btn">
-        <Link href="/product/coat">
+        <Link href="/product/blouse">
           <a>더보기</a>
         </Link>
       </div>
       <div>
-        <Link href="/test3">
-          <h3>단 하나만 사도 배송비 무료</h3>
-        </Link>
+        <h3>러블리한 봄신상!🌷 할인까지!?</h3>
       </div>
-      <ProductsCardSlider />
+      <ProductsCardSlider products={data?.slice(5, 10)} />
       <div className="product-more-btn">
-        <Link href="/test">
+        <Link href="/product/jacket">
           <a>더보기</a>
         </Link>
       </div>
       <div>
-        <Link href="/test4">
-          <h3>단 하나만 사도 배송비 무료</h3>
-        </Link>
+        <h3>내일 뭐 입지? 역대급 빠른배송🤩</h3>
       </div>
-      <ProductsCardSlider />
+      <ProductsCardSlider products={data?.slice(10, 15)} />
       <div className="product-more-btn">
-        <Link href="/test">
+        <Link href="/product/shirts">
           <a>더보기</a>
         </Link>
       </div>
       <div>
-        <Link href="/test5">
-          <h3>단 하나만 사도 배송비 무료</h3>
-        </Link>
+        <h3>어떤 걸 구매해도 실패 없는 자체브랜드🙆‍♀️</h3>
       </div>
-      <ProductsCardSlider />
+      <ProductsCardSlider products={data?.slice(15, 20)} />
       <div className="product-more-btn">
-        <Link href="/test">
+        <Link href="/product/skirt">
           <a>더보기</a>
         </Link>
       </div>
-
       <MainEventSlider />
     </HomeContainer>
   );

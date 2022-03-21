@@ -18,7 +18,7 @@ const ProductCard: VFC<Props> = ({ data }) => {
 
   const onClickProductCardImg = useCallback(() => {
     router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
-  }, []);
+  }, [data, router, baseFrontUrl]);
 
   return (
     <ProductCardContainer>
@@ -60,12 +60,12 @@ const ProductCard: VFC<Props> = ({ data }) => {
           <span className="w-[17px] h-[9px] ml-[3px] bg-[#E4CBAD] border border-[#efefef] rounded-[3px] block"></span>
         </div>
         <h3 className="text-[#969696] text-[0.75rem]">스타일린트[자체제작]</h3>
-        <p className="text-[#212121] text-[0.85rem] tracking-[-0.5px]">
+        <div className="text-[#212121] text-[0.85rem] tracking-[-0.5px] product-desc">
           {data.name}
-        </p>
+        </div>
         <div className="flex tracking-[-0.5px] justify-between my-[10px] py-[12px] border-b-[1px] border-[#F7F7F7]">
           <div className="">
-            <span className="font-semibold">{data.price}</span>
+            <span className="font-semibold">{data.price.toLocaleString()}</span>
             <span className="ml-[5px] text-[17px] text-[#FF9995]">35%</span>
           </div>
           <span>

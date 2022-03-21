@@ -3,17 +3,17 @@ import styled from 'styled-components';
 export const HomeContainer = styled.section`
   & > div h3 {
     font-weight: 600;
-    cursor: pointer;
+
     display: inline-block;
-    margin: 20px 0 20px 20px;
-    font-size: 22px;
+    margin: 20px 0 15px 20px;
+    font-size: 20px;
   }
 
   .product-more-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 60px 0;
+    margin: 60px 0 45px;
   }
 
   .product-more-btn > a {

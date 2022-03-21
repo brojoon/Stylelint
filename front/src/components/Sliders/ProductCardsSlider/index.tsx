@@ -1,11 +1,15 @@
 import ProductCard from '@components/ProductCard';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, VFC } from 'react';
 import { ProductCardSlideWrapper } from './style';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import { IProducts } from '@typings/db';
 
-const ProductsCardSlider = () => {
+interface Props {
+  products: IProducts[];
+}
+
+const ProductsCardSlider: VFC<Props> = ({ products }) => {
   const ProductCards = 100;
   const [slidePosition, setSlidePosition] = useState(0);
   const [isMouseEnter, setIsMouseEnter] = useState(false);
@@ -14,12 +18,6 @@ const ProductsCardSlider = () => {
   const [savePosValue, setSavePosValue] = useState(0);
   const [slideStartX, setSlideStartX] = useState(0);
   const [slideClickedTime, setSlideClickedTime] = useState<Date>();
-
-  const { data, isLoading, error } = useQuery<IProducts[]>('queryKey', () =>
-    fetcher(`/api/product`),
-  );
-
-  console.log(data);
 
   const OnMouseDownSlide = useCallback((e) => {
     setSlideClickedTime(new Date());
@@ -122,28 +120,18 @@ const ProductsCardSlider = () => {
       PosX={`${slidePosition}`}
       IsTransition={isTransition}
     >
-      {data && data[0] ? (
-        <>
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-          <ProductCard data={data[0]} />
-        </>
-      ) : (
-        ''
-      )}
+      {products &&
+        products.map((product) => {
+          return <ProductCard data={product} />;
+        })}
+      {products &&
+        products.map((product) => {
+          return <ProductCard data={product} />;
+        })}
+      {products &&
+        products.map((product) => {
+          return <ProductCard data={product} />;
+        })}
     </ProductCardSlideWrapper>
   );
 };

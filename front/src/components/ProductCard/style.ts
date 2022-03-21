@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-export const ProductCardContainer = styled.div``;
+export const ProductCardContainer = styled.div`
+  .product-desc {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+`;
 
 export const ProductCardIconWrapper = styled.div<{ IsProductDibs: boolean }>`
   @keyframes scale2 {
