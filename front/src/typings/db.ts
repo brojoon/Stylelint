@@ -1,11 +1,14 @@
 export interface IProducts {
   code: string;
   name: string;
-  type: number;
-  dibs: number;
-  perchase_quantity: string;
+  type: string;
   price: number;
+  dibs: number;
+  perchase_quantity: number;
   image: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
 }
 
 export interface IProductSubImg {

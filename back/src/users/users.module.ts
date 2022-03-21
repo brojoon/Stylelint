@@ -1,3 +1,4 @@
+import { UsersBasket } from './../entities/users/users.basket';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthService } from 'src/auth/auth.service';
@@ -8,7 +9,7 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Users])],
+  imports: [TypeOrmModule.forFeature([Users, UsersBasket])],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService],

@@ -21,7 +21,7 @@ export class UsersBasket {
     example: 'brojoon',
     required: true,
   })
-  @Column('char', { name: 'userId', unique: true, length: 15 })
+  @Column('char', { name: 'userId', length: 15 })
   userId: string;
 
   @IsString()
@@ -31,8 +31,8 @@ export class UsersBasket {
     example: '3M 자동차 활성탄 에어컨필터 6285 SM6 QM6 에어컨필',
     required: true,
   })
-  @Column('char', { name: 'product_name', unique: true, length: 30 })
-  productName: string;
+  @Column('char', { name: 'product_name', length: 30 })
+  product_name: string;
 
   @IsString()
   @IsNotEmpty()
@@ -43,6 +43,12 @@ export class UsersBasket {
   @IsNotEmpty()
   @Column('int', { name: 'quantity' })
   quantity: number;
+
+  @Column('char', { name: 'size', length: 10 })
+  size: string;
+
+  @Column('char', { name: 'color', length: 10 })
+  color: string;
 
   @IsString()
   @IsNotEmpty()

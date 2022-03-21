@@ -3,6 +3,8 @@ import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
 import React, { useCallback, useState, VFC } from 'react';
 import { ProductCardContainer, ProductCardIconWrapper } from './style';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { AddBasketFetch } from '@store/modules/addBasket';
 
 interface Props {
   data: IProducts;
@@ -12,6 +14,21 @@ const ProductCard: VFC<Props> = ({ data }) => {
   const [quickview, setQuickview] = useState(false);
   const [isProductDibs, setIsProductDibs] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const onClickProductBasket = useCallback(() => {
+    dispatch(
+      AddBasketFetch({
+        userId: '111',
+        product_name: data.code,
+        price: data.price,
+        quantity: 1,
+        size: 'S',
+        color: 'Red',
+        image: data.image,
+      }),
+    );
+  }, []);
   const onClickProductDibs = useCallback(() => {
     setIsProductDibs((prev) => !prev);
   }, []);
@@ -87,7 +104,10 @@ const ProductCard: VFC<Props> = ({ data }) => {
               onClick={onClickProductDibs}
               className="w-[23px] h-[20px] bg-[position:-45px_-177px] bg-[url('~@../../../public/img/imags.png')] inline-block"
             ></span>
-            <span className="ml-[10px] w-[23px] h-[24px] bg-[position:-123px_-174px] bg-[url('~@../../../public/img/imags.png')] inline-block"></span>
+            <span
+              onClick={onClickProductBasket}
+              className="ml-[10px] w-[23px] h-[24px] bg-[position:-123px_-174px] bg-[url('~@../../../public/img/imags.png')] inline-block"
+            ></span>
           </ProductCardIconWrapper>
         </div>
       </div>
@@ -96,3 +116,12 @@ const ProductCard: VFC<Props> = ({ data }) => {
 };
 
 export default ProductCard;
+function PutBasketFetch(arg0: {
+  userId: string;
+  product_name: string;
+  price: number;
+  quantity: number;
+  image: string;
+}): any {
+  throw new Error('Function not implemented.');
+}

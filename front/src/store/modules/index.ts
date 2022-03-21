@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import counter from './counter';
 import login from './login';
 import logout from './logout';
+import putBasket from './addBasket';
 import signup from './signup';
 
 const persistConfig = {
@@ -21,6 +22,7 @@ export const rootReducer = (state: any, action: any) => {
     login,
     logout,
     signup,
+    putBasket,
     // 여기에추가
   })(state, action);
 };
