@@ -32,17 +32,14 @@ export class Product {
   @Column('char', { name: 'type', length: 20 })
   type: string;
 
-  @IsString()
   @IsNotEmpty()
   @Column('int', { name: 'price' })
   price: number;
 
-  @IsString()
   @IsNotEmpty()
   @Column('int', { name: 'dibs' })
   dibs: number;
 
-  @IsString()
   @IsNotEmpty()
   @Column('int', { name: 'perchase_quantity' })
   perchase_quantity: number;

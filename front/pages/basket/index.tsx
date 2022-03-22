@@ -1,5 +1,5 @@
 import BasketProductCard from '@components/BasketProductCard';
-import { RemoveBasketFetch } from '@store/modules/removeBasket';
+import { BasketRemoveFetch } from '@store/modules/basketRemove';
 import { IBasketProduct } from '@typings/db';
 import fetcher from '@utils/utils/fetcher';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -13,6 +13,7 @@ const Basket = () => {
     new Array(1).fill(0),
   );
   const [totalPrice, setStateTotalPrice] = useState(0);
+  const [totalMany, setTotalMany] = useState(0);
   const { data, isLoading, error, refetch } = useQuery('basketList', () =>
     fetcher(`/api/basket`),
   );
@@ -23,14 +24,17 @@ const Basket = () => {
 
   useEffect(() => {
     if (data) {
-      let total = 0;
+      let totalPrice = 0;
+      let totalMany = 0;
       for (let i = 0; i < data.length; i++) {
         if (productCardArr[i] == 1) {
-          total += data[i].price * data[i].quantity;
+          totalPrice += data[i].price * data[i].quantity;
+          totalMany += data[i].quantity;
         }
       }
-      console.log('total: ', total);
-      setStateTotalPrice(total);
+      console.log('totalPrice: ', totalPrice);
+      setTotalMany(totalMany);
+      setStateTotalPrice(totalPrice);
     }
   }, [data, productCardArr]);
 
@@ -53,7 +57,7 @@ const Basket = () => {
     await Promise.all(
       productCardArr.map(async (arr, index) => {
         if (arr === 1 && data.length > index) {
-          await dispatch(RemoveBasketFetch(data[index].id));
+          await dispatch(BasketRemoveFetch(data[index].id));
           console.log('deleting: ', index);
         }
       }),
@@ -78,7 +82,7 @@ const Basket = () => {
           <div className="basket-tab-wrapper">
             <span>전체</span>
             <span className="basket-count">
-              <em>7</em>
+              <em>{data?.length}</em>
             </span>
           </div>
         </div>
@@ -128,7 +132,7 @@ const Basket = () => {
                   <li>
                     <span>상품수</span>
                     <div>
-                      <span>0</span>
+                      <span>{totalMany}</span>
                       <span>개</span>
                     </div>
                   </li>

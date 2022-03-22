@@ -68,6 +68,10 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
     margin: 0 6px;
   }
 
+  .basket-product-count > input::-webkit-inner-spin-button {
+    appearance: none;
+  }
+
   .basket-product-count > button:nth-child(1) {
     width: 21px;
     height: 21px;

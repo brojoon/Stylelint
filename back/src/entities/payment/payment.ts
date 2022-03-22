@@ -7,9 +7,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
-@Entity({ schema: 'stylelint', name: 'Basket' })
+@Entity({ schema: 'stylelint', name: 'payment' })
 export class Basket {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
@@ -34,12 +34,10 @@ export class Basket {
   @Column('char', { name: 'product_name', length: 100 })
   product_name: string;
 
-  @IsString()
   @IsNotEmpty()
   @Column('int', { name: 'price' })
   price: number;
 
-  @IsString()
   @IsNotEmpty()
   @Column('int', { name: 'quantity' })
   quantity: number;
@@ -54,4 +52,9 @@ export class Basket {
   @IsNotEmpty()
   @Column('text', { name: 'image' })
   image: string;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  @Column('boolean', { name: 'state' })
+  state: boolean;
 }

@@ -4,7 +4,7 @@ import React, { useCallback, useState, VFC } from 'react';
 import { ProductCardContainer, ProductCardIconWrapper } from './style';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { AddBasketFetch } from '@store/modules/addBasket';
+import { BasketAddFetch } from '@store/modules/basketAdd';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 
@@ -26,7 +26,7 @@ const ProductCard: VFC<Props> = ({ data }) => {
   const onClickProductBasket = useCallback(() => {
     if (user) {
       dispatch(
-        AddBasketFetch({
+        BasketAddFetch({
           userId: user.userId,
           product_name: data.name,
           price: data.price,

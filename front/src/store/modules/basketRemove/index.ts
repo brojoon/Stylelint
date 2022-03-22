@@ -3,14 +3,14 @@ import axios from 'axios';
 import { imageConfigDefault } from 'next/dist/server/image-config';
 import Router from 'next/router';
 
-interface typeRemoveBasket {
+interface typeBasketRemove {
   status: string;
 }
 
-const initialState: typeRemoveBasket = { status: '' }; // 초기 상태 정의
+const initialState: typeBasketRemove = { status: '' }; // 초기 상태 정의
 
-export const RemoveBasketFetch = createAsyncThunk(
-  'user/removeBasketFetch',
+export const BasketRemoveFetch = createAsyncThunk(
+  'user/BasketRemoveFetch',
   async (id: number) => {
     console.log(id);
     const response = await axios.post('/api/basket/remove', { id: id });
@@ -18,21 +18,21 @@ export const RemoveBasketFetch = createAsyncThunk(
   },
 );
 
-const RemoveBasketSlice = createSlice({
-  name: 'removeBasket',
+const BasketRemoveSlice = createSlice({
+  name: 'BasketRemove',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(RemoveBasketFetch.pending, (state, action) => {
+    builder.addCase(BasketRemoveFetch.pending, (state, action) => {
       state.status = 'pending';
     });
-    builder.addCase(RemoveBasketFetch.fulfilled, (state, action) => {
+    builder.addCase(BasketRemoveFetch.fulfilled, (state, action) => {
       state.status = 'success';
     });
-    builder.addCase(RemoveBasketFetch.rejected, (state, action) => {
+    builder.addCase(BasketRemoveFetch.rejected, (state, action) => {
       state.status = 'rejected';
     });
   },
 });
 
-export default RemoveBasketSlice.reducer; // 리듀서
+export default BasketRemoveSlice.reducer; // 리듀서

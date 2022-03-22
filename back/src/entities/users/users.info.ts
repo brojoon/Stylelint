@@ -21,7 +21,7 @@ export class Users {
     example: 'brojoon',
     required: true,
   })
-  @Column('char', { name: 'userId', unique: true, length: 15 })
+  @Column('char', { name: 'userId', unique: true, length: 30 })
   userId: string;
 
   // @Column('varchar', { name: 'userName', length: 15 })

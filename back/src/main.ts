@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import path from 'path';
+import { ValidationPipe } from '@nestjs/common';
 
 declare const module: any;
 
@@ -17,6 +18,8 @@ async function bootstrap() {
     origin: 'http://localhost:3000',
     credentials: true,
   });
+
+  app.useGlobalPipes(new ValidationPipe());
 
   app.useStaticAssets(path.join(__dirname, '..', 'imgs'), {
     prefix: '/imgs',

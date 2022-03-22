@@ -50,4 +50,15 @@ export class BasketController {
     console.log('id', body);
     return this.basketService.basketRemove(body.id);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @ApiResponse({
+    status: 200,
+    description: '성공',
+  })
+  @HttpCode(200)
+  @Post('counter')
+  async basketCounter(@Body() body: { id: number; quantity: number }) {
+    return this.basketService.basketCounter(body.id, body.quantity);
+  }
 }

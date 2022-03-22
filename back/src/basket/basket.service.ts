@@ -74,4 +74,28 @@ export class BasketService {
       });
     } catch (error) {}
   }
+
+  async basketCounter(id: number, quantity: number) {
+    try {
+      const result = await this.usersBasketRepository.findOne({
+        select: [
+          'id',
+          'userId',
+          'product_name',
+          'price',
+          'quantity',
+          'size',
+          'color',
+          'image',
+        ],
+        where: {
+          id: id,
+        },
+      });
+      if (result) {
+        result.quantity = quantity;
+        await this.usersBasketRepository.update(result.id, result);
+      }
+    } catch (error) {}
+  }
 }

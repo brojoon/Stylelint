@@ -1,4 +1,5 @@
-import { RemoveBasketFetch } from '@store/modules/removeBasket';
+import { BasketCounterFetch } from '@store/modules/basketCounter';
+import { BasketRemoveFetch } from '@store/modules/basketRemove';
 import { IBasketProduct } from '@typings/db';
 import { baseApiUrl } from '@utils/utils/const';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
@@ -24,9 +25,9 @@ const BasketProductCard: VFC<Props> = ({
   const dispatch = useDispatch();
 
   const onClickProductDelete = useCallback(async () => {
-    await dispatch(RemoveBasketFetch(basketProduct.id));
+    await dispatch(BasketRemoveFetch(basketProduct.id));
     refetch();
-  }, [basketProduct, RemoveBasketFetch, dispatch]);
+  }, [basketProduct, BasketRemoveFetch, dispatch]);
 
   const onClickProductCheck = useCallback(
     (e) => {
@@ -46,19 +47,31 @@ const BasketProductCard: VFC<Props> = ({
     }
   }, []);
 
-  const onClickProductAddCount = useCallback((e) => {
-    setProductCount((prev) => prev + 1);
-  }, []);
+  const onClickProductAddCount = useCallback(
+    async (e) => {
+      setProductCount((prev) => prev + 1);
+      const data = { id: basketProduct.id, quantity: productCount + 1 };
+      await dispatch(BasketCounterFetch(data));
+      refetch();
+    },
+    [productCount, dispatch, BasketCounterFetch],
+  );
 
-  const onClickProductSubstractCount = useCallback((e) => {
-    setProductCount((prev) => {
-      if (prev <= 1) {
-        alert('개수가 0개입니다');
-        return 1;
-      }
-      return prev - 1;
-    });
-  }, []);
+  const onClickProductSubstractCount = useCallback(
+    async (e) => {
+      setProductCount((prev) => {
+        if (prev <= 1) {
+          alert('개수가 0개입니다');
+          return 1;
+        }
+        return prev - 1;
+      });
+      const data = { id: basketProduct.id, quantity: productCount - 1 };
+      await dispatch(BasketCounterFetch(data));
+      refetch();
+    },
+    [productCount, dispatch, BasketCounterFetch],
+  );
 
   return (
     <BasketProductContainer IsChecked={productCardArr[index] ? true : false}>

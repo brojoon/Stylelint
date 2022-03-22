@@ -1,13 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { imageConfigDefault } from 'next/dist/server/image-config';
-import Router from 'next/router';
 
-interface typeAddBasket {
+interface typeBasketAdd {
   status: string;
 }
 
-interface AddBasketRequest {
+interface BasketAddRequest {
   userId: string;
   product_name: string;
   price: number;
@@ -16,11 +14,11 @@ interface AddBasketRequest {
   color: string;
   image: string;
 }
-const initialState: typeAddBasket = { status: '' }; // 초기 상태 정의
+const initialState: typeBasketAdd = { status: '' }; // 초기 상태 정의
 
-export const AddBasketFetch = createAsyncThunk(
-  'user/AddBasketFetch',
-  async (data: AddBasketRequest) => {
+export const BasketAddFetch = createAsyncThunk(
+  'user/BasketAddFetch',
+  async (data: BasketAddRequest) => {
     const response = await axios.post('/api/basket/add', {
       userId: data.userId,
       product_name: data.product_name,
@@ -34,21 +32,21 @@ export const AddBasketFetch = createAsyncThunk(
   },
 );
 
-const addBasketSlice = createSlice({
-  name: 'addBasket',
+const BasketAddSlice = createSlice({
+  name: 'BasketAdd',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(AddBasketFetch.pending, (state, action) => {
+    builder.addCase(BasketAddFetch.pending, (state, action) => {
       state.status = 'pending';
     });
-    builder.addCase(AddBasketFetch.fulfilled, (state, action) => {
+    builder.addCase(BasketAddFetch.fulfilled, (state, action) => {
       state.status = 'success';
     });
-    builder.addCase(AddBasketFetch.rejected, (state, action) => {
+    builder.addCase(BasketAddFetch.rejected, (state, action) => {
       state.status = 'rejected';
     });
   },
 });
 
-export default addBasketSlice.reducer; // 리듀서
+export default BasketAddSlice.reducer; // 리듀서

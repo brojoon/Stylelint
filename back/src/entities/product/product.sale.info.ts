@@ -26,7 +26,6 @@ export class ProductSailInfo {
   @Column('char', { name: 'size', length: 15 })
   size: string;
 
-  @IsNumber()
   @IsNotEmpty()
   @Column('int', { name: 'quantity', nullable: false })
   quantity: number;
