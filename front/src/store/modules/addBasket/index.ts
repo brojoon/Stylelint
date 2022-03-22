@@ -3,7 +3,7 @@ import axios from 'axios';
 import { imageConfigDefault } from 'next/dist/server/image-config';
 import Router from 'next/router';
 
-interface typePutBasket {
+interface typeAddBasket {
   status: string;
 }
 
@@ -16,7 +16,7 @@ interface AddBasketRequest {
   color: string;
   image: string;
 }
-const initialState: typePutBasket = { status: '' }; // 초기 상태 정의
+const initialState: typeAddBasket = { status: '' }; // 초기 상태 정의
 
 export const AddBasketFetch = createAsyncThunk(
   'user/AddBasketFetch',
@@ -35,7 +35,7 @@ export const AddBasketFetch = createAsyncThunk(
 );
 
 const addBasketSlice = createSlice({
-  name: 'putBasket',
+  name: 'addBasket',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

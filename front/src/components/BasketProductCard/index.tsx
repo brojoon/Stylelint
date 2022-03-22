@@ -1,26 +1,29 @@
+import { RemoveBasketFetch } from '@store/modules/removeBasket';
+import { IBasketProduct } from '@typings/db';
+import { baseApiUrl } from '@utils/utils/const';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
+import { useDispatch } from 'react-redux';
 import { BasketProductContainer } from './style';
 
 interface Props {
   index: number;
   setProductCardArr: any;
   productCardArr: number[];
+  basketProduct: IBasketProduct;
 }
 
 const BasketProductCard: VFC<Props> = ({
   index,
   setProductCardArr,
   productCardArr,
+  basketProduct,
 }) => {
-  const [productCount, setProductCount] = useState(1);
+  const [productCount, setProductCount] = useState(basketProduct.quantity);
+  const dispatch = useDispatch();
 
   const onClickProductDelete = useCallback(() => {
-    setProductCardArr((prev: number[]) => {
-      const tmp = [...prev];
-      tmp[index] = 2;
-      return tmp;
-    });
-  }, []);
+    dispatch(RemoveBasketFetch(basketProduct.id));
+  }, [basketProduct, RemoveBasketFetch, dispatch]);
 
   const onClickProductCheck = useCallback(
     (e) => {
@@ -71,12 +74,12 @@ const BasketProductCard: VFC<Props> = ({
                 </label>
               </span>
               <div>
-                <img src="./img/product1/product_detail_2.jpg" />
+                <img src={baseApiUrl + basketProduct?.image} />
               </div>
             </div>
 
             <div className="basket-product-desc">
-              <span>3M 자동차 활성탄 에어컨필터 6285 SM6 QM6 에어컨필</span>
+              <span>{basketProduct.product_name}</span>
             </div>
 
             <div className="basket-product-count">
@@ -90,7 +93,12 @@ const BasketProductCard: VFC<Props> = ({
             </div>
             <div className="basket-justfy-between-div"></div>
             <div className="basket-product-price">
-              <span>30,240원</span>
+              <span>
+                {(
+                  basketProduct.price * basketProduct.quantity
+                ).toLocaleString()}
+                원
+              </span>
               <button onClick={onClickProductDelete}></button>
             </div>
           </div>

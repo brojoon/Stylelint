@@ -20,7 +20,7 @@ const ProductCard: VFC<Props> = ({ data }) => {
     dispatch(
       AddBasketFetch({
         userId: '111',
-        product_name: data.code,
+        product_name: data.name,
         price: data.price,
         quantity: 1,
         size: 'S',

@@ -1,10 +1,17 @@
 import BasketProductCard from '@components/BasketProductCard';
+import { IBasketProduct } from '@typings/db';
+import fetcher from '@utils/utils/fetcher';
 import React, { useCallback, useState } from 'react';
+import { useQuery } from 'react-query';
 import { BasketContainer } from './style';
 
 const Basket = () => {
   const [isCheckedAll, setIsCheckedAllSelct] = useState(false);
   const [productCardArr, setProductCardArr] = useState<number[]>([0, 0, 0, 0]);
+  const { data, isLoading, error } = useQuery('basketList', () =>
+    fetcher(`/api/user/basket`),
+  );
+  console.log(data);
   const onCheckedAllSelect = useCallback((e) => {
     setIsCheckedAllSelct(e.target.checked);
     setProductCardArr((prev) => {
@@ -66,14 +73,14 @@ const Basket = () => {
         <section className="basket-products-container">
           <div className="basket-products-wrapper">
             <div>
-              {productCardArr.map((value, index) => {
-                if (value == 2) return;
+              {data?.map((product: IBasketProduct, index: number) => {
                 return (
                   <BasketProductCard
                     key={index}
                     index={index}
                     setProductCardArr={setProductCardArr}
                     productCardArr={productCardArr}
+                    basketProduct={product}
                   />
                 );
               })}

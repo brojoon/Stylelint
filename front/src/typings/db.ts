@@ -22,3 +22,13 @@ export interface IProductsWithSubImg {
   price: number;
   productSubImgCode: IProductSubImg[];
 }
+
+export interface IBasketProduct {
+  id: number;
+  product_name: string;
+  price: number;
+  quantity: number;
+  size: string;
+  color: string;
+  image: string;
+}

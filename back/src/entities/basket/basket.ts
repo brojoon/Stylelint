@@ -10,7 +10,7 @@ import {
 import { IsNotEmpty, IsString } from 'class-validator';
 
 @Entity({ schema: 'stylelint', name: 'usersBasket' })
-export class UsersBasket {
+export class Basket {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
@@ -31,7 +31,7 @@ export class UsersBasket {
     example: '3M 자동차 활성탄 에어컨필터 6285 SM6 QM6 에어컨필',
     required: true,
   })
-  @Column('char', { name: 'product_name', length: 30 })
+  @Column('char', { name: 'product_name', length: 100 })
   product_name: string;
 
   @IsString()

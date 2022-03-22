@@ -8,6 +8,9 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProductsModule } from './products/products.module';
+import { BasketController } from './basket/basket.controller';
+import { BasketService } from './basket/basket.service';
+import { BasketModule } from './basket/basket.module';
 import ormconfig from '../ormconfig';
 
 @Module({
@@ -17,9 +20,11 @@ import ormconfig from '../ormconfig';
     AuthModule,
     TypeOrmModule.forRoot(ormconfig),
     ProductsModule,
+    BasketModule,
   ],
 
-  providers: [AppService],
+  providers: [AppService, BasketService],
+  controllers: [BasketController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {

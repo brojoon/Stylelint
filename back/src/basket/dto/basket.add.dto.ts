@@ -1,7 +1,7 @@
-import { UsersBasket } from './../../entities/users/users.basket';
+import { Basket } from '../../entities/basket/basket';
 import { ApiProperty, PickType } from '@nestjs/swagger';
 
-export class BasketAddDto extends PickType(UsersBasket, [
+export class BasketAddDto extends PickType(Basket, [
   'userId',
   'product_name',
   'price',
