@@ -23,8 +23,7 @@ import ormconfig from '../ormconfig';
     BasketModule,
   ],
 
-  providers: [AppService, BasketService],
-  controllers: [BasketController],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {

@@ -12,7 +12,7 @@ import { ApiResponse } from '@nestjs/swagger';
 import { BasketAddDto } from './dto/basket.add.dto';
 import { User } from 'src/common/decorators/user.decorator';
 
-@Controller('basket')
+@Controller('api/basket')
 export class BasketController {
   constructor(private basketService: BasketService) {}
   @UseGuards(JwtAuthGuard)
@@ -22,7 +22,7 @@ export class BasketController {
     type: BasketAddDto,
   })
   @HttpCode(200)
-  @Get('basket')
+  @Get()
   async getBasket(@User() user) {
     return this.basketService.basketInfo(user?.userId);
   }
@@ -34,7 +34,7 @@ export class BasketController {
     type: BasketAddDto,
   })
   @HttpCode(200)
-  @Post('basket/add')
+  @Post('add')
   async basketAdd(@Body() body: BasketAddDto) {
     return this.basketService.basketAdd(body);
   }
@@ -45,7 +45,7 @@ export class BasketController {
     description: '성공',
   })
   @HttpCode(200)
-  @Post('basket/remove')
+  @Post('remove')
   async basketRemove(@Body() body: { id: number }) {
     console.log('id', body);
     return this.basketService.basketRemove(body.id);

@@ -1,35 +1,71 @@
 import BasketProductCard from '@components/BasketProductCard';
+import { RemoveBasketFetch } from '@store/modules/removeBasket';
 import { IBasketProduct } from '@typings/db';
 import fetcher from '@utils/utils/fetcher';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { useDispatch } from 'react-redux';
 import { BasketContainer } from './style';
 
 const Basket = () => {
   const [isCheckedAll, setIsCheckedAllSelct] = useState(false);
-  const [productCardArr, setProductCardArr] = useState<number[]>([0, 0, 0, 0]);
-  const { data, isLoading, error } = useQuery('basketList', () =>
-    fetcher(`/api/user/basket`),
+  const [productCardArr, setProductCardArr] = useState<number[]>(
+    new Array(1).fill(0),
   );
-  console.log(data);
-  const onCheckedAllSelect = useCallback((e) => {
-    setIsCheckedAllSelct(e.target.checked);
-    setProductCardArr((prev) => {
-      return prev.map((value) => {
-        if (value == 2) return value;
-        return e.target.checked ? 1 : 0;
-      });
-    });
-  }, []);
+  const [totalPrice, setStateTotalPrice] = useState(0);
+  const { data, isLoading, error, refetch } = useQuery('basketList', () =>
+    fetcher(`/api/basket`),
+  );
 
-  const onClickProductDelete = useCallback(() => {
+  useEffect(() => {
+    if (data) setProductCardArr(new Array(data.length).fill(0));
+  }, [data]);
+
+  useEffect(() => {
+    if (data) {
+      let total = 0;
+      for (let i = 0; i < data.length; i++) {
+        if (productCardArr[i] == 1) {
+          total += data[i].price * data[i].quantity;
+        }
+      }
+      console.log('total: ', total);
+      setStateTotalPrice(total);
+    }
+  }, [data, productCardArr]);
+
+  const dispatch = useDispatch();
+  console.log(data);
+
+  const onCheckedAllSelect = useCallback(
+    (e) => {
+      setIsCheckedAllSelct(e.target.checked);
+      setProductCardArr((prev) => {
+        return prev.map((value) => {
+          return e.target.checked ? 1 : 0;
+        });
+      });
+    },
+    [data],
+  );
+
+  const onClickProductDelete = useCallback(async () => {
+    await Promise.all(
+      productCardArr.map(async (arr, index) => {
+        if (arr === 1 && data.length > index) {
+          await dispatch(RemoveBasketFetch(data[index].id));
+          console.log('deleting: ', index);
+        }
+      }),
+    );
     setProductCardArr((prev) => {
       return prev.map((value) => {
-        if (value == 1) return 2;
-        else return value;
+        return 0;
       });
     });
-  }, []);
+    console.log('delete Done');
+    refetch();
+  }, [productCardArr, data, refetch]);
   return (
     <BasketContainer IsCheckedAll={isCheckedAll} className="basket-container">
       <div>
@@ -78,6 +114,7 @@ const Basket = () => {
                   <BasketProductCard
                     key={index}
                     index={index}
+                    refetch={refetch}
                     setProductCardArr={setProductCardArr}
                     productCardArr={productCardArr}
                     basketProduct={product}
@@ -98,7 +135,7 @@ const Basket = () => {
                   <li>
                     <span>전체 주문금액</span>
                     <div>
-                      <span>59,160</span>
+                      <span>{totalPrice.toLocaleString()}</span>
                       <span>원</span>
                     </div>
                   </li>

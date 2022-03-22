@@ -21,7 +21,7 @@ const initialState: typeAddBasket = { status: '' }; // 초기 상태 정의
 export const AddBasketFetch = createAsyncThunk(
   'user/AddBasketFetch',
   async (data: AddBasketRequest) => {
-    const response = await axios.post('/api/user/basket/add', {
+    const response = await axios.post('/api/basket/add', {
       userId: data.userId,
       product_name: data.product_name,
       price: data.price,

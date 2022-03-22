@@ -13,7 +13,7 @@ export const RemoveBasketFetch = createAsyncThunk(
   'user/removeBasketFetch',
   async (id: number) => {
     console.log(id);
-    const response = await axios.post('/api/user/basket/remove', { id: id });
+    const response = await axios.post('/api/basket/remove', { id: id });
     return response?.data;
   },
 );

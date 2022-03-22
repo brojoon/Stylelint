@@ -10,6 +10,7 @@ interface Props {
   setProductCardArr: any;
   productCardArr: number[];
   basketProduct: IBasketProduct;
+  refetch: any;
 }
 
 const BasketProductCard: VFC<Props> = ({
@@ -17,12 +18,14 @@ const BasketProductCard: VFC<Props> = ({
   setProductCardArr,
   productCardArr,
   basketProduct,
+  refetch,
 }) => {
   const [productCount, setProductCount] = useState(basketProduct.quantity);
   const dispatch = useDispatch();
 
-  const onClickProductDelete = useCallback(() => {
-    dispatch(RemoveBasketFetch(basketProduct.id));
+  const onClickProductDelete = useCallback(async () => {
+    await dispatch(RemoveBasketFetch(basketProduct.id));
+    refetch();
   }, [basketProduct, RemoveBasketFetch, dispatch]);
 
   const onClickProductCheck = useCallback(

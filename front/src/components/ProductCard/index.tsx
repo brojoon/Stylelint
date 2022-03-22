@@ -5,6 +5,8 @@ import { ProductCardContainer, ProductCardIconWrapper } from './style';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { AddBasketFetch } from '@store/modules/addBasket';
+import { useQuery } from 'react-query';
+import fetcher from '@utils/utils/fetcher';
 
 interface Props {
   data: IProducts;
@@ -15,19 +17,26 @@ const ProductCard: VFC<Props> = ({ data }) => {
   const [isProductDibs, setIsProductDibs] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  const {
+    data: user,
+    isLoading,
+    error,
+  } = useQuery('user', () => fetcher(`/api/user/profile`));
 
   const onClickProductBasket = useCallback(() => {
-    dispatch(
-      AddBasketFetch({
-        userId: '111',
-        product_name: data.name,
-        price: data.price,
-        quantity: 1,
-        size: 'S',
-        color: 'Red',
-        image: data.image,
-      }),
-    );
+    if (user) {
+      dispatch(
+        AddBasketFetch({
+          userId: user.userId,
+          product_name: data.name,
+          price: data.price,
+          quantity: 1,
+          size: 'S',
+          color: 'Red',
+          image: data.image,
+        }),
+      );
+    }
   }, []);
   const onClickProductDibs = useCallback(() => {
     setIsProductDibs((prev) => !prev);
