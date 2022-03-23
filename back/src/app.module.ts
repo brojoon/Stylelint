@@ -11,6 +11,9 @@ import { ProductsModule } from './products/products.module';
 import { BasketController } from './basket/basket.controller';
 import { BasketService } from './basket/basket.service';
 import { BasketModule } from './basket/basket.module';
+import { PaymentController } from './payment/payment.controller';
+import { PaymentService } from './payment/payment.service';
+import { PaymentModule } from './payment/payment.module';
 import ormconfig from '../ormconfig';
 
 @Module({
@@ -21,9 +24,12 @@ import ormconfig from '../ormconfig';
     TypeOrmModule.forRoot(ormconfig),
     ProductsModule,
     BasketModule,
+    PaymentModule,
   ],
 
   providers: [AppService],
+
+  controllers: [PaymentController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {

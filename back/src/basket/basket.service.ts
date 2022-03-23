@@ -8,11 +8,11 @@ import { BasketAddDto } from './dto/basket.add.dto';
 export class BasketService {
   constructor(
     @InjectRepository(Basket)
-    private usersBasketRepository: Repository<Basket>,
+    private BasketRepository: Repository<Basket>,
   ) {}
   async basketInfo(userId: string) {
     try {
-      const result = await this.usersBasketRepository.find({
+      const result = await this.BasketRepository.find({
         select: [
           'id',
           'product_name',
@@ -32,7 +32,7 @@ export class BasketService {
 
   async basketAdd(product: BasketAddDto) {
     try {
-      const result = await this.usersBasketRepository.findOne({
+      const result = await this.BasketRepository.findOne({
         select: [
           'id',
           'userId',
@@ -51,7 +51,7 @@ export class BasketService {
         },
       });
       if (!result) {
-        this.usersBasketRepository.save({
+        this.BasketRepository.save({
           userId: product.userId,
           product_name: product.product_name,
           price: product.price,
@@ -62,14 +62,14 @@ export class BasketService {
         });
       } else {
         result.quantity += product.quantity;
-        await this.usersBasketRepository.update(result.id, result);
+        await this.BasketRepository.update(result.id, result);
       }
     } catch (error) {}
   }
 
   async basketRemove(id: number) {
     try {
-      const reulst = await this.usersBasketRepository.delete({
+      const reulst = await this.BasketRepository.delete({
         id: id,
       });
     } catch (error) {}
@@ -77,7 +77,7 @@ export class BasketService {
 
   async basketCounter(id: number, quantity: number) {
     try {
-      const result = await this.usersBasketRepository.findOne({
+      const result = await this.BasketRepository.findOne({
         select: [
           'id',
           'userId',
@@ -94,7 +94,7 @@ export class BasketService {
       });
       if (result) {
         result.quantity = quantity;
-        await this.usersBasketRepository.update(result.id, result);
+        await this.BasketRepository.update(result.id, result);
       }
     } catch (error) {}
   }

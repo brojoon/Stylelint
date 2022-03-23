@@ -34,12 +34,10 @@ export class Basket {
   @Column('char', { name: 'product_name', length: 100 })
   product_name: string;
 
-  @IsString()
   @IsNotEmpty()
   @Column('int', { name: 'price' })
   price: number;
 
-  @IsString()
   @IsNotEmpty()
   @Column('int', { name: 'quantity' })
   quantity: number;
