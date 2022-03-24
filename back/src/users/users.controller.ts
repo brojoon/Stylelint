@@ -36,6 +36,7 @@ export class UsersController {
     return this.usersService.userinfo(user?.userId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @Get('dibs')
   async getDibs(@User() user) {

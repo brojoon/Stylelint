@@ -24,12 +24,15 @@ const ProductCard: VFC<Props> = ({ data }) => {
     error,
   } = useQuery('user', () => fetcher(`/api/user/profile`));
 
-  const { data: dibs } = useQuery('user/dibs', () => fetcher(`/api/user/dibs`));
+  const { data: dibs, refetch: dibsRefetch } = useQuery('user/dibs', () =>
+    fetcher(`/api/user/dibs`),
+  );
 
   useEffect(() => {
     if (dibs) {
+      console.log('dibs', dibs);
       for (let i = 0; i < dibs.length; i++) {
-        if (dibs[i] == data.name) setIsProductDibs(true);
+        if (dibs[i].product_name == data.name) setIsProductDibs(true);
       }
     }
   }, [dibs, data]);
@@ -51,18 +54,21 @@ const ProductCard: VFC<Props> = ({ data }) => {
   }, []);
 
   const onClickProductDibs = useCallback(async () => {
-    if (!isProductDibs) {
-      await axios.post('api/user/dibs/save', {
-        userId: user.userId,
-        product_name: data.name,
-      });
-      setIsProductDibs(true);
-    } else {
+    if (isProductDibs) {
       axios.post('api/user/dibs/delete', {
         userId: user.userId,
         product_name: data.name,
       });
       setIsProductDibs(false);
+      dibsRefetch();
+    } else {
+      await axios.post('api/user/dibs/save', {
+        userId: user.userId,
+        product_name: data.name,
+      });
+
+      setIsProductDibs(true);
+      dibsRefetch();
     }
   }, [isProductDibs, user, data]);
 

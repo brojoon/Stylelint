@@ -70,9 +70,12 @@ export class UsersService {
         where: { name: product_name },
       });
 
-      const result2 = await this.productsRepository.update(product, {
-        dibs: product.dibs + 1,
-      });
+      const result2 = await this.productsRepository.update(
+        { name: product_name },
+        {
+          dibs: product.dibs + 1,
+        },
+      );
     } catch (error) {}
   }
 
@@ -88,9 +91,12 @@ export class UsersService {
         where: { name: product_name },
       });
 
-      const result2 = await this.productsRepository.update(product, {
-        dibs: product.dibs - 1,
-      });
+      const result2 = await this.productsRepository.update(
+        { name: product_name },
+        {
+          dibs: product.dibs - 1,
+        },
+      );
     } catch (error) {}
   }
 }

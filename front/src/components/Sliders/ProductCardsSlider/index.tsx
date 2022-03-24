@@ -122,15 +122,15 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
     >
       {products &&
         products.map((product) => {
-          return <ProductCard data={product} />;
+          return <ProductCard key={product.code} data={product} />;
         })}
       {products &&
         products.map((product) => {
-          return <ProductCard data={product} />;
+          return <ProductCard key={product.code} data={product} />;
         })}
       {products &&
         products.map((product) => {
-          return <ProductCard data={product} />;
+          return <ProductCard key={product.code} data={product} />;
         })}
     </ProductCardSlideWrapper>
   );

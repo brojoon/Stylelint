@@ -2,8 +2,9 @@ import ProductDetailDesc from '@components/ProductDetailDesc';
 import ProductDetailSlider from '@components/Sliders/ProductDetailSlider';
 import { days, months } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
+import axios from 'axios';
 import { useRouter } from 'next/router';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ProductDetailContainer, ProductPurchaseWrapper } from './[code]style';
 
@@ -12,13 +13,51 @@ const productDetails = () => {
   const [productDescNavIndex, setProductDescNavIndex] = useState('1');
   const router = useRouter();
   const { type, code } = router.query;
-  const { data, isLoading, error } = useQuery('productDetailInfo', () =>
-    fetcher(`/api/product/${code}`),
+
+  const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
+
+  const {
+    data,
+    isLoading,
+    error,
+    refetch: productDetailInfoRefetch,
+  } = useQuery('productDetailInfo', () => fetcher(`/api/product/${code}`));
+
+  const { data: dibs, refetch: dibsRefetch } = useQuery('user/dibs', () =>
+    fetcher(`/api/user/dibs`),
   );
 
-  const onClickProductDibs = useCallback(() => {
-    setIsProductDibs((prev) => !prev);
-  }, []);
+  useEffect(() => {
+    if (dibs) {
+      console.log('data:', data);
+      for (let i = 0; i < dibs.length; i++) {
+        if (dibs[i].product_name == data.name) {
+          setIsProductDibs(true);
+        }
+      }
+    }
+  }, [dibs, data]);
+
+  const onClickProductDibs = useCallback(async () => {
+    if (isProductDibs) {
+      await axios.post('api/user/dibs/delete', {
+        userId: user.userId,
+        product_name: data.name,
+      });
+      setIsProductDibs(false);
+      await dibsRefetch();
+      await productDetailInfoRefetch();
+    } else {
+      await axios.post('api/user/dibs/save', {
+        userId: user.userId,
+        product_name: data.name,
+      });
+
+      setIsProductDibs(true);
+      await dibsRefetch();
+      await productDetailInfoRefetch();
+    }
+  }, [isProductDibs, user, data]);
   const onClickProductDescNav = useCallback((e) => {
     setProductDescNavIndex(e.target.dataset.index);
   }, []);
