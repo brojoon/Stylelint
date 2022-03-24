@@ -53,6 +53,21 @@ export class Payment {
   @Column('text', { name: 'image' })
   image: string;
 
+  @Column('int', { name: 'basket_number', nullable: true })
+  basket_number: number;
+
+  @IsString()
+  @Column('char', { name: 'address', length: 100, nullable: true })
+  address: string;
+
+  @IsString()
+  @Column('char', { name: 'receiver', length: 25, nullable: true })
+  receiver: string;
+
+  @IsString()
+  @Column('char', { name: 'phone_number', length: 30, nullable: true })
+  phone_number: string;
+
   @IsBoolean()
   @IsNotEmpty()
   @Column('boolean', { name: 'state' })

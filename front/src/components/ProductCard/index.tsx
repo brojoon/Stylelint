@@ -1,12 +1,13 @@
 import { IProducts } from '@typings/db';
 import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
-import React, { useCallback, useState, VFC } from 'react';
+import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { ProductCardContainer, ProductCardIconWrapper } from './style';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { BasketAddFetch } from '@store/modules/basketAdd';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
+import axios from 'axios';
 
 interface Props {
   data: IProducts;
@@ -23,6 +24,16 @@ const ProductCard: VFC<Props> = ({ data }) => {
     error,
   } = useQuery('user', () => fetcher(`/api/user/profile`));
 
+  const { data: dibs } = useQuery('user/dibs', () => fetcher(`/api/user/dibs`));
+
+  useEffect(() => {
+    if (dibs) {
+      for (let i = 0; i < dibs.length; i++) {
+        if (dibs[i] == data.name) setIsProductDibs(true);
+      }
+    }
+  }, [dibs, data]);
+
   const onClickProductBasket = useCallback(() => {
     if (user) {
       dispatch(
@@ -38,9 +49,22 @@ const ProductCard: VFC<Props> = ({ data }) => {
       );
     }
   }, []);
-  const onClickProductDibs = useCallback(() => {
-    setIsProductDibs((prev) => !prev);
-  }, []);
+
+  const onClickProductDibs = useCallback(async () => {
+    if (!isProductDibs) {
+      await axios.post('api/user/dibs/save', {
+        userId: user.userId,
+        product_name: data.name,
+      });
+      setIsProductDibs(true);
+    } else {
+      axios.post('api/user/dibs/delete', {
+        userId: user.userId,
+        product_name: data.name,
+      });
+      setIsProductDibs(false);
+    }
+  }, [isProductDibs, user, data]);
 
   const onClickProductCardImg = useCallback(() => {
     router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
@@ -92,7 +116,7 @@ const ProductCard: VFC<Props> = ({ data }) => {
         <div className="flex tracking-[-0.5px] justify-between my-[10px] py-[12px] border-b-[1px] border-[#F7F7F7]">
           <div className="">
             <span className="font-semibold">{data.price.toLocaleString()}</span>
-            <span className="ml-[5px] text-[17px] text-[#FF9995]">35%</span>
+            <span className="ml-[5px] text-[17px] text-[#FF9995]">32%</span>
           </div>
           <span>
             <span className="text-[0.75rem]">무료배송</span>

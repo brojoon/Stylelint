@@ -1,3 +1,4 @@
+import { UserDips } from './src/entities/users/user.dibs.info';
 import { Payment } from './src/entities/payment/payment';
 import { Users } from './src/entities/users/users.info';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
@@ -22,7 +23,15 @@ const config: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
 
-  entities: [Users, ProductSubImg, Product, ProductSailInfo, Basket, Payment],
+  entities: [
+    Users,
+    ProductSubImg,
+    Product,
+    ProductSailInfo,
+    Basket,
+    Payment,
+    UserDips,
+  ],
   migrations: [__dirname + '/src/migrations/*.ts'],
   cli: { migrationsDir: 'src/migrations' },
   autoLoadEntities: false,

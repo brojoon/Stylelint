@@ -1,3 +1,4 @@
+import { Basket } from './../entities/basket/basket';
 import { Payment } from '../entities/payment/payment';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,6 +9,8 @@ export class PaymentService {
   constructor(
     @InjectRepository(Payment)
     private PaymentRepository: Repository<Payment>,
+    @InjectRepository(Basket)
+    private BasketRepository: Repository<Basket>,
   ) {}
 
   async PaymentInfo() {
@@ -20,12 +23,14 @@ export class PaymentService {
           'quantity',
           'size',
           'color',
+          'basket_number',
           'image',
         ],
         where: {
           state: false,
         },
       });
+      return result;
     } catch (error) {}
   }
 
@@ -39,6 +44,7 @@ export class PaymentService {
           'quantity',
           'size',
           'color',
+          'address',
           'image',
         ],
         where: {
@@ -50,21 +56,28 @@ export class PaymentService {
 
   async PaymentInfoSave(data) {
     try {
-      this.PaymentRepository.delete({
+      await this.PaymentRepository.delete({
         state: false,
       });
-      this.PaymentRepository.save(data);
+      await this.PaymentRepository.save(data);
     } catch (error) {}
   }
 
-  async PaymentDoneInfoSave() {
+  async PaymentDoneUpdate(data) {
     try {
-      this.PaymentRepository.update(
+      await this.PaymentRepository.update(
         {
           state: false,
         },
-        { state: true },
+        {
+          state: true,
+          address: data.address,
+          receiver: data.receiver,
+          phone_number: data.phone_number,
+        },
       );
+      const result = await this.BasketRepository.delete(data.basket_numbers);
+      return result;
     } catch (error) {}
   }
 }

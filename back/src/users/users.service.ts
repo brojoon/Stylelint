@@ -1,3 +1,5 @@
+import { Product } from 'src/entities/product/product.info';
+import { UserDips } from './../entities/users/user.dibs.info';
 import { Users } from 'src/entities/users/users.info';
 import {
   BadRequestException,
@@ -14,6 +16,10 @@ import { UserLoginDto } from './dto/user.login.dto';
 export class UsersService {
   constructor(
     @InjectRepository(Users) private usersRepository: Repository<Users>,
+    @InjectRepository(UserDips)
+    private userDipsRepository: Repository<UserDips>,
+    @InjectRepository(Product)
+    private productsRepository: Repository<Product>,
 
     private connection: Connection,
   ) {}
@@ -38,5 +44,53 @@ export class UsersService {
       else if (error.response.statusCode === 404)
         throw new NotFoundException(error.response.message);
     }
+  }
+
+  async userDibsInfo(userId: string) {
+    if (!userId) return null;
+
+    try {
+      const result = await this.userDipsRepository.find({
+        select: ['product_name'],
+        where: { userId },
+      });
+      return result;
+    } catch (error) {}
+  }
+
+  async userDibsSave(userId: string, product_name: string) {
+    if (!userId) return null;
+
+    try {
+      const result = await this.userDipsRepository.save({
+        userId: userId,
+        product_name: product_name,
+      });
+      const product = await this.productsRepository.findOne({
+        where: { name: product_name },
+      });
+
+      const result2 = await this.productsRepository.update(product, {
+        dibs: product.dibs + 1,
+      });
+    } catch (error) {}
+  }
+
+  async userDibsDelete(userId: string, product_name: string) {
+    if (!userId) return null;
+
+    try {
+      const result = await this.userDipsRepository.delete({
+        userId: userId,
+        product_name: product_name,
+      });
+      const product = await this.productsRepository.findOne({
+        where: { name: product_name },
+      });
+
+      const result2 = await this.productsRepository.update(product, {
+        dibs: product.dibs - 1,
+      });
+    } catch (error) {}
   }
 }

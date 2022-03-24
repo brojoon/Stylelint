@@ -35,6 +35,25 @@ export class UsersController {
   async getProfile(@User() user) {
     return this.usersService.userinfo(user?.userId);
   }
+
+  @HttpCode(200)
+  @Get('dibs')
+  async getDibs(@User() user) {
+    return this.usersService.userDibsInfo(user?.userId);
+  }
+
+  @HttpCode(200)
+  @Post('dibs/save')
+  async DibsSave(@Body() body) {
+    return this.usersService.userDibsSave(body.userId, body.product_name);
+  }
+
+  @HttpCode(200)
+  @Post('dibs/delete')
+  async DibsDelete(@Body() body) {
+    return this.usersService.userDibsDelete(body.userId, body.product_name);
+  }
+
   // @Get('profile/:userId')
   // async getProfile(@Param('userId') userId: string, @Res() res) {
   //   const userInfo = await this.usersService.info(userId);

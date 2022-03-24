@@ -39,11 +39,11 @@ const productDetails = () => {
                   {data?.name}
                 </p>
                 <p className="text-[1.15rem] text-[#9D9D9D] line-through ">
-                  {data?.price?.toLocaleString()}
+                  {Math.floor(data?.price * 1.5).toLocaleString()}
                 </p>
                 <div className="border-b-[1px] pb-[25px]">
                   <span className="text-[0.75rem] text-[#ff9995] mr-[0.5rem]">
-                    10%쿠폰 적용시
+                    32% 할인 적용시
                   </span>
                   <span className="text-[1.5625rem] font-semibold">
                     {data?.price?.toLocaleString()}

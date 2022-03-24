@@ -1,7 +1,10 @@
 import BasketProductCard from '@components/BasketProductCard';
 import { BasketRemoveFetch } from '@store/modules/basketRemove';
+import { PaymentSaveFetch } from '@store/modules/paymentSave';
 import { IBasketProduct } from '@typings/db';
+import { baseFrontUrl } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
@@ -17,6 +20,7 @@ const Basket = () => {
   const { data, isLoading, error, refetch } = useQuery('basketList', () =>
     fetcher(`/api/basket`),
   );
+  const router = useRouter();
 
   useEffect(() => {
     if (data) setProductCardArr(new Array(data.length).fill(0));
@@ -70,6 +74,30 @@ const Basket = () => {
     console.log('delete Done');
     refetch();
   }, [productCardArr, data, refetch]);
+
+  const onClickPurchase = useCallback(async () => {
+    const ret = data.filter((product: any, index: number) => {
+      if (productCardArr[index]) return true;
+      else false;
+    });
+    let ret2 = [];
+    for (let i = 0; i < ret.length; i++) {
+      ret2.push({
+        userId: '1111',
+        product_name: ret[i].product_name,
+        price: ret[i].price,
+        quantity: ret[i].quantity,
+        size: ret[i].size,
+        color: ret[i].color,
+        image: ret[i].image,
+        basket_number: ret[i].id,
+        state: false,
+      });
+    }
+    console.log(ret2);
+    router.push(baseFrontUrl + '/payment');
+    await dispatch(PaymentSaveFetch(ret2));
+  }, [data, productCardArr]);
   return (
     <BasketContainer IsCheckedAll={isCheckedAll} className="basket-container">
       <div>
@@ -146,7 +174,7 @@ const Basket = () => {
                 </ul>
               </div>
               <div className="basket-product-order-btn">
-                <button>구매하기</button>
+                <button onClick={onClickPurchase}>구매하기</button>
               </div>
             </div>
           </div>

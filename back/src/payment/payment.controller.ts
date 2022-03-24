@@ -24,7 +24,7 @@ export class PaymentController {
     description: '성공',
   })
   @HttpCode(200)
-  @Get('/done')
+  @Get('done')
   async getPaymentDone() {
     return this.paymentService.PaymentDoneInfo();
   }
@@ -35,7 +35,7 @@ export class PaymentController {
     description: '성공',
   })
   @HttpCode(200)
-  @Post()
+  @Post('save')
   async PaymentSave(@Body() body) {
     return this.paymentService.PaymentInfoSave(body);
   }
@@ -46,8 +46,8 @@ export class PaymentController {
     description: '성공',
   })
   @HttpCode(200)
-  @Post()
-  asyncPaymentDoneSave(@Body() body) {
-    return this.paymentService.PaymentDoneInfoSave();
+  @Post('save/done')
+  async PaymentDoneSave(@Body() body) {
+    return this.paymentService.PaymentDoneUpdate(body);
   }
 }

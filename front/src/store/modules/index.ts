@@ -9,6 +9,8 @@ import logout from './logout';
 import signup from './signup';
 import basketRemove from './basketRemove';
 import basketAdd from './basketAdd';
+import paymentSave from './paymentSave';
+import paymentDoneUpdate from './paymentDoneUpdate';
 
 const persistConfig = {
   key: 'root',
@@ -26,6 +28,9 @@ export const rootReducer = (state: any, action: any) => {
     signup,
     basketAdd,
     basketRemove,
+    paymentSave,
+    paymentDoneUpdate,
+
     // 여기에추가
   })(state, action);
 };
