@@ -66,8 +66,84 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
     transition: 0.3s;
   }
 
+  .basket-product-select {
+    margin-top: 25px;
+  }
+
+  .basket-product-select h2 {
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+    line-height: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1e2732;
+  }
+
+  .basket-product-select-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .basket-product-count {
+    margin-top: 2px;
+    display: flex;
+    width: 106px;
+    padding: 10px 10px;
+    align-items: start;
+    border: 1px solid #efeff0;
+    border-radius: 2px;
+    background: #f9f9fa;
+  }
+
+  .basket-product-count > input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 30px;
+    height: 21px;
+    border: 1px solid #ececec;
+    color: #233549;
+    font-size: 14px;
+    text-align: center;
+    background: #fff;
+    margin: 0 6px;
+  }
+
+  .basket-product-count > input::-webkit-inner-spin-button {
+    appearance: none;
+  }
+
+  .basket-product-count > button:nth-child(1) {
+    width: 21px;
+    height: 21px;
+    background: url('/img/basket_product_count.png') no-repeat;
+    background-position: 0 0;
+  }
+
+  .basket-product-count > button:nth-child(3) {
+    width: 21px;
+    height: 21px;
+    background: url(' /img/basket_product_count.png') no-repeat;
+    background-position: -26px 0;
+  }
+
+  .basket-product-select-btn {
+    margin-left: 10px;
+    display: block;
+    width: 58px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 16px;
+    line-height: 38px;
+    height: 40px;
+    color: #5e636d;
+    background: #fff;
+    border: 1px solid #d1d3d6;
+    border-radius: 2px;
+  }
+
   & .product-purchase-payment {
-    margin-top: 70px;
+    margin-top: 40px;
   }
 
   & .purchase-button {

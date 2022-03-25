@@ -1,4 +1,5 @@
 import ProductDetailDesc from '@components/ProductDetailDesc';
+import SelectedProductCardContainer from '@components/SelectedProductCardContainer';
 import ProductDetailSlider from '@components/Sliders/ProductDetailSlider';
 import { days, months } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
@@ -8,9 +9,24 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ProductDetailContainer, ProductPurchaseWrapper } from './[code]style';
 
-const productDetails = () => {
+export interface ISelecedProduct {
+  color: string;
+  size: string;
+  product_name: string;
+  quantity: number;
+  price: number;
+}
+
+const ProductDetails = () => {
   const [isProductDibs, setIsProductDibs] = useState(false);
   const [productDescNavIndex, setProductDescNavIndex] = useState('1');
+  const [productCount, setProductCount] = useState(1);
+  const [selectSize, setSelectSize] = useState('default');
+  const [selectColor, setSelectColor] = useState('default');
+  const [selectedProductArr, setSelectedProductArr] = useState<
+    ISelecedProduct[]
+  >([]);
+
   const router = useRouter();
   const { type, code } = router.query;
 
@@ -28,7 +44,7 @@ const productDetails = () => {
   );
 
   useEffect(() => {
-    if (dibs) {
+    if (dibs && data) {
       console.log('data:', data);
       for (let i = 0; i < dibs.length; i++) {
         if (dibs[i].product_name == data.name) {
@@ -37,6 +53,8 @@ const productDetails = () => {
       }
     }
   }, [dibs, data]);
+
+  useEffect(() => {}, []);
 
   const onClickProductDibs = useCallback(async () => {
     if (isProductDibs) {
@@ -58,9 +76,59 @@ const productDetails = () => {
       await productDetailInfoRefetch();
     }
   }, [isProductDibs, user, data]);
+
   const onClickProductDescNav = useCallback((e) => {
     setProductDescNavIndex(e.target.dataset.index);
   }, []);
+
+  const onChangeProductCount = useCallback((e) => {
+    if (e.target.value < 1) {
+      alert('주문 가능한 최소 수량은 1개 입니다.');
+      return;
+    }
+  }, []);
+
+  const onClickProductSubstractCount = useCallback((e) => {
+    setProductCount((prev) => {
+      if (prev <= 1) {
+        alert('개수가 0개입니다');
+        return 1;
+      }
+      return prev - 1;
+    });
+  }, []);
+
+  const onClickProductAddCount = useCallback((e) => {
+    setProductCount((prev) => prev + 1);
+  }, []);
+
+  const onChangeSelectSize = useCallback((e) => {
+    setSelectSize(e.target.value);
+  }, []);
+
+  const onChangeSelectColor = useCallback((e) => {
+    setSelectColor(e.target.value);
+  }, []);
+
+  const onClickSelectBtn = useCallback(() => {
+    if (selectColor && selectSize && productCount >= 1) {
+      setSelectedProductArr((prev) =>
+        prev.concat([
+          {
+            color: selectColor,
+            size: selectSize,
+            product_name: data.name,
+            price: data.price,
+            quantity: productCount,
+          },
+        ]),
+      );
+    }
+    setSelectColor('default');
+    setSelectSize('default');
+    setProductCount(1);
+  }, [selectColor, selectSize, productCount, data]);
+
   return (
     <>
       <ProductDetailContainer>
@@ -114,8 +182,13 @@ const productDetails = () => {
                 <ProductPurchaseWrapper IsProductDibs={isProductDibs}>
                   <div className="option-container">
                     <span className="option-header">옵션선택</span>
-                    <select className="option-size" name="사이즈">
-                      <option disabled selected>
+                    <select
+                      className="option-size"
+                      onChange={onChangeSelectSize}
+                      value={selectSize}
+                      name="사이즈"
+                    >
+                      <option disabled value="default" selected>
                         사이즈
                       </option>
                       <option value="S">S</option>
@@ -127,8 +200,13 @@ const productDetails = () => {
                     </span>
                   </div>
                   <div className="option-container">
-                    <select className="option-size" name="색상">
-                      <option disabled selected>
+                    <select
+                      className="option-size"
+                      onChange={onChangeSelectColor}
+                      value={selectColor}
+                      name="색상"
+                    >
+                      <option disabled value="default" selected>
                         색상
                       </option>
                       <option value="Black">Black</option>
@@ -139,6 +217,36 @@ const productDetails = () => {
                       <img src="/img/select_dropdown.png" alt="" />
                     </span>
                   </div>
+                  {selectSize !== 'default' && selectColor !== 'default' && (
+                    <div className="basket-product-select">
+                      <h2>수량</h2>
+                      <div className="basket-product-select-wrapper">
+                        <div className="basket-product-count">
+                          <button
+                            onClick={onClickProductSubstractCount}
+                          ></button>
+                          <input
+                            onChange={onChangeProductCount}
+                            type="number"
+                            value={productCount}
+                          />
+                          <button onClick={onClickProductAddCount}></button>
+                        </div>
+                        <button
+                          className="basket-product-select-btn"
+                          onClick={onClickSelectBtn}
+                        >
+                          선택
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  <SelectedProductCardContainer
+                    selectedProductArr={selectedProductArr}
+                    setSelectedProductArr={setSelectedProductArr}
+                  />
+
                   <div className="product-purchase-payment">
                     <div className="purchase-result">
                       <span>총 상품금액</span>
@@ -168,4 +276,4 @@ const productDetails = () => {
   );
 };
 
-export default productDetails;
+export default ProductDetails;
