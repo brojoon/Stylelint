@@ -38,10 +38,10 @@ const config: TypeOrmModuleOptions = {
   cli: { migrationsDir: 'src/migrations' },
   autoLoadEntities: false,
   charset: 'utf8mb4',
-  synchronize: false,
+  synchronize: true,
   logging: true,
   keepConnectionAlive: true,
-  // dropSchema: true,
+  dropSchema: true,
 };
 
 export = config;
