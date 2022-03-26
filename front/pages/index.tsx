@@ -4,7 +4,7 @@ import Header from '@components/layouts/Header';
 import MainSlider from '@components/Sliders/MainSlider';
 import ProductsGridWrapper from '@components/ProductCardsGridWrapper';
 import ProductsCardSlider from '@components/Sliders/ProductCardsSlider';
-import { HomeContainer } from './style';
+import { HomeContainer } from '../public/style';
 import MainEventSlider from '@components/Sliders/MainEventSlider';
 import axios from 'axios';
 import { useQuery } from 'react-query';

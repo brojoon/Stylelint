@@ -4,6 +4,7 @@ import { ProductCardSlideWrapper } from './style';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import { IProducts } from '@typings/db';
+import ModalBasket from '@components/ModalBasket';
 
 interface Props {
   products: IProducts[];
@@ -18,6 +19,7 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
   const [savePosValue, setSavePosValue] = useState(0);
   const [slideStartX, setSlideStartX] = useState(0);
   const [slideClickedTime, setSlideClickedTime] = useState<Date>();
+  const [isModalBasket, setIsModalBasket] = useState(false);
 
   const OnMouseDownSlide = useCallback((e) => {
     setSlideClickedTime(new Date());
@@ -108,31 +110,52 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
   }, []);
 
   return (
-    <ProductCardSlideWrapper
-      onMouseDown={OnMouseDownSlide}
-      onMouseMove={onMouseMoveSlide}
-      onMouseUp={onMouseUpSlide}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      onTouchStart={onTouchDownSlide}
-      onTouchMove={onTouchMoveSlide}
-      onTouchEnd={onTouchUpSlide}
-      PosX={`${slidePosition}`}
-      IsTransition={isTransition}
-    >
-      {products &&
-        products.map((product) => {
-          return <ProductCard key={product.code} data={product} />;
-        })}
-      {products &&
-        products.map((product) => {
-          return <ProductCard key={product.code} data={product} />;
-        })}
-      {products &&
-        products.map((product) => {
-          return <ProductCard key={product.code} data={product} />;
-        })}
-    </ProductCardSlideWrapper>
+    <>
+      {isModalBasket && <ModalBasket setIsModalBasket={setIsModalBasket} />}
+      <ProductCardSlideWrapper
+        onMouseDown={OnMouseDownSlide}
+        onMouseMove={onMouseMoveSlide}
+        onMouseUp={onMouseUpSlide}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onTouchStart={onTouchDownSlide}
+        onTouchMove={onTouchMoveSlide}
+        onTouchEnd={onTouchUpSlide}
+        PosX={`${slidePosition}`}
+        IsTransition={isTransition}
+      >
+        {products &&
+          products.map((product) => {
+            return (
+              <ProductCard
+                key={product.code}
+                data={product}
+                setIsModalBasket={setIsModalBasket}
+              />
+            );
+          })}
+        {products &&
+          products.map((product) => {
+            return (
+              <ProductCard
+                key={product.code}
+                data={product}
+                setIsModalBasket={setIsModalBasket}
+              />
+            );
+          })}
+        {products &&
+          products.map((product) => {
+            return (
+              <ProductCard
+                key={product.code}
+                data={product}
+                setIsModalBasket={setIsModalBasket}
+              />
+            );
+          })}
+      </ProductCardSlideWrapper>
+    </>
   );
 };
 

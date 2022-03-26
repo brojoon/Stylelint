@@ -6,7 +6,7 @@ export const Container = styled.div`
   .selected-list {
     position: relative;
     margin-top: 10px;
-    padding: 14px 13px 11px;
+    padding: 14px 13px 8px;
     background: #f9f9fa;
     border: 1px solid #f2f2f2;
     border-radius: 2px;
@@ -16,17 +16,28 @@ export const Container = styled.div`
     opacity: 0.8;
   }
 
+  .product-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .product-option {
     font-weight: 500;
     font-size: 14px;
   }
 
-  .product-info {
+  .product-info > div:nth-child(2) {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .close {
     margin-left: 10px;
+    width: 26px;
+    height: 26px;
+    background-position: -442px -122px;
+    background-image: url(/img/close-btn.png);
   }
 `;

@@ -41,9 +41,7 @@ const SelectedProductCardContainer: VFC<Props> = ({
                       data-index={index}
                       className="close"
                       onClick={onClickDeleteProduct}
-                    >
-                      X
-                    </button>
+                    ></button>
                   </div>
                 </div>
               </div>
