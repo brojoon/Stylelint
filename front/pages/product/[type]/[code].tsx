@@ -1,20 +1,26 @@
 import ProductDetailDesc from '@components/ProductDetailDesc';
 import SelectedProductCardContainer from '@components/SelectedProductCardContainer';
 import ProductDetailSlider from '@components/Sliders/ProductDetailSlider';
-import { days, months } from '@utils/utils/const';
+import { BasketAddFetch } from '@store/modules/basketAdd';
+import { PaymentSaveFetch } from '@store/modules/paymentSave';
+import { baseFrontUrl, days, months } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import { useDispatch } from 'react-redux';
 import { ProductDetailContainer, ProductPurchaseWrapper } from './[code]style';
 
 export interface ISelecedProduct {
+  userId: string;
+  image: string;
   color: string;
   size: string;
   product_name: string;
   quantity: number;
   price: number;
+  state: boolean;
 }
 
 const ProductDetails = () => {
@@ -23,13 +29,13 @@ const ProductDetails = () => {
   const [productCount, setProductCount] = useState(1);
   const [selectSize, setSelectSize] = useState('default');
   const [selectColor, setSelectColor] = useState('default');
+  const [totalPrice, setTotalPrice] = useState(0);
   const [selectedProductArr, setSelectedProductArr] = useState<
     ISelecedProduct[]
   >([]);
 
   const router = useRouter();
   const { type, code } = router.query;
-
   const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
 
   const {
@@ -42,6 +48,19 @@ const ProductDetails = () => {
   const { data: dibs, refetch: dibsRefetch } = useQuery('user/dibs', () =>
     fetcher(`/api/user/dibs`),
   );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (selectedProductArr.length) {
+      let sum = 0;
+      for (let i = 0; i < selectedProductArr.length; i++) {
+        sum += selectedProductArr[i].price * selectedProductArr[i].quantity;
+      }
+      setTotalPrice(sum);
+    } else {
+      setTotalPrice(0);
+    }
+  }, [selectedProductArr]);
 
   useEffect(() => {
     if (dibs && data) {
@@ -111,15 +130,18 @@ const ProductDetails = () => {
   }, []);
 
   const onClickSelectBtn = useCallback(() => {
-    if (selectColor && selectSize && productCount >= 1) {
+    if (selectColor && selectSize && productCount >= 1 && user) {
       setSelectedProductArr((prev) =>
         prev.concat([
           {
-            color: selectColor,
-            size: selectSize,
+            userId: user.userId,
             product_name: data.name,
             price: data.price,
             quantity: productCount,
+            size: selectSize,
+            color: selectColor,
+            image: data.image,
+            state: false,
           },
         ]),
       );
@@ -127,7 +149,36 @@ const ProductDetails = () => {
     setSelectColor('default');
     setSelectSize('default');
     setProductCount(1);
-  }, [selectColor, selectSize, productCount, data]);
+  }, [selectColor, selectSize, productCount, data, user]);
+
+  const onClickProductsBasket = useCallback(async () => {
+    if (selectedProductArr) {
+      for (let i = 0; i < selectedProductArr.length; i++) {
+        await dispatch(
+          BasketAddFetch([
+            {
+              userId: user.userId,
+              product_name: data.name,
+              price: data.price,
+              quantity: selectedProductArr[i].quantity,
+              size: selectedProductArr[i].size,
+              color: selectedProductArr[i].color,
+              image: data.image,
+            },
+          ]),
+        );
+      }
+      setSelectedProductArr([]);
+    }
+  }, [selectedProductArr, user, BasketAddFetch]);
+
+  const onClickPurchase = useCallback(async () => {
+    if (selectedProductArr) {
+      await dispatch(PaymentSaveFetch(selectedProductArr));
+      console.log('selectedProductArr', selectedProductArr);
+      router.push(baseFrontUrl + '/payment');
+    }
+  }, [selectedProductArr, baseFrontUrl, dispatch, PaymentSaveFetch]);
 
   return (
     <>
@@ -246,21 +297,20 @@ const ProductDetails = () => {
                     selectedProductArr={selectedProductArr}
                     setSelectedProductArr={setSelectedProductArr}
                   />
-
                   <div className="product-purchase-payment">
                     <div className="purchase-result">
                       <span>총 상품금액</span>
-                      {/* <span>결과</span> */}
+                      <span>{totalPrice.toLocaleString()}원</span>
                     </div>
                     <div className="purchase-button">
                       <button onClick={onClickProductDibs}>
                         <span className="product-dibs"></span>
                         <span className="product-dibs-count">{data?.dibs}</span>
                       </button>
-                      <button>
+                      <button onClick={onClickProductsBasket}>
                         <span>장바구니</span>
                       </button>
-                      <button>
+                      <button onClick={onClickPurchase}>
                         <span>구매하기</span>
                       </button>
                     </div>

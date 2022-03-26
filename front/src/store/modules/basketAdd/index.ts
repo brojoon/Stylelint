@@ -14,20 +14,17 @@ interface BasketAddRequest {
   color: string;
   image: string;
 }
+
 const initialState: typeBasketAdd = { status: '' }; // 초기 상태 정의
 
 export const BasketAddFetch = createAsyncThunk(
   'user/BasketAddFetch',
-  async (data: BasketAddRequest) => {
-    const response = await axios.post('/api/basket/add', {
-      userId: data.userId,
-      product_name: data.product_name,
-      price: data.price,
-      quantity: data.quantity,
-      size: data.size,
-      color: data.color,
-      image: data.image,
-    });
+  async (data: BasketAddRequest[]) => {
+    const response = await axios.post(
+      '/api/basket/add',
+
+      data,
+    );
     return response?.data;
   },
 );

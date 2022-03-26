@@ -35,19 +35,19 @@ export class BasketController {
   })
   @HttpCode(200)
   @Post('add')
-  async basketAdd(@Body() body: BasketAddDto) {
+  async basketAdd(@Body() body: BasketAddDto[]) {
     return this.basketService.basketAdd(body);
   }
 
-  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: 200,
     description: '성공',
   })
   @HttpCode(200)
   @Post('remove')
-  async basketRemove(@Body() body: { id: number }) {
-    return this.basketService.basketRemove(body.id);
+  async basketRemove(@Body() body) {
+    console.log('body:', body);
+    return this.basketService.basketRemove(body);
   }
 
   @UseGuards(JwtAuthGuard)

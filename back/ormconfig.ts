@@ -1,3 +1,4 @@
+import { UserPaymentRecent } from './src/entities/users/user.payment.recent';
 import { UserDips } from './src/entities/users/user.dibs.info';
 import { Payment } from './src/entities/payment/payment';
 import { Users } from './src/entities/users/users.info';
@@ -31,6 +32,7 @@ const config: TypeOrmModuleOptions = {
     Basket,
     Payment,
     UserDips,
+    UserPaymentRecent,
   ],
   migrations: [__dirname + '/src/migrations/*.ts'],
   cli: { migrationsDir: 'src/migrations' },

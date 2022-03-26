@@ -1,3 +1,4 @@
+import { UserPaymentRecent } from './../entities/users/user.payment.recent';
 import { UserDips } from './../entities/users/user.dibs.info';
 import { Product } from 'src/entities/product/product.info';
 import { Module } from '@nestjs/common';
@@ -10,7 +11,9 @@ import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Users, UserDips, Product])],
+  imports: [
+    TypeOrmModule.forFeature([Users, UserDips, Product, UserPaymentRecent]),
+  ],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService],

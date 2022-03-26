@@ -10,6 +10,10 @@ import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { BasketContainer } from './style';
 
+interface IDeleteProductsId {
+  id: number;
+}
+
 const Basket = () => {
   const [isCheckedAll, setIsCheckedAllSelct] = useState(false);
   const [productCardArr, setProductCardArr] = useState<number[]>(
@@ -58,21 +62,21 @@ const Basket = () => {
   );
 
   const onClickProductDelete = useCallback(async () => {
-    await Promise.all(
-      productCardArr.map(async (arr, index) => {
-        if (arr === 1 && data.length > index) {
-          await dispatch(BasketRemoveFetch(data[index].id));
-          console.log('deleting: ', index);
-        }
-      }),
-    );
-    setProductCardArr((prev) => {
-      return prev.map((value) => {
-        return 0;
+    if (data) {
+      const postArr: IDeleteProductsId[] = [];
+      for (let i = 0; i < data.length; i++) {
+        if (productCardArr[i] == 1) postArr.push({ id: data[i].id });
+      }
+      console.log('postArr', postArr);
+      await dispatch(BasketRemoveFetch(postArr));
+      setProductCardArr((prev) => {
+        return prev.map((value) => {
+          return 0;
+        });
       });
-    });
-    console.log('delete Done');
-    refetch();
+      console.log('delete Done');
+      refetch();
+    }
   }, [productCardArr, data, refetch]);
 
   const onClickPurchase = useCallback(async () => {
@@ -95,8 +99,8 @@ const Basket = () => {
       });
     }
     console.log(ret2);
-    router.push(baseFrontUrl + '/payment');
     await dispatch(PaymentSaveFetch(ret2));
+    router.push(baseFrontUrl + '/payment');
   }, [data, productCardArr]);
   return (
     <BasketContainer IsCheckedAll={isCheckedAll} className="basket-container">

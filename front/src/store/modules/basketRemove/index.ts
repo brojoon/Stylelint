@@ -11,9 +11,8 @@ const initialState: typeBasketRemove = { status: '' }; // 초기 상태 정의
 
 export const BasketRemoveFetch = createAsyncThunk(
   'user/BasketRemoveFetch',
-  async (id: number) => {
-    console.log(id);
-    const response = await axios.post('/api/basket/remove', { id: id });
+  async (data: any) => {
+    const response = await axios.post('/api/basket/remove', data);
     return response?.data;
   },
 );

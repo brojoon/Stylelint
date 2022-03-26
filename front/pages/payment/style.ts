@@ -81,18 +81,38 @@ export const PaymentContainer = styled.section`
     background-size: 300px auto;
   }
 
-  .payment-address-name > span {
-    display: inline-block;
+  .payment-info-text {
+    margin-top: 15px;
+    margin-bottom: 5px;
     font-size: 16px;
-    line-height: 20px;
-    color: #222;
-    font-weight: bold;
-    vertical-align: top;
+    line-height: 24px;
+    color: #222222;
+    font-weight: 500;
+    letter-spacing: -0.16px;
   }
 
-  .payment-address-name > span:nth-child(2) {
-    margin-left: 6px;
+  .payment-info-text > input:nth-child(1) {
+    padding: 10px;
+
+    border-radius: 5px 0 0 5px;
+    width: 50%;
+    border-left: 1px solid #dbdbdb;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+
   }
+
+  .payment-info-text > input:nth-child(2) {
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    width: 50%;
+    border: 1px solid #dbdbdb;
+  }
+
+  .payment-info-text > input:focus {
+    outline-color: #a3a3a3;
+  }
+
 
   .payment-address-text {
     margin-top: 5px;
@@ -214,7 +234,16 @@ export const PaymentContainer = styled.section`
     padding: 20px 0;
     display: flex;
     align-items: center;
+    width: 100%;
   }
+
+  .payment-purchase-info h3 {
+    color: #233549;
+    font-weight: bold;
+    opacity: 0.9;
+  }
+
+
 
   .payment-purchase-info img {
     width: 86px;
@@ -227,17 +256,22 @@ export const PaymentContainer = styled.section`
   }
 
   .payment-purchase-info > div:nth-child(2) > div:nth-child(2) {
-    margin-top: 5px;
+    margin-top: 4px;
   }
 
-  .payment-purchase-info > div:nth-child(2) > div:nth-child(2) > span:nth-child(1) {
+  .payment-purchase-info-detail-wrapper > div:nth-child(1) > span {
+    color: #233549;
+    opacity: 0.8;
+  }
+
+  .payment-purchase-info-detail-wrapper > div:nth-child(2) > span:nth-child(1) {
     font-size: 18px;
     line-height: 24px;
     color: #000;
     font-weight: bold;
   }
 
-  .payment-purchase-info > div:nth-child(2) > div:nth-child(2) > span:nth-child(2) {
+  .payment-purchase-info-detail-wrapper > div:nth-child(2) > span:nth-child(2) {
     display: inline-block;
     font-size: 15px;
     line-height: 24px;
@@ -247,7 +281,7 @@ export const PaymentContainer = styled.section`
     font-weight: bold;
   }
 
-  .payment-purchase-info > div:nth-child(2) > div:nth-child(2) > span:nth-child(3) {
+  .payment-purchase-info-detail-wrapper > span:nth-child(3) {
     margin-left: 5px;
     display: inline-block;
     font-size: 15px;

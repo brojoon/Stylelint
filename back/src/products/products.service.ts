@@ -30,6 +30,7 @@ export class ProductsService {
         'p.type',
         'p.price',
         'p.dibs',
+        'p.image',
         'p.perchase_quantity',
         'sailInfo.color',
         'sailInfo.size',

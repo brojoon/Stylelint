@@ -45,6 +45,21 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
     font-size: 15px;
     letter-spacing: -0.5px;
     max-width: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .basket-product-desc span:nth-child(1) {
+    font-weight: bold;
+    color: #233549;
+  }
+
+  .basket-product-desc span:nth-child(2) {
+    color: #233549;
+    opacity: 0.8;
+    font-size: 14px;
+    font-weight: 500;
   }
 
   .basket-product-count {

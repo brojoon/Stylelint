@@ -1,3 +1,4 @@
+import { UserPaymentRecent } from '../entities/users/user.payment.recent';
 import { Product } from 'src/entities/product/product.info';
 import { UserDips } from './../entities/users/user.dibs.info';
 import { Users } from 'src/entities/users/users.info';
@@ -20,6 +21,8 @@ export class UsersService {
     private userDipsRepository: Repository<UserDips>,
     @InjectRepository(Product)
     private productsRepository: Repository<Product>,
+    @InjectRepository(UserPaymentRecent)
+    private recentPaymentRepository: Repository<UserPaymentRecent>,
 
     private connection: Connection,
   ) {}
@@ -98,5 +101,21 @@ export class UsersService {
         },
       );
     } catch (error) {}
+  }
+
+  async userPaymentRecentInfo(userId) {
+    try {
+      const user = await this.recentPaymentRepository.findOne({
+        userId,
+      });
+      return user;
+    } catch {}
+  }
+
+  async userPaymentRecentSave(data) {
+    try {
+      await this.recentPaymentRepository.delete({ userId: data.userId });
+      await this.recentPaymentRepository.save(data);
+    } catch {}
   }
 }

@@ -13,11 +13,11 @@ export const Container = styled.div`
     border-bottom: 1px solid #bec1c7;
     font-weight: bold;
     color: #233549;
+    opacity: 0.8;
   }
 
   .product-option {
     font-weight: 500;
-    opacity: 0.8;
     font-size: 14px;
   }
 

@@ -147,7 +147,7 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
   }
 
   & .purchase-button {
-    margin-top: 30px;
+    margin-top: 25px;
     display: flex;
   }
 
@@ -205,8 +205,28 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
   }
 
   & .purchase-result {
-    padding-bottom: 30px;
+    padding-bottom: 5px;
     border-bottom: 1px solid #111111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & .purchase-result span:nth-child(1) {
+    font-size: 16px;
+    line-height: 22px;
+    color: #5e636d;
+    letter-spacing: -1px;
+  }
+
+  & .purchase-result span:nth-child(2) {
+    line-height: 38px;
+    font-size: 24px;
+    color: #000;
+    font-weight: bold;
+   
+    letter-spacing: -0.5px;
+}
   }
 
   & .product-dibs-count {

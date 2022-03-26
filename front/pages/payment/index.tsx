@@ -9,6 +9,7 @@ import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
 import { useDispatch } from 'react-redux';
 import { PaymentDoneUpdateFetch } from '@store/modules/paymentDoneUpdate';
 import { useRouter } from 'next/router';
+import { PaymentRecentSaveFetch } from '@store/modules/paymentRecentSave';
 
 interface IPostType {
   address: string;
@@ -25,7 +26,11 @@ const Payment = () => {
   const [addressInputValue, setAddressInputValue] = useState('주소');
   const [addressSubInputValue, setAddressSubInputValue] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
-  const [totalNumber, setTotalNumber] = useState(0);
+  const [totaLQuantity, setTotaLQuantity] = useState(0);
+  const [postName, setPostName] = useState('');
+  const [postPhoneNumber, setPostPhoneNumber] = useState('');
+
+  const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
   const { data, isLoading, error } = useQuery('paymentList', () =>
     fetcher(`/api/payment`),
   );
@@ -42,9 +47,34 @@ const Payment = () => {
         num += data[i].quantity;
       }
       setTotalPrice(sum);
-      setTotalNumber(num);
+      setTotaLQuantity(num);
     }
   }, [data]);
+
+  const onChangeName = useCallback((e) => {
+    setPostName(e.target.value);
+  }, []);
+
+  const onChangePhoneNumber = useCallback((e) => {
+    console.log(
+      e.target.value
+        .replace(/[^0-9]/g, '')
+        .replace(
+          /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+          '$1-$2-$3',
+        )
+        .replace('--', '-'),
+    );
+    setPostPhoneNumber(
+      e.target.value
+        .replace(/[^0-9]/g, '')
+        .replace(
+          /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+          '$1-$2-$3',
+        )
+        .replace('--', '-'),
+    );
+  }, []);
 
   const onChangeSubInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,11 +88,11 @@ const Payment = () => {
   }, []);
 
   const onClickPurchase = useCallback(() => {
-    if (data && addressSubInputValue && addressInputValue) {
+    if (data && addressSubInputValue && postName && postPhoneNumber) {
       const post: IPostType = {
         address: addressInputValue + ' ' + addressSubInputValue,
-        receiver: '홍길동',
-        phone_number: '010-9420-8033',
+        receiver: postName,
+        phone_number: postPhoneNumber,
         basket_numbers: [],
       };
       console.log('isdata', data);
@@ -71,9 +101,28 @@ const Payment = () => {
         post.basket_numbers.push({ id: data[i].basket_number });
       }
       dispatch(PaymentDoneUpdateFetch(post));
+      dispatch(
+        PaymentRecentSaveFetch({
+          userId: user.userId,
+          receiver: postName,
+          total_price: totalPrice,
+          total_purchase_quantity: totaLQuantity,
+          address: addressInputValue + ' ' + addressSubInputValue,
+          phone_number: postPhoneNumber,
+        }),
+      );
       router.push(baseFrontUrl + '/payment/result');
     }
-  }, [data, addressSubInputValue, addressInputValue]);
+  }, [
+    data,
+    addressSubInputValue,
+    addressInputValue,
+    postName,
+    postPhoneNumber,
+    totalPrice,
+    totaLQuantity,
+    user,
+  ]);
 
   return (
     <>
@@ -99,13 +148,23 @@ const Payment = () => {
                   <div className="payment-info-card">
                     <div>
                       <div>
-                        <h3>홍길동</h3>
+                        <h3>배송정보</h3>
                       </div>
                     </div>
                     <div>
-                      <div className="payment-address-name">
-                        <span>홍길동</span>
-                        <span> 010-3333-4444</span>
+                      <div className="payment-info-text">
+                        <input
+                          type="text"
+                          onChange={onChangeName}
+                          value={postName}
+                          placeholder="이름"
+                        />
+                        <input
+                          type="text"
+                          onChange={onChangePhoneNumber}
+                          value={postPhoneNumber}
+                          placeholder="연락처"
+                        />
                       </div>
                       <div className="payment-address-text">
                         <input type="text" disabled value={addressInputValue} />
@@ -153,7 +212,7 @@ const Payment = () => {
                 <div>
                   <div className="payment-purchase-card">
                     <div className="payment-purchase-header">
-                      <h3>주문상품 {totalNumber}개</h3>
+                      <h3>주문상품 {totaLQuantity}개</h3>
                     </div>
                     <div>
                       {data?.map((product: any) => {
@@ -163,11 +222,17 @@ const Payment = () => {
                               <img src={baseApiUrl + product.image} />
                             </div>
                             <div>
-                              <div>{product.product_name}</div>
-                              <div>
-                                <span>{product.price.toLocaleString()}</span>
-                                <span>원</span>
-                                <span>/ {product.quantity}개</span>
+                              <h3>{product.product_name}</h3>
+                              <div className="payment-purchase-info-detail-wrapper">
+                                <div>
+                                  <span>사이즈: {product.size}</span>{' '}
+                                  <span>색상: {product.color}</span>
+                                </div>
+                                <div>
+                                  <span>{product.price.toLocaleString()}</span>
+                                  <span>원</span>
+                                  <span> / {product.quantity}개</span>
+                                </div>
                               </div>
                             </div>
                           </div>

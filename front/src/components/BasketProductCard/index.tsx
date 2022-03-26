@@ -25,7 +25,7 @@ const BasketProductCard: VFC<Props> = ({
   const dispatch = useDispatch();
 
   const onClickProductDelete = useCallback(async () => {
-    await dispatch(BasketRemoveFetch(basketProduct.id));
+    await dispatch(BasketRemoveFetch([{ id: basketProduct.id }]));
     refetch();
   }, [basketProduct, BasketRemoveFetch, dispatch]);
 
@@ -96,6 +96,9 @@ const BasketProductCard: VFC<Props> = ({
 
             <div className="basket-product-desc">
               <span>{basketProduct.product_name}</span>
+              <span>
+                사이즈: {basketProduct.size} 색상: {basketProduct.color}{' '}
+              </span>
             </div>
 
             <div className="basket-product-count">

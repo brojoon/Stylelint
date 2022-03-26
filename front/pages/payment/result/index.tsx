@@ -1,8 +1,13 @@
+import fetcher from '@utils/utils/fetcher';
 import Link from 'next/link';
 import React from 'react';
+import { useQuery } from 'react-query';
 import { ResultContainer } from './style';
 
 const Result = () => {
+  const { data: recentPaymemt } = useQuery('userRecentPayment', () =>
+    fetcher(`/api/user/payment/recent`),
+  );
   return (
     <ResultContainer>
       <div>
@@ -15,14 +20,11 @@ const Result = () => {
           <div className="body-wrapper">
             <div className="body-info">
               <p>
-                <span>홍길동 님</span>이 주문하신 소중한 상품을 곧 보내
-                드릴게요!
+                <span>{recentPaymemt?.receiver} 님</span>이 주문하신 소중한
+                상품을 곧 보내 드릴게요!
               </p>
               <p>
-                <span>
-                  서울특별시 송파구 송파대로 567 (잠실주공아파트) 530동 410호 /
-                  홍길동
-                </span>
+                <span>{recentPaymemt?.address}</span>
               </p>
             </div>
             <div className="shopping-info-btn">
@@ -52,7 +54,9 @@ const Result = () => {
                   <tr>
                     <td>
                       <div>
-                        <span>28,350</span>
+                        <span>
+                          {recentPaymemt?.total_price?.toLocaleString()}
+                        </span>
                         <span>원</span>
                       </div>
                     </td>
@@ -65,11 +69,9 @@ const Result = () => {
                     </td>
                     <td>
                       <p>
-                        <span>이름 : 홍길동</span>
-                        <span>
-                          주소 : 서울특별시 송파구 송파대로 567 530동 810호
-                        </span>
-                        <span>연락처 : 010 2042 5503</span>
+                        <span>이름 : {recentPaymemt?.receiver}</span>
+                        <span>주소 : {recentPaymemt?.address}</span>
+                        <span>연락처 : {recentPaymemt?.phone_number}</span>
                       </p>
                     </td>
                   </tr>

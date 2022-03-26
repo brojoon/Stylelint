@@ -43,16 +43,32 @@ export class UsersController {
     return this.usersService.userDibsInfo(user?.userId);
   }
 
+  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @Post('dibs/save')
   async DibsSave(@Body() body) {
     return this.usersService.userDibsSave(body.userId, body.product_name);
   }
 
+  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @Post('dibs/delete')
   async DibsDelete(@Body() body) {
     return this.usersService.userDibsDelete(body.userId, body.product_name);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(200)
+  @Get('payment/recent')
+  async getRecentPayment(@User() user) {
+    return this.usersService.userPaymentRecentInfo(user?.userId);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(200)
+  @Post('payment/recent')
+  async PostRecentPayment(@Body() body) {
+    return this.usersService.userPaymentRecentSave(body);
   }
 
   // @Get('profile/:userId')

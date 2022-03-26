@@ -30,48 +30,48 @@ export class BasketService {
     } catch (error) {}
   }
 
-  async basketAdd(product: BasketAddDto) {
+  async basketAdd(product: BasketAddDto[]) {
     try {
-      const result = await this.BasketRepository.findOne({
-        select: [
-          'id',
-          'userId',
-          'product_name',
-          'price',
-          'quantity',
-          'size',
-          'color',
-          'image',
-        ],
-        where: {
-          userId: product.userId,
-          product_name: product.product_name,
-          size: product.size,
-          color: product.color,
-        },
-      });
-      if (!result) {
-        this.BasketRepository.save({
-          userId: product.userId,
-          product_name: product.product_name,
-          price: product.price,
-          quantity: product.quantity,
-          size: product.size,
-          color: product.color,
-          image: product.image,
+      for (let i = 0; i < product.length; i++) {
+        const result = await this.BasketRepository.findOne({
+          select: [
+            'id',
+            'userId',
+            'product_name',
+            'price',
+            'quantity',
+            'size',
+            'color',
+            'image',
+          ],
+          where: {
+            userId: product[i].userId,
+            product_name: product[i].product_name,
+            size: product[i].size,
+            color: product[i].color,
+          },
         });
-      } else {
-        result.quantity += product.quantity;
-        await this.BasketRepository.update(result.id, result);
+        if (!result) {
+          await this.BasketRepository.save({
+            userId: product[i].userId,
+            product_name: product[i].product_name,
+            price: product[i].price,
+            quantity: product[i].quantity,
+            size: product[i].size,
+            color: product[i].color,
+            image: product[i].image,
+          });
+        } else {
+          result.quantity += product[i].quantity;
+          await this.BasketRepository.update(result.id, result);
+        }
       }
     } catch (error) {}
   }
 
-  async basketRemove(id: number) {
+  async basketRemove(data) {
     try {
-      const reulst = await this.BasketRepository.delete({
-        id: id,
-      });
+      const reulst = await this.BasketRepository.delete(data);
     } catch (error) {}
   }
 

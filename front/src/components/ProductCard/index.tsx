@@ -40,18 +40,20 @@ const ProductCard: VFC<Props> = ({ data }) => {
   const onClickProductBasket = useCallback(() => {
     if (user) {
       dispatch(
-        BasketAddFetch({
-          userId: user.userId,
-          product_name: data.name,
-          price: data.price,
-          quantity: 1,
-          size: 'S',
-          color: 'Red',
-          image: data.image,
-        }),
+        BasketAddFetch([
+          {
+            userId: user.userId,
+            product_name: data.name,
+            price: data.price,
+            quantity: 1,
+            size: 'S',
+            color: 'Red',
+            image: data.image,
+          },
+        ]),
       );
     }
-  }, []);
+  }, [user]);
 
   const onClickProductDibs = useCallback(async () => {
     if (isProductDibs) {
@@ -155,12 +157,3 @@ const ProductCard: VFC<Props> = ({ data }) => {
 };
 
 export default ProductCard;
-function PutBasketFetch(arg0: {
-  userId: string;
-  product_name: string;
-  price: number;
-  quantity: number;
-  image: string;
-}): any {
-  throw new Error('Function not implemented.');
-}

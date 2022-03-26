@@ -10,7 +10,7 @@ import {
 import { IsNotEmpty, IsString } from 'class-validator';
 
 @Entity({ schema: 'stylelint', name: 'userRecentPayment' })
-export class UserDips {
+export class UserPaymentRecent {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
@@ -21,7 +21,7 @@ export class UserDips {
     example: 'brojoon',
     required: true,
   })
-  @Column('char', { name: 'userId', length: 30 })
+  @Column('char', { name: 'userId', unique: true, length: 30 })
   userId: string;
 
   @IsString()
@@ -30,22 +30,19 @@ export class UserDips {
 
   @IsNotEmpty()
   @Column('int', { name: 'total_price' })
-  totalPrice: number;
+  total_price: number;
 
   @IsNotEmpty()
-  @Column('int', { name: 'total_perchase_quantity' })
-  perchase_quantity: number;
+  @Column('int', { name: 'total_purchase_quantity' })
+  total_purchase_quantity: number;
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'address', length: 40 })
-  product_name: string;
+  @Column('char', { name: 'address', length: 100 })
+  address: string;
 
   @IsString()
   @IsNotEmpty()
   @Column('char', { name: 'phone_number', length: 30 })
   phone_number: string;
-
-  // @Column('varchar', { name: 'userName', length: 15 })
-  // userName: string;
 }

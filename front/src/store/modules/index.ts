@@ -11,6 +11,7 @@ import basketRemove from './basketRemove';
 import basketAdd from './basketAdd';
 import paymentSave from './paymentSave';
 import paymentDoneUpdate from './paymentDoneUpdate';
+import paymentRecentSave from './paymentRecentSave';
 
 const persistConfig = {
   key: 'root',
@@ -30,6 +31,7 @@ export const rootReducer = (state: any, action: any) => {
     basketRemove,
     paymentSave,
     paymentDoneUpdate,
+    paymentRecentSave,
 
     // 여기에추가
   })(state, action);
