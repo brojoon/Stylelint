@@ -28,8 +28,8 @@ const Result = () => {
               </p>
             </div>
             <div className="shopping-info-btn">
-              <Link href="/shopping/info">
-                <button>나의쇼핑정보</button>
+              <Link href="/orderHistory">
+                <button>나의배송정보</button>
               </Link>
             </div>
             <div className="order-info-table-container">

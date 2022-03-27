@@ -110,79 +110,88 @@ const Basket = () => {
             <h3 className="title">장바구니</h3>
           </div>
         </div>
-        <div className="basket-tab-container">
-          <div className="basket-tab-wrapper">
-            <span>전체</span>
-            <span className="basket-count">
-              <em>{data?.length}</em>
-            </span>
-          </div>
-        </div>
-        <div className="basket-option">
-          <div className="basket-option-conatiner">
-            <div className="basket-option-wrapper">
-              <ul>
-                <li>
-                  <span className="basket-option-select-wrapper">
-                    <label htmlFor="전체선택">
-                      <input
-                        onChange={onCheckedAllSelect}
-                        checked={isCheckedAll}
-                        type="checkbox"
-                        id="전체선택"
+        {data?.length > 0 ? (
+          <>
+            <div className="basket-tab-container">
+              <div className="basket-tab-wrapper">
+                <span>전체</span>
+                <span className="basket-count">
+                  <em>{data?.length}</em>
+                </span>
+              </div>
+            </div>
+            <div className="basket-option">
+              <div className="basket-option-conatiner">
+                <div className="basket-option-wrapper">
+                  <ul>
+                    <li>
+                      <span className="basket-option-select-wrapper">
+                        <label htmlFor="전체선택">
+                          <input
+                            onChange={onCheckedAllSelect}
+                            checked={isCheckedAll}
+                            type="checkbox"
+                            id="전체선택"
+                          />
+                          전체선택
+                        </label>
+                      </span>
+                    </li>
+                    <li>
+                      <button onClick={onClickProductDelete}>선택삭제</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <section className="basket-products-container">
+              <div className="basket-products-wrapper">
+                <div>
+                  {data?.map((product: IBasketProduct, index: number) => {
+                    return (
+                      <BasketProductCard
+                        key={index}
+                        index={index}
+                        refetch={refetch}
+                        setProductCardArr={setProductCardArr}
+                        productCardArr={productCardArr}
+                        basketProduct={product}
                       />
-                      전체선택
-                    </label>
-                  </span>
-                </li>
-                <li>
-                  <button onClick={onClickProductDelete}>선택삭제</button>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <section className="basket-products-container">
-          <div className="basket-products-wrapper">
-            <div>
-              {data?.map((product: IBasketProduct, index: number) => {
-                return (
-                  <BasketProductCard
-                    key={index}
-                    index={index}
-                    refetch={refetch}
-                    setProductCardArr={setProductCardArr}
-                    productCardArr={productCardArr}
-                    basketProduct={product}
-                  />
-                );
-              })}
-            </div>
-            <div className="basket-product-order-container">
-              <div className="basket-product-order-wrapper">
-                <ul>
-                  <li>
-                    <span>상품수</span>
-                    <div>
-                      <span>{totalMany}</span>
-                      <span>개</span>
-                    </div>
-                  </li>
-                  <li>
-                    <span>전체 주문금액</span>
-                    <div>
-                      <span>{totalPrice.toLocaleString()}</span>
-                      <span>원</span>
-                    </div>
-                  </li>
-                </ul>
+                    );
+                  })}
+                </div>
+                <div className="basket-product-order-container">
+                  <div className="basket-product-order-wrapper">
+                    <ul>
+                      <li>
+                        <span>상품수</span>
+                        <div>
+                          <span>{totalMany}</span>
+                          <span>개</span>
+                        </div>
+                      </li>
+                      <li>
+                        <span>전체 주문금액</span>
+                        <div>
+                          <span>{totalPrice.toLocaleString()}</span>
+                          <span>원</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="basket-product-order-btn">
+                    <button onClick={onClickPurchase}>구매하기</button>
+                  </div>
+                </div>
               </div>
-              <div className="basket-product-order-btn">
-                <button onClick={onClickPurchase}>구매하기</button>
-              </div>
-            </div>
+            </section>
+          </>
+        ) : (
+          <div className="empty-container">
+            <h2>앗!</h2>
+            <span>장바구니가 텅~</span>
           </div>
-        </section>
+        )}
       </div>
     </BasketContainer>
   );

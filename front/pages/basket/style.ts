@@ -238,4 +238,27 @@ export const BasketContainer = styled.section<{ IsCheckedAll: boolean }>`
     font-weight: bold;
     vertical-align: middle;
   }
+
+  .empty-container {
+    padding: 0 1%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 500px;
+  }
+
+  .empty-container h2 {
+    font-size: 62px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+
+  .empty-container > span {
+    margin-top: 18px;
+    font-size: 22px;
+    font-weight: 500;
+  }
 `;

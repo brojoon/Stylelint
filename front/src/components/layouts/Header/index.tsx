@@ -76,7 +76,12 @@ const Header = () => {
                         <Link href="/profile">회원정보</Link>
                       </li>
                       <li>
-                        <Link href="/profile">배송조회</Link>
+                        <Link
+                          href="/orderHistory
+                        "
+                        >
+                          배송조회
+                        </Link>
                       </li>
                       <li>
                         <button onClick={onClickLogout}>로그아웃</button>
