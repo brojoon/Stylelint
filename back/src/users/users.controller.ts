@@ -38,6 +38,12 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @HttpCode(200)
+  @Post('profile')
+  async PostProfile(@Body() Body) {
+    return this.usersService.userInfoUpdate(Body);
+  }
+
+  @HttpCode(200)
   @Get('dibs')
   async getDibs(@User() user) {
     return this.usersService.userDibsInfo(user?.userId);

@@ -45,6 +45,8 @@ export class PaymentService {
           'size',
           'color',
           'address',
+          'phone_number',
+          'receiver',
           'image',
         ],
         where: {

@@ -3,11 +3,12 @@ import SelectedProductCardContainer from '@components/SelectedProductCardContain
 import ProductDetailSlider from '@components/Sliders/ProductDetailSlider';
 import { BasketAddFetch } from '@store/modules/basketAdd';
 import { PaymentSaveFetch } from '@store/modules/paymentSave';
-import { baseFrontUrl, days, months } from '@utils/utils/const';
+import { baseApiUrl, baseFrontUrl, days, months } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { ProductDetailContainer, ProductPurchaseWrapper } from './[code]style';
@@ -23,7 +24,12 @@ export interface ISelecedProduct {
   state: boolean;
 }
 
-const ProductDetails = () => {
+export interface Props {
+  ssrData: any;
+}
+
+const ProductDetails: VFC<Props> = ({ ssrData }) => {
+  console.log('ssrdata:', ssrData);
   const [isProductDibs, setIsProductDibs] = useState(false);
   const [productDescNavIndex, setProductDescNavIndex] = useState('1');
   const [productCount, setProductCount] = useState(1);
@@ -33,17 +39,15 @@ const ProductDetails = () => {
   const [selectedProductArr, setSelectedProductArr] = useState<
     ISelecedProduct[]
   >([]);
-
   const router = useRouter();
   const { type, code } = router.query;
-  const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
-
   const {
     data,
     isLoading,
     error,
     refetch: productDetailInfoRefetch,
-  } = useQuery('productDetailInfo', () => fetcher(`/api/product/${code}`));
+  } = useQuery('productDetailInfo', () => fetcher(`api/product/${code}`));
+  const { data: user } = useQuery('user', () => fetcher(`api/user/profile`));
 
   const { data: dibs, refetch: dibsRefetch } = useQuery('user/dibs', () =>
     fetcher(`/api/user/dibs`),
@@ -64,7 +68,6 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (dibs && data) {
-      console.log('data:', data);
       for (let i = 0; i < dibs.length; i++) {
         if (dibs[i].product_name == data.name) {
           setIsProductDibs(true);
@@ -175,7 +178,7 @@ const ProductDetails = () => {
   const onClickPurchase = useCallback(async () => {
     if (selectedProductArr) {
       await dispatch(PaymentSaveFetch(selectedProductArr));
-      console.log('selectedProductArr', selectedProductArr);
+
       router.push(baseFrontUrl + '/payment');
     }
   }, [selectedProductArr, baseFrontUrl, dispatch, PaymentSaveFetch]);
@@ -194,7 +197,7 @@ const ProductDetails = () => {
                   스타일린트
                 </h3>
                 <p className="text-[1.5rem] text-[#333333] mb-[30px] font-bold">
-                  {data?.name}
+                  {data ? data.name : 1}
                 </p>
                 <p className="text-[1.15rem] text-[#9D9D9D] line-through ">
                   {Math.floor(data?.price * 1.5).toLocaleString()}
@@ -204,7 +207,7 @@ const ProductDetails = () => {
                     32% 할인 적용시
                   </span>
                   <span className="text-[1.5625rem] font-semibold">
-                    {data?.price?.toLocaleString()}
+                    {data ? data.price?.toLocaleString() : 1}
                   </span>
                   <strong>원</strong>
                 </div>
@@ -212,7 +215,7 @@ const ProductDetails = () => {
                   <tbody className="text-[#333333] text-[0.875rem]">
                     <tr>
                       <th className="pr-[1.75rem] pr-[1.75rem]">구매자수</th>
-                      <td>{data?.perchase_quantity}</td>
+                      <td>{data ? data.perchase_quantity : 1}</td>
                     </tr>
                     <tr>
                       <th className="pr-[1.75rem] pt-[10px] ">배송구분</th>
@@ -305,7 +308,9 @@ const ProductDetails = () => {
                     <div className="purchase-button">
                       <button onClick={onClickProductDibs}>
                         <span className="product-dibs"></span>
-                        <span className="product-dibs-count">{data?.dibs}</span>
+                        <span className="product-dibs-count">
+                          {data ? data.dibs : 1}
+                        </span>
                       </button>
                       <button onClick={onClickProductsBasket}>
                         <span>장바구니</span>
@@ -324,6 +329,24 @@ const ProductDetails = () => {
       <ProductDetailDesc />
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { code } = ctx.query;
+  const ssrData = await fetcher(`${baseApiUrl}/api/product/${code}`);
+
+  // data 없을 땐 리턴값을 달리함
+  // if (!data) {
+  //   return {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false,
+  //     },
+  //   };
+  // }
+
+  //pageProps로 넘길 데이터
+  return { props: { ssrData } };
 };
 
 export default ProductDetails;

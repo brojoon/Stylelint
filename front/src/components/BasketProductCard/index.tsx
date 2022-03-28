@@ -101,6 +101,7 @@ const BasketProductCard: VFC<Props> = ({
               </span>
             </div>
 
+            <div className="basket-justfy-between-div"></div>
             <div className="basket-product-count">
               <button onClick={onClickProductSubstractCount}></button>
               <input

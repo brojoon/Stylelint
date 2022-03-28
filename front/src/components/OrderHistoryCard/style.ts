@@ -14,11 +14,19 @@ export const OrderHistoryProductContainer = styled.section`
     height: 130px;
     justify-content: space-between;
     border-radius: 6px;
+    align-items: center;
   }
 
   .order-product-info {
     margin: 0 10px;
     display: flex;
+    align-items: center;
+  }
+
+  .order-product-info h3 {
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: 600;
   }
 
   .order-product-info > div > img {
@@ -29,7 +37,7 @@ export const OrderHistoryProductContainer = styled.section`
   .order-product-desc {
     font-size: 15px;
     letter-spacing: -0.5px;
-    max-width: 260px;
+    max-width: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,11 +57,31 @@ export const OrderHistoryProductContainer = styled.section`
 
   .order-justfy-between-div {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .order-user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .order-user-info > div {
+    margin-top: 12px;
   }
 
   .order-product-price {
     display: flex;
     flex-direction: column;
+    text-align: center;
   }
 
   .order-product-price > span {

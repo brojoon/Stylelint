@@ -44,10 +44,9 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
   .basket-product-desc {
     font-size: 15px;
     letter-spacing: -0.5px;
-    max-width: 260px;
+    max-width: 180px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
   }
 
   .basket-product-desc span:nth-child(1) {
@@ -66,7 +65,6 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
     margin-left: 1.25rem;
     margin-top: 2px;
     display: flex;
-    align-items: start;
   }
 
   .basket-product-count > input {

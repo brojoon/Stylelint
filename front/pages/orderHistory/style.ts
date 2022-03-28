@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const OrderHistoryContainer = styled.section`
-  max-width: 1330px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 0 1%;
 
@@ -17,7 +17,6 @@ export const OrderHistoryContainer = styled.section`
     margin-bottom: 30px;
     border-bottom: 1px solid #ddd;
     width: 100%;
-    text-align: center;
     font-size: 28px;
     line-height: 29px;
     font-weight: 700;

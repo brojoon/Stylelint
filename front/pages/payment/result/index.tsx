@@ -24,7 +24,7 @@ const Result = () => {
                 상품을 곧 보내 드릴게요!
               </p>
               <p>
-                <span>{recentPaymemt?.address}</span>
+                <span>{recentPaymemt?.address.replace('/', ' ')}</span>
               </p>
             </div>
             <div className="shopping-info-btn">
@@ -70,7 +70,9 @@ const Result = () => {
                     <td>
                       <p>
                         <span>이름 : {recentPaymemt?.receiver}</span>
-                        <span>주소 : {recentPaymemt?.address}</span>
+                        <span>
+                          주소 : {recentPaymemt?.address.replace('/', ' ')}
+                        </span>
                         <span>연락처 : {recentPaymemt?.phone_number}</span>
                       </p>
                     </td>

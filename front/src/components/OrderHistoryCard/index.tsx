@@ -15,6 +15,7 @@ const OrderHistoryCard: VFC<Props> = ({ orderHistoryProduct }) => {
         <li>
           <div className="order-product-content">
             <div className="order-product-info">
+              <h3>{orderHistoryProduct.id}</h3>
               <div>
                 <img src={baseApiUrl + orderHistoryProduct?.image} />
               </div>
@@ -27,12 +28,16 @@ const OrderHistoryCard: VFC<Props> = ({ orderHistoryProduct }) => {
               </span>
             </div>
             <div className="order-justfy-between-div"></div>
-
+            <div className="order-user-info">
+              <span>{orderHistoryProduct?.address.replace('/', ' ')}</span>
+              <div>
+                <span>{orderHistoryProduct?.receiver}</span>
+                <span>{' / ' + orderHistoryProduct?.phone_number}</span>
+              </div>
+            </div>
+            <div className="order-justfy-between-div"></div>
             <div className="order-product-price">
-              <span>{orderHistoryProduct?.address}</span>
-              <span>{orderHistoryProduct?.receiver}</span>
-              <span>{orderHistoryProduct?.phone_number}</span>
-              <span>배송중</span>
+              <span> 배송중</span>
               <span>
                 {(
                   orderHistoryProduct?.price * orderHistoryProduct?.quantity

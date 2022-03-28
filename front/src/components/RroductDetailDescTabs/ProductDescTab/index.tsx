@@ -10,7 +10,7 @@ const ProductDescTab = () => {
   const router = useRouter();
   const { type, code } = router.query;
   const { data, isLoading, error } = useQuery('productDetailInfo', () =>
-    fetcher(`/api/product/${code}`),
+    fetcher(`api/product/${code}`),
   );
   const onClickInfoBtn = useCallback(() => {
     setIsMoreProductInfo((prev) => !prev);

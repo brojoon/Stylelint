@@ -31,7 +31,7 @@ export class UsersService {
     if (!userId) return null;
     try {
       const result = await this.usersRepository.findOne({
-        select: ['userId', 'password', 'address', 'email'],
+        select: ['userId', 'password', 'address', 'email', 'phone_number'],
         where: { userId },
       });
       if (!result) throw new NotFoundException('유저 정보 없음');
@@ -47,6 +47,17 @@ export class UsersService {
       else if (error.response.statusCode === 404)
         throw new NotFoundException(error.response.message);
     }
+  }
+
+  async userInfoUpdate(data) {
+    try {
+      await this.usersRepository.update(
+        {
+          userId: data.userId,
+        },
+        data,
+      );
+    } catch (error) {}
   }
 
   async userDibsInfo(userId: string) {

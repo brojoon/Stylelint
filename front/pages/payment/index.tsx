@@ -39,6 +39,18 @@ const Payment = () => {
   const router = useRouter();
 
   useEffect(() => {
+    if (user) {
+      if (user?.address) {
+        const addressIndex = user.address.indexOf('/');
+        setAddressInputValue(user.address.slice(undefined, addressIndex));
+        setAddressSubInputValue(user.address.slice(addressIndex + 1));
+      }
+
+      if (user?.phone_number) setPostPhoneNumber(user.phone_number);
+    }
+  }, [user]);
+
+  useEffect(() => {
     if (data) {
       let sum = 0;
       let num = 0;
@@ -90,7 +102,7 @@ const Payment = () => {
   const onClickPurchase = useCallback(() => {
     if (data && addressSubInputValue && postName && postPhoneNumber) {
       const post: IPostType = {
-        address: addressInputValue + ' ' + addressSubInputValue,
+        address: addressInputValue + '/' + addressSubInputValue,
         receiver: postName,
         phone_number: postPhoneNumber,
         basket_numbers: [],
@@ -127,12 +139,10 @@ const Payment = () => {
   return (
     <>
       {isPostCode && (
-        <>
-          <Postcode
-            setAddressInputValue={setAddressInputValue}
-            setIsPostCode={setIsPostCode}
-          />
-        </>
+        <Postcode
+          setAddressInputValue={setAddressInputValue}
+          setIsPostCode={setIsPostCode}
+        />
       )}
       <PaymentContainer>
         <div>
@@ -162,6 +172,7 @@ const Payment = () => {
                         <input
                           type="text"
                           onChange={onChangePhoneNumber}
+                          maxLength={13}
                           value={postPhoneNumber}
                           placeholder="연락처"
                         />

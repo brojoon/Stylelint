@@ -13,7 +13,7 @@ const ProductDetailSlider = () => {
   const { type, code } = router.query;
 
   const { data, isLoading, error } = useQuery('productDetailInfo', () =>
-    fetcher(`/api/product/${code}`),
+    fetcher(`api/product/${code}`),
   );
 
   console.log('data', data);

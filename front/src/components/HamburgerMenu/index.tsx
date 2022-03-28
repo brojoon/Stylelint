@@ -16,6 +16,10 @@ const HamburgerMenu: VFC<Props> = ({
   const onClickBackground = useCallback(() => {
     setIsMenuActive((prev: boolean) => !prev);
   }, []);
+
+  const onClickClose = useCallback(() => {
+    setIsMenuActive(false);
+  }, []);
   return (
     <HamburgerMenuContainer
       IsScrollTop={IsScrollTop}

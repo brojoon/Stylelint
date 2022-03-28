@@ -95,9 +95,6 @@ const Header = () => {
                       <li>
                         <Link href="/signup">회원가입</Link>
                       </li>
-                      <li>
-                        <Link href="/profile">배송조회</Link>
-                      </li>
                     </ul>
                   )}
                 </li>

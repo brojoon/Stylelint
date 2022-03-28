@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProductDetailContainer = styled.main`
-  max-width: 1280px;
+  max-width: 1300px;
   margin: 0 auto;
 
   & .product-Deital-wrapper {

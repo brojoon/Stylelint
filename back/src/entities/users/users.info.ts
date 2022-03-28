@@ -47,6 +47,14 @@ export class Users {
   @Column('char', { name: 'email', unique: true, length: 30 })
   email: string;
 
+  @Column('char', {
+    name: 'phone_number',
+    unique: true,
+    length: 15,
+    nullable: true,
+  })
+  phone_number: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

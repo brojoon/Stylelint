@@ -11,13 +11,14 @@ const OrderHistory = () => {
   console.log('done', data);
   return (
     <OrderHistoryContainer>
-      <div className="order-history-wrapper">
-        <h3 className="title">주문/배송 조회</h3>
-        {data?.map((history: any) => {
-          return <OrderHistoryCard orderHistoryProduct={history} />;
-        })}
-      </div>
-      {false && (
+      {data?.length > 0 ? (
+        <div className="order-history-wrapper">
+          <h3 className="title">주문/배송 조회</h3>
+          {data?.map((history: any) => {
+            return <OrderHistoryCard orderHistoryProduct={history} />;
+          })}
+        </div>
+      ) : (
         <div className="empty-container">
           <h2>앗!</h2>
           <span>아직 주문내역이 없습니다.</span>
