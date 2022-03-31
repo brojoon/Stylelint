@@ -17,30 +17,35 @@ function MemberLogin() {
         password: userPasswordInputValue,
       }),
     );
-    console.log('login!!');
   }, [userIdInputValue, userPasswordInputValue]);
   const onClickKakaoBtn = useCallback(() => {}, []);
   const onClickGoogleBtn = useCallback(() => {}, []);
   return (
     <div className="flex flex-col justify-center items-center">
-      <BasicInput
-        setInputValue={setUserIdInputValue}
-        inputValue={userIdInputValue}
-        type="text"
-        name="id"
-        placeholder="아이디를 입력해 주세요."
-        maxLength={20}
-        style="h-[50px] w-full my-5 outline-neutral-400 border rounded px-3"
-      />
-      <BasicInput
-        setInputValue={setUserPasswordInputValue}
-        inputValue={userPasswordInputValue}
-        type="password"
-        name="password"
-        placeholder="비밀번호를 입력해 주세요."
-        maxLength={20}
-        style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
-      />
+      <label className="w-full">
+        <span className="text-[1rem]">아이디</span>
+        <BasicInput
+          setInputValue={setUserIdInputValue}
+          inputValue={userIdInputValue}
+          type="text"
+          name="id"
+          placeholder="아이디를 입력해 주세요."
+          maxLength={20}
+          style="h-[50px] w-full mb-5 outline-neutral-400 border rounded px-3"
+        />
+      </label>
+      <label className="w-full">
+        <span className="text-[1rem]">비밀번호</span>
+        <BasicInput
+          setInputValue={setUserPasswordInputValue}
+          inputValue={userPasswordInputValue}
+          type="password"
+          name="password"
+          placeholder="비밀번호를 입력해 주세요."
+          maxLength={20}
+          style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+        />
+      </label>
       <div className="flex justify-between items-center w-[100%] mb-8">
         <label className="flex justify-center items-center cursor-pointer text-sm">
           <input
@@ -51,9 +56,8 @@ function MemberLogin() {
           &nbsp;아이디 저장
         </label>
         <div className="flex justify-center items-betweem text-[0.75rem] ">
-          <Link href="/id-password-retrieve">
-            <span className="pr-1 cursor-pointer">아이디 · 비밀번호 찾기</span>
-          </Link>
+          <span className="pr-1 cursor-pointer">아이디 · 비밀번호 찾기</span>
+
           <Link href="/signup">
             <span className="pl-1 cursor-pointer">회원가입</span>
           </Link>

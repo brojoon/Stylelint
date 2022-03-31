@@ -19,7 +19,6 @@ export const BackgroundHeader = styled.div`
 `;
 
 export const MainHeader = styled.header<{ IsScrollTop: number }>`
-
   position: fixed;
   top: 0;
   left: 0;
@@ -34,23 +33,26 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   transform: ${(props) =>
     props.IsScrollTop > 60 ? 'translateY(0)' : 'translateY(35px)'};
   .wrapper {
-
-    max-width: 1330px;
+    width: 1330px;
     margin: 0 auto;
-    padding: 0 1%;
+    padding: 0 10px;
     background: #fff;
     height: ${(props) => (props.IsScrollTop > 60 ? '65px' : '89px')};
     transition: all 500ms ease;
     align-items: center;
   }
-
   .container {
-    width: 1320px;
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: between;
+   
+    justify-content: space-between;
   }
 
+  .logo-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
   .all-menu {
     position: relative;
     display: block;
@@ -58,110 +60,76 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
     height: 40px;
     cursor: pointer;
   }
-
   button.all-menu span {
     display: block;
     position: absolute;
-
-    width: 1.3rem;
-    height: 0.1875rem;
+    width: 20.8px;
+    height: 3px;
     background: #3c3c3c;
     transition-duration: 0.4s;
   }
-
   button.all-menu.active span:nth-child(1) {
     top: 19px;
-
     width: 23px;
     transform: rotate(45deg);
   }
-
   button.all-menu.active span:nth-child(2) {
     opacity: 0;
     transform: translateX(-30px);
   }
-
   button.all-menu.active span:nth-child(3) {
     top: 19px;
-
     width: 23px;
     transform: rotate(-45deg);
   }
-
   button.all-menu span:nth-child(1) {
     top: 11px;
   }
-
   button.all-menu span:nth-child(2) {
     top: 19px;
   }
-
   button.all-menu span:nth-child(3) {
     top: 27px;
   }
-
   .logo {
-
-    width: 11%;
+  
     font-weight: 700;
   }
   .logo h1 {
     cursor: pointer;
-    font-size: 1.5rem;
-  }
-
-  .category {
-    width: 60%;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .category > li {
-    position: relative;
-    display: inline-block;
-    color: #111;
-    padding: 0 1.3%;
+    font-size: 24px;
   }
 
   .info {
     position: relative;
     display: flex;
     align-items: center;
-    width: 8%;
-    min-width: 176px;
-  }
 
+  }
   .info > ul {
     display: flex;
     justify-centent: center;
     align-items: center;
   }
-
   .info > ul > li {
     cursor: pointer;
   }
-
-  .info > ul > li:nth-child(2) {
+  .info > ul > li:nth-child(3) {
     margin-left: 2rem;
   }
-
-  .info > ul > li:nth-child(3) {
+  .info > ul > li:nth-child(2) {
     margin-left: 2rem;
     position: relative;
     padding: ${(props) => (props.IsScrollTop > 60 ? '19px 0' : '32px 0')};
-
   }
-
-  .info > ul > li:nth-child(3):hover {
+  .info > ul > li:nth-child(2):hover {
     .subBox {
       display: flex;
     }
   }
-
   .subBox:hover {
     display: flex;
   }
-
   .subBox {
     position: absolute;
     width: 6.25rem;
@@ -170,30 +138,26 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    right: 0;
+    right: 0px;
     transition: all 500ms ease;
     transform: ${(props) =>
       props.IsScrollTop > 60
         ? 'translate(40%, 20px);'
         : 'translate(40%, 32px);'}
     background: #fff;
-    padding: 0.8rem;
+    padding: 12px;
     border: 1px solid #eeeeee;
     font-size: 0.875rem;
     font-weight: 600;
     color: #111111;
   }
-
   .subBox > li > button {
     font-size: 0.875rem;
     font-weight: 600;
     color: #111111;
   }
-
   .subBox li {
     white-space: nowrap;
     margin: 0.45rem 0;
   }
-
-
 `;

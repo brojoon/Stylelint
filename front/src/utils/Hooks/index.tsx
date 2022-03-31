@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import debounce from 'lodash/debounce';
 
 export function useScroll() {
@@ -30,4 +31,22 @@ export function useScroll() {
   return {
     scrollY,
   };
+}
+
+export function useIsTablet() {
+  const [isTablet, setIsTablet] = useState(false);
+  const Tablet = useMediaQuery({ query: '(max-width: 768px)' });
+  useEffect(() => {
+    setIsTablet(Tablet);
+  }, [Tablet]);
+  return isTablet;
+}
+
+export function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  const mobile = useMediaQuery({ query: '(max-width: 480px)' });
+  useEffect(() => {
+    setIsMobile(mobile);
+  }, [mobile]);
+  return isMobile;
 }

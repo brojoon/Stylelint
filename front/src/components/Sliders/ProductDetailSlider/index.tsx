@@ -1,23 +1,28 @@
 import fetcher from '@utils/utils/fetcher';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, VFC } from 'react';
 import { useQuery } from 'react-query';
 import { ProductDetailSlide, ProductDetailSubSlide } from './style';
 import { useRouter } from 'next/router';
 import { baseApiUrl } from '@utils/utils/const';
 import { IProductsWithSubImg } from '@typings/db';
 
-const ProductDetailSlider = () => {
+interface Props {
+  ssrProductData: any;
+}
+
+const ProductDetailSlider: VFC<Props> = ({ ssrProductData }) => {
   const [productSlideIndex, setProductSlideIndex] = useState(2);
   const [productSubSlidePosX, setProductSubSlidePosX] = useState('0');
   const router = useRouter();
   const { type, code } = router.query;
 
-  const { data, isLoading, error } = useQuery('productDetailInfo', () =>
-    fetcher(`api/product/${code}`),
+  const { data, isLoading, error } = useQuery(
+    'productDetailInfo',
+    () => fetcher(`api/product/${code}`),
+    {
+      initialData: ssrProductData,
+    },
   );
-
-  console.log('data', data);
-
   const onClickProductSlideLeft = useCallback(() => {
     setProductSlideIndex((prev) => {
       if (prev == 2) {
@@ -89,19 +94,18 @@ const ProductDetailSlider = () => {
             ></button>
             <div className="sub-slide-img-container">
               <div className="sub-slide-img-wrapper">
-                {data &&
-                  data?.productSubImg?.map((subImg: any, index: number) => {
-                    if (index > 7) return;
-                    return (
-                      <div>
-                        <img
-                          onClick={onClickSubSlideImg}
-                          data-index={`${index + 2}`}
-                          src={`${baseApiUrl + subImg.subimage}`}
-                        />
-                      </div>
-                    );
-                  })}
+                {data?.productSubImg?.map((subImg: any, index: number) => {
+                  if (index > 7) return;
+                  return (
+                    <div>
+                      <img
+                        onClick={onClickSubSlideImg}
+                        data-index={`${index + 2}`}
+                        src={`${baseApiUrl + subImg.subimage}`}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <button

@@ -18,10 +18,10 @@ const ProductsGridWrapper = () => {
         if (product.type === type) return <ProductCard data={product} />;
       })} */}
 
-        <ProductCard data={data[4]} />
+        {/* <ProductCard data={data[4]} />
         <ProductCard data={data[5]} />
         <ProductCard data={data[6]} />
-        <ProductCard data={data[8]} />
+        <ProductCard data={data[8]} /> */}
       </div>
     </div>
   );

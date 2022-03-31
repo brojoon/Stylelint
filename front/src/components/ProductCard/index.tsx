@@ -19,16 +19,17 @@ interface Props {
 const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
   const [quickview, setQuickview] = useState(false);
   const [isProductDibs, setIsProductDibs] = useState(false);
+  const [isClickProductImg, setIsClickProductImg] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const {
     data: user,
     isLoading,
     error,
-  } = useQuery('user', () => fetcher(`/api/user/profile`));
+  } = useQuery('user', () => fetcher(`api/user/profile`));
 
   const { data: dibs, refetch: dibsRefetch } = useQuery('user/dibs', () =>
-    fetcher(`/api/user/dibs`),
+    fetcher(`api/user/dibs`),
   );
 
   useEffect(() => {
@@ -78,15 +79,31 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
     }
   }, [isProductDibs, user, data]);
 
-  const onClickProductCardImg = useCallback(() => {
-    router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
-  }, [data, router, baseFrontUrl]);
+  // const onClickProductCardImg = useCallback(() => {
+  //   router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
+  // }, [data, router, baseFrontUrl]);
+
+  const onMouseDownSlide = useCallback((e) => {
+    setIsClickProductImg(true);
+  }, []);
+
+  const onMouseMoveSlide = useCallback((e) => {
+    setIsClickProductImg(false);
+  }, []);
+
+  const onMouseUpSlide = useCallback(
+    (e) => {
+      if (isClickProductImg)
+        router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
+    },
+    [router, baseFrontUrl, data, isClickProductImg],
+  );
 
   return (
     <>
       <ProductCardContainer>
         <div
-          onClick={onClickProductCardImg}
+          // onClick={onClickProductCardImg}
           className="relative z-10 rounded-[10px] w-[100%]"
           onMouseEnter={() => {
             setQuickview(true);
@@ -94,6 +111,9 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
           onMouseLeave={() => {
             setQuickview(false);
           }}
+          onMouseDown={onMouseDownSlide}
+          onMouseMove={onMouseMoveSlide}
+          onMouseUp={onMouseUpSlide}
         >
           <img
             className=" w-[100%] h-[100%] rounded-[10px] bg-contain"

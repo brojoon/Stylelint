@@ -25,11 +25,10 @@ export interface ISelecedProduct {
 }
 
 export interface Props {
-  ssrData: any;
+  ssrProductData: any;
 }
 
-const ProductDetails: VFC<Props> = ({ ssrData }) => {
-  console.log('ssrdata:', ssrData);
+const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
   const [isProductDibs, setIsProductDibs] = useState(false);
   const [productDescNavIndex, setProductDescNavIndex] = useState('1');
   const [productCount, setProductCount] = useState(1);
@@ -46,12 +45,17 @@ const ProductDetails: VFC<Props> = ({ ssrData }) => {
     isLoading,
     error,
     refetch: productDetailInfoRefetch,
-  } = useQuery('productDetailInfo', () => fetcher(`api/product/${code}`));
-  const { data: user } = useQuery('user', () => fetcher(`api/user/profile`));
+  } = useQuery('productDetailInfo', () => fetcher(`api/product/${code}`), {
+    initialData: ssrProductData,
+  });
+  const { data: user, refetch: userRefetch } = useQuery('user', () =>
+    fetcher(`api/user/profile`),
+  );
 
   const { data: dibs, refetch: dibsRefetch } = useQuery('user/dibs', () =>
-    fetcher(`/api/user/dibs`),
+    fetcher(`api/user/dibs`),
   );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -65,18 +69,29 @@ const ProductDetails: VFC<Props> = ({ ssrData }) => {
       setTotalPrice(0);
     }
   }, [selectedProductArr]);
-
   useEffect(() => {
     if (dibs && data) {
       for (let i = 0; i < dibs.length; i++) {
         if (dibs[i].product_name == data.name) {
           setIsProductDibs(true);
+          break;
         }
+        if (i === dibs.length - 1) setIsProductDibs(false);
       }
     }
   }, [dibs, data]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (code) {
+      productDetailInfoRefetch().then(() => dibsRefetch());
+      userRefetch();
+      setSelectSize('default');
+      setSelectColor('default');
+      setTotalPrice(0);
+      setSelectedProductArr([]);
+      setProductDescNavIndex('1');
+    }
+  }, [code]);
 
   const onClickProductDibs = useCallback(async () => {
     if (isProductDibs) {
@@ -189,7 +204,7 @@ const ProductDetails: VFC<Props> = ({ ssrData }) => {
         <div className="product-Deital-wrapper">
           <div className="flex justify-between">
             <div className="flex flex-col w-[50%]">
-              <ProductDetailSlider />
+              <ProductDetailSlider ssrProductData={ssrProductData} />
             </div>
             <div className="w-[50%] flex justify-center ml-[1rem] ">
               <div>
@@ -197,17 +212,17 @@ const ProductDetails: VFC<Props> = ({ ssrData }) => {
                   스타일린트
                 </h3>
                 <p className="text-[1.5rem] text-[#333333] mb-[30px] font-bold">
-                  {data ? data.name : 1}
+                  {data?.name}
                 </p>
                 <p className="text-[1.15rem] text-[#9D9D9D] line-through ">
-                  {Math.floor(data?.price * 1.5).toLocaleString()}
+                  {data && Math.floor(data?.price * 1.5).toLocaleString()}
                 </p>
                 <div className="border-b-[1px] pb-[25px]">
                   <span className="text-[0.75rem] text-[#ff9995] mr-[0.5rem]">
                     32% 할인 적용시
                   </span>
                   <span className="text-[1.5625rem] font-semibold">
-                    {data ? data.price?.toLocaleString() : 1}
+                    {data?.price?.toLocaleString()}
                   </span>
                   <strong>원</strong>
                 </div>
@@ -215,7 +230,7 @@ const ProductDetails: VFC<Props> = ({ ssrData }) => {
                   <tbody className="text-[#333333] text-[0.875rem]">
                     <tr>
                       <th className="pr-[1.75rem] pr-[1.75rem]">구매자수</th>
-                      <td>{data ? data.perchase_quantity : 1}</td>
+                      <td>{data?.perchase_quantity}</td>
                     </tr>
                     <tr>
                       <th className="pr-[1.75rem] pt-[10px] ">배송구분</th>
@@ -308,9 +323,7 @@ const ProductDetails: VFC<Props> = ({ ssrData }) => {
                     <div className="purchase-button">
                       <button onClick={onClickProductDibs}>
                         <span className="product-dibs"></span>
-                        <span className="product-dibs-count">
-                          {data ? data.dibs : 1}
-                        </span>
+                        <span className="product-dibs-count">{data?.dibs}</span>
                       </button>
                       <button onClick={onClickProductsBasket}>
                         <span>장바구니</span>
@@ -333,7 +346,7 @@ const ProductDetails: VFC<Props> = ({ ssrData }) => {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { code } = ctx.query;
-  const ssrData = await fetcher(`${baseApiUrl}/api/product/${code}`);
+  const ssrProductData = await fetcher(`${baseApiUrl}/api/product/${code}`);
 
   // data 없을 땐 리턴값을 달리함
   // if (!data) {
@@ -346,7 +359,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   // }
 
   //pageProps로 넘길 데이터
-  return { props: { ssrData } };
+  return { props: { ssrProductData } };
 };
 
 export default ProductDetails;

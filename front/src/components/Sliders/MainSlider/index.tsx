@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SlideContainer, SlideWrapper } from './style';
 import { asleep } from '@utils/utils/asleep';
+import { useIsMobile } from '@utils/Hooks';
 
 const MainSlider = () => {
   const slideImgCount = 7;
@@ -12,6 +13,8 @@ const MainSlider = () => {
   const [isMouseEnter, setIsMouseEnter] = useState(false);
   const [savePosValue, setSavePosValue] = useState(0);
   const [paginationIndex, setPaginationIndex] = useState(1);
+
+  const isMobile = useIsMobile();
 
   const onChangePaginationIndex = useCallback((e) => {
     setPaginationIndex(Number(e.target.id.substr(-1)));
@@ -245,12 +248,14 @@ const MainSlider = () => {
         <label htmlFor="slide-radio-4"></label>
         <label htmlFor="slide-radio-5"></label>
       </div>
-      <button
-        onClick={onClickPrev}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        className="absolute z-10 top-[45%] translate-y-[-50%] translate-x-[-50%] left-[1%] bg-no-repeat w-[45px] h-[45px] bg-[url('~@../../../public/img/sliderbtn.png')]"
-      />
+      {!isMobile && (
+        <button
+          onClick={onClickPrev}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          className="absolute z-10 top-[45%] translate-y-[-50%] translate-x-[-50%] left-[1%] bg-no-repeat w-[45px] h-[45px] bg-[url('~@../../../public/img/sliderbtn.png')]"
+        />
+      )}
       <SlideWrapper
         onMouseDown={OnMouseDownSlide}
         onMouseMove={onMouseMoveSlide}
@@ -320,12 +325,14 @@ const MainSlider = () => {
           <div className={`slide-img-text`}></div>
         </div>
       </SlideWrapper>
-      <button
-        onClick={onClickNext}
-        onMouseLeave={onMouseLeave}
-        onMouseEnter={onMouseEnter}
-        className="absolute top-[45%] translate-y-[-50%] translate-x-[-50%] left-[13.2%] bg-no-repeat w-[45px] h-[45px] bg-right bg-[url('~@../../../public/img/sliderbtn.png')]"
-      />
+      {!isMobile && (
+        <button
+          onClick={onClickNext}
+          onMouseLeave={onMouseLeave}
+          onMouseEnter={onMouseEnter}
+          className="absolute top-[45%] translate-y-[-50%] translate-x-[-50%] left-[13.2%] bg-no-repeat w-[45px] h-[45px] bg-right bg-[url('~@../../../public/img/sliderbtn.png')]"
+        />
+      )}
     </SlideContainer>
   );
 };

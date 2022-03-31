@@ -1,5 +1,5 @@
 import HamburgerMenu from '@components/HamburgerMenu';
-import { useScroll } from '@utils/Hooks';
+import { useIsMobile, useScroll } from '@utils/Hooks';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { MainHeader, BackgroundHeader, Banner } from './style';
@@ -15,6 +15,7 @@ const Header = () => {
   const { scrollY } = useScroll();
   const dispatch = useDispatch();
   const isLogin = useSelector((state: any) => state.login.token);
+  const isMobile = useIsMobile();
 
   const onClickMenuBtn = useCallback(() => {
     setIsMenuActive((prev) => !prev);
@@ -34,21 +35,21 @@ const Header = () => {
       <MainHeader IsScrollTop={scrollY}>
         <div className="wrapper">
           <div className="container">
-            <button
-              className={`all-menu ${isMenuActive ? 'active' : 'none'}`}
-              onClick={onClickMenuBtn}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-            <div className="logo">
-              <Link href="/">
-                <h1>STYLELINT</h1>
-              </Link>
+            <div className="logo-wrapper">
+              <button
+                className={`all-menu ${isMenuActive ? 'active' : 'none'}`}
+                onClick={onClickMenuBtn}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+              <div className="logo">
+                <Link href="/">
+                  <h1>STYLELINT</h1>
+                </Link>
+              </div>
             </div>
-
-            <ul className="category"></ul>
 
             <div className="info">
               <ul>
@@ -56,13 +57,6 @@ const Header = () => {
                   <div>
                     <img width="26px" height="26px" src="/img/search.svg" />
                   </div>
-                </li>
-                <li>
-                  <Link href="/basket">
-                    <div>
-                      <img width="26px" height="26px" src="/img/cart.svg" />
-                    </div>
-                  </Link>
                 </li>
                 <li>
                   <Link href="/profile">
@@ -97,6 +91,13 @@ const Header = () => {
                       </li>
                     </ul>
                   )}
+                </li>
+                <li>
+                  <Link href="/basket">
+                    <div>
+                      <img width="26px" height="26px" src="/img/cart.svg" />
+                    </div>
+                  </Link>
                 </li>
               </ul>
             </div>

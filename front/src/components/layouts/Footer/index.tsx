@@ -1,9 +1,12 @@
+import { useIsMobile } from '@utils/Hooks';
 import React from 'react';
 import { FooterContainer } from './style';
 
 const Footer = () => {
+  const isMobile = useIsMobile();
+
   return (
-    <FooterContainer>
+    <FooterContainer IsMobile={isMobile}>
       <div className="footer-wrapper">
         <div>
           <ul className="footer-utility">

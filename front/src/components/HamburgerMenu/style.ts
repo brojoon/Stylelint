@@ -46,21 +46,21 @@ export const HamburgerMenuContainer = styled.div<{
   }
   .menu-wrapper > ul {
     display: flex;
-    padding: 50px 0;
+    padding: 50px 5px;
     flex-direction: column;
   }
 
   .menu-wrapper > ul > li {
     position: relative;
     display: block;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: #636363;
     margin-bottom: 18px;
   }
 
   .menu-wrapper > ul > li:nth-child(1) {
     color: #000;
-    font-size: 17px;
+    font-size: 1.0625rem;
     margin-bottom: 15px;
     font-weight: 600;
   }

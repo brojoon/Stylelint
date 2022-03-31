@@ -29,7 +29,7 @@ const OrderHistoryCard: VFC<Props> = ({ orderHistoryProduct }) => {
             </div>
             <div className="order-justfy-between-div"></div>
             <div className="order-user-info">
-              <span>{orderHistoryProduct?.address.replace('/', ' ')}</span>
+              <span>{orderHistoryProduct?.address?.replace('/', ' ')}</span>
               <div>
                 <span>{orderHistoryProduct?.receiver}</span>
                 <span>{' / ' + orderHistoryProduct?.phone_number}</span>

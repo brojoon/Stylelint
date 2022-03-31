@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FooterContainer = styled.footer`
+export const FooterContainer = styled.footer<{ IsMobile: boolean }>`
   background-color: #fafafa;
   border-top: 1px solid #e2e2e2;
 
@@ -16,16 +16,19 @@ export const FooterContainer = styled.footer`
 
   .footer-utility {
     display: flex;
+    flex-direction: ${(Props) => (Props.IsMobile ? 'column' : 'row')};
   }
 
   .footer-utility > li {
     position: relative;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 20px;
     letter-spacing: -1px;
     color: #5e636d;
-    padding: 0 25px;
+    padding: ${(Props) => (Props.IsMobile ? '0' : '0 25px')};
+
     font-weight: 600;
+    text-align: ${(Props) => (Props.IsMobile ? 'center' : '')};
   }
   .footer-utility > li:before {
     content: '';
@@ -36,6 +39,7 @@ export const FooterContainer = styled.footer`
     height: 12px;
     margin-top: -6px;
     background-color: #dadde1;
+    display: ${(Props) => (Props.IsMobile ? 'none' : '')};
   }
 
   .footer-utility > li:nth-child(1) {
@@ -54,7 +58,7 @@ export const FooterContainer = styled.footer`
     display: flex;
     justify-content: space-between;
     color: #757c8a;
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
 
   .footer-info > div {
@@ -63,7 +67,7 @@ export const FooterContainer = styled.footer`
 
   .footer-info > div > h3 {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 0.875rem;
     color: #000000;
     margin-bottom: 5px;
   }
@@ -74,7 +78,7 @@ export const FooterContainer = styled.footer`
 
   .footer-legal-info > div > ul > li {
     margin-right: 30px;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: #94989f;
   }
 
@@ -103,7 +107,7 @@ export const FooterContainer = styled.footer`
   }
 
   .footer-text-notice {
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 20px;
     letter-spacing: -1px;
     color: #94989f;
@@ -112,7 +116,7 @@ export const FooterContainer = styled.footer`
   .content-notice {
     margin-left: 8px;
     margin-top: -1px;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 20px;
     letter-spacing: -1px;
     color: #94989f;

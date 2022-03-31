@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import { IProducts } from '@typings/db';
 import ModalBasket from '@components/ModalBasket';
+import { useIsMobile } from '@utils/Hooks';
 
 interface Props {
   products: IProducts[];
@@ -20,8 +21,9 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
   const [slideStartX, setSlideStartX] = useState(0);
   const [slideClickedTime, setSlideClickedTime] = useState<Date>();
   const [isModalBasket, setIsModalBasket] = useState(false);
+  const isMobile = useIsMobile();
 
-  const OnMouseDownSlide = useCallback((e) => {
+  const onMouseDownSlide = useCallback((e) => {
     setSlideClickedTime(new Date());
     setIsTransition(false);
     setSlideStartX(e.clientX);
@@ -49,6 +51,8 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
     setIsSlide(false);
     setIsTransition(true);
     let timeCompenstaion = 0;
+    console.log('result: ', slidePosition + savePosValue * timeCompenstaion);
+    console.log('window.innerWidth', window.innerWidth);
 
     if (slideClickedTime) {
       timeCompenstaion = +new Date() - +slideClickedTime;
@@ -59,8 +63,26 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
 
     if (slidePosition + savePosValue * timeCompenstaion > 0) {
       setSlidePosition(0);
-    } else if (slidePosition + savePosValue * timeCompenstaion < -228) {
+    } else if (
+      // 228
+      window.innerWidth > 1300 &&
+      slidePosition + savePosValue * timeCompenstaion < -228
+    ) {
       setSlidePosition(-228);
+    } else if (
+      // 228
+      window.innerWidth <= 480 &&
+      slidePosition + savePosValue * timeCompenstaion <
+        -328 + window.innerWidth / 9
+    ) {
+      setSlidePosition(-328 + window.innerWidth / 9);
+    } else if (
+      // 228
+      window.innerWidth <= 1300 &&
+      slidePosition + savePosValue * timeCompenstaion <
+        -328 + window.innerWidth / 13
+    ) {
+      setSlidePosition(-328 + window.innerWidth / 13);
     } else if (savePosValue > 0) {
       setSlidePosition(slidePosition + savePosValue * timeCompenstaion);
     } else if (savePosValue < 0) {
@@ -113,7 +135,7 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
     <>
       {isModalBasket && <ModalBasket setIsModalBasket={setIsModalBasket} />}
       <ProductCardSlideWrapper
-        onMouseDown={OnMouseDownSlide}
+        onMouseDown={onMouseDownSlide}
         onMouseMove={onMouseMoveSlide}
         onMouseUp={onMouseUpSlide}
         onMouseEnter={onMouseEnter}
@@ -123,37 +145,40 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
         onTouchEnd={onTouchUpSlide}
         PosX={`${slidePosition}`}
         IsTransition={isTransition}
+        IsMobile={isMobile}
       >
-        {products &&
-          products.map((product) => {
-            return (
-              <ProductCard
-                key={product.code}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-          })}
-        {products &&
-          products.map((product) => {
-            return (
-              <ProductCard
-                key={product.code}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-          })}
-        {products &&
-          products.map((product) => {
-            return (
-              <ProductCard
-                key={product.code}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-          })}
+        <div>
+          {products &&
+            products.map((product) => {
+              return (
+                <ProductCard
+                  key={product.code}
+                  data={product}
+                  setIsModalBasket={setIsModalBasket}
+                />
+              );
+            })}
+          {products &&
+            products.map((product) => {
+              return (
+                <ProductCard
+                  key={product.code}
+                  data={product}
+                  setIsModalBasket={setIsModalBasket}
+                />
+              );
+            })}
+          {products &&
+            products.map((product) => {
+              return (
+                <ProductCard
+                  key={product.code}
+                  data={product}
+                  setIsModalBasket={setIsModalBasket}
+                />
+              );
+            })}
+        </div>
       </ProductCardSlideWrapper>
     </>
   );

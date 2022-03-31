@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 export const HomeContainer = styled.section`
-  & > div h3 {
+  .home-wrapper {
+    max-width: 1300px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  .home-wrapper > div h3 {
     font-weight: 600;
 
     display: inline-block;
