@@ -1,3 +1,4 @@
+import { useIsMobile } from '@utils/Hooks';
 import fetcher from '@utils/utils/fetcher';
 import Link from 'next/link';
 import React from 'react';
@@ -8,6 +9,9 @@ const Result = () => {
   const { data: recentPaymemt } = useQuery('userRecentPayment', () =>
     fetcher(`/api/user/payment/recent`),
   );
+
+  const isMobile = useIsMobile();
+
   return (
     <ResultContainer>
       <div>

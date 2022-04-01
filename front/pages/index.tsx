@@ -12,6 +12,8 @@ import fetcher from '@utils/utils/fetcher';
 import { GetServerSideProps } from 'next';
 import { baseApiUrl } from '@utils/utils/const';
 import { VFC } from 'react';
+import { useIsMobile, useIsTablet } from '@utils/Hooks';
+import MobileMainEventSlider from '@components/Sliders/MobileMainEvetnSlider';
 
 interface Props {
   ssrProducstData: any;
@@ -25,8 +27,8 @@ const IndexPage: VFC<Props> = ({ ssrProducstData }) => {
       initialData: ssrProducstData,
     },
   );
-
-  console.log(data);
+  const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
 
   return (
     <HomeContainer>
@@ -69,7 +71,7 @@ const IndexPage: VFC<Props> = ({ ssrProducstData }) => {
           </Link>
         </div>
       </div>
-      <MainEventSlider />
+      {isTablet ? <MobileMainEventSlider /> : <MainEventSlider />}
     </HomeContainer>
   );
 };

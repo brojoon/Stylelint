@@ -2,6 +2,7 @@ import BasketProductCard from '@components/BasketProductCard';
 import { BasketRemoveFetch } from '@store/modules/basketRemove';
 import { PaymentSaveFetch } from '@store/modules/paymentSave';
 import { IBasketProduct } from '@typings/db';
+import { useIsMobile, useIsTablet1024 } from '@utils/Hooks';
 import { baseFrontUrl } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
 import { useRouter } from 'next/router';
@@ -21,10 +22,14 @@ const Basket = () => {
   );
   const [totalPrice, setStateTotalPrice] = useState(0);
   const [totalMany, setTotalMany] = useState(0);
+
   const { data, isLoading, error, refetch } = useQuery('basketList', () =>
     fetcher(`/api/basket`),
   );
   const router = useRouter();
+
+  const isTablet1024 = useIsTablet1024();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (data) setProductCardArr(new Array(data.length).fill(0));
@@ -40,14 +45,13 @@ const Basket = () => {
           totalMany += data[i].quantity;
         }
       }
-      console.log('totalPrice: ', totalPrice);
+
       setTotalMany(totalMany);
       setStateTotalPrice(totalPrice);
     }
   }, [data, productCardArr]);
 
   const dispatch = useDispatch();
-  console.log(data);
 
   const onCheckedAllSelect = useCallback(
     (e) => {
@@ -67,14 +71,13 @@ const Basket = () => {
       for (let i = 0; i < data.length; i++) {
         if (productCardArr[i] == 1) postArr.push({ id: data[i].id });
       }
-      console.log('postArr', postArr);
+
       await dispatch(BasketRemoveFetch(postArr));
       setProductCardArr((prev) => {
         return prev.map((value) => {
           return 0;
         });
       });
-      console.log('delete Done');
       refetch();
     }
   }, [productCardArr, data, refetch]);
@@ -98,12 +101,16 @@ const Basket = () => {
         state: false,
       });
     }
-    console.log(ret2);
     await dispatch(PaymentSaveFetch(ret2));
     router.push(baseFrontUrl + '/payment');
   }, [data, productCardArr]);
   return (
-    <BasketContainer IsCheckedAll={isCheckedAll} className="basket-container">
+    <BasketContainer
+      IsCheckedAll={isCheckedAll}
+      IsTablet1024={isTablet1024}
+      IsMobile={isMobile}
+      className="basket-container"
+    >
       <div>
         <div className="title-container">
           <div className="title-wrapper">

@@ -5,7 +5,7 @@ export const FooterContainer = styled.footer<{ IsMobile: boolean }>`
   border-top: 1px solid #e2e2e2;
 
   .footer-wrapper {
-    padding: 0 1%;
+    padding: 0 15px;
     max-width: 1300px;
     margin: 0 auto;
   }
@@ -25,7 +25,7 @@ export const FooterContainer = styled.footer<{ IsMobile: boolean }>`
     line-height: 20px;
     letter-spacing: -1px;
     color: #5e636d;
-    padding: ${(Props) => (Props.IsMobile ? '0' : '0 25px')};
+    padding: ${(Props) => (Props.IsMobile ? '0' : '25px')};
 
     font-weight: 600;
     text-align: ${(Props) => (Props.IsMobile ? 'center' : '')};

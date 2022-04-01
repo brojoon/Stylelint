@@ -1,6 +1,7 @@
 import { BasketCounterFetch } from '@store/modules/basketCounter';
 import { BasketRemoveFetch } from '@store/modules/basketRemove';
 import { IBasketProduct } from '@typings/db';
+import { useIsTablet1024 } from '@utils/Hooks';
 import { baseApiUrl } from '@utils/utils/const';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { useDispatch } from 'react-redux';
@@ -23,6 +24,7 @@ const BasketProductCard: VFC<Props> = ({
 }) => {
   const [productCount, setProductCount] = useState(basketProduct.quantity);
   const dispatch = useDispatch();
+  const isTablet1024 = useIsTablet1024();
 
   const onClickProductDelete = useCallback(async () => {
     await dispatch(BasketRemoveFetch([{ id: basketProduct.id }]));
@@ -74,7 +76,10 @@ const BasketProductCard: VFC<Props> = ({
   );
 
   return (
-    <BasketProductContainer IsChecked={productCardArr[index] ? true : false}>
+    <BasketProductContainer
+      IsChecked={productCardArr[index] ? true : false}
+      IsTablet1024={isTablet1024}
+    >
       <ul>
         <li>
           <div className="basket-product-content">
@@ -93,7 +98,7 @@ const BasketProductCard: VFC<Props> = ({
                 <img src={baseApiUrl + basketProduct?.image} />
               </div>
             </div>
-
+            {/* ${(props) => (props.IsTablet1024 ? 'align-items: center;' : '')} */}
             <div className="basket-product-desc">
               <span>{basketProduct.product_name}</span>
               <span>

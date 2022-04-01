@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-export const OrderHistoryProductContainer = styled.section`
+export const OrderHistoryProductContainer = styled.section<{
+  IsTable1024: boolean;
+}>`
   position: relative;
 
   margin-bottom: 15px;
@@ -11,16 +13,20 @@ export const OrderHistoryProductContainer = styled.section`
     display: flex;
     padding: 30px 20px;
     background-color: #ffffff;
-    height: 130px;
+
     justify-content: space-between;
     border-radius: 6px;
     align-items: center;
+    flex-direction: ${(props) => (props.IsTable1024 ? 'column' : 'row')};
+    text-align: center;
   }
 
   .order-product-info {
     margin: 0 10px;
     display: flex;
     align-items: center;
+    ${(props) => (props.IsTable1024 ? 'width: 100%;' : '')}
+    ${(props) => (props.IsTable1024 ? 'margin-bottom: 10px' : '')}
   }
 
   .order-product-info h3 {
@@ -30,8 +36,12 @@ export const OrderHistoryProductContainer = styled.section`
   }
 
   .order-product-info > div > img {
-    width: 80px;
-    height: 80px;
+    width: ${(props) => (props.IsTable1024 ? '100%' : '80px')};
+    height: ${(props) => (props.IsTable1024 ? '100%' : '80px')};
+  }
+
+  .order-product-info > div {
+    width: 100%;
   }
 
   .order-product-desc {
@@ -41,6 +51,8 @@ export const OrderHistoryProductContainer = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    ${(props) => (props.IsTable1024 ? 'margin-bottom: 10px' : '')}
   }
 
   .order-product-desc span:nth-child(1) {
@@ -86,8 +98,7 @@ export const OrderHistoryProductContainer = styled.section`
 
   .order-product-price > span {
     color: #000;
-    font-size: 18px;
-    line-height: 27px;
+    font-size: 1.125rem;
     font-weight: bold;
     word-wrap: break-word;
     word-break: break-all;

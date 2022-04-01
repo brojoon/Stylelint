@@ -56,7 +56,7 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
   .all-menu {
     position: relative;
     display: block;
-    width: 40px;
+    width: 30px;
     height: 40px;
     cursor: pointer;
   }
@@ -92,12 +92,12 @@ export const MainHeader = styled.header<{ IsScrollTop: number }>`
     top: 27px;
   }
   .logo {
-  
     font-weight: 700;
   }
   .logo h1 {
     cursor: pointer;
-    font-size: 24px;
+    width: 120px;
+    
   }
 
   .info {

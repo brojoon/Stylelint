@@ -1,3 +1,4 @@
+import { useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import { baseApiUrl } from '@utils/utils/const';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { useDispatch } from 'react-redux';
@@ -9,8 +10,11 @@ interface Props {
 }
 
 const OrderHistoryCard: VFC<Props> = ({ orderHistoryProduct }) => {
+  const isTablet = useIsTablet();
+  const isTable1024 = useIsTablet1024();
+
   return (
-    <OrderHistoryProductContainer>
+    <OrderHistoryProductContainer IsTable1024={isTable1024}>
       <ul>
         <li>
           <div className="order-product-content">
@@ -22,19 +26,21 @@ const OrderHistoryCard: VFC<Props> = ({ orderHistoryProduct }) => {
             </div>
             <div className="order-product-desc">
               <span>{orderHistoryProduct?.product_name}</span>
-              <span>
+              {/* <span>
                 사이즈: {orderHistoryProduct?.size} 색상:{' '}
                 {orderHistoryProduct?.color}{' '}
-              </span>
+              </span> */}
             </div>
             <div className="order-justfy-between-div"></div>
-            <div className="order-user-info">
-              <span>{orderHistoryProduct?.address?.replace('/', ' ')}</span>
-              <div>
-                <span>{orderHistoryProduct?.receiver}</span>
-                <span>{' / ' + orderHistoryProduct?.phone_number}</span>
+            {!isTable1024 && (
+              <div className="order-user-info">
+                <span>{orderHistoryProduct?.address?.replace('/', ' ')}</span>
+                <div>
+                  <span>{orderHistoryProduct?.receiver}</span>
+                  <span>{' / ' + orderHistoryProduct?.phone_number}</span>
+                </div>
               </div>
-            </div>
+            )}
             <div className="order-justfy-between-div"></div>
             <div className="order-product-price">
               <span> 배송중</span>

@@ -6,7 +6,7 @@ export const PaymentContainer = styled.section`
   }
 
   & .title-wrapper {
-    padding: 0 1%;
+    padding: 0 15px;
     max-width: 1300px;
     margin: 0 auto;
   }

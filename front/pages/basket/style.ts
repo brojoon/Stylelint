@@ -1,26 +1,31 @@
 import styled from 'styled-components';
 
-export const BasketContainer = styled.section<{ IsCheckedAll: boolean }>`
+export const BasketContainer = styled.section<{
+  IsCheckedAll: boolean;
+  IsTablet1024: boolean;
+  IsMobile: boolean;
+}>`
   & .title-container {
     border-bottom: 1px solid #eeeeee;
   }
 
   & .title-wrapper {
-    padding: 0 1%;
+    padding: 0 15px;
     max-width: 1300px;
     margin: 0 auto;
   }
 
   & .title {
-    font-size: 2.375rem;
+    font-size: 1.8rem;
     color: #363636;
     font-weight: bold;
     letter-spacing: -1px;
 
     width: 100%;
     margin: 20px 0;
+    ${(props) => (props.IsMobile ? 'text-indent: -9999px;' : '')}
 
-    background: url(./img/purchase_pagenation.png) right -18px no-repeat;
+    background: url(./img/purchase_pagenation.png) right -30px no-repeat;
   }
 
   & .basket-tab-container {
@@ -31,7 +36,7 @@ export const BasketContainer = styled.section<{ IsCheckedAll: boolean }>`
 
   & .basket-tab-wrapper {
     max-width: 1300px;
-    padding: 0 1%;
+    padding: 0 15px;
     margin: 0 auto;
     display: flex;
   }
@@ -78,7 +83,7 @@ export const BasketContainer = styled.section<{ IsCheckedAll: boolean }>`
 
   .basket-option-conatiner {
     max-width: 1300px;
-    padding: 0 1%;
+    padding: 0 15px;
     margin: 0 auto;
   }
 
@@ -148,19 +153,27 @@ export const BasketContainer = styled.section<{ IsCheckedAll: boolean }>`
   }
 
   .basket-products-wrapper {
-    padding: 0 1%;
+    padding: 0 15px;
     max-width: 1300px;
     margin: 0 auto;
     display: flex;
+    justify-content: space-between;
+    ${(props) => (props.IsTablet1024 ? 'flex-direction: column' : '')}
+  }
+
+  .basket-products-wrapper > div {
+    width: 100%;
   }
 
   .basket-product-order-container {
     background: #ffffff;
-    max-width: 330px;
+
+    ${(props) => (props.IsTablet1024 ? '' : 'max-width: 330px;')}
     padding: 20px;
-    width: 30%;
+    width: 100%;
     height: 200px;
-    margin-left: 15px;
+    ${(props) => (props.IsTablet1024 ? '' : 'margin-left: 15px;')}
+
     border: 1px solid #000;
     border-radius: 6px;
   }
@@ -240,7 +253,7 @@ export const BasketContainer = styled.section<{ IsCheckedAll: boolean }>`
   }
 
   .empty-container {
-    padding: 0 1%;
+    padding: 0 15px;
     max-width: 1300px;
     margin: 0 auto;
     display: flex;

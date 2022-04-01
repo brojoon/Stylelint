@@ -6,7 +6,7 @@ export const ProfileContainer = styled.div`
   .profile-wrapper {
     max-width: 1300px;
     margin: 0 auto;
-    padding: 0 1%;
+    padding: 0 15px;
     background: #ffffff;
     padding: 20px 20px 60px;
   }
@@ -173,7 +173,7 @@ export const ProfileContainer = styled.div`
   }
 
   .payment-address-text {
-    margin-top: 5px;
+    margin-top: 20px;
     font-size: 16px;
     line-height: 24px;
     color: #222222;

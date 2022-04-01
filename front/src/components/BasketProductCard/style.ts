@@ -1,20 +1,26 @@
 import styled from 'styled-components';
 
-export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
+export const BasketProductContainer = styled.section<{
+  IsChecked: boolean;
+  IsTablet1024: boolean;
+}>`
   position: relative;
-  min-width: 800px;
-  width: 70%;
+  width: 100%;
   margin-bottom: 15px;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
 
   .basket-product-content {
     display: flex;
+
     padding: 30px 20px;
     background-color: #ffffff;
-    height: 130px;
+
+    text-align: center;
     justify-content: space-between;
     border-radius: 6px;
+    ${(props) => (props.IsTablet1024 ? 'flex-direction: column;' : '')}
+    ${(props) => (props.IsTablet1024 ? 'align-items: center;' : '')}
   }
 
   .basket-product-info {
@@ -37,8 +43,8 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
   }
 
   .basket-product-info > div > img {
-    width: 80px;
-    height: 80px;
+    ${(props) => (props.IsTablet1024 ? 'width: 100%' : 'width: 80px;')}
+    ${(props) => (props.IsTablet1024 ? 'height: 100%' : 'height: 80px;')}
   }
 
   .basket-product-desc {
@@ -47,6 +53,9 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
     max-width: 180px;
     display: flex;
     flex-direction: column;
+
+    ${(props) => (props.IsTablet1024 ? 'margin-left: 34px;' : '')}
+    ${(props) => (props.IsTablet1024 ? 'margin-top: 10px;' : '')}
   }
 
   .basket-product-desc span:nth-child(1) {
@@ -57,13 +66,17 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
   .basket-product-desc span:nth-child(2) {
     color: #233549;
     opacity: 0.8;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
   }
 
   .basket-product-count {
-    margin-left: 1.25rem;
-    margin-top: 2px;
+    ${(props) => (props.IsTablet1024 ? '' : 'margin-left  : 1.25rem;')}
+    ${(props) =>
+      props.IsTablet1024 ? 'margin-top: 10px;' : 'margin-top: 2px;'}
+
+    ${(props) => (props.IsTablet1024 ? 'margin-left: 34px;' : '')}
+
     display: flex;
   }
 
@@ -104,7 +117,12 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
   }
 
   .basket-product-price {
-    display: block;
+    ${(props) => (props.IsTablet1024 ? 'display: flex;' : '')}
+    ${(props) => (props.IsTablet1024 ? 'flex-direction: column;' : '')}
+    ${(props) => (props.IsTablet1024 ? 'align-items: center;' : '')}
+    ${(props) => (props.IsTablet1024 ? 'margin-top: 10px;' : '')}
+    ${(props) =>
+      props.IsTablet1024 ? 'margin-left: 34px;' : 'margin-top: 2px;'}
   }
 
   .basket-product-price > span {
@@ -119,7 +137,8 @@ export const BasketProductContainer = styled.section<{ IsChecked: boolean }>`
   .basket-product-price > button {
     width: 14px;
     height: 14px;
-    margin-left: 14px;
+    ${(props) => (props.IsTablet1024 ? 'margin-left:0;' : 'margin-left: 14px;')}
+    ${(props) => (props.IsTablet1024 ? 'margin-top: 8px;' : '')}
     background: url('./img/basket_product_count.png') no-repeat;
     background-position: -102px -60px;
   }

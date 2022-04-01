@@ -46,7 +46,9 @@ const Header = () => {
               </button>
               <div className="logo">
                 <Link href="/">
-                  <h1>STYLELINT</h1>
+                  <h1>
+                    <img src="/img/logo.png" />
+                  </h1>
                 </Link>
               </div>
             </div>

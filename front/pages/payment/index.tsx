@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { PaymentDoneUpdateFetch } from '@store/modules/paymentDoneUpdate';
 import { useRouter } from 'next/router';
 import { PaymentRecentSaveFetch } from '@store/modules/paymentRecentSave';
+import { useIsMobile, useIsTablet1024 } from '@utils/Hooks';
 
 interface IPostType {
   address: string;
@@ -37,6 +38,8 @@ const Payment = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
+  const isTablet1024 = useIsTablet1024();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (user) {

@@ -33,6 +33,15 @@ export function useScroll() {
   };
 }
 
+export function useIsTablet1024() {
+  const [isTablet1024, setIsTablet1024] = useState(false);
+  const Tablet = useMediaQuery({ query: '(max-width: 1024px)' });
+  useEffect(() => {
+    setIsTablet1024(Tablet);
+  }, [Tablet]);
+  return isTablet1024;
+}
+
 export function useIsTablet() {
   const [isTablet, setIsTablet] = useState(false);
   const Tablet = useMediaQuery({ query: '(max-width: 768px)' });

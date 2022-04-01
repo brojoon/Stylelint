@@ -6,7 +6,7 @@ export const ResultContainer = styled.section`
   }
 
   & .title-wrapper {
-    padding: 0 1%;
+    padding: 0 15px;
     max-width: 1300px;
     margin: 0 auto;
   }
@@ -24,7 +24,7 @@ export const ResultContainer = styled.section`
   }
 
   & .body-container {
-    padding: 0 1%;
+    padding: 0 15px;
     max-width: 1300px;
     margin: 0 auto;
   }
@@ -83,12 +83,14 @@ export const ResultContainer = styled.section`
 
   .order-table-tbody > tr:nth-child(1) > td:nth-child(1) {
     background-color: #f7f7f7;
+
     padding: 13px 20px;
     border-bottom: 1px solid #f1f1f1;
     border-right: 1px solid #f1f1f1;
   }
 
   .order-table-tbody > tr:nth-child(1) > td:nth-child(1) p {
+    display: flex;
     background: url(/img/dot_2x2_777.png) no-repeat 20px 10px;
     color: #676767;
   }
@@ -164,7 +166,7 @@ export const ResultContainer = styled.section`
   }
 
   .note-tip {
-    margin: 80px 0 200px;
+    margin: 80px 0 120px;
     padding: 20px 40px;
     border: 1px solid #e1e1e1;
   }
