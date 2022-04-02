@@ -25,7 +25,7 @@ export const BasketContainer = styled.section<{
     margin: 20px 0;
     ${(props) => (props.IsMobile ? 'text-indent: -9999px;' : '')}
 
-    background: url(./img/purchase_pagenation.png) right -30px no-repeat;
+    background: url(./img/purchase_pagenation.png) right -25px no-repeat;
   }
 
   & .basket-tab-container {

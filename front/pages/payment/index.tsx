@@ -10,7 +10,8 @@ import { useDispatch } from 'react-redux';
 import { PaymentDoneUpdateFetch } from '@store/modules/paymentDoneUpdate';
 import { useRouter } from 'next/router';
 import { PaymentRecentSaveFetch } from '@store/modules/paymentRecentSave';
-import { useIsMobile, useIsTablet1024 } from '@utils/Hooks';
+import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
+import MobilePaymentSlider from '@components/Sliders/MobilePaymentSlider';
 
 interface IPostType {
   address: string;
@@ -39,6 +40,7 @@ const Payment = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const isTablet1024 = useIsTablet1024();
+  const isTablet = useIsTablet();
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -147,7 +149,7 @@ const Payment = () => {
           setIsPostCode={setIsPostCode}
         />
       )}
-      <PaymentContainer>
+      <PaymentContainer IsTablet1024={isTablet1024} IsMobile={isMobile}>
         <div>
           <div className="title-container">
             <div className="title-wrapper">
@@ -221,7 +223,7 @@ const Payment = () => {
                       </div>
                     </div>
                   </div>
-                  <PaymentSlider />
+                  {isTablet ? <MobilePaymentSlider /> : <PaymentSlider />}
                 </div>
                 <div>
                   <div className="payment-purchase-card">
@@ -252,7 +254,6 @@ const Payment = () => {
                           </div>
                         );
                       })}
-
                       <div>
                         <div className="payment-purchase-price">
                           <span>상품금액</span>

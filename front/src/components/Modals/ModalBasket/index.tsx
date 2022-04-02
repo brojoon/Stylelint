@@ -1,3 +1,4 @@
+import { useIsMobile } from '@utils/Hooks';
 import Link from 'next/link';
 import React, { useCallback, VFC } from 'react';
 import { ModalBackground, ModalBasketContainer } from './style';
@@ -10,10 +11,13 @@ const ModalBasket: VFC<Props> = ({ setIsModalBasket }) => {
   const onClickModalClose = useCallback(() => {
     setIsModalBasket(false);
   }, []);
+
+  const isMobile = useIsMobile();
+
   return (
     <>
       <ModalBackground onClick={onClickModalClose} />
-      <ModalBasketContainer>
+      <ModalBasketContainer IsMobile={isMobile}>
         <div className="modal-wrapper">
           <button onClick={onClickModalClose}></button>
           <div>

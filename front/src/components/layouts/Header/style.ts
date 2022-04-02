@@ -18,7 +18,10 @@ export const BackgroundHeader = styled.div`
   height: 125px;
 `;
 
-export const MainHeader = styled.header<{ IsScrollTop: number }>`
+export const MainHeader = styled.header<{
+  IsScrollTop: number;
+  IsMobile: boolean;
+}>`
   position: fixed;
   top: 0;
   left: 0;

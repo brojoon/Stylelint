@@ -3,6 +3,7 @@ import SelectedProductCardContainer from '@components/SelectedProductCardContain
 import ProductDetailSlider from '@components/Sliders/ProductDetailSlider';
 import { BasketAddFetch } from '@store/modules/basketAdd';
 import { PaymentSaveFetch } from '@store/modules/paymentSave';
+import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import { baseApiUrl, baseFrontUrl, days, months } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
@@ -56,6 +57,9 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
     fetcher(`api/user/dibs`),
   );
 
+  const isTablet1024 = useIsTablet1024();
+  const isTablet = useIsTablet();
+  const isMobile = useIsMobile();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -200,141 +204,137 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
 
   return (
     <>
-      <ProductDetailContainer>
+      <ProductDetailContainer IsTablet1024={isTablet1024} IsTablet={isTablet}>
         <div className="product-Deital-wrapper">
-          <div className="flex justify-between">
-            <div className="flex flex-col w-[50%]">
-              <ProductDetailSlider ssrProductData={ssrProductData} />
-            </div>
-            <div className="w-[50%] flex justify-center ml-[1rem] ">
-              <div>
-                <h3 className="text-[1.125rem] text-[#7E7E7E] font-semibold">
-                  스타일린트
-                </h3>
-                <p className="text-[1.5rem] text-[#333333] mb-[30px] font-bold">
-                  {data?.name}
-                </p>
-                <p className="text-[1.15rem] text-[#9D9D9D] line-through ">
-                  {data && Math.floor(data?.price * 1.5).toLocaleString()}
-                </p>
-                <div className="border-b-[1px] pb-[25px]">
-                  <span className="text-[0.75rem] text-[#ff9995] mr-[0.5rem]">
-                    32% 할인 적용시
-                  </span>
-                  <span className="text-[1.5625rem] font-semibold">
-                    {data?.price?.toLocaleString()}
-                  </span>
-                  <strong>원</strong>
-                </div>
-                <table className="mt-[25px]">
-                  <tbody className="text-[#333333] text-[0.875rem]">
-                    <tr>
-                      <th className="pr-[1.75rem] pr-[1.75rem]">구매자수</th>
-                      <td>{data?.perchase_quantity}</td>
-                    </tr>
-                    <tr>
-                      <th className="pr-[1.75rem] pt-[10px] ">배송구분</th>
-                      <td className="pt-[10px]">무료배송</td>
-                    </tr>
-                    <tr>
-                      <th className="pr-[1.75rem] pt-[10px]">배송예상</th>
-                      <td className="pt-[10px]">
-                        {months[new Date().getMonth()] +
-                          new Date().getDate() +
-                          '일 ' +
-                          days[new Date().getDay()] +
-                          ' 오후 3시 이전 주문시'}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <ProductPurchaseWrapper IsProductDibs={isProductDibs}>
-                  <div className="option-container">
-                    <span className="option-header">옵션선택</span>
-                    <select
-                      className="option-size"
-                      onChange={onChangeSelectSize}
-                      value={selectSize}
-                      name="사이즈"
-                    >
-                      <option disabled value="default" selected>
-                        사이즈
-                      </option>
-                      <option value="S">S</option>
-                      <option value="M">M</option>
-                      <option value="L">L</option>
-                    </select>
-                    <span className="icoArrow arrow1">
-                      <img src="/img/select_dropdown.png" alt="" />
-                    </span>
-                  </div>
-                  <div className="option-container">
-                    <select
-                      className="option-size"
-                      onChange={onChangeSelectColor}
-                      value={selectColor}
-                      name="색상"
-                    >
-                      <option disabled value="default" selected>
-                        색상
-                      </option>
-                      <option value="Black">Black</option>
-                      <option value="White">White</option>
-                      <option value="Red">Red</option>
-                    </select>
-                    <span className="icoArrow arrow2">
-                      <img src="/img/select_dropdown.png" alt="" />
-                    </span>
-                  </div>
-                  {selectSize !== 'default' && selectColor !== 'default' && (
-                    <div className="basket-product-select">
-                      <h2>수량</h2>
-                      <div className="basket-product-select-wrapper">
-                        <div className="basket-product-count">
-                          <button
-                            onClick={onClickProductSubstractCount}
-                          ></button>
-                          <input
-                            onChange={onChangeProductCount}
-                            type="number"
-                            value={productCount}
-                          />
-                          <button onClick={onClickProductAddCount}></button>
-                        </div>
-                        <button
-                          className="basket-product-select-btn"
-                          onClick={onClickSelectBtn}
-                        >
-                          선택
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  <SelectedProductCardContainer
-                    selectedProductArr={selectedProductArr}
-                    setSelectedProductArr={setSelectedProductArr}
-                  />
-                  <div className="product-purchase-payment">
-                    <div className="purchase-result">
-                      <span>총 상품금액</span>
-                      <span>{totalPrice.toLocaleString()}원</span>
-                    </div>
-                    <div className="purchase-button">
-                      <button onClick={onClickProductDibs}>
-                        <span className="product-dibs"></span>
-                        <span className="product-dibs-count">{data?.dibs}</span>
-                      </button>
-                      <button onClick={onClickProductsBasket}>
-                        <span>장바구니</span>
-                      </button>
-                      <button onClick={onClickPurchase}>
-                        <span>구매하기</span>
-                      </button>
-                    </div>
-                  </div>
-                </ProductPurchaseWrapper>
+          <div className="product-slide-wrapper flex flex-col w-[50%]">
+            <ProductDetailSlider ssrProductData={ssrProductData} />
+          </div>
+          <div className="product-purchase-wrapper ">
+            <div>
+              <h3 className="text-[1.125rem] text-[#7E7E7E] font-semibold">
+                스타일린트
+              </h3>
+              <p className="text-[1.5rem] text-[#333333] mb-[30px] font-bold">
+                {data?.name}
+              </p>
+              <p className="text-[1.15rem] text-[#9D9D9D] line-through ">
+                {data && Math.floor(data?.price * 1.5).toLocaleString()}
+              </p>
+              <div className="border-b-[1px] pb-[25px]">
+                <span className="text-[0.75rem] text-[#ff9995] mr-[0.5rem]">
+                  32% 할인 적용시
+                </span>
+                <span className="text-[1.5625rem] font-semibold">
+                  {data?.price?.toLocaleString()}
+                </span>
+                <strong>원</strong>
               </div>
+              <table className="mt-[25px]">
+                <tbody className="text-[#333333] text-[0.875rem]">
+                  <tr>
+                    <th className="pr-[1.75rem] pr-[1.75rem]">구매자수</th>
+                    <td>{data?.perchase_quantity}</td>
+                  </tr>
+                  <tr>
+                    <th className="pr-[1.75rem] pt-[10px] ">배송구분</th>
+                    <td className="pt-[10px]">무료배송</td>
+                  </tr>
+                  <tr>
+                    <th className="pr-[1.75rem] pt-[10px]">배송예상</th>
+                    <td className="pt-[10px]">
+                      {months[new Date().getMonth()] +
+                        new Date().getDate() +
+                        '일 ' +
+                        days[new Date().getDay()] +
+                        ' 오후 3시 이전 주문시'}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <ProductPurchaseWrapper IsProductDibs={isProductDibs}>
+                <div className="option-container">
+                  <span className="option-header">옵션선택</span>
+                  <select
+                    className="option-size"
+                    onChange={onChangeSelectSize}
+                    value={selectSize}
+                    name="사이즈"
+                  >
+                    <option disabled value="default" selected>
+                      사이즈
+                    </option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                  </select>
+                  <span className="icoArrow arrow1">
+                    <img src="/img/select_dropdown.png" alt="" />
+                  </span>
+                </div>
+                <div className="option-container">
+                  <select
+                    className="option-size"
+                    onChange={onChangeSelectColor}
+                    value={selectColor}
+                    name="색상"
+                  >
+                    <option disabled value="default" selected>
+                      색상
+                    </option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Red">Red</option>
+                  </select>
+                  <span className="icoArrow arrow2">
+                    <img src="/img/select_dropdown.png" alt="" />
+                  </span>
+                </div>
+                {selectSize !== 'default' && selectColor !== 'default' && (
+                  <div className="basket-product-select">
+                    <h2>수량</h2>
+                    <div className="basket-product-select-wrapper">
+                      <div className="basket-product-count">
+                        <button onClick={onClickProductSubstractCount}></button>
+                        <input
+                          onChange={onChangeProductCount}
+                          type="number"
+                          value={productCount}
+                        />
+                        <button onClick={onClickProductAddCount}></button>
+                      </div>
+                      <button
+                        className="basket-product-select-btn"
+                        onClick={onClickSelectBtn}
+                      >
+                        선택
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                <SelectedProductCardContainer
+                  selectedProductArr={selectedProductArr}
+                  setSelectedProductArr={setSelectedProductArr}
+                />
+                <div className="product-purchase-payment">
+                  <div className="purchase-result">
+                    <span>총 상품금액</span>
+                    <span>{totalPrice.toLocaleString()}원</span>
+                  </div>
+                  <div className="purchase-button">
+                    <button onClick={onClickProductDibs}>
+                      <span className="product-dibs"></span>
+                      <span className="product-dibs-count">{data?.dibs}</span>
+                    </button>
+                    <button onClick={onClickProductsBasket}>
+                      <span>장바구니</span>
+                    </button>
+                    <button onClick={onClickPurchase}>
+                      <span>구매하기</span>
+                    </button>
+                  </div>
+                </div>
+              </ProductPurchaseWrapper>
             </div>
           </div>
         </div>

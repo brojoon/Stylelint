@@ -4,7 +4,7 @@ import { ProductCardSlideWrapper } from './style';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import { IProducts } from '@typings/db';
-import ModalBasket from '@components/ModalBasket';
+import ModalBasket from '@components/Modals/ModalBasket';
 import { useIsMobile } from '@utils/Hooks';
 
 interface Props {

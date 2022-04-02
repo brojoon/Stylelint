@@ -13,7 +13,7 @@ const Result = () => {
   const isMobile = useIsMobile();
 
   return (
-    <ResultContainer>
+    <ResultContainer IsMobile={isMobile}>
       <div>
         <div className="title-container">
           <div className="title-wrapper">

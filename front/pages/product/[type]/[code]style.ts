@@ -1,11 +1,32 @@
 import styled from 'styled-components';
 
-export const ProductDetailContainer = styled.main`
+export const ProductDetailContainer = styled.main<{
+  IsTablet1024: boolean;
+  IsTablet: boolean;
+}>`
   max-width: 1300px;
   margin: 0 auto;
-
+  padding: 15px;
   & .product-Deital-wrapper {
-    margin: 1.6rem;
+    display: flex;
+    ${(props) => (props.IsTablet ? 'flex-direction: column;' : '')}
+  }
+
+  & .product-slide-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  & .product-purchase-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    ${(props) => (props.IsTablet ? 'margin-top: 30px;' : ' margin-left: 10px;')}
+  }
+
+  & .product-purchase-wrapper > div {
+    max-width: 500px;
   }
 `;
 

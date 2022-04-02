@@ -32,7 +32,7 @@ const Header = () => {
         </span>
       </Banner>
       <BackgroundHeader />
-      <MainHeader IsScrollTop={scrollY}>
+      <MainHeader IsScrollTop={scrollY} IsMobile={isMobile}>
         <div className="wrapper">
           <div className="container">
             <div className="logo-wrapper">
@@ -52,13 +52,14 @@ const Header = () => {
                 </Link>
               </div>
             </div>
-
             <div className="info">
               <ul>
                 <li>
-                  <div>
-                    <img width="26px" height="26px" src="/img/search.svg" />
-                  </div>
+                  {!isMobile && (
+                    <div>
+                      <img width="26px" height="26px" src="/img/search.svg" />
+                    </div>
+                  )}
                 </li>
                 <li>
                   <Link href="/profile">

@@ -8,8 +8,8 @@ import { BasketAddFetch } from '@store/modules/basketAdd';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
-import { ModalBasketContainer } from '@components/ModalBasket/style';
-import ModalBasket from '@components/ModalBasket';
+import { ModalBasketContainer } from '@components/Modals/ModalBasket/style';
+import ModalBasket from '@components/Modals/ModalBasket';
 
 interface Props {
   data: IProducts;

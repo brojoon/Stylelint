@@ -1,3 +1,4 @@
+import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import React, { useCallback, VFC } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import { DaumPostcodeContainer } from './style';
@@ -30,12 +31,19 @@ const Postcode: VFC<Props> = ({ setAddressInputValue, setIsPostCode }) => {
     setIsPostCode(false);
   };
 
+  const isTablet1024 = useIsTablet1024();
+  const isTablet = useIsTablet();
+  const isMobile = useIsMobile();
+
   return (
     <DaumPostcodeContainer onClick={onClickPostCodeModal}>
       <DaumPostcode
         onComplete={handleComplete}
         className="post-code"
-        style={{ width: '500px', height: '470px' }}
+        style={{
+          width: isMobile ? '300px' : isTablet ? '400px' : '500px',
+          height: isMobile ? '350px' : isTablet ? '380px' : '470px',
+        }}
       />
     </DaumPostcodeContainer>
   );

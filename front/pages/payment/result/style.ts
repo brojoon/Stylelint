@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ResultContainer = styled.section`
+export const ResultContainer = styled.section<{ IsMobile: boolean }>`
   & .title-container {
     border-bottom: 1px solid #eeeeee;
   }
@@ -19,6 +19,7 @@ export const ResultContainer = styled.section`
 
     width: 100%;
     margin: 20px 0;
+    ${(props) => (props.IsMobile ? 'text-indent: -9999px;' : '')}
 
     background: url(/img/purchase_pagenation.png) right -208px no-repeat;
   }

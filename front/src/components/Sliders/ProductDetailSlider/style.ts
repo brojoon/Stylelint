@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ProductDetailSlide = styled.div`
   width: 100%;
 
+  border-radius: 0.8rem;
   position: relative;
   background-color: #000;
   & > img {

@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-export const PaymentContainer = styled.section`
+export const PaymentContainer = styled.section<{
+  IsTablet1024: boolean;
+  IsMobile: boolean;
+}>`
   & .title-container {
     border-bottom: 1px solid #eeeeee;
   }
@@ -12,15 +15,14 @@ export const PaymentContainer = styled.section`
   }
 
   & .title {
-    font-size: 2.375rem;
+    font-size: 1.8rem;
     color: #363636;
     font-weight: bold;
     letter-spacing: -1px;
-
     width: 100%;
     margin: 20px 0;
-
-    background: url(./img/purchase_pagenation.png) right -113px no-repeat;
+    background: url(./img/purchase_pagenation.png) right -120px no-repeat;
+    ${(props) => (props.IsMobile ? 'text-indent: -9999px;' : '')}
   }
 
   .payment-section-container {
@@ -28,22 +30,26 @@ export const PaymentContainer = styled.section`
   }
 
   .payment-section-wrapper {
-    padding: 40px 1%;
+    padding: 40px 15px;
     max-width: 1300px;
     margin: 0 auto;
   }
 
   .payment-section-flex-wrapper {
     display: flex;
+    justify-content: space-between;
+    ${(props) => (props.IsTablet1024 ? 'flex-direction: column; ' : '')}
+
   }
 
   .payment-section-flex-wrapper > div:nth-child(1) {
-    width: 60%;
-    margin-right: 25px;
+    ${(props) => (props.IsTablet1024 ? '' : 'margin-right: 25px;')}
+    width: 100%;
+  -
   }
 
   .payment-section-flex-wrapper > div:nth-child(2) {
-    width: 38%;
+
   }
 
   .payment-info-card {
@@ -57,7 +63,7 @@ export const PaymentContainer = styled.section`
   }
 
   .payment-info-card h3 {
-    font-size: 1.125rem;
+    font-size: 17px;
     position: relative;
     color: #ff7638;
     font-weight: 600;
@@ -207,14 +213,17 @@ export const PaymentContainer = styled.section`
     transition: 0.3s;
   }
 
+\
   .payment-purchase-card {
     background-color: #ffffff;
     padding: 20px;
     position: relative;
-    width: 100%;
+
     border-radius: 8px;
     border: 1px solid #000;
     box-sizing: border-box;
+    ${(props) => (props.IsTablet1024 ? 'width: 100%;' : 'width: 460px;')}
+    ${(props) => (props.IsTablet1024 ? 'margin-top: 20px;' : '')}
   }
 
   .payment-purchase-header {
@@ -235,6 +244,7 @@ export const PaymentContainer = styled.section`
     display: flex;
     align-items: center;
     width: 100%;
+  
   }
 
   .payment-purchase-info h3 {
@@ -262,6 +272,7 @@ export const PaymentContainer = styled.section`
   .payment-purchase-info-detail-wrapper > div:nth-child(1) > span {
     color: #233549;
     opacity: 0.8;
+    font-size: 0.825rem;
   }
 
   .payment-purchase-info-detail-wrapper > div:nth-child(2) > span:nth-child(1) {

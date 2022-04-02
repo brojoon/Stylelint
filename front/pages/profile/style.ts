@@ -118,7 +118,7 @@ export const ProfileContainer = styled.div`
   }
 
   .payment-info-card h3 {
-    font-size: 1.125rem;
+    font-size: 17px;
     position: relative;
     color: #ff7638;
     font-weight: 600;
@@ -173,7 +173,7 @@ export const ProfileContainer = styled.div`
   }
 
   .payment-address-text {
-    margin-top: 20px;
+    margin-top: 15px;
     font-size: 16px;
     line-height: 24px;
     color: #222222;
