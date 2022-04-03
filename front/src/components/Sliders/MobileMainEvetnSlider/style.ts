@@ -1,24 +1,21 @@
 import styled from 'styled-components';
 
-export const MainEventSliderContainer = styled.div<{ PaginationIndex: number }>`
+export const MainEventSliderContainer = styled.div<{
+  PaginationIndex: number;
+  SlideIndex: number;
+  posX: string;
+  IsTransition: boolean;
+}>`
 
   position: relative;
   margin: 0 auto;
   max-width: 1300px;
-  height: 130px;
+  height: 40vw;
 
   margin-top: 15px;
   overflow: hidden;
   margin-bottom: 100px;
-
-  .event-slide-wrapper {
-
-    transform: ${(props) => {
-      return `translateX(${(props.PaginationIndex - 1) * -100}%)`;
-    }};
-    width: 100%;
-    transition: transform cubic-bezier(0.85, 0, 0.15, 1) 1s;
-  }
+  margin: 20px;
 
   .slide-radio {
     display: none;
@@ -67,54 +64,108 @@ export const MainEventSliderContainer = styled.div<{ PaginationIndex: number }>`
   #event-slide-radio-4: checked ~.pagination label:nth-child(4),
   #event-slide-radio-5: checked ~.pagination label:nth-child(5),
   #event-slide-radio-6: checked ~.pagination label:nth-child(6),
-  #event-slide-radio-7: checked ~.pagination label:nth-child(7) {
+  #event-slide-radio-7: checked ~.pagination label:nth-child(7),
+  #event-slide-radio-8: checked ~.pagination label:nth-child(8) {
     opacity: 0.8;
   }
 
-.slide-img-wrapper {
+.event-slide-wrapper { 
+    width: 800%;
+    height: 100%;
+  
+    transform: ${(props) => `translateX(${props.posX}%)`};
+    transition: ${(props) =>
+      props.IsTransition
+        ? 'transform cubic-bezier(0.60, 0.20, 0.30, 1) 0.5s'
+        : ''};
+  }
+
+
+.slide-img-wrapper1 {
     position: absolute;
-    width: 98%;
-    margin: 0 1%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: url(/img/main-event-slideImg/event_1.png) no-repeat;
+    width: 12.5%;
+    background-size: 100% 100%;
+  }
+
+.slide-img-wrapper2 {
+
+  position: absolute;
+  top: 0;
+  left: 12.5%;
+  height: 100%;
+  background: url(/img/main-event-slideImg/event_2.png) no-repeat;
+  width: 12.5%;
+  background-size: 100% 100%;
 
   }
 
-  .slide-img-wrapper img {
-    width: 100%;
+.slide-img-wrapper3 {
 
+  position: absolute;
+  top: 0;
+  left: 25%;
+  height: 100%;
+  background: url(/img/main-event-slideImg/event_3.png) no-repeat;
+  width: 12.5%;
+  background-size: 100% 100%;
   }
 
-.slide-img-wrapper:nth-child(1) {
+.slide-img-wrapper4 {
 
-    left: 0%;
-
+  position: absolute;
+  top: 0;
+  left: 37.5%;
+  height: 100%;
+  background: url(/img/main-event-slideImg/event_4.png) no-repeat;
+  width: 12.5%;
+  background-size: 100% 100%;
   }
 
-.slide-img-wrapper:nth-child(2) {
-    left: 100%;
+.slide-img-wrapper5 {
 
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  background: url(/img/main-event-slideImg/event_5.png) no-repeat;
+  width: 12.5%;
+  background-size: 100% 100%;
   }
 
-.slide-img-wrapper:nth-child(3) {
-    left: 200%;
+.slide-img-wrapper6 {
+
+  position: absolute;
+  top: 0;
+  left: 62.5%;
+  height: 100%;
+  background: url(/img/main-event-slideImg/event_6.png) no-repeat;
+  width: 12.5%;
+  background-size: 100% 100%;
   }
 
-.slide-img-wrapper:nth-child(4) {
-    left: 300%;
+.slide-img-wrapper7 {
+
+  position: absolute;
+  top: 0;
+  left: 75%;
+  height: 100%;
+  background: url(/img/main-event-slideImg/event_7.png) no-repeat;
+  width: 12.5%;
+  background-size: 100% 100%;
   }
 
-.slide-img-wrapper:nth-child(5) {
-    left: 400%;
-  }
+.slide-img-wrapper8 {
 
-.slide-img-wrapper:nth-child(6) {
-    left: 500%;
-  }
-
-.slide-img-wrapper:nth-child(7) {
-    left: 600%;
-  }
-
-.slide-img-wrapper:nth-child(8) {
-    left: 700%;
+  position: absolute;
+  top: 0;
+  left: 87.5%;
+  height: 100%;
+  background: url(/img/main-event-slideImg/event_8.png) no-repeat;
+  width: 12.5%;
+  background-size: 100% 100%;
   }
 `;

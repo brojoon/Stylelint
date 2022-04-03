@@ -3,37 +3,107 @@ import { MainEventSliderContainer } from './style';
 
 const MobileMainEventSlider = () => {
   const [paginationIndex, setPaginationIndex] = useState(1);
-  const [isTransition, setIsTransition] = useState(true);
+  const slideImgCount = 8;
+  const slideImgRatio = 100 / slideImgCount;
+  const [slidePosition, setSlidePosition] = useState(0);
   const [isSlide, setIsSlide] = useState(false);
   const [slideStartX, setSlideStartX] = useState(0);
+  const [isTransition, setIsTransition] = useState(true);
   const [savePosValue, setSavePosValue] = useState(0);
 
-  // const OnMouseDownSlide = useCallback((e) => {
-  //   setIsTransition(false);
-  //   setSlideStartX(e.clientX);
-  //   setIsSlide(true);
-  // }, []);
+  const OnMouseDownSlide = useCallback((e) => {
+    setIsTransition(false);
+    setSlideStartX(e.clientX);
+    setIsSlide(true);
+  }, []);
 
-  // const onMouseMoveSlide = useCallback(
-  //   (e) => {
-  //     if (isSlide) {
-  //       setPaginationIndex(
-  //         ((slideStartX - e.clientX) / window.innerWidth) * paginationIndex -
-  //           savePosValue,
-  //       );
-  //       setSavePosValue((slideStartX - e.clientX) / window.innerWidth);
-  //     }
-  //   },
-  //   [paginationIndex, isSlide, savePosValue],
-  // );
+  const onMouseMoveSlide = useCallback(
+    (e) => {
+      if (isSlide) {
+        setSlidePosition(
+          ((slideStartX - e.clientX) / window.innerWidth) * -slideImgRatio +
+            slidePosition -
+            savePosValue,
+        );
+        setSavePosValue(
+          ((slideStartX - e.clientX) / window.innerWidth) * -slideImgRatio,
+        );
+      }
+    },
+    [slidePosition, isSlide, savePosValue],
+  );
+
+  const onMouseUpSlide = useCallback(async () => {
+    setIsSlide(false);
+    setIsTransition(true);
+    const curPage = Math.floor(slidePosition / slideImgRatio);
+    console.log('curPage: ', curPage);
+    console.log('slidePosition:', slidePosition);
+    if (savePosValue > 2) {
+      if (slidePosition + slideImgRatio >= -5) {
+        setSlidePosition(0);
+        setPaginationIndex(1);
+      } else {
+        setSlidePosition((curPage + 1) * slideImgRatio);
+        setPaginationIndex(curPage * -1);
+      }
+    } else if (savePosValue < -2) {
+      if (slidePosition - slideImgRatio < -87.5) {
+        setSlidePosition(-87.5);
+        setPaginationIndex(slideImgCount);
+      } else {
+        setSlidePosition(curPage * slideImgRatio);
+        setPaginationIndex((curPage - 1) * -1);
+      }
+    } else {
+      savePosValue <= 0
+        ? setSlidePosition((curPage + 1) * slideImgRatio)
+        : setSlidePosition(curPage * slideImgRatio);
+    }
+    setSavePosValue(0);
+  }, [savePosValue, slidePosition]);
+
+  const onTouchDownSlide = useCallback((e) => {
+    setIsTransition(false);
+    setSlideStartX(e.changedTouches[0].clientX);
+    setIsSlide(true);
+  }, []);
+
+  const onTouchMoveSlide = useCallback(
+    (e) => {
+      if (isSlide) {
+        setSlidePosition(
+          ((slideStartX - e.changedTouches[0].clientX) / window.innerWidth) *
+            -slideImgRatio +
+            slidePosition -
+            savePosValue,
+        );
+        setSavePosValue(
+          ((slideStartX - e.changedTouches[0].clientX) / window.innerWidth) *
+            -slideImgRatio,
+        );
+      }
+    },
+    [slidePosition, isSlide, savePosValue],
+  );
+
+  const onTouchUpSlide = useCallback(() => {
+    onMouseUpSlide();
+  }, [onMouseUpSlide]);
 
   const onChangePaginationIndex = useCallback((e) => {
     setPaginationIndex(Number(e.target.id.substr(-1)));
+    setSlidePosition((Number(e.target.id.substr(-1)) - 1) * -slideImgRatio);
     console.log(Number(e.target.id.substr(-1)));
   }, []);
 
   return (
-    <MainEventSliderContainer PaginationIndex={paginationIndex}>
+    <MainEventSliderContainer
+      PaginationIndex={paginationIndex}
+      SlideIndex={paginationIndex}
+      posX={`${slidePosition}`}
+      IsTransition={isTransition}
+    >
       <input
         type="radio"
         name="event-slide-radios"
@@ -91,6 +161,15 @@ const MobileMainEventSlider = () => {
         checked={paginationIndex == 7 ? true : false}
       />
 
+      <input
+        type="radio"
+        name="event-slide-radios"
+        className="slide-radio"
+        onChange={onChangePaginationIndex}
+        id="event-slide-radio-8"
+        checked={paginationIndex == 8 ? true : false}
+      />
+
       <div className="pagination">
         <label htmlFor="event-slide-radio-1"></label>
         <label htmlFor="event-slide-radio-2"></label>
@@ -99,32 +178,25 @@ const MobileMainEventSlider = () => {
         <label htmlFor="event-slide-radio-5"></label>
         <label htmlFor="event-slide-radio-6"></label>
         <label htmlFor="event-slide-radio-7"></label>
+        <label htmlFor="event-slide-radio-8"></label>
       </div>
-      <div className="event-slide-wrapper">
-        <div className="slide-img-wrapper">
-          <img src="/img/main-event-slideImg/event_1.png"></img>
-        </div>
-        <div className="slide-img-wrapper">
-          <img src="/img/main-event-slideImg/event_2.png"></img>
-        </div>
-        <div className="slide-img-wrapper">
-          <img src="/img/main-event-slideImg/event_3.png"></img>
-        </div>
-        <div className="slide-img-wrapper">
-          <img src="/img/main-event-slideImg/event_4.png"></img>
-        </div>
-        <div className="slide-img-wrapper">
-          <img src="/img/main-event-slideImg/event_5.png"></img>
-        </div>
-        <div className="slide-img-wrapper">
-          <img src="/img/main-event-slideImg/event_6.png"></img>
-        </div>
-        <div className="slide-img-wrapper">
-          <img src="/img/main-event-slideImg/event_7.png"></img>
-        </div>
-        <div className="slide-img-wrapper">
-          <img src="/img/main-event-slideImg/event_8.png"></img>
-        </div>
+      <div
+        className="event-slide-wrapper"
+        onMouseMove={onMouseMoveSlide}
+        onMouseUp={onMouseUpSlide}
+        onMouseDown={OnMouseDownSlide}
+        onTouchStart={onTouchDownSlide}
+        onTouchMove={onTouchMoveSlide}
+        onTouchEnd={onTouchUpSlide}
+      >
+        <div className="slide-img-wrapper1"></div>
+        <div className="slide-img-wrapper2"></div>
+        <div className="slide-img-wrapper3"></div>
+        <div className="slide-img-wrapper4"></div>
+        <div className="slide-img-wrapper5"></div>
+        <div className="slide-img-wrapper6"></div>
+        <div className="slide-img-wrapper7"></div>
+        <div className="slide-img-wrapper8"></div>
       </div>
     </MainEventSliderContainer>
   );

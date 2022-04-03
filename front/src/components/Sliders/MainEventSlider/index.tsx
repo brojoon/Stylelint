@@ -2,94 +2,30 @@ import React, { useCallback, useState } from 'react';
 import { MainEventSliderContainer } from './style';
 
 const MainEventSlider = () => {
-  const slideImgCount = 7;
-  const slideImgRatio = 100 / slideImgCount;
   const [paginationIndex, setPaginationIndex] = useState(1);
-  const [slidePosition, setSlidePosition] = useState(-20);
+  const [isTransition, setIsTransition] = useState(true);
   const [isSlide, setIsSlide] = useState(false);
   const [slideStartX, setSlideStartX] = useState(0);
-  const [isTransition, setIsTransition] = useState(true);
   const [savePosValue, setSavePosValue] = useState(0);
 
-  const OnMouseDownSlide = useCallback((e) => {
-    setIsTransition(false);
-    setSlideStartX(e.clientX);
-    setIsSlide(true);
-  }, []);
+  // const OnMouseDownSlide = useCallback((e) => {
+  //   setIsTransition(false);
+  //   setSlideStartX(e.clientX);
+  //   setIsSlide(true);
+  // }, []);
 
-  const onMouseMoveSlide = useCallback(
-    (e) => {
-      if (isSlide) {
-        setSlidePosition(
-          ((slideStartX - e.clientX) / window.innerWidth) * -slideImgRatio +
-            slidePosition -
-            savePosValue,
-        );
-        setSavePosValue(
-          ((slideStartX - e.clientX) / window.innerWidth) * -slideImgRatio,
-        );
-      }
-    },
-    [slidePosition, isSlide, savePosValue],
-  );
-
-  const onMouseUpSlide = useCallback(async () => {
-    setIsSlide(false);
-    setIsTransition(true);
-    const curPage = Math.floor(slidePosition / slideImgRatio);
-    console.log('curPage: ', curPage);
-    console.log('slidePosition:', slidePosition);
-    if (savePosValue > 3) {
-      if (slidePosition + slideImgRatio >= -5) {
-        setSlidePosition(0);
-        setPaginationIndex(1);
-      } else {
-        setSlidePosition((curPage + 1) * slideImgRatio);
-        setPaginationIndex(curPage * -1);
-      }
-    } else if (savePosValue < -3) {
-      if (slidePosition - slideImgRatio < -80) {
-        setSlidePosition(-80);
-        setPaginationIndex(slideImgCount);
-      } else {
-        setSlidePosition(curPage * slideImgRatio);
-        setPaginationIndex((curPage - 1) * -1);
-      }
-    } else {
-      savePosValue <= 0
-        ? setSlidePosition((curPage + 1) * slideImgRatio)
-        : setSlidePosition(curPage * slideImgRatio);
-    }
-    setSavePosValue(0);
-  }, [savePosValue, slidePosition]);
-
-  const onTouchDownSlide = useCallback((e) => {
-    setIsTransition(false);
-    setSlideStartX(e.changedTouches[0].clientX);
-    setIsSlide(true);
-  }, []);
-
-  const onTouchMoveSlide = useCallback(
-    (e) => {
-      if (isSlide) {
-        setSlidePosition(
-          ((slideStartX - e.changedTouches[0].clientX) / window.innerWidth) *
-            -slideImgRatio +
-            slidePosition -
-            savePosValue,
-        );
-        setSavePosValue(
-          ((slideStartX - e.changedTouches[0].clientX) / window.innerWidth) *
-            -slideImgRatio,
-        );
-      }
-    },
-    [slidePosition, isSlide, savePosValue],
-  );
-
-  const onTouchUpSlide = useCallback(() => {
-    onMouseUpSlide();
-  }, [onMouseUpSlide]);
+  // const onMouseMoveSlide = useCallback(
+  //   (e) => {
+  //     if (isSlide) {
+  //       setPaginationIndex(
+  //         ((slideStartX - e.clientX) / window.innerWidth) * paginationIndex -
+  //           savePosValue,
+  //       );
+  //       setSavePosValue((slideStartX - e.clientX) / window.innerWidth);
+  //     }
+  //   },
+  //   [paginationIndex, isSlide, savePosValue],
+  // );
 
   const onChangePaginationIndex = useCallback((e) => {
     setPaginationIndex(Number(e.target.id.substr(-1)));
