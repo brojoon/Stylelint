@@ -18,7 +18,7 @@ export const BasketCounterFetch = createAsyncThunk(
       id: data.id,
       quantity: data.quantity,
     });
-    return response?.data;
+    return 'success';
   },
 );
 

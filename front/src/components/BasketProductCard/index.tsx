@@ -23,6 +23,7 @@ const BasketProductCard: VFC<Props> = ({
   refetch,
 }) => {
   const [productCount, setProductCount] = useState(basketProduct.quantity);
+  const [isCountLoading, setIsCounterLoading] = useState(false);
   const dispatch = useDispatch();
   const isTablet1024 = useIsTablet1024();
 
@@ -51,26 +52,33 @@ const BasketProductCard: VFC<Props> = ({
 
   const onClickProductAddCount = useCallback(
     async (e) => {
-      setProductCount((prev) => prev + 1);
+      setIsCounterLoading(true);
       const data = { id: basketProduct.id, quantity: productCount + 1 };
-      await dispatch(BasketCounterFetch(data));
-      refetch();
+      const res: any = await dispatch(BasketCounterFetch(data));
+      if (res.meta.requestStatus === 'fulfilled') {
+        setProductCount((prev) => prev + 1);
+      }
+      setIsCounterLoading(false);
+      // refetch();
     },
     [productCount, dispatch, BasketCounterFetch],
   );
 
   const onClickProductSubstractCount = useCallback(
     async (e) => {
-      setProductCount((prev) => {
-        if (prev <= 1) {
-          alert('개수가 0개입니다');
-          return 1;
-        }
-        return prev - 1;
-      });
+      if (productCount <= 1) {
+        alert('개수가 0개입니다');
+        return;
+      }
+
+      setIsCounterLoading(true);
       const data = { id: basketProduct.id, quantity: productCount - 1 };
-      await dispatch(BasketCounterFetch(data));
-      refetch();
+      const res: any = await dispatch(BasketCounterFetch(data));
+      if (res.meta.requestStatus === 'fulfilled') {
+        setProductCount((prev) => prev - 1);
+      }
+      setIsCounterLoading(false);
+      // refetch();
     },
     [productCount, dispatch, BasketCounterFetch],
   );
@@ -107,15 +115,17 @@ const BasketProductCard: VFC<Props> = ({
             </div>
 
             <div className="basket-justfy-between-div"></div>
-            <div className="basket-product-count">
-              <button onClick={onClickProductSubstractCount}></button>
-              <input
-                onChange={onChangeProductCount}
-                type="number"
-                value={productCount}
-              />
-              <button onClick={onClickProductAddCount}></button>
-            </div>
+            {!isCountLoading && (
+              <div className="basket-product-count">
+                <button onClick={onClickProductSubstractCount}></button>
+                <input
+                  onChange={onChangeProductCount}
+                  type="number"
+                  value={productCount}
+                />
+                <button onClick={onClickProductAddCount}></button>
+              </div>
+            )}
             <div className="basket-justfy-between-div"></div>
             <div className="basket-product-price">
               <span>

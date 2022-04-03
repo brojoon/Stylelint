@@ -26,6 +26,9 @@ const Basket = () => {
   const { data, isLoading, error, refetch } = useQuery('basketList', () =>
     fetcher(`/api/basket`),
   );
+  const { data: user, refetch: userRefetch } = useQuery('user', () =>
+    fetcher(`api/user/profile`),
+  );
   const router = useRouter();
 
   const isTablet1024 = useIsTablet1024();
@@ -83,26 +86,28 @@ const Basket = () => {
   }, [productCardArr, data, refetch]);
 
   const onClickPurchase = useCallback(async () => {
-    const ret = data.filter((product: any, index: number) => {
-      if (productCardArr[index]) return true;
-      else false;
-    });
-    let ret2 = [];
-    for (let i = 0; i < ret.length; i++) {
-      ret2.push({
-        userId: '1111',
-        product_name: ret[i].product_name,
-        price: ret[i].price,
-        quantity: ret[i].quantity,
-        size: ret[i].size,
-        color: ret[i].color,
-        image: ret[i].image,
-        basket_number: ret[i].id,
-        state: false,
+    refetch().then(async (refetched: any) => {
+      const ret = refetched.data.filter((product: any, index: number) => {
+        if (productCardArr[index]) return true;
+        else false;
       });
-    }
-    await dispatch(PaymentSaveFetch(ret2));
-    router.push(baseFrontUrl + '/payment');
+      let ret2 = [];
+      for (let i = 0; i < ret.length; i++) {
+        ret2.push({
+          userId: user.userId,
+          product_name: ret[i].product_name,
+          price: ret[i].price,
+          quantity: ret[i].quantity,
+          size: ret[i].size,
+          color: ret[i].color,
+          image: ret[i].image,
+          basket_number: ret[i].id,
+          state: false,
+        });
+      }
+      await dispatch(PaymentSaveFetch(ret2));
+      router.push(baseFrontUrl + '/payment');
+    });
   }, [data, productCardArr]);
   return (
     <BasketContainer
@@ -157,7 +162,7 @@ const Basket = () => {
                   {data?.map((product: IBasketProduct, index: number) => {
                     return (
                       <BasketProductCard
-                        key={index}
+                        key={product.id}
                         index={index}
                         refetch={refetch}
                         setProductCardArr={setProductCardArr}
