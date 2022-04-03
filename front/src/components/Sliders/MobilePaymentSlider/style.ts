@@ -1,169 +1,125 @@
 import styled from 'styled-components';
 
-export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
-  width: 100%;
+export const PaymentSliderContainer = styled.div<{
+  SlideIndex: number;
+  posX: string;
+  IsTransition: boolean;
+}>`
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   margin-top: 20px;
   border-radius: 8px;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
+
+  width: 100%;
+
+  padding: 20px;
+
   & > div {
-    padding: 30px;
-    width: 727px;
+    width: 100%;
+    height: 42vw;
+    position: relative;
+    overflow: hidden;
   }
+
+  .slide-container {
+    width: 500%;
+    height: 100%;
+  }
+
+  .slide-container > div {
+    display: flex;
+    height: 100%;
+    transform: ${(props) => `translateX(${props.posX}%)`};
+    transition: ${(props) =>
+      props.IsTransition
+        ? 'transform cubic-bezier(0.60, 0.20, 0.30, 1) 0.5s'
+        : ''};
+  }
+
   & > div > div > h3 {
     border-bottom: 1px solid #333;
     padding-bottom: 20px;
     font-weight: 600;
   }
-  .slide-container {
-    position: relative;
-    height: 265px;
-    overflow: hidden;
-  }
-  .payment-card-config {
-    margin-top: 15px;
-    display: flex;
-    justify-content: end;
-  }
-  .payment-card-config > button {
-    height: 28px;
-    padding: 4px 7px 4px;
-    font-size: 12px;
-    line-height: 16px;
-    color: #2c2c2c;
-    background: #fff;
-    border: 1px solid #bdbdbd;
-    border-radius: 6px;
-  }
-  .slide-container > ul {
-    text-align: left;
-    float: none;
+
+  .pagenation-wrapper {
     position: absolute;
-    inset: 0px auto auto
-      ${(props) => {
-        return props.SlideIndex == 1 ? -179 : 170 - props.SlideIndex * 349;
-      }}px;
-    transition: inset 0.3s;
-    margin: 0px;
-    width: 6288px;
-    height: 100%;
-    z-index: auto;
+    background: rgba(0, 0, 0, 0.3);
+    min-height: 30px;
+    min-width: 50px;
+    border-radius: 3.1rem;
+    width: 12%;
+    height: 11%;
+
+    bottom: 8%;
+    right: 8%;
     display: flex;
+    justify-content: center;
     align-items: center;
-  }
-  .slide-container > ul > li {
-    width: 287px;
-    min-height: 177px;
-    margin: 0 31px;
-    position: relative;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    z-index: 1000;
   }
 
-  .slide-container > ul > li > div > div {
+  .slide-container > div > div:nth-child(1) {
     position: absolute;
-    bottom: 10%;
-    left: 10%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: url(/img/payment-cards/신한_card.png) no-repeat;
+    width: 20%;
+    background-size: 100% 100%;
   }
-  .slide-container > ul > li > div > div > p:nth-child(1) {
-    font-size: 15px;
-    line-height: 15px;
+
+  .slide-container > div > div:nth-child(2) {
+    position: absolute;
+    top: 0;
+    left: 20%;
+    height: 100%;
+    width: 20%;
+    background: url(/img/payment-cards/toss_card.png) no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .slide-container > div > div:nth-child(3) {
+    position: absolute;
+    top: 0;
+    left: 40%;
+    height: 100%;
+    width: 20%;
+    background: url(/img/payment-cards/우리_card.png) no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .slide-container > div > div:nth-child(4) {
+    position: absolute;
+    top: 0;
+    left: 60%;
+    height: 100%;
+    width: 20%;
+    background: url(/img/payment-cards/kakao_card.png) no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .slide-container > div > div:nth-child(5) {
+    position: absolute;
+    top: 0;
+    left: 80%;
+    height: 100%;
+    width: 20%;
+    background: url(/img/payment-cards/sk_card.png) no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .card-text {
+    position: absolute;
+    font-size: 0.9rem;
     font-weight: bold;
     color: #fff;
     text-shadow: 0 1px 1px rgb(0 0 0 / 15%);
-  }
-  .slide-container > ul > li > div > div > p:nth-child(2) {
-    font-size: 14px;
-    color: #fff;
-    text-shadow: 0 1px 1px rgb(0 0 0 / 15%);
-    letter-spacing: 2px;
-  }
-  .slide-container > ul > li:nth-child(2) > div {
-    width: 200px;
-    min-height: 177px;
-    background: url(//pics.gmarket.co.kr/pc/sprite/kr/checkout/sprite__payment-card.png)
-      no-repeat;
-    background-size: cover;
-
-    background-position: 0;
-  }
-  .slide-container > ul > li:nth-child(3) > div {
-    width: 287px;
-    min-height: 177px;
-    background: url(//pics.gmarket.co.kr/pc/sprite/kr/checkout/sprite__payment-card.png)
-      no-repeat;
-    background-size: 1455px auto;
-    background-position: 0px -1092px;
-  }
-  .slide-container > ul > li:nth-child(4) > div {
-    width: 287px;
-    min-height: 177px;
-    background: url(//pics.gmarket.co.kr/pc/sprite/kr/checkout/sprite__payment-card.png)
-      no-repeat;
-    background-size: 1455px auto;
-    background-position: -1168px -1638px;
-  }
-  .slide-container > ul > li:last-child {
-    background-color: white;
-  }
-  .slide-container > ul > li:last-child button {
-    width: 287px;
-    height: 177px;
-    border-radius: 8px;
-    border: solid 1px #000;
-    background: #fff;
-    font-size: 15px;
-    font-weight: 500;
-    color: #000;
-    text-align: center;
-  }
-  .slide-container > ul > li:last-child button:before {
-    overflow: hidden;
-    display: inline-block;
-    background: url(//pics.gmarket.co.kr/pc/sprite/kr/checkout/sprite__checkout.png)
-      no-repeat;
-    background-size: 300px auto;
-    content: '';
-    display: block;
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 12px;
-    background-position: 0 -183px;
-  }
-  .slide-container > button:nth-child(2) {
-    content: '';
-    overflow: hidden;
-    background: url(//pics.gmarket.co.kr/pc/sprite/kr/checkout/sprite__checkout.png)
-      no-repeat;
-    background-position: -163px -92px;
-    background-size: 300px auto;
-    font-size: 0;
-    right: 21%;
-    position: absolute;
-    z-index: 50;
-    top: 50%;
-    transform: translate(50%, -50%);
-    width: 32px;
-    height: 32px;
-  }
-  .slide-container > button:nth-child(3) {
-    content: '';
-    display: ${(props) => {
-      return props.SlideIndex <= 0 ? 'none' : 'inline-block';
-    }};
-    overflow: hidden;
-    background: url(//pics.gmarket.co.kr/pc/sprite/kr/checkout/sprite__checkout.png)
-      no-repeat;
-    background-position: -197px -92px;
-    background-size: 300px auto;
-    transform: translate(50%, -50%);
-    font-size: 0;
-    position: absolute;
-    z-index: 5;
-    top: 50%;
-    width: 32px;
-    height: 32px;
-    left: 20%;
+    bottom: 8%;
+    left: 7%;
   }
 `;

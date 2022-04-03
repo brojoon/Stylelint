@@ -60,13 +60,6 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
     margin: 0 31px;
     position: relative;
   }
-  .slide-container > ul > li:nth-child(1) > div {
-    width: 287px;
-    min-height: 177px;
-    background: url(/img/payment_card.png) no-repeat;
-    background-size: 1455px auto;
-    background-position: 0px -1820px;
-  }
   .slide-container > ul > li > div > div {
     position: absolute;
     bottom: 10%;
@@ -85,12 +78,21 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
     text-shadow: 0 1px 1px rgb(0 0 0 / 15%);
     letter-spacing: 2px;
   }
-  .slide-container > ul > li:nth-child(2) > div {
+
+  .slide-container > ul > li:nth-child(1) > div {
     width: 287px;
     min-height: 177px;
     background: url(/img/payment_card.png) no-repeat;
     background-size: 1455px auto;
     background-position: -1168px 0;
+  }
+
+  .slide-container > ul > li:nth-child(2) > div {
+    width: 287px;
+    min-height: 177px;
+    background: url(/img/payment_card.png) no-repeat;
+    background-size: 1455px auto;
+    background-position: 0px -1820px;
   }
   .slide-container > ul > li:nth-child(3) > div {
     width: 287px;

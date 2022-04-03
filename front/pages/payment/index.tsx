@@ -223,6 +223,7 @@ const Payment = () => {
                       </div>
                     </div>
                   </div>
+
                   {isTablet ? <MobilePaymentSlider /> : <PaymentSlider />}
                 </div>
                 <div>
