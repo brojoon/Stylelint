@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 import { ProductDetailContainer, ProductPurchaseWrapper } from './[code]style';
 
 export interface ISelecedProduct {
@@ -31,6 +32,7 @@ export interface Props {
 
 const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
   const [isProductDibs, setIsProductDibs] = useState(false);
+  const [isDibLoading, setIsDibLoading] = useState(false);
   const [productDescNavIndex, setProductDescNavIndex] = useState('1');
   const [productCount, setProductCount] = useState(1);
   const [selectSize, setSelectSize] = useState('default');
@@ -39,6 +41,7 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
   const [selectedProductArr, setSelectedProductArr] = useState<
     ISelecedProduct[]
   >([]);
+
   const router = useRouter();
   const { type, code } = router.query;
   const {
@@ -98,24 +101,25 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
   }, [code]);
 
   const onClickProductDibs = useCallback(async () => {
+    setIsDibLoading(true);
     if (isProductDibs) {
-      await axios.post('api/user/dibs/delete', {
+      const ret = await axios.post('api/user/dibs/delete', {
         userId: user.userId,
         product_name: data.name,
       });
-      setIsProductDibs(false);
+      if (ret.status === 200) setIsProductDibs(false);
       await dibsRefetch();
       await productDetailInfoRefetch();
     } else {
-      await axios.post('api/user/dibs/save', {
+      const ret = await axios.post('api/user/dibs/save', {
         userId: user.userId,
         product_name: data.name,
       });
-
-      setIsProductDibs(true);
+      if (ret.status === 200) setIsProductDibs(true);
       await dibsRefetch();
       await productDetailInfoRefetch();
     }
+    setIsDibLoading(false);
   }, [isProductDibs, user, data]);
 
   const onClickProductDescNav = useCallback((e) => {
@@ -322,10 +326,17 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
                     <span>{totalPrice.toLocaleString()}원</span>
                   </div>
                   <div className="purchase-button">
-                    <button onClick={onClickProductDibs}>
-                      <span className="product-dibs"></span>
-                      <span className="product-dibs-count">{data?.dibs}</span>
-                    </button>
+                    {isDibLoading ? (
+                      <span className="clip-loader-wrapper">
+                        <ClipLoader color={'#36d7b7'} size={30} />
+                      </span>
+                    ) : (
+                      <button onClick={onClickProductDibs}>
+                        <span className="product-dibs"></span>
+                        <span className="product-dibs-count">{data?.dibs}</span>
+                      </button>
+                    )}
+
                     <button onClick={onClickProductsBasket}>
                       <span>장바구니</span>
                     </button>

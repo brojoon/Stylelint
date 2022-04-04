@@ -6,6 +6,8 @@ import { baseApiUrl } from '@utils/utils/const';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { useDispatch } from 'react-redux';
 import { BasketProductContainer } from './style';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { asleep } from '@utils/utils/asleep';
 
 interface Props {
   index: number;
@@ -58,8 +60,9 @@ const BasketProductCard: VFC<Props> = ({
       if (res.meta.requestStatus === 'fulfilled') {
         setProductCount((prev) => prev + 1);
       }
+      await asleep(100, '성공');
       setIsCounterLoading(false);
-      // refetch();
+      refetch();
     },
     [productCount, dispatch, BasketCounterFetch],
   );
@@ -77,6 +80,7 @@ const BasketProductCard: VFC<Props> = ({
       if (res.meta.requestStatus === 'fulfilled') {
         setProductCount((prev) => prev - 1);
       }
+      await asleep(100, '성공');
       setIsCounterLoading(false);
       // refetch();
     },
@@ -115,17 +119,23 @@ const BasketProductCard: VFC<Props> = ({
             </div>
 
             <div className="basket-justfy-between-div"></div>
-            {!isCountLoading && (
-              <div className="basket-product-count">
-                <button onClick={onClickProductSubstractCount}></button>
-                <input
-                  onChange={onChangeProductCount}
-                  type="number"
-                  value={productCount}
-                />
-                <button onClick={onClickProductAddCount}></button>
-              </div>
-            )}
+
+            <div className="basket-product-count">
+              {isCountLoading ? (
+                <ClipLoader color={'#36d7b7'} size={isTablet1024 ? 21 : 25} />
+              ) : (
+                <>
+                  <button onClick={onClickProductSubstractCount}></button>
+                  <input
+                    onChange={onChangeProductCount}
+                    type="number"
+                    value={productCount}
+                  />
+                  <button onClick={onClickProductAddCount}></button>
+                </>
+              )}
+            </div>
+
             <div className="basket-justfy-between-div"></div>
             <div className="basket-product-price">
               <span>
@@ -143,4 +153,4 @@ const BasketProductCard: VFC<Props> = ({
   );
 };
 
-export default BasketProductCard;
+export default React.memo(BasketProductCard);

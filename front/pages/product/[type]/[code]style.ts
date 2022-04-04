@@ -172,6 +172,14 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
     display: flex;
   }
 
+  & .clip-loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 13.5px 3px;
+    width: 15%;
+  }
+
   & .purchase-button > button:nth-child(1) {
     display: flex;
     flex-direction: column;
@@ -180,7 +188,7 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
     border: 1px solid #dbdbdb;
     border-radius: 5px;
     padding: 4px 3px;
-    width: 12%;
+    width: 15%;
   }
 
   & .purchase-button > button:nth-child(2) {

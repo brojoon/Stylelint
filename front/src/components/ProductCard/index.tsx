@@ -10,6 +10,9 @@ import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
 import { ModalBasketContainer } from '@components/Modals/ModalBasket/style';
 import ModalBasket from '@components/Modals/ModalBasket';
+import { asleep } from '@utils/utils/asleep';
+import { ClipLoader } from 'react-spinners';
+import { useIsTablet1024 } from '@utils/Hooks';
 
 interface Props {
   data: IProducts;
@@ -18,10 +21,13 @@ interface Props {
 
 const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
   const [quickview, setQuickview] = useState(false);
-  const [isProductDibs, setIsProductDibs] = useState(false);
   const [isClickProductImg, setIsClickProductImg] = useState(false);
+  const [isDibLoading, setIsDibLoading] = useState(false);
+  const [isBasketLoading, setIsBasketLoading] = useState(false);
+  const [isProductDibs, setIsProductDibs] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+
   const {
     data: user,
     isLoading,
@@ -41,9 +47,10 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
     }
   }, [dibs, data]);
 
-  const onClickProductBasket = useCallback(() => {
+  const onClickProductBasket = useCallback(async () => {
     if (user) {
-      dispatch(
+      setIsBasketLoading(true);
+      const res: any = await dispatch(
         BasketAddFetch([
           {
             userId: user.userId,
@@ -56,27 +63,30 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
           },
         ]),
       );
-      setIsModalBasket(true);
+      if (res.meta.requestStatus === 'fulfilled') {
+        setIsModalBasket(true);
+      }
+      setIsBasketLoading(false);
     }
   }, [user]);
 
   const onClickProductDibs = useCallback(async () => {
+    setIsDibLoading(true);
     if (isProductDibs) {
-      axios.post('api/user/dibs/delete', {
+      const ret = await axios.post('api/user/dibs/delete', {
         userId: user.userId,
         product_name: data.name,
       });
-      setIsProductDibs(false);
-      dibsRefetch();
+      if (ret.status === 200) setIsProductDibs(false);
     } else {
-      await axios.post('api/user/dibs/save', {
+      const ret = await axios.post('api/user/dibs/save', {
         userId: user.userId,
         product_name: data.name,
       });
-
-      setIsProductDibs(true);
-      dibsRefetch();
+      if (ret.status === 200) setIsProductDibs(true);
+      // dibsRefetch();
     }
+    setIsDibLoading(false);
   }, [isProductDibs, user, data]);
 
   // const onClickProductCardImg = useCallback(() => {
@@ -170,14 +180,24 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
               IsProductDibs={isProductDibs}
               className="flex items-center"
             >
-              <span
-                onClick={onClickProductDibs}
-                className="w-[23px] h-[20px] bg-[position:-45px_-177px] bg-[url('~@../../../public/img/imags.png')] inline-block"
-              ></span>
-              <span
-                onClick={onClickProductBasket}
-                className="ml-[10px] w-[23px] h-[24px] bg-[position:-123px_-174px] bg-[url('~@../../../public/img/imags.png')] inline-block"
-              ></span>
+              {isDibLoading ? (
+                <ClipLoader color={'#36d7b7'} size={20} />
+              ) : (
+                <span
+                  onClick={onClickProductDibs}
+                  className="w-[23px] h-[20px] bg-[position:-45px_-177px] bg-[url('~@../../../public/img/imags.png')] inline-block"
+                ></span>
+              )}
+              {isBasketLoading ? (
+                <span className="ml-[13px]">
+                  <ClipLoader color={'#36d7b7'} size={20} />
+                </span>
+              ) : (
+                <span
+                  onClick={onClickProductBasket}
+                  className="ml-[10px] w-[23px] h-[24px] bg-[position:-123px_-174px] bg-[url('~@../../../public/img/imags.png')] inline-block"
+                ></span>
+              )}
             </ProductCardIconWrapper>
           </div>
         </div>
