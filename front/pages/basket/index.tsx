@@ -1,4 +1,5 @@
 import BasketProductCard from '@components/BasketProductCard';
+import { refetchProductsArr } from '@store/modules/basketProductSelectArr';
 import { BasketRemoveFetch } from '@store/modules/basketRemove';
 import { PaymentSaveFetch } from '@store/modules/paymentSave';
 import { IBasketProduct } from '@typings/db';
@@ -8,7 +9,7 @@ import fetcher from '@utils/utils/fetcher';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BasketContainer } from './style';
 
 interface IDeleteProductsId {
@@ -17,9 +18,9 @@ interface IDeleteProductsId {
 
 const Basket = () => {
   const [isCheckedAll, setIsCheckedAllSelct] = useState(false);
-  const [productCardArr, setProductCardArr] = useState<number[]>(
-    new Array(1).fill(0),
-  );
+  // const [productCardArr, setProductCardArr] = useState<number[]>(
+  //   new Array(1).fill(0),
+  // );
   const [totalPrice, setStateTotalPrice] = useState(0);
   const [totalMany, setTotalMany] = useState(0);
 
@@ -30,12 +31,21 @@ const Basket = () => {
     fetcher(`api/user/profile`),
   );
   const router = useRouter();
-
   const isTablet1024 = useIsTablet1024();
   const isMobile = useIsMobile();
+  const dispatch = useDispatch();
+
+  const { productCardArr } = useSelector((state: any) => ({
+    productCardArr: state.basketProductsSelectArr.productCardArr,
+  }));
+
+  console.log('productCardArr', productCardArr);
 
   useEffect(() => {
-    if (data) setProductCardArr(new Array(data.length).fill(0));
+    if (data) {
+      if (data.length != productCardArr.length)
+        dispatch(refetchProductsArr(new Array(data.length).fill(0)));
+    }
   }, [data]);
 
   useEffect(() => {
@@ -54,16 +64,16 @@ const Basket = () => {
     }
   }, [data, productCardArr]);
 
-  const dispatch = useDispatch();
-
   const onCheckedAllSelect = useCallback(
     (e) => {
       setIsCheckedAllSelct(e.target.checked);
-      setProductCardArr((prev) => {
-        return prev.map((value) => {
-          return e.target.checked ? 1 : 0;
-        });
-      });
+      dispatch(
+        refetchProductsArr(
+          productCardArr?.map((value: number) => {
+            return e.target.checked ? 1 : 0;
+          }),
+        ),
+      );
     },
     [data],
   );
@@ -76,11 +86,13 @@ const Basket = () => {
       }
 
       await dispatch(BasketRemoveFetch(postArr));
-      setProductCardArr((prev) => {
-        return prev.map((value) => {
-          return 0;
-        });
-      });
+      // dispatch(
+      //   refetchProductsArr(
+      //     productCardArr?.((value: number) => {
+      //       return 0;
+      //     }),
+      //   ),
+      // );
       refetch();
     }
   }, [productCardArr, data, refetch]);
@@ -165,8 +177,6 @@ const Basket = () => {
                         key={product.id}
                         index={index}
                         refetch={refetch}
-                        setProductCardArr={setProductCardArr}
-                        productCardArr={productCardArr}
                         basketProduct={product}
                       />
                     );

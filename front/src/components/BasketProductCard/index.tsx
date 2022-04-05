@@ -4,30 +4,29 @@ import { IBasketProduct } from '@typings/db';
 import { useIsTablet1024 } from '@utils/Hooks';
 import { baseApiUrl } from '@utils/utils/const';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BasketProductContainer } from './style';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { asleep } from '@utils/utils/asleep';
+import { refetchProductsArr } from '@store/modules/basketProductSelectArr';
 
 interface Props {
   index: number;
-  setProductCardArr: any;
-  productCardArr: number[];
+  // setProductCardArr: any;
+  // productCardArr: number[];
   basketProduct: IBasketProduct;
   refetch: any;
 }
 
-const BasketProductCard: VFC<Props> = ({
-  index,
-  setProductCardArr,
-  productCardArr,
-  basketProduct,
-  refetch,
-}) => {
+const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
   const [productCount, setProductCount] = useState(basketProduct.quantity);
   const [isCountLoading, setIsCounterLoading] = useState(false);
   const dispatch = useDispatch();
   const isTablet1024 = useIsTablet1024();
+
+  const { productCardArr } = useSelector((state: any) => ({
+    productCardArr: state.basketProductsSelectArr.productCardArr,
+  }));
 
   const onClickProductDelete = useCallback(async () => {
     await dispatch(BasketRemoveFetch([{ id: basketProduct.id }]));
@@ -36,13 +35,13 @@ const BasketProductCard: VFC<Props> = ({
 
   const onClickProductCheck = useCallback(
     (e) => {
-      setProductCardArr((prev: number[]) => {
-        const tmp = [...prev];
+      if (productCardArr) {
+        const tmp = [...productCardArr];
         tmp[index] = e.target.checked ? 1 : 0;
-        return tmp;
-      });
+        dispatch(refetchProductsArr(tmp));
+      }
     },
-    [index],
+    [index, productCardArr],
   );
 
   const onChangeProductCount = useCallback((e) => {
@@ -82,7 +81,7 @@ const BasketProductCard: VFC<Props> = ({
       }
       await asleep(100, '성공');
       setIsCounterLoading(false);
-      // refetch();
+      refetch();
     },
     [productCount, dispatch, BasketCounterFetch],
   );
