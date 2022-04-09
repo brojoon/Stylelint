@@ -1,22 +1,23 @@
 import ProductsGridWrapper from '@components/ProductCardsGridWrapper';
+import { useIsTablet } from '@utils/Hooks';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { SelectedTypeProductsContainer } from './style';
 
 const SelectedTypeProducts = () => {
+  const router: any = useRouter();
+  const isTablet = useIsTablet();
+  const { type } = router.query;
+
   return (
     <SelectedTypeProductsContainer>
       <div className="products-header-wrapper">
         <div>
-          <h3 className="title">BLOUSE</h3>
+          <h3 className="title">{type?.toUpperCase()}</h3>
           <p>Delivery Included / Free Shipping </p>
 
           <ProductsGridWrapper />
         </div>
-      </div>
-      <div className="products-products-wrapper">
-        <ProductsGridWrapper />
-        <ProductsGridWrapper />
-        <ProductsGridWrapper />
       </div>
     </SelectedTypeProductsContainer>
   );

@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 export const SelectedTypeProductsContainer = styled.section`
   .products-header-wrapper {
-    height: 800px;
+    height: 100%;
     background-color: #f5f3e4;
     text-align: center;
+    padding: 30px 0 100px;
   }
 
   .products-header-wrapper > div {
@@ -21,7 +22,7 @@ export const SelectedTypeProductsContainer = styled.section`
   }
 
   .products-header-wrapper > div > p {
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     font-size: 1rem;
     color: #9c9c9c;
     font-weight: 500;

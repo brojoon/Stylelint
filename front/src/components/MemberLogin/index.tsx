@@ -49,7 +49,7 @@ function MemberLogin() {
       <div className="flex justify-between items-center w-[100%] mb-8">
         <label className="flex justify-center items-center cursor-pointer text-sm">
           <input
-            className="cursor-pointer w-[20px] h-[20px]"
+            className="cursor-pointer w-[0.9rem] h-[0.9rem]"
             type="checkbox"
             value="아이디 저장"
           />
