@@ -48,6 +48,7 @@ export class PaymentService {
           'phone_number',
           'receiver',
           'image',
+          'createdAt',
         ],
         where: {
           state: true,
@@ -77,6 +78,7 @@ export class PaymentService {
           address: data.address,
           receiver: data.receiver,
           phone_number: data.phone_number,
+          createdAt: new Date(),
         },
       );
       const result = await this.BasketRepository.delete(data.basket_numbers);

@@ -1,5 +1,6 @@
 import { useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import { baseApiUrl } from '@utils/utils/const';
+import dayjs from 'dayjs';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { useDispatch } from 'react-redux';
 import { OrderHistoryProductContainer } from './style';
@@ -19,7 +20,13 @@ const OrderHistoryCard: VFC<Props> = ({ orderHistoryProduct }) => {
         <li>
           <div className="order-product-content">
             <div className="order-product-info">
-              <h3>{orderHistoryProduct.id}</h3>
+              <h3>
+                {dayjs(orderHistoryProduct.createdAt).year() +
+                  '-' +
+                  (Number(dayjs(orderHistoryProduct.createdAt).month()) + 1) +
+                  '-' +
+                  dayjs(orderHistoryProduct.createdAt).date()}
+              </h3>
               <div>
                 <img src={baseApiUrl + orderHistoryProduct?.image} />
               </div>

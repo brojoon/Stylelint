@@ -68,6 +68,9 @@ export class Payment {
   @Column('char', { name: 'phone_number', length: 30, nullable: true })
   phone_number: string;
 
+  @CreateDateColumn()
+  createdAt: Date;
+
   @IsBoolean()
   @IsNotEmpty()
   @Column('boolean', { name: 'state' })

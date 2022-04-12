@@ -14,6 +14,7 @@ import { baseApiUrl } from '@utils/utils/const';
 import { VFC } from 'react';
 import { useIsMobile, useIsTablet } from '@utils/Hooks';
 import MobileMainEventSlider from '@components/Sliders/MobileMainEvetnSlider';
+import ProductCard2Wrapper from '@components/ProductCard2Wrapper';
 
 interface Props {
   ssrProducstData: any;
@@ -70,8 +71,17 @@ const IndexPage: VFC<Props> = ({ ssrProducstData }) => {
             <a>더보기</a>
           </Link>
         </div>
+        {isTablet ? <MobileMainEventSlider /> : <MainEventSlider />}
+        <div>
+          <h3>이게 꿈이야 생일이야?! 타임세일⏰ </h3>
+        </div>
+        <ProductCard2Wrapper products={data?.slice(20, 25)} />
+        <div className="product-more-btn-last">
+          <Link href="/product/dress">
+            <a>더보기</a>
+          </Link>
+        </div>
       </div>
-      {isTablet ? <MobileMainEventSlider /> : <MainEventSlider />}
     </HomeContainer>
   );
 };

@@ -7,7 +7,7 @@ export const MainEventSliderContainer = styled.div<{ PaginationIndex: number }>`
   max-width: 1300px;
   height: 18vw;
   max-height: 230px;
-  margin-top: 50px;
+  margin-top: 100px;
 
   overflow: hidden;
   margin-bottom: 100px;

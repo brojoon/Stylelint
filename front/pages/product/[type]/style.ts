@@ -4,7 +4,7 @@ export const SelectedTypeProductsContainer = styled.section`
   .products-header-wrapper {
     height: 100%;
     background-color: #f5f3e4;
-    text-align: center;
+
     padding: 30px 0 100px;
   }
 
@@ -18,6 +18,7 @@ export const SelectedTypeProductsContainer = styled.section`
     padding: 30px 0 10px;
     font-size: 1.625rem;
     font-weight: 600;
+    text-align: center;
     letter-spacing: 2px;
   }
 
@@ -26,6 +27,7 @@ export const SelectedTypeProductsContainer = styled.section`
     font-size: 1rem;
     color: #9c9c9c;
     font-weight: 500;
+    text-align: center;
     letter-spacing: 2px;
 
   }

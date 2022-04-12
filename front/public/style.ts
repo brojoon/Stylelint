@@ -21,6 +21,25 @@ export const HomeContainer = styled.section`
     margin: 60px 0 45px;
   }
 
+  .product-more-btn-last {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0 100px;
+  }
+
+  .product-more-btn-last > a {
+    border: 1px solid #cdcdcd;
+    border-radius: 6px;
+    color: #8d8d8d;
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 11px 53px;
+    color: #8d8d8d;
+    font-size: 14px;
+  }
+
   .product-more-btn > a {
     border: 1px solid #cdcdcd;
     border-radius: 6px;

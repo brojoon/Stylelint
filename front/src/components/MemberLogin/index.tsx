@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react';
 import Link from 'next/link';
 import { LoginFetch } from '@store/modules/login';
 import { useDispatch } from 'react-redux';
+import { MemberLoginContainer } from './style';
 
 function MemberLogin() {
   const [userIdInputValue, setUserIdInputValue] = useState('');
@@ -21,7 +22,7 @@ function MemberLogin() {
   const onClickKakaoBtn = useCallback(() => {}, []);
   const onClickGoogleBtn = useCallback(() => {}, []);
   return (
-    <div className="flex flex-col justify-center items-center">
+    <MemberLoginContainer>
       <label className="w-full">
         <span className="text-[1rem]">아이디</span>
         <BasicInput
@@ -31,8 +32,9 @@ function MemberLogin() {
           name="id"
           placeholder="아이디를 입력해 주세요."
           maxLength={20}
-          style="h-[50px] w-full mb-5 outline-neutral-400 border rounded px-3"
+          style="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
         />
+        <p className="error-text">아이디를 입력해주세요.</p>
       </label>
       <label className="w-full">
         <span className="text-[1rem]">비밀번호</span>
@@ -46,6 +48,7 @@ function MemberLogin() {
           style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
         />
       </label>
+      <p className="error-text">비밀번호를 입력해주세요.</p>
       <div className="flex justify-between items-center w-[100%] mb-8">
         <label className="flex justify-center items-center cursor-pointer text-sm">
           <input
@@ -79,7 +82,7 @@ function MemberLogin() {
         style="flex justify-center items-center w-full bg-indigo-50  border rounded text-black py-3 font-semibold before:bg-[url('~@../../../public/img/google-logo.png')] before:bg-cover before:w-[1.875rem] before:h-[1.875rem] before:inline-block"
       />
       <p className="font-medium text-[#8E929F] mt-10">© StyleLint Corp.</p>
-    </div>
+    </MemberLoginContainer>
   );
 }
 

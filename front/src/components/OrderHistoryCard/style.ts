@@ -24,15 +24,20 @@ export const OrderHistoryProductContainer = styled.section<{
   .order-product-info {
     margin: 0 10px;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     ${(props) => (props.IsTable1024 ? 'width: 100%;' : '')}
     ${(props) => (props.IsTable1024 ? 'margin-bottom: 10px' : '')}
   }
 
   .order-product-info h3 {
-    margin-right: 20px;
-    font-size: 18px;
+    font-size: ${(props) => (props.IsTable1024 ? '16px' : '14px')};
+    color: #444;
     font-weight: 600;
+
+    margin-bottom: ${(props) => (props.IsTable1024 ? '8px' : '1px')};
+    white-space: nowrap;
   }
 
   .order-product-info > div > img {

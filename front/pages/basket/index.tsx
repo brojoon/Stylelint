@@ -46,7 +46,7 @@ const Basket = () => {
       if (data.length != productCardArr.length)
         dispatch(refetchProductsArr(new Array(data.length).fill(0)));
     }
-  }, [data]);
+  }, [data, productCardArr]);
 
   useEffect(() => {
     if (data) {
@@ -75,7 +75,7 @@ const Basket = () => {
         ),
       );
     },
-    [data],
+    [data, productCardArr],
   );
 
   const onClickProductDelete = useCallback(async () => {
