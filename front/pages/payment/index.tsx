@@ -31,6 +31,9 @@ const Payment = () => {
   const [totaLQuantity, setTotaLQuantity] = useState(0);
   const [postName, setPostName] = useState('');
   const [postPhoneNumber, setPostPhoneNumber] = useState('');
+  const [nameErrorText, setNameErrorText] = useState('');
+  const [phoneNumberErrorText, setPhoneNumberErrorText] = useState('');
+  const [addressErrorText, setAddressErrorText] = useState('');
 
   const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
   const { data, isLoading, error } = useQuery('paymentList', () =>
@@ -68,9 +71,13 @@ const Payment = () => {
     }
   }, [data]);
 
-  const onChangeName = useCallback((e) => {
-    setPostName(e.target.value);
-  }, []);
+  const onChangeName = useCallback(
+    (e) => {
+      setPostName(e.target.value);
+      if (nameErrorText) setNameErrorText('');
+    },
+    [nameErrorText],
+  );
 
   const onChangePhoneNumber = useCallback((e) => {
     console.log(
@@ -105,6 +112,10 @@ const Payment = () => {
   }, []);
 
   const onClickPurchase = useCallback(() => {
+    if (!postName) {
+      setNameErrorText('이름을 입력해주세요');
+      return;
+    }
     if (data && addressSubInputValue && postName && postPhoneNumber) {
       const post: IPostType = {
         address: addressInputValue + '/' + addressSubInputValue,
@@ -173,6 +184,7 @@ const Payment = () => {
                           onChange={onChangeName}
                           value={postName}
                           placeholder="이름"
+                          maxLength={15}
                         />
                         <input
                           type="text"
@@ -181,6 +193,9 @@ const Payment = () => {
                           value={postPhoneNumber}
                           placeholder="연락처"
                         />
+                        {nameErrorText && (
+                          <p className="error-text">{nameErrorText}</p>
+                        )}
                       </div>
                       <div className="payment-address-text">
                         <input type="text" disabled value={addressInputValue} />
@@ -189,6 +204,7 @@ const Payment = () => {
                           onChange={onChangeSubInput}
                           value={addressSubInputValue}
                           placeholder="상세주소"
+                          maxLength={50}
                         />
                       </div>
                       <div className="option-container">

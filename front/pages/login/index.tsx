@@ -1,5 +1,4 @@
 import MemberLogin from '@components/MemberLogin';
-import NonMemberOrder from '@components/NonMemberOrder';
 import React from 'react';
 
 import cookies from 'next-cookies';

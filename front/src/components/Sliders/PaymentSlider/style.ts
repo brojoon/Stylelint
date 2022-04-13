@@ -143,6 +143,9 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
   .slide-container > button:nth-child(2) {
     content: '';
     overflow: hidden;
+    display: ${(props) => {
+      return props.SlideIndex >= 4 ? 'none' : 'inline-block';
+    }};
     background: url(/img/sprite__checkout.png) no-repeat;
     background-position: -163px -92px;
     background-size: 300px auto;

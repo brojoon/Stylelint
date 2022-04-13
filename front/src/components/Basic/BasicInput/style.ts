@@ -1,18 +1,12 @@
 import styled from 'styled-components';
 
-export const MemberLoginContainer = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items; cetner;
-  
+export const InputContainer = styled.section`
   .error-text {
-   color: #F45452;
-   font-size: 12px;
-   display: flex;
-   align-items: center;
-   margin-bottom: 3px;
-
+    color: #f45452;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
   }
 
   .error-text::before {

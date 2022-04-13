@@ -63,12 +63,11 @@ const PaymentSlider = () => {
                 </div>
               </div>
             </li>
-
-            <li>
+            {/* <li>
               <div>
                 <button>카드 등록</button>
               </div>
-            </li>
+            </li> */}
           </ul>
           <button onClick={onClickNext}></button>
           <button onClick={onClickPrev}></button>
