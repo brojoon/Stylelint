@@ -242,4 +242,22 @@ export const ProfileContainer = styled.div`
     color: #256feb;
     border: 1px solid #256feb;
   }
+
+  .error-text {
+    color: #f45452;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
+  }
+
+  .error-text::before {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 4px;
+    background: url(/img/icon_error.png) center center no-repeat;
+    background-size: 100% auto;
+    display: inline-block;
+    content: '';
+  }
 `;

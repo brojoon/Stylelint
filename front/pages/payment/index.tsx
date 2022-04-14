@@ -32,7 +32,6 @@ const Payment = () => {
   const [postName, setPostName] = useState('');
   const [postPhoneNumber, setPostPhoneNumber] = useState('');
   const [nameErrorText, setNameErrorText] = useState('');
-  const [phoneNumberErrorText, setPhoneNumberErrorText] = useState('');
   const [addressErrorText, setAddressErrorText] = useState('');
 
   const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
@@ -79,32 +78,37 @@ const Payment = () => {
     [nameErrorText],
   );
 
-  const onChangePhoneNumber = useCallback((e) => {
-    console.log(
-      e.target.value
-        .replace(/[^0-9]/g, '')
-        .replace(
-          /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
-          '$1-$2-$3',
-        )
-        .replace('--', '-'),
-    );
-    setPostPhoneNumber(
-      e.target.value
-        .replace(/[^0-9]/g, '')
-        .replace(
-          /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
-          '$1-$2-$3',
-        )
-        .replace('--', '-'),
-    );
-  }, []);
+  const onChangePhoneNumber = useCallback(
+    (e) => {
+      console.log(
+        e.target.value
+          .replace(/[^0-9]/g, '')
+          .replace(
+            /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+            '$1-$2-$3',
+          )
+          .replace('--', '-'),
+      );
+      if (nameErrorText) setNameErrorText('');
+      setPostPhoneNumber(
+        e.target.value
+          .replace(/[^0-9]/g, '')
+          .replace(
+            /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
+            '$1-$2-$3',
+          )
+          .replace('--', '-'),
+      );
+    },
+    [nameErrorText],
+  );
 
   const onChangeSubInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setAddressSubInputValue(e.target.value);
+      if (addressErrorText) setAddressErrorText('');
     },
-    [],
+    [addressErrorText],
   );
 
   const onClickChangeAddress = useCallback(() => {
@@ -114,6 +118,24 @@ const Payment = () => {
   const onClickPurchase = useCallback(() => {
     if (!postName) {
       setNameErrorText('이름을 입력해주세요');
+      return;
+    }
+    if (!postPhoneNumber) {
+      setNameErrorText('연락처를 입력해주세요');
+      return;
+    }
+
+    if (
+      postPhoneNumber.length !== 13 ||
+      postPhoneNumber[3] !== '-' ||
+      postPhoneNumber[8] !== '-'
+    ) {
+      setNameErrorText('연락처를 올바르게 입력해주세요');
+      return;
+    }
+
+    if (addressInputValue == '주소' || !addressSubInputValue) {
+      setAddressErrorText('주소를 입력해주세요');
       return;
     }
     if (data && addressSubInputValue && postName && postPhoneNumber) {
@@ -157,6 +179,7 @@ const Payment = () => {
       {isPostCode && (
         <Postcode
           setAddressInputValue={setAddressInputValue}
+          setAddressErrorText={setAddressErrorText}
           setIsPostCode={setIsPostCode}
         />
       )}
@@ -206,6 +229,9 @@ const Payment = () => {
                           placeholder="상세주소"
                           maxLength={50}
                         />
+                        {addressErrorText && (
+                          <p className="error-text">{addressErrorText}</p>
+                        )}
                       </div>
                       <div className="option-container">
                         <select className="option-post" name="요청사항">

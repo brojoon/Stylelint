@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react';
 import { SignupContainer } from './style';
 import { useDispatch } from 'react-redux';
 import { SignupFetch } from '@store/modules/signup';
+import isPassword from '@utils/utils/regexPassword';
 
 interface signupRequest {
   userId: string;
@@ -41,6 +42,14 @@ const signup = () => {
       setPasswordCheckErrorText('비밀번호가 일치하지 않습니다.');
       return;
     }
+
+    if (!isPassword(inputPassword)) {
+      setPasswordCheckErrorText(
+        '8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합',
+      );
+      return;
+    }
+
     if (!inputEmailHead) {
       setEmailErrorText('이메일을 입력 해주세요');
       return;
@@ -99,12 +108,12 @@ const signup = () => {
               inputValue={inputIdValue}
               type="text"
               name="id"
-              placeholder="영문 혹은 영문+숫자, 4~15자."
+              placeholder="아이디를 입력해주세요"
               maxLength={15}
               style="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
             />
           </label>
-          <label className="mb-2.5">
+          <label>
             <span className="text-[1rem]">비밀번호</span>
             <BasicInput
               setInputValue={setInputPassword}
@@ -113,8 +122,8 @@ const signup = () => {
               inputValue={inputPassword}
               type="password"
               name="password"
-              placeholder="영어, 숫자, 특수문자 중 2가지 이상 10~20자"
-              maxLength={20}
+              placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+              maxLength={16}
               style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
             />
           </label>
@@ -126,7 +135,7 @@ const signup = () => {
             type="password"
             name="password"
             placeholder="비밀번호 확인"
-            maxLength={20}
+            maxLength={16}
             style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
           />
           <label>
@@ -156,7 +165,7 @@ const signup = () => {
           </label>
           <div className="option-container">
             <select
-              className="border rounded outline-neutral-400 mt-5 h-[50px] option-email-sub"
+              className="border rounded outline-neutral-400 h-[50px] option-email-sub"
               name="email"
               onChange={onChangeEmailSelect}
             >

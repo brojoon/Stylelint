@@ -5,10 +5,15 @@ import { DaumPostcodeContainer } from './style';
 
 interface Props {
   setAddressInputValue: any;
+  setAddressErrorText: any;
   setIsPostCode: any;
 }
 
-const Postcode: VFC<Props> = ({ setAddressInputValue, setIsPostCode }) => {
+const Postcode: VFC<Props> = ({
+  setAddressInputValue,
+  setIsPostCode,
+  setAddressErrorText,
+}) => {
   const onClickPostCodeModal = useCallback(() => {
     setIsPostCode(false);
   }, []);
@@ -29,6 +34,7 @@ const Postcode: VFC<Props> = ({ setAddressInputValue, setIsPostCode }) => {
 
     setAddressInputValue(fullAddress); // e.g. '서울 성동구 왕십리로2길 20 (성수동1가)'
     setIsPostCode(false);
+    setAddressErrorText('');
   };
 
   const isTablet1024 = useIsTablet1024();

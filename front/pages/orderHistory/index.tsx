@@ -1,6 +1,6 @@
 import OrderHistoryCard from '@components/OrderHistoryCard';
 import fetcher from '@utils/utils/fetcher';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { OrderHistoryContainer } from './style';
 
@@ -8,7 +8,14 @@ const OrderHistory = () => {
   const { data, isLoading, error, refetch } = useQuery('paymentList', () =>
     fetcher(`/api/payment/done`),
   );
-  console.log('done', data);
+
+  // const [count, setcount] = useState(0);
+
+  // const onClickBtn = useCallback(() => {
+  //   setcount((p) => p + 1);
+  //   console.log(count);
+  // }, [count]);
+
   return (
     <OrderHistoryContainer>
       {data?.length > 0 ? (
