@@ -6,9 +6,9 @@ import PaymentSlider from '@components/Sliders/PaymentSlider';
 import fetcher from '@utils/utils/fetcher';
 import { useQuery } from 'react-query';
 import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PaymentDoneUpdateFetch } from '@store/modules/paymentDoneUpdate';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { PaymentRecentSaveFetch } from '@store/modules/paymentRecentSave';
 import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import MobilePaymentSlider from '@components/Sliders/MobilePaymentSlider';
@@ -56,6 +56,12 @@ const Payment = () => {
       if (user?.phone_number) setPostPhoneNumber(user.phone_number);
     }
   }, [user]);
+
+  const isLogin = useSelector((state: any) => state.login.token);
+
+  useEffect(() => {
+    if (!isLogin) Router.push('/');
+  }, [isLogin]);
 
   useEffect(() => {
     if (data) {

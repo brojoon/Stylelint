@@ -1,8 +1,10 @@
 import { useIsMobile } from '@utils/Hooks';
 import fetcher from '@utils/utils/fetcher';
 import Link from 'next/link';
-import React from 'react';
+import Router from 'next/router';
+import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
 import { ResultContainer } from './style';
 
 const Result = () => {
@@ -11,6 +13,12 @@ const Result = () => {
   );
 
   const isMobile = useIsMobile();
+
+  const isLogin = useSelector((state: any) => state.login.token);
+
+  useEffect(() => {
+    if (!isLogin) Router.push('/');
+  }, [isLogin]);
 
   return (
     <ResultContainer IsMobile={isMobile}>

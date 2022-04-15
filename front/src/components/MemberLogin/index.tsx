@@ -72,7 +72,7 @@ function MemberLogin() {
             name="password"
             placeholder="비밀번호를 입력해 주세요."
             maxLength={16}
-            style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+            style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border"
           />
         </label>
 

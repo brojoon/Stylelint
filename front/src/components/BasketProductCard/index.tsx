@@ -45,19 +45,21 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
   );
 
   const onChangeProductCount = useCallback((e) => {
-    if (e.target.value < 1) {
-      alert('주문 가능한 최소 수량은 1개 입니다.');
-      return;
-    }
+    setProductCount(e.target.value);
+    console.log('count: ', e.target.value);
   }, []);
 
   const onClickProductAddCount = useCallback(
     async (e) => {
+      if (productCount >= 99) {
+        alert('99개를 초과할수 없습니다.');
+        return;
+      }
       setIsCounterLoading(true);
-      const data = { id: basketProduct.id, quantity: productCount + 1 };
+      const data = { id: basketProduct.id, quantity: +productCount + 1 };
       const res: any = await dispatch(BasketCounterFetch(data));
       if (res.meta.requestStatus === 'fulfilled') {
-        setProductCount((prev) => prev + 1);
+        setProductCount((prev) => +prev + 1);
       }
       await asleep(100, '성공');
       setIsCounterLoading(false);
@@ -69,15 +71,15 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
   const onClickProductSubstractCount = useCallback(
     async (e) => {
       if (productCount <= 1) {
-        alert('개수가 0개입니다');
+        alert('1개 미만이 될수 없습니다.');
         return;
       }
 
       setIsCounterLoading(true);
-      const data = { id: basketProduct.id, quantity: productCount - 1 };
+      const data = { id: basketProduct.id, quantity: +productCount - 1 };
       const res: any = await dispatch(BasketCounterFetch(data));
       if (res.meta.requestStatus === 'fulfilled') {
-        setProductCount((prev) => prev - 1);
+        setProductCount((prev) => +prev - 1);
       }
       await asleep(100, '성공');
       setIsCounterLoading(false);
@@ -86,6 +88,43 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
     [productCount, dispatch, BasketCounterFetch],
   );
 
+  const onFocustOut = useCallback(
+    async (e) => {
+      if (e.target.value > 99) {
+        alert('99개를 초과할수 없습니다.');
+        setIsCounterLoading(true);
+        const data = { id: basketProduct.id, quantity: 99 };
+        const res: any = await dispatch(BasketCounterFetch(data));
+        setProductCount(99);
+        await asleep(100, '성공');
+        setIsCounterLoading(false);
+        refetch();
+      } else if (e.target.value < 1) {
+        alert('1개 미만이 될수 없습니다.');
+        setIsCounterLoading(true);
+        const data = { id: basketProduct.id, quantity: 1 };
+        const res: any = await dispatch(BasketCounterFetch(data));
+        setProductCount(1);
+        await asleep(100, '성공');
+        setIsCounterLoading(false);
+        refetch();
+      } else if (e.target.value[0] == 0) {
+        alert('올바른 값을 입력해주세요');
+        setProductCount(1);
+      } else {
+        setIsCounterLoading(true);
+        const data = { id: basketProduct.id, quantity: e.target.value };
+        const res: any = await dispatch(BasketCounterFetch(data));
+        if (res.meta.requestStatus === 'fulfilled') {
+          setProductCount(e.target.value);
+        }
+        await asleep(100, '성공');
+        setIsCounterLoading(false);
+        refetch();
+      }
+    },
+    [productCount, dispatch, BasketCounterFetch],
+  );
   return (
     <BasketProductContainer
       IsChecked={productCardArr[index] ? true : false}
@@ -129,6 +168,7 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
                     onChange={onChangeProductCount}
                     type="number"
                     value={productCount}
+                    onBlur={onFocustOut}
                   />
                   <button onClick={onClickProductAddCount}></button>
                 </>

@@ -1,9 +1,19 @@
 import MemberLogin from '@components/MemberLogin';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import cookies from 'next-cookies';
+import Router from 'next/router';
+import fetcher from '@utils/utils/fetcher';
+import { useQuery } from 'react-query';
 
 function Login() {
+  const { data: user, refetch: userRefetch } = useQuery('user', () =>
+    fetcher(`api/user/profile`),
+  );
+  useEffect(() => {
+    if (user) Router.push('/');
+  }, [user]);
+
   return (
     <div className="flex flex-nowrap justify-center py-10 bg-[#f1f1f1]">
       <div className="flex flex-col items-center border-[#eceef2] border rounded-[4px] px-10 py-12 w-[400px] bg-[#ffffff]">

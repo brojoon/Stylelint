@@ -3,9 +3,10 @@ import Postcode from '@components/Modals/PostcodeModal';
 import { UserInfoUpdateFetch } from '@store/modules/userInfoUpdate';
 import fetcher from '@utils/utils/fetcher';
 import isPassword from '@utils/utils/regexPassword';
+import Router from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ProfileContainer } from './style';
 
 const Profile = () => {
@@ -27,6 +28,12 @@ const Profile = () => {
 
   const dispatch = useDispatch();
   console.log('user', user);
+
+  const isLogin = useSelector((state: any) => state.login.token);
+
+  useEffect(() => {
+    if (!isLogin) Router.push('/');
+  }, [isLogin]);
 
   useEffect(() => {
     if (user) {
@@ -155,7 +162,8 @@ const Profile = () => {
     } else {
       addressInput = addressInputValue + '/' + addressSubInputValue;
     }
-
+    console.log('addressInput!!', addressInput);
+    console.log('inputPhoneNumber!!', inputPhoneNumber);
     dispatch(
       UserInfoUpdateFetch({
         userId: user.userId,
@@ -269,7 +277,7 @@ const Profile = () => {
 
             <div className="option-container">
               <select
-                className="border rounded outline-neutral-400 mt-1.5 h-[50px] option-email-sub"
+                className="border rounded outline-neutral-400 h-[50px] option-email-sub"
                 name="email"
                 onChange={onChangeEmailSelect}
               >

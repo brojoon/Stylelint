@@ -2,7 +2,7 @@ import { IProducts } from '@typings/db';
 import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { ProductCardContainer, ProductCardIconWrapper } from './style';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { BasketAddFetch } from '@store/modules/basketAdd';
 import { useQuery } from 'react-query';
@@ -48,7 +48,9 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
   }, [dibs, data]);
 
   const onClickProductBasket = useCallback(async () => {
-    if (user) {
+    if (!user) {
+      Router.push('/login');
+    } else {
       setIsBasketLoading(true);
       const res: any = await dispatch(
         BasketAddFetch([
@@ -71,6 +73,10 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
   }, [user]);
 
   const onClickProductDibs = useCallback(async () => {
+    if (!user) {
+      Router.push('/login');
+      return;
+    }
     setIsDibLoading(true);
     if (isProductDibs) {
       const ret = await axios.post('api/user/dibs/delete', {

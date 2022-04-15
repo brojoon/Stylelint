@@ -6,7 +6,7 @@ import { IBasketProduct } from '@typings/db';
 import { useIsMobile, useIsTablet1024 } from '@utils/Hooks';
 import { baseFrontUrl } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
@@ -40,6 +40,12 @@ const Basket = () => {
   }));
 
   console.log('productCardArr', productCardArr);
+
+  const isLogin = useSelector((state: any) => state.login.token);
+
+  useEffect(() => {
+    if (!isLogin) Router.push('/');
+  }, [isLogin]);
 
   useEffect(() => {
     if (data) {

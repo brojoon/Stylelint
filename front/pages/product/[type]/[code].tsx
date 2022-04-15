@@ -8,7 +8,7 @@ import { baseApiUrl, baseFrontUrl, days, months } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
@@ -101,6 +101,10 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
   }, [code]);
 
   const onClickProductDibs = useCallback(async () => {
+    if (!user) {
+      Router.push('/login');
+      return;
+    }
     setIsDibLoading(true);
     if (isProductDibs) {
       const ret = await axios.post('api/user/dibs/delete', {
@@ -156,11 +160,11 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
   }, []);
 
   const onClickSelectBtn = useCallback(() => {
-    if (selectColor && selectSize && productCount >= 1 && user) {
+    if (selectColor && selectSize && productCount >= 1) {
       setSelectedProductArr((prev) =>
         prev.concat([
           {
-            userId: user.userId,
+            userId: user?.userId,
             product_name: data.name,
             price: data.price,
             quantity: productCount,
@@ -175,9 +179,13 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
     setSelectColor('default');
     setSelectSize('default');
     setProductCount(1);
-  }, [selectColor, selectSize, productCount, data, user]);
+  }, [selectColor, selectSize, productCount, data]);
 
   const onClickProductsBasket = useCallback(async () => {
+    if (!user) {
+      Router.push('/login');
+      return;
+    }
     if (selectedProductArr) {
       for (let i = 0; i < selectedProductArr.length; i++) {
         await dispatch(
@@ -199,12 +207,16 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
   }, [selectedProductArr, user, BasketAddFetch]);
 
   const onClickPurchase = useCallback(async () => {
+    if (!user) {
+      Router.push('/login');
+      return;
+    }
     if (selectedProductArr) {
       await dispatch(PaymentSaveFetch(selectedProductArr));
 
       router.push(baseFrontUrl + '/payment');
     }
-  }, [selectedProductArr, baseFrontUrl, dispatch, PaymentSaveFetch]);
+  }, [selectedProductArr, baseFrontUrl, dispatch, user, PaymentSaveFetch]);
 
   return (
     <>

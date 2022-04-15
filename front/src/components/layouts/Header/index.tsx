@@ -18,6 +18,7 @@ const Header = () => {
   const isMobile = useIsMobile();
 
   const onClickMenuBtn = useCallback(() => {
+    alert('hi');
     setIsMenuActive((prev) => !prev);
   }, []);
 
@@ -62,7 +63,7 @@ const Header = () => {
                   )}
                 </li>
                 <li>
-                  <Link href="/profile">
+                  <Link href={isLogin ? '/profile' : '/login'}>
                     <div>
                       <img width="26px" height="26px" src="/img/profile.svg" />
                     </div>
@@ -96,7 +97,7 @@ const Header = () => {
                   )}
                 </li>
                 <li>
-                  <Link href="/basket">
+                  <Link href={isLogin ? '/basket' : '/login'}>
                     <div>
                       <img width="26px" height="26px" src="/img/cart.svg" />
                     </div>

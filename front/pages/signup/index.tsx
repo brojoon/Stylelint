@@ -1,10 +1,13 @@
 import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { SignupContainer } from './style';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SignupFetch } from '@store/modules/signup';
 import isPassword from '@utils/utils/regexPassword';
+import { useQuery } from 'react-query';
+import fetcher from '@utils/utils/fetcher';
+import Router from 'next/router';
 
 interface signupRequest {
   userId: string;
@@ -22,8 +25,20 @@ const signup = () => {
   const [passwordErrorText, setPasswordErrorText] = useState('');
   const [passwordCheckErrorText, setPasswordCheckErrorText] = useState('');
   const [emailErrorText, setEmailErrorText] = useState('');
-
+  const { data: user, refetch: userRefetch } = useQuery('user', () =>
+    fetcher(`api/user/profile`),
+  );
   const dispatch = useDispatch();
+
+  // const isLogin = useSelector((state: any) => state.login.token);
+
+  // useEffect(() => {
+  //   if (!isLogin) Router.push('/');
+  // }, [isLogin]);
+
+  useEffect(() => {
+    if (user) Router.push('/');
+  }, [user]);
 
   const onSubmitSinup = useCallback(() => {
     if (!inputIdValue) {
