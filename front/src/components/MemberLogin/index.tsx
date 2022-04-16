@@ -34,6 +34,21 @@ function MemberLogin() {
     );
     setIsModalNotice(true);
   }, [userIdInputValue, userPasswordInputValue]);
+
+  const onChangePassword = useCallback(
+    (e) => {
+      setUserPasswordInputValue(e.target.value);
+      if (passwordErrorText) setPasswordErrorText('');
+    },
+    [passwordErrorText],
+  );
+
+  const onKeyUpSubmit = useCallback(
+    (e) => {
+      if (e.keyCode == 13) onSubmitLogin();
+    },
+    [onSubmitLogin],
+  );
   const onClickKakaoBtn = useCallback(() => {}, []);
   const onClickGoogleBtn = useCallback(() => {}, []);
   return (
@@ -63,17 +78,19 @@ function MemberLogin() {
         </label>
         <label className="w-full">
           <span className="text-[1rem]">비밀번호</span>
-          <BasicInput
-            setInputValue={setUserPasswordInputValue}
-            errorText={passwordErrorText}
-            setErrorText={setPasswordErrorText}
-            inputValue={userPasswordInputValue}
+          <input
+            onChange={onChangePassword}
+            value={userPasswordInputValue}
+            onKeyUp={onKeyUpSubmit}
             type="password"
             name="password"
             placeholder="비밀번호를 입력해 주세요."
             maxLength={16}
-            style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border"
+            className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border"
           />
+          {passwordErrorText && (
+            <p className="error-text">{passwordErrorText}</p>
+          )}
         </label>
 
         <div className="flex justify-between items-center w-[100%] mb-8">

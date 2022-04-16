@@ -30,7 +30,6 @@ const loginSlice = createSlice({
   reducers: {
     removeToken: (state) => {
       state.token = '';
-      Router.push('/login');
     },
   },
   extraReducers: (builder) => {
@@ -40,8 +39,6 @@ const loginSlice = createSlice({
     builder.addCase(LoginFetch.fulfilled, (state, action) => {
       state.status = 'success';
       state.token = action.payload;
-      console.log(state.token);
-
       Router.push('/');
     });
     builder.addCase(LoginFetch.rejected, (state, action) => {

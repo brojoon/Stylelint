@@ -1,5 +1,5 @@
 import HamburgerMenu from '@components/HamburgerMenu';
-import { useIsMobile, useScroll } from '@utils/Hooks';
+import { useIsMobile, useIsTablet1024, useScroll } from '@utils/Hooks';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { MainHeader, BackgroundHeader, Banner } from './style';
@@ -9,22 +9,75 @@ import { removeToken } from '@store/modules/login';
 import { useAppDispatch } from '@store/index';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
+import Router from 'next/router';
 
 const Header = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
+  const [isMobileProfileBar, setIsMobileProfileBar] = useState(false);
   const { scrollY } = useScroll();
   const dispatch = useDispatch();
   const isLogin = useSelector((state: any) => state.login.token);
   const isMobile = useIsMobile();
+  const isTablet1024 = useIsTablet1024();
+
+  useEffect(() => {
+    if (!isTablet1024) setIsMobileProfileBar(false);
+  }, [isTablet1024]);
 
   const onClickMenuBtn = useCallback(() => {
-    alert('hi');
     setIsMenuActive((prev) => !prev);
   }, []);
 
+  const onClickProfile = useCallback(() => {
+    if (isTablet1024) {
+      setIsMobileProfileBar((prev) => !prev);
+      return;
+    }
+
+    if (isLogin) {
+      Router.push('/profile');
+    } else {
+      Router.push('/login');
+    }
+  }, [isTablet1024, isLogin, isMobileProfileBar]);
+
+  const onClickSubProfile = useCallback(() => {
+    if (isTablet1024) {
+      setIsMobileProfileBar(false);
+    }
+    if (isLogin) {
+      Router.push('/profile');
+    } else {
+      Router.push('/login');
+    }
+  }, [isTablet1024, isLogin]);
+
+  const onClickLoginBtn = useCallback(() => {
+    if (isTablet1024) {
+      setIsMobileProfileBar(false);
+    }
+    Router.push('/login');
+  }, [isTablet1024, isLogin]);
+
+  const onClickSignup = useCallback(() => {
+    if (isTablet1024) {
+      setIsMobileProfileBar(false);
+    }
+    Router.push('/signup');
+  }, [isTablet1024]);
+
+  const onClickOrderHistory = useCallback(() => {
+    if (isTablet1024) {
+      setIsMobileProfileBar(false);
+    }
+    Router.push('/orderHistory');
+  }, [isTablet1024]);
+
   const onClickLogout = useCallback(() => {
     dispatch(LogoutFetch());
+    setIsMobileProfileBar(false);
   }, [dispatch, LogoutFetch, removeToken, useQuery]);
+
   return (
     <>
       <Banner>
@@ -33,7 +86,12 @@ const Header = () => {
         </span>
       </Banner>
       <BackgroundHeader />
-      <MainHeader IsScrollTop={scrollY} IsMobile={isMobile}>
+      <MainHeader
+        IsScrollTop={scrollY}
+        IsMobile={isMobile}
+        IsTablet1024={isTablet1024}
+        IsMobileProfileBar={isMobileProfileBar}
+      >
         <div className="wrapper">
           <div className="container">
             <div className="logo-wrapper">
@@ -63,36 +121,22 @@ const Header = () => {
                   )}
                 </li>
                 <li>
-                  <Link href={isLogin ? '/profile' : '/login'}>
-                    <div>
-                      <img width="26px" height="26px" src="/img/profile.svg" />
-                    </div>
-                  </Link>
+                  <div onClick={onClickProfile}>
+                    <img width="26px" height="26px" src="/img/profile.svg" />
+                  </div>
+
                   {isLogin ? (
                     <ul className="subBox">
-                      <li>
-                        <Link href="/profile">회원정보</Link>
-                      </li>
-                      <li>
-                        <Link
-                          href="/orderHistory
-                        "
-                        >
-                          배송조회
-                        </Link>
-                      </li>
+                      <li onClick={onClickSubProfile}>회원정보</li>
+                      <li onClick={onClickOrderHistory}>배송조회</li>
                       <li>
                         <button onClick={onClickLogout}>로그아웃</button>
                       </li>
                     </ul>
                   ) : (
                     <ul className="subBox">
-                      <li>
-                        <Link href="/login">로그인</Link>
-                      </li>
-                      <li>
-                        <Link href="/signup">회원가입</Link>
-                      </li>
+                      <li onClick={onClickLoginBtn}>로그인</li>
+                      <li onClick={onClickSignup}>회원가입</li>
                     </ul>
                   )}
                 </li>

@@ -1,4 +1,5 @@
 import BasicInput from '@components/Basic/BasicInput';
+import LoadingCircle from '@components/LoadingCircle';
 import Postcode from '@components/Modals/PostcodeModal';
 import { UserInfoUpdateFetch } from '@store/modules/userInfoUpdate';
 import fetcher from '@utils/utils/fetcher';
@@ -23,17 +24,17 @@ const Profile = () => {
   const [emailErrorText, setEmailErrorText] = useState('');
   const [nameErrorText, setNameErrorText] = useState('');
   const [addressErrorText, setAddressErrorText] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
 
   const dispatch = useDispatch();
   console.log('user', user);
 
-  const isLogin = useSelector((state: any) => state.login.token);
-
   useEffect(() => {
-    if (!isLogin) Router.push('/');
-  }, [isLogin]);
+    if (user == false) Router.push('/login');
+    else if (user) setIsLoading(false);
+  }, [user]);
 
   useEffect(() => {
     if (user) {
@@ -185,143 +186,157 @@ const Profile = () => {
 
   return (
     <>
-      {isPostCode && (
-        <Postcode
-          setAddressInputValue={setAddressInputValue}
-          setAddressErrorText={setAddressErrorText}
-          setIsPostCode={setIsPostCode}
-        />
-      )}
-      <ProfileContainer>
-        <div className="profile-wrapper">
-          <div className="title">
-            <h2>마이페이지</h2>
-          </div>
-
-          <h3 className="my-title">회원정보 변경</h3>
-          <div className="my-info-header">
-            <h4>
-              <b>{user?.userId}</b>님의 회원정보
-            </h4>
-          </div>
-          <div className="my-info-wrapper">
-            <div className="member-id-box">
-              <dl>
-                <dt>아이디</dt>
-                <dd>{user?.userId}</dd>
-              </dl>
-            </div>
-            <label className="mb-3 mt-5">
-              <span className="text-[1rem]">비밀번호</span>
-              <BasicInput
-                setInputValue={setInputPassword}
-                setErrorText={setPasswordErrorText}
-                errorText={passwordErrorText}
-                inputValue={inputPassword}
-                type="password"
-                name="password"
-                placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
-                maxLength={16}
-                style="h-[50px] w-full outline-neutral-400 rounded px-3 border "
-              />
-            </label>
-            <BasicInput
-              setInputValue={setInputPasswordCheck}
-              errorText={passwordCheckErrorText}
-              setErrorText={setPasswordCheckErrorText}
-              inputValue={inputPasswordCheck}
-              type="password"
-              name="password"
-              placeholder="비밀번호 확인"
-              maxLength={16}
-              style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+      {isLoading ? (
+        <LoadingCircle />
+      ) : (
+        <>
+          {isPostCode && (
+            <Postcode
+              setAddressInputValue={setAddressInputValue}
+              setAddressErrorText={setAddressErrorText}
+              setIsPostCode={setIsPostCode}
             />
-            <label className="mb-2.5">
-              <span className="text-[1rem]">연락처</span>
-              <input
-                type="text"
-                onChange={onChangePhoneNumber}
-                value={inputPhoneNumber}
-                maxLength={13}
-                placeholder="-을 제외하고 입력해주세요"
-                className="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
-              />
-              {nameErrorText && <p className="error-text">{nameErrorText}</p>}
-            </label>
-
-            <label>
-              이메일
-              <div className="flex items-center">
-                <input
-                  onChange={onChangeEmail}
-                  value={inputEmailHead}
-                  type="text"
-                  name="email"
-                  placeholder="이메일 앞자리"
-                  maxLength={15}
-                  className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
-                />
-                <span className="px-2.5">@</span>
-                <input
-                  onChange={onChangeSubEmail}
-                  value={inputEmailSub}
-                  type="text"
-                  name="emailsub"
-                  placeholder="이메일 뒷자리"
-                  maxLength={15}
-                  className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
-                />
+          )}
+          <ProfileContainer>
+            <div className="profile-wrapper">
+              <div className="title">
+                <h2>마이페이지</h2>
               </div>
-              {emailErrorText && <p className="error-text">{emailErrorText}</p>}
-            </label>
 
-            <div className="option-container">
-              <select
-                className="border rounded outline-neutral-400 h-[50px] option-email-sub"
-                name="email"
-                onChange={onChangeEmailSelect}
-              >
-                <option value="">직접입력</option>
-                <option value="naver.com">naver.com</option>
-                <option value="gmail.com">gmail.com</option>
-                <option value="nate.com">nate.com</option>
-                <option value="daum.com">daum.com</option>
-              </select>
-              <span className="icoArrow">
-                <img src="./img/select_dropdown.png" alt="" />
-              </span>
-              <div className="payment-info-card">
-                <div>
-                  <div>
-                    <h3>배송정보</h3>
-                  </div>
+              <h3 className="my-title">회원정보 변경</h3>
+              <div className="my-info-header">
+                <h4>
+                  <b>{user?.userId}</b>님의 회원정보
+                </h4>
+              </div>
+              <div className="my-info-wrapper">
+                <div className="member-id-box">
+                  <dl>
+                    <dt>아이디</dt>
+                    <dd>{user?.userId}</dd>
+                  </dl>
                 </div>
-                <div>
-                  <div className="payment-address-text">
-                    <input type="text" disabled value={addressInputValue} />
+                <label className="mb-3 mt-5">
+                  <span className="text-[1rem]">비밀번호</span>
+                  <BasicInput
+                    setInputValue={setInputPassword}
+                    setErrorText={setPasswordErrorText}
+                    errorText={passwordErrorText}
+                    inputValue={inputPassword}
+                    type="password"
+                    name="password"
+                    placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                    maxLength={16}
+                    style="h-[50px] w-full outline-neutral-400 rounded px-3 border "
+                  />
+                </label>
+                <BasicInput
+                  setInputValue={setInputPasswordCheck}
+                  errorText={passwordCheckErrorText}
+                  setErrorText={setPasswordCheckErrorText}
+                  inputValue={inputPasswordCheck}
+                  type="password"
+                  name="password"
+                  placeholder="비밀번호 확인"
+                  maxLength={16}
+                  style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+                />
+                <label className="mb-2.5">
+                  <span className="text-[1rem]">연락처</span>
+                  <input
+                    type="text"
+                    onChange={onChangePhoneNumber}
+                    value={inputPhoneNumber}
+                    maxLength={13}
+                    placeholder="-을 제외하고 입력해주세요"
+                    className="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
+                  />
+                  {nameErrorText && (
+                    <p className="error-text">{nameErrorText}</p>
+                  )}
+                </label>
+
+                <label>
+                  이메일
+                  <div className="flex items-center">
                     <input
+                      onChange={onChangeEmail}
+                      value={inputEmailHead}
                       type="text"
-                      onChange={onChangeSubInput}
-                      value={addressSubInputValue}
-                      placeholder="상세주소"
-                      maxLength={50}
+                      name="email"
+                      placeholder="이메일 앞자리"
+                      maxLength={15}
+                      className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
                     />
-                    {addressErrorText && (
-                      <p className="error-text">{addressErrorText}</p>
-                    )}
+                    <span className="px-2.5">@</span>
+                    <input
+                      onChange={onChangeSubEmail}
+                      value={inputEmailSub}
+                      type="text"
+                      name="emailsub"
+                      placeholder="이메일 뒷자리"
+                      maxLength={15}
+                      className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+                    />
                   </div>
-                  <div className="payment-address-change">
-                    <button onClick={onClickChangeAddress}>배송지 변경</button>
+                  {emailErrorText && (
+                    <p className="error-text">{emailErrorText}</p>
+                  )}
+                </label>
+
+                <div className="option-container">
+                  <select
+                    className="border rounded outline-neutral-400 h-[50px] option-email-sub"
+                    name="email"
+                    onChange={onChangeEmailSelect}
+                  >
+                    <option value="">직접입력</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="nate.com">nate.com</option>
+                    <option value="daum.com">daum.com</option>
+                  </select>
+                  <span className="icoArrow">
+                    <img src="./img/select_dropdown.png" alt="" />
+                  </span>
+                  <div className="payment-info-card">
+                    <div>
+                      <div>
+                        <h3>배송정보</h3>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="payment-address-text">
+                        <input type="text" disabled value={addressInputValue} />
+                        <input
+                          type="text"
+                          onChange={onChangeSubInput}
+                          value={addressSubInputValue}
+                          placeholder="상세주소"
+                          maxLength={50}
+                        />
+                        {addressErrorText && (
+                          <p className="error-text">{addressErrorText}</p>
+                        )}
+                      </div>
+                      <div className="payment-address-change">
+                        <button onClick={onClickChangeAddress}>
+                          배송지 변경
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="info-submit">
+                    <button onClick={onClickUserInfoUpdateBtn}>
+                      저장 하기
+                    </button>
                   </div>
                 </div>
-              </div>
-              <div className="info-submit">
-                <button onClick={onClickUserInfoUpdateBtn}>저장 하기</button>
               </div>
             </div>
-          </div>
-        </div>
-      </ProfileContainer>
+          </ProfileContainer>
+        </>
+      )}
     </>
   );
 };

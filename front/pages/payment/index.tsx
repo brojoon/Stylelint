@@ -12,6 +12,7 @@ import Router, { useRouter } from 'next/router';
 import { PaymentRecentSaveFetch } from '@store/modules/paymentRecentSave';
 import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import MobilePaymentSlider from '@components/Sliders/MobilePaymentSlider';
+import LoadingCircle from '@components/LoadingCircle';
 
 interface IPostType {
   address: string;
@@ -33,9 +34,9 @@ const Payment = () => {
   const [postPhoneNumber, setPostPhoneNumber] = useState('');
   const [nameErrorText, setNameErrorText] = useState('');
   const [addressErrorText, setAddressErrorText] = useState('');
-
+  const [isLoading, setIsLoading] = useState(true);
   const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
-  const { data, isLoading, error } = useQuery('paymentList', () =>
+  const { data, error } = useQuery('paymentList', () =>
     fetcher(`/api/payment`),
   );
 
@@ -44,6 +45,11 @@ const Payment = () => {
   const isTablet1024 = useIsTablet1024();
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (user == false) Router.push('/login');
+    else if (user) setIsLoading(false);
+  }, [user]);
 
   useEffect(() => {
     if (user) {
@@ -56,12 +62,6 @@ const Payment = () => {
       if (user?.phone_number) setPostPhoneNumber(user.phone_number);
     }
   }, [user]);
-
-  const isLogin = useSelector((state: any) => state.login.token);
-
-  useEffect(() => {
-    if (!isLogin) Router.push('/');
-  }, [isLogin]);
 
   useEffect(() => {
     if (data) {
@@ -182,148 +182,160 @@ const Payment = () => {
 
   return (
     <>
-      {isPostCode && (
-        <Postcode
-          setAddressInputValue={setAddressInputValue}
-          setAddressErrorText={setAddressErrorText}
-          setIsPostCode={setIsPostCode}
-        />
-      )}
-      <PaymentContainer IsTablet1024={isTablet1024} IsMobile={isMobile}>
-        <div>
-          <div className="title-container">
-            <div className="title-wrapper">
-              <h3 className="title">주문결제</h3>
-            </div>
-          </div>
-          <div className="payment-section-container">
-            <div className="payment-section-wrapper">
-              <div className="payment-section-flex-wrapper">
-                <div>
-                  <div className="payment-info-card">
-                    <div>
-                      <div>
-                        <h3>배송정보</h3>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="payment-info-text">
-                        <input
-                          type="text"
-                          onChange={onChangeName}
-                          value={postName}
-                          placeholder="이름"
-                          maxLength={15}
-                        />
-                        <input
-                          type="text"
-                          onChange={onChangePhoneNumber}
-                          maxLength={13}
-                          value={postPhoneNumber}
-                          placeholder="연락처"
-                        />
-                        {nameErrorText && (
-                          <p className="error-text">{nameErrorText}</p>
-                        )}
-                      </div>
-                      <div className="payment-address-text">
-                        <input type="text" disabled value={addressInputValue} />
-                        <input
-                          type="text"
-                          onChange={onChangeSubInput}
-                          value={addressSubInputValue}
-                          placeholder="상세주소"
-                          maxLength={50}
-                        />
-                        {addressErrorText && (
-                          <p className="error-text">{addressErrorText}</p>
-                        )}
-                      </div>
-                      <div className="option-container">
-                        <select className="option-post" name="요청사항">
-                          <option value="배송시 요청사항을 선택해주세요.">
-                            배송시 요청사항을 선택해주세요.
-                          </option>
-                          <option value="직접 수령하겠습니다.">
-                            직접 수령하겠습니다.
-                          </option>
-                          <option value="배송 전 연락바랍니다.">
-                            배송 전 연락바랍니다.
-                          </option>
-                          <option value="부재 시 경비실에 맡겨주세요.">
-                            부재 시 경비실에 맡겨주세요.
-                          </option>
-                          <option value="부재 시 문 앞에 놓아주세요.">
-                            부재 시 문 앞에 놓아주세요.
-                          </option>
-                          <option value="부재 시 택배함에 넣어주세요.">
-                            부재 시 택배함에 넣어주세요.
-                          </option>
-                        </select>
-                        <span className="icoArrow arrow2">
-                          <img src="./img/select_dropdown.png" alt="" />
-                        </span>
-                      </div>
-                      <div className="payment-address-change">
-                        <button onClick={onClickChangeAddress}>
-                          배송지 변경
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {isTablet ? <MobilePaymentSlider /> : <PaymentSlider />}
+      {isLoading ? (
+        <LoadingCircle />
+      ) : (
+        <>
+          {isPostCode && (
+            <Postcode
+              setAddressInputValue={setAddressInputValue}
+              setAddressErrorText={setAddressErrorText}
+              setIsPostCode={setIsPostCode}
+            />
+          )}
+          <PaymentContainer IsTablet1024={isTablet1024} IsMobile={isMobile}>
+            <div>
+              <div className="title-container">
+                <div className="title-wrapper">
+                  <h3 className="title">주문결제</h3>
                 </div>
-                <div>
-                  <div className="payment-purchase-card">
-                    <div className="payment-purchase-header">
-                      <h3>주문상품 {totaLQuantity}개</h3>
-                    </div>
+              </div>
+              <div className="payment-section-container">
+                <div className="payment-section-wrapper">
+                  <div className="payment-section-flex-wrapper">
                     <div>
-                      {data?.map((product: any) => {
-                        return (
-                          <div className="payment-purchase-info">
-                            <div>
-                              <img src={baseApiUrl + product.image} />
-                            </div>
-                            <div>
-                              <h3>{product.product_name}</h3>
-                              <div className="payment-purchase-info-detail-wrapper">
-                                <div>
-                                  <span>사이즈: {product.size}</span>{' '}
-                                  <span>색상: {product.color}</span>
-                                </div>
-                                <div>
-                                  <span>{product.price.toLocaleString()}</span>
-                                  <span>원</span>
-                                  <span> / {product.quantity}개</span>
-                                </div>
-                              </div>
-                            </div>
+                      <div className="payment-info-card">
+                        <div>
+                          <div>
+                            <h3>배송정보</h3>
                           </div>
-                        );
-                      })}
-                      <div>
-                        <div className="payment-purchase-price">
-                          <span>상품금액</span>
-                          <span>{totalPrice.toLocaleString()}원</span>
+                        </div>
+                        <div>
+                          <div className="payment-info-text">
+                            <input
+                              type="text"
+                              onChange={onChangeName}
+                              value={postName}
+                              placeholder="이름"
+                              maxLength={15}
+                            />
+                            <input
+                              type="text"
+                              onChange={onChangePhoneNumber}
+                              maxLength={13}
+                              value={postPhoneNumber}
+                              placeholder="연락처"
+                            />
+                            {nameErrorText && (
+                              <p className="error-text">{nameErrorText}</p>
+                            )}
+                          </div>
+                          <div className="payment-address-text">
+                            <input
+                              type="text"
+                              disabled
+                              value={addressInputValue}
+                            />
+                            <input
+                              type="text"
+                              onChange={onChangeSubInput}
+                              value={addressSubInputValue}
+                              placeholder="상세주소"
+                              maxLength={50}
+                            />
+                            {addressErrorText && (
+                              <p className="error-text">{addressErrorText}</p>
+                            )}
+                          </div>
+                          <div className="option-container">
+                            <select className="option-post" name="요청사항">
+                              <option value="배송시 요청사항을 선택해주세요.">
+                                배송시 요청사항을 선택해주세요.
+                              </option>
+                              <option value="직접 수령하겠습니다.">
+                                직접 수령하겠습니다.
+                              </option>
+                              <option value="배송 전 연락바랍니다.">
+                                배송 전 연락바랍니다.
+                              </option>
+                              <option value="부재 시 경비실에 맡겨주세요.">
+                                부재 시 경비실에 맡겨주세요.
+                              </option>
+                              <option value="부재 시 문 앞에 놓아주세요.">
+                                부재 시 문 앞에 놓아주세요.
+                              </option>
+                              <option value="부재 시 택배함에 넣어주세요.">
+                                부재 시 택배함에 넣어주세요.
+                              </option>
+                            </select>
+                            <span className="icoArrow arrow2">
+                              <img src="./img/select_dropdown.png" alt="" />
+                            </span>
+                          </div>
+                          <div className="payment-address-change">
+                            <button onClick={onClickChangeAddress}>
+                              배송지 변경
+                            </button>
+                          </div>
                         </div>
                       </div>
+
+                      {isTablet ? <MobilePaymentSlider /> : <PaymentSlider />}
                     </div>
-                    <div className="payment-purchas-total">
-                      <span>총 결제금액</span>
-                      <span>{totalPrice.toLocaleString()}원</span>
-                    </div>
-                    <div className="payment-purchas-btn">
-                      <button onClick={onClickPurchase}>결제하기</button>
+                    <div>
+                      <div className="payment-purchase-card">
+                        <div className="payment-purchase-header">
+                          <h3>주문상품 {totaLQuantity}개</h3>
+                        </div>
+                        <div>
+                          {data?.map((product: any) => {
+                            return (
+                              <div className="payment-purchase-info">
+                                <div>
+                                  <img src={baseApiUrl + product.image} />
+                                </div>
+                                <div>
+                                  <h3>{product.product_name}</h3>
+                                  <div className="payment-purchase-info-detail-wrapper">
+                                    <div>
+                                      <span>사이즈: {product.size}</span>{' '}
+                                      <span>색상: {product.color}</span>
+                                    </div>
+                                    <div>
+                                      <span>
+                                        {product.price.toLocaleString()}
+                                      </span>
+                                      <span>원</span>
+                                      <span> / {product.quantity}개</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
+                          <div>
+                            <div className="payment-purchase-price">
+                              <span>상품금액</span>
+                              <span>{totalPrice.toLocaleString()}원</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="payment-purchas-total">
+                          <span>총 결제금액</span>
+                          <span>{totalPrice.toLocaleString()}원</span>
+                        </div>
+                        <div className="payment-purchas-btn">
+                          <button onClick={onClickPurchase}>결제하기</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </PaymentContainer>
+          </PaymentContainer>
+        </>
+      )}
     </>
   );
 };

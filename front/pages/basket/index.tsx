@@ -1,4 +1,5 @@
 import BasketProductCard from '@components/BasketProductCard';
+import LoadingCircle from '@components/LoadingCircle';
 import { refetchProductsArr } from '@store/modules/basketProductSelectArr';
 import { BasketRemoveFetch } from '@store/modules/basketRemove';
 import { PaymentSaveFetch } from '@store/modules/paymentSave';
@@ -23,8 +24,9 @@ const Basket = () => {
   // );
   const [totalPrice, setStateTotalPrice] = useState(0);
   const [totalMany, setTotalMany] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { data, isLoading, error, refetch } = useQuery('basketList', () =>
+  const { data, error, refetch } = useQuery('basketList', () =>
     fetcher(`/api/basket`),
   );
   const { data: user, refetch: userRefetch } = useQuery('user', () =>
@@ -41,11 +43,10 @@ const Basket = () => {
 
   console.log('productCardArr', productCardArr);
 
-  const isLogin = useSelector((state: any) => state.login.token);
-
   useEffect(() => {
-    if (!isLogin) Router.push('/');
-  }, [isLogin]);
+    if (user == false) Router.push('/login');
+    else if (user) setIsLoading(false);
+  }, [user]);
 
   useEffect(() => {
     if (data) {
@@ -128,100 +129,108 @@ const Basket = () => {
     });
   }, [data, productCardArr]);
   return (
-    <BasketContainer
-      IsCheckedAll={isCheckedAll}
-      IsTablet1024={isTablet1024}
-      IsMobile={isMobile}
-      className="basket-container"
-    >
-      <div>
-        <div className="title-container">
-          <div className="title-wrapper">
-            <h3 className="title">장바구니</h3>
-          </div>
-        </div>
-        {data?.length > 0 ? (
-          <>
-            <div className="basket-tab-container">
-              <div className="basket-tab-wrapper">
-                <span>전체</span>
-                <span className="basket-count">
-                  <em>{data?.length}</em>
-                </span>
+    <>
+      {isLoading ? (
+        <LoadingCircle />
+      ) : (
+        <BasketContainer
+          IsCheckedAll={isCheckedAll}
+          IsTablet1024={isTablet1024}
+          IsMobile={isMobile}
+          className="basket-container"
+        >
+          <div>
+            <div className="title-container">
+              <div className="title-wrapper">
+                <h3 className="title">장바구니</h3>
               </div>
             </div>
-            <div className="basket-option">
-              <div className="basket-option-conatiner">
-                <div className="basket-option-wrapper">
-                  <ul>
-                    <li>
-                      <span className="basket-option-select-wrapper">
-                        <label htmlFor="전체선택">
-                          <input
-                            onChange={onCheckedAllSelect}
-                            checked={isCheckedAll}
-                            type="checkbox"
-                            id="전체선택"
+            {data?.length > 0 ? (
+              <>
+                <div className="basket-tab-container">
+                  <div className="basket-tab-wrapper">
+                    <span>전체</span>
+                    <span className="basket-count">
+                      <em>{data?.length}</em>
+                    </span>
+                  </div>
+                </div>
+                <div className="basket-option">
+                  <div className="basket-option-conatiner">
+                    <div className="basket-option-wrapper">
+                      <ul>
+                        <li>
+                          <span className="basket-option-select-wrapper">
+                            <label htmlFor="전체선택">
+                              <input
+                                onChange={onCheckedAllSelect}
+                                checked={isCheckedAll}
+                                type="checkbox"
+                                id="전체선택"
+                              />
+                              전체선택
+                            </label>
+                          </span>
+                        </li>
+                        <li>
+                          <button onClick={onClickProductDelete}>
+                            선택삭제
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <section className="basket-products-container">
+                  <div className="basket-products-wrapper">
+                    <div>
+                      {data?.map((product: IBasketProduct, index: number) => {
+                        return (
+                          <BasketProductCard
+                            key={product.id}
+                            index={index}
+                            refetch={refetch}
+                            basketProduct={product}
                           />
-                          전체선택
-                        </label>
-                      </span>
-                    </li>
-                    <li>
-                      <button onClick={onClickProductDelete}>선택삭제</button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <section className="basket-products-container">
-              <div className="basket-products-wrapper">
-                <div>
-                  {data?.map((product: IBasketProduct, index: number) => {
-                    return (
-                      <BasketProductCard
-                        key={product.id}
-                        index={index}
-                        refetch={refetch}
-                        basketProduct={product}
-                      />
-                    );
-                  })}
-                </div>
-                <div className="basket-product-order-container">
-                  <div className="basket-product-order-wrapper">
-                    <ul>
-                      <li>
-                        <span>상품수</span>
-                        <div>
-                          <span>{totalMany}</span>
-                          <span>개</span>
-                        </div>
-                      </li>
-                      <li>
-                        <span>전체 주문금액</span>
-                        <div>
-                          <span>{totalPrice.toLocaleString()}</span>
-                          <span>원</span>
-                        </div>
-                      </li>
-                    </ul>
+                        );
+                      })}
+                    </div>
+                    <div className="basket-product-order-container">
+                      <div className="basket-product-order-wrapper">
+                        <ul>
+                          <li>
+                            <span>상품수</span>
+                            <div>
+                              <span>{totalMany}</span>
+                              <span>개</span>
+                            </div>
+                          </li>
+                          <li>
+                            <span>전체 주문금액</span>
+                            <div>
+                              <span>{totalPrice.toLocaleString()}</span>
+                              <span>원</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="basket-product-order-btn">
+                        <button onClick={onClickPurchase}>구매하기</button>
+                      </div>
+                    </div>
                   </div>
-                  <div className="basket-product-order-btn">
-                    <button onClick={onClickPurchase}>구매하기</button>
-                  </div>
-                </div>
+                </section>
+              </>
+            ) : (
+              <div className="empty-container">
+                <h2>앗!</h2>
+                <span>장바구니가 텅~</span>
               </div>
-            </section>
-          </>
-        ) : (
-          <div className="empty-container">
-            <h2>앗!</h2>
-            <span>장바구니가 텅~</span>
+            )}
           </div>
-        )}
-      </div>
-    </BasketContainer>
+        </BasketContainer>
+      )}
+    </>
   );
 };
 

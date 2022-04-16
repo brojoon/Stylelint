@@ -126,29 +126,49 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
     setIsDibLoading(false);
   }, [isProductDibs, user, data]);
 
-  const onClickProductDescNav = useCallback((e) => {
-    setProductDescNavIndex(e.target.dataset.index);
-  }, []);
+  // const onClickProductDescNav = useCallback((e) => {
+  //   setProductDescNavIndex(e.target.dataset.index);
+  // }, []);
 
   const onChangeProductCount = useCallback((e) => {
-    if (e.target.value < 1) {
-      alert('주문 가능한 최소 수량은 1개 입니다.');
-      return;
-    }
+    setProductCount(e.target.value);
   }, []);
 
-  const onClickProductSubstractCount = useCallback((e) => {
-    setProductCount((prev) => {
-      if (prev <= 1) {
-        alert('개수가 0개입니다');
-        return 1;
+  const onClickProductSubstractCount = useCallback(
+    (e) => {
+      if (productCount <= 1) {
+        alert('1개 미만이 될수 없습니다.');
+        return;
       }
-      return prev - 1;
-    });
-  }, []);
+      setProductCount((prev) => +prev - 1);
+    },
+    [productCount],
+  );
 
-  const onClickProductAddCount = useCallback((e) => {
-    setProductCount((prev) => prev + 1);
+  const onClickProductAddCount = useCallback(
+    (e) => {
+      if (productCount >= 99) {
+        alert('99개를 초과할수 없습니다.');
+        return;
+      }
+      setProductCount((prev) => +prev + 1);
+    },
+    [productCount],
+  );
+
+  const onFocustOut = useCallback((e) => {
+    if (e.target.value > 99) {
+      alert('99개를 초과할수 없습니다.');
+      setProductCount(99);
+    } else if (e.target.value < 1) {
+      alert('1개 미만이 될수 없습니다.');
+      setProductCount(1);
+    } else if (e.target.value[0] == 0) {
+      alert('올바른 값을 입력해주세요');
+      setProductCount(1);
+    } else {
+      setProductCount(e.target.value);
+    }
   }, []);
 
   const onChangeSelectSize = useCallback((e) => {
@@ -315,6 +335,7 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
                           onChange={onChangeProductCount}
                           type="number"
                           value={productCount}
+                          onBlur={onFocustOut}
                         />
                         <button onClick={onClickProductAddCount}></button>
                       </div>

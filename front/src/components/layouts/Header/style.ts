@@ -21,6 +21,8 @@ export const BackgroundHeader = styled.div`
 export const MainHeader = styled.header<{
   IsScrollTop: number;
   IsMobile: boolean;
+  IsTablet1024: boolean;
+  IsMobileProfileBar: boolean;
 }>`
   position: fixed;
   top: 0;
@@ -125,14 +127,17 @@ export const MainHeader = styled.header<{
     position: relative;
     padding: ${(props) => (props.IsScrollTop > 60 ? '19px 0' : '32px 0')};
   }
+
+
   .info > ul > li:nth-child(2):hover {
     .subBox {
-      display: flex;
+      ${(props) => (props.IsTablet1024 ? '' : 'display: flex;')}
     }
   }
   .subBox:hover {
-    display: flex;
+    ${(props) => (props.IsTablet1024 ? '' : 'display: flex;')}
   }
+
   .subBox {
     position: absolute;
     width: 6.25rem;
@@ -153,6 +158,7 @@ export const MainHeader = styled.header<{
     font-size: 0.875rem;
     font-weight: 600;
     color: #111111;
+    ${(props) => (props.IsMobileProfileBar ? 'display: flex;' : '')}
   }
   .subBox > li > button {
     font-size: 0.875rem;
