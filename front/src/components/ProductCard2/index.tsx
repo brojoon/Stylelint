@@ -1,18 +1,9 @@
 import { IProducts } from '@typings/db';
 import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
-import React, { useCallback, useEffect, useState, VFC } from 'react';
-import { ProductCardContainer, ProductCardIconWrapper } from './style';
+import React, { useCallback, useState, VFC } from 'react';
+import { ProductCardContainer } from './style';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { BasketAddFetch } from '@store/modules/basketAdd';
-import { useQuery } from 'react-query';
-import fetcher from '@utils/utils/fetcher';
-import axios from 'axios';
-import { ModalBasketContainer } from '@components/Modals/ModalBasket/style';
-import ModalBasket from '@components/Modals/ModalBasket';
-import { asleep } from '@utils/utils/asleep';
-import { ClipLoader } from 'react-spinners';
-import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
+import { useIsTablet } from '@utils/Hooks';
 
 interface Props {
   data: IProducts;
@@ -20,18 +11,8 @@ interface Props {
 
 const ProductCard2: VFC<Props> = ({ data }) => {
   const [quickview, setQuickview] = useState(false);
-  const [isClickProductImg, setIsClickProductImg] = useState(false);
-  const [isDibLoading, setIsDibLoading] = useState(false);
-  const [isBasketLoading, setIsBasketLoading] = useState(false);
-  const [isProductDibs, setIsProductDibs] = useState(false);
   const router = useRouter();
   const IsTablet = useIsTablet();
-
-  const {
-    data: user,
-    isLoading,
-    error,
-  } = useQuery('user', () => fetcher(`api/user/profile`));
 
   const onClickProductCardImg = useCallback(() => {
     router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
@@ -64,9 +45,6 @@ const ProductCard2: VFC<Props> = ({ data }) => {
             </div>
           </div>
           <div>
-            {/* <h3 className="text-[#969696] text-[0.75rem]">
-            스타일린트[자체제작]
-          </h3> */}
             <div className="text-[#212121] text-[0.85rem] tracking-[-0.5px] product-desc">
               {data.name}
             </div>

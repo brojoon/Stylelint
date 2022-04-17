@@ -3,6 +3,7 @@ import SelectedProductCardContainer from '@components/SelectedProductCardContain
 import ProductDetailSlider from '@components/Sliders/ProductDetailSlider';
 import { BasketAddFetch } from '@store/modules/basketAdd';
 import { PaymentSaveFetch } from '@store/modules/paymentSave';
+import { IProductDetailInfo } from '@typings/db';
 import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import { baseApiUrl, baseFrontUrl, days, months } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
@@ -27,7 +28,7 @@ export interface ISelecedProduct {
 }
 
 export interface Props {
-  ssrProductData: any;
+  ssrProductData: IProductDetailInfo;
 }
 
 const ProductDetails: VFC<Props> = ({ ssrProductData }) => {

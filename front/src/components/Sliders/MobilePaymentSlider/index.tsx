@@ -1,5 +1,4 @@
 import { useIsTablet } from '@utils/Hooks';
-import { asleep } from '@utils/utils/asleep';
 import React, { useCallback, useState } from 'react';
 import { PaymentSliderContainer } from './style';
 
@@ -40,8 +39,6 @@ const MobilePaymentSlider = () => {
     setIsSlide(false);
     setIsTransition(true);
     const curPage = Math.floor(slidePosition / slideImgRatio);
-    console.log('curPage: ', curPage);
-    console.log('slidePosition:', slidePosition);
     if (savePosValue > 3) {
       if (slidePosition + slideImgRatio >= -5) {
         setSlidePosition(0);

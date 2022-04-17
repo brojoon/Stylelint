@@ -15,9 +15,10 @@ import { VFC } from 'react';
 import { useIsMobile, useIsTablet } from '@utils/Hooks';
 import MobileMainEventSlider from '@components/Sliders/MobileMainEvetnSlider';
 import ProductCard2Wrapper from '@components/ProductCard2Wrapper';
+import { IProducts } from '@typings/db';
 
 interface Props {
-  ssrProducstData: any;
+  ssrProducstData: IProducts[];
 }
 
 const IndexPage: VFC<Props> = ({ ssrProducstData }) => {

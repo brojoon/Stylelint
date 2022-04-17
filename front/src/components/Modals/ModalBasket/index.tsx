@@ -4,7 +4,7 @@ import React, { useCallback, VFC } from 'react';
 import { ModalBackground, ModalBasketContainer } from './style';
 
 interface Props {
-  setIsModalBasket: any;
+  setIsModalBasket: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ModalBasket: VFC<Props> = ({ setIsModalBasket }) => {

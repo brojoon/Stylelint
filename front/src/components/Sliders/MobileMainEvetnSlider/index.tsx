@@ -37,8 +37,6 @@ const MobileMainEventSlider = () => {
     setIsSlide(false);
     setIsTransition(true);
     const curPage = Math.floor(slidePosition / slideImgRatio);
-    console.log('curPage: ', curPage);
-    console.log('slidePosition:', slidePosition);
     if (savePosValue > 2) {
       if (slidePosition + slideImgRatio >= -5) {
         setSlidePosition(0);
@@ -94,7 +92,6 @@ const MobileMainEventSlider = () => {
   const onChangePaginationIndex = useCallback((e) => {
     setPaginationIndex(Number(e.target.id.substr(-1)));
     setSlidePosition((Number(e.target.id.substr(-1)) - 1) * -slideImgRatio);
-    console.log(Number(e.target.id.substr(-1)));
   }, []);
 
   return (

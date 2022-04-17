@@ -3,7 +3,7 @@ import { BasketRemoveFetch } from '@store/modules/basketRemove';
 import { IBasketProduct } from '@typings/db';
 import { useIsTablet1024 } from '@utils/Hooks';
 import { baseApiUrl } from '@utils/utils/const';
-import React, { useCallback, useEffect, useState, VFC } from 'react';
+import React, { useCallback, useState, VFC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BasketProductContainer } from './style';
 import ClipLoader from 'react-spinners/ClipLoader';
@@ -12,8 +12,6 @@ import { refetchProductsArr } from '@store/modules/basketProductSelectArr';
 
 interface Props {
   index: number;
-  // setProductCardArr: any;
-  // productCardArr: number[];
   basketProduct: IBasketProduct;
   refetch: any;
 }
@@ -46,7 +44,6 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
 
   const onChangeProductCount = useCallback((e) => {
     setProductCount(e.target.value);
-    console.log('count: ', e.target.value);
   }, []);
 
   const onClickProductAddCount = useCallback(

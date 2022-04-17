@@ -20,11 +20,7 @@ const initialState: typeBasketAdd = { status: '' }; // 초기 상태 정의
 export const BasketAddFetch = createAsyncThunk(
   'user/BasketAddFetch',
   async (data: BasketAddRequest[]) => {
-    const response = await axios.post(
-      '/api/basket/add',
-
-      data,
-    );
+    const response = await axios.post('/api/basket/add', data);
     return response?.data;
   },
 );

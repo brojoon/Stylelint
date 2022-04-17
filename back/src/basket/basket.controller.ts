@@ -46,7 +46,6 @@ export class BasketController {
   @HttpCode(200)
   @Post('remove')
   async basketRemove(@Body() body) {
-    console.log('body:', body);
     return this.basketService.basketRemove(body);
   }
 

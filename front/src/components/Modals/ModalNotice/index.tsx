@@ -4,7 +4,7 @@ import React, { useCallback, VFC } from 'react';
 import { ModalBackground, ModalBasketContainer } from './style';
 
 interface Props {
-  setIsModalNotice: any;
+  setIsModalNotice: React.Dispatch<React.SetStateAction<boolean>>;
   noticeText: string;
 }
 

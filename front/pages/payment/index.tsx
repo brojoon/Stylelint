@@ -1,28 +1,18 @@
 import Postcode from '@components/Modals/PostcodeModal';
 import React, { useCallback, useEffect, useState } from 'react';
 import { PaymentContainer } from './style';
-import Link from 'next/link';
 import PaymentSlider from '@components/Sliders/PaymentSlider';
 import fetcher from '@utils/utils/fetcher';
 import { useQuery } from 'react-query';
 import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { PaymentDoneUpdateFetch } from '@store/modules/paymentDoneUpdate';
 import Router, { useRouter } from 'next/router';
 import { PaymentRecentSaveFetch } from '@store/modules/paymentRecentSave';
 import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import MobilePaymentSlider from '@components/Sliders/MobilePaymentSlider';
 import LoadingCircle from '@components/LoadingCircle';
-
-interface IPostType {
-  address: string;
-  basket_numbers: IBasket_numbersType[];
-  receiver: string;
-  phone_number: string;
-}
-interface IBasket_numbersType {
-  id: string;
-}
+import { IPostType } from '@typings/IRequest';
 
 const Payment = () => {
   const [isPostCode, setIsPostCode] = useState(false);
@@ -36,9 +26,7 @@ const Payment = () => {
   const [addressErrorText, setAddressErrorText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
-  const { data, error } = useQuery('paymentList', () =>
-    fetcher(`/api/payment`),
-  );
+  const { data } = useQuery('paymentList', () => fetcher(`/api/payment`));
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -86,15 +74,6 @@ const Payment = () => {
 
   const onChangePhoneNumber = useCallback(
     (e) => {
-      console.log(
-        e.target.value
-          .replace(/[^0-9]/g, '')
-          .replace(
-            /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
-            '$1-$2-$3',
-          )
-          .replace('--', '-'),
-      );
       if (nameErrorText) setNameErrorText('');
       setPostPhoneNumber(
         e.target.value
@@ -151,9 +130,8 @@ const Payment = () => {
         phone_number: postPhoneNumber,
         basket_numbers: [],
       };
-      console.log('isdata', data);
+
       for (let i = 0; i < data.length; i++) {
-        console.log('data', data[i].basket_number);
         post.basket_numbers.push({ id: data[i].basket_number });
       }
       dispatch(PaymentDoneUpdateFetch(post));

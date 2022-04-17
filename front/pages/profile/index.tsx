@@ -29,7 +29,6 @@ const Profile = () => {
   const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
 
   const dispatch = useDispatch();
-  console.log('user', user);
 
   useEffect(() => {
     if (user == false) Router.push('/login');
@@ -56,15 +55,6 @@ const Profile = () => {
 
   const onChangePhoneNumber = useCallback(
     (e) => {
-      console.log(
-        e.target.value
-          .replace(/[^0-9]/g, '')
-          .replace(
-            /(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,
-            '$1-$2-$3',
-          )
-          .replace('--', '-'),
-      );
       if (nameErrorText) setNameErrorText('');
       setInputPhoneNumber(
         e.target.value
@@ -163,8 +153,7 @@ const Profile = () => {
     } else {
       addressInput = addressInputValue + '/' + addressSubInputValue;
     }
-    console.log('addressInput!!', addressInput);
-    console.log('inputPhoneNumber!!', inputPhoneNumber);
+
     dispatch(
       UserInfoUpdateFetch({
         userId: user.userId,

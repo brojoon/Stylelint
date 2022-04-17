@@ -61,6 +61,5 @@ export class AuthController {
     if (result) {
       return 'ok';
     }
-    console.log('회원가입 성공');
   }
 }

@@ -1,3 +1,4 @@
+import { IPaymentsDoneInfo } from '@typings/db';
 import { useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import { baseApiUrl } from '@utils/utils/const';
 import dayjs from 'dayjs';
@@ -6,8 +7,7 @@ import { useDispatch } from 'react-redux';
 import { OrderHistoryProductContainer } from './style';
 
 interface Props {
-  orderHistoryProduct: any;
-  // refetch: any;
+  orderHistoryProduct: IPaymentsDoneInfo;
 }
 
 const OrderHistoryCard: VFC<Props> = ({ orderHistoryProduct }) => {

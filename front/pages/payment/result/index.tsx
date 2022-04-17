@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Router from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useSelector } from 'react-redux';
 import { ResultContainer } from './style';
 
 const Result = () => {

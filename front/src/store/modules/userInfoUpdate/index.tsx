@@ -7,9 +7,17 @@ interface typeUserInfoUpdate {
 
 const initialState: typeUserInfoUpdate = { status: '' }; // 초기 상태 정의
 
+interface userInfoUpdateRequest {
+  userId: string;
+  password: string;
+  address: string | null;
+  email: string;
+  phone_number: string;
+}
+
 export const UserInfoUpdateFetch = createAsyncThunk(
   'user/UserInfoUpdateFetch',
-  async (data: any) => {
+  async (data: userInfoUpdateRequest) => {
     const response = await axios.post('/api/user/profile', data);
     return response?.data;
   },

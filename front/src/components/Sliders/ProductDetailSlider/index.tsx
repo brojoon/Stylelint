@@ -4,10 +4,10 @@ import { useQuery } from 'react-query';
 import { ProductDetailSlide, ProductDetailSubSlide } from './style';
 import { useRouter } from 'next/router';
 import { baseApiUrl } from '@utils/utils/const';
-import { IProductsWithSubImg } from '@typings/db';
+import { IProductDetailInfo } from '@typings/db';
 
 interface Props {
-  ssrProductData: any;
+  ssrProductData: IProductDetailInfo;
 }
 
 const ProductDetailSlider: VFC<Props> = ({ ssrProductData }) => {
@@ -58,7 +58,6 @@ const ProductDetailSlider: VFC<Props> = ({ ssrProductData }) => {
 
   const onClickSubSlideImg = (e: any) => {
     setProductSlideIndex(+e.target.dataset.index);
-    console.log(e.target.dataset);
   };
   return (
     <>

@@ -19,14 +19,11 @@ interface IDeleteProductsId {
 
 const Basket = () => {
   const [isCheckedAll, setIsCheckedAllSelct] = useState(false);
-  // const [productCardArr, setProductCardArr] = useState<number[]>(
-  //   new Array(1).fill(0),
-  // );
   const [totalPrice, setStateTotalPrice] = useState(0);
   const [totalMany, setTotalMany] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { data, error, refetch } = useQuery('basketList', () =>
+  const { data, refetch } = useQuery('basketList', () =>
     fetcher(`/api/basket`),
   );
   const { data: user, refetch: userRefetch } = useQuery('user', () =>
@@ -40,8 +37,6 @@ const Basket = () => {
   const { productCardArr } = useSelector((state: any) => ({
     productCardArr: state.basketProductsSelectArr.productCardArr,
   }));
-
-  console.log('productCardArr', productCardArr);
 
   useEffect(() => {
     if (user == false) Router.push('/login');
@@ -106,10 +101,12 @@ const Basket = () => {
 
   const onClickPurchase = useCallback(async () => {
     refetch().then(async (refetched: any) => {
-      const ret = refetched.data.filter((product: any, index: number) => {
-        if (productCardArr[index]) return true;
-        else false;
-      });
+      const ret = refetched.data.filter(
+        (product: IBasketProduct, index: number) => {
+          if (productCardArr[index]) return true;
+          else false;
+        },
+      );
       let ret2 = [];
       for (let i = 0; i < ret.length; i++) {
         ret2.push({

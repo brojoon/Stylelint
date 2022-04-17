@@ -27,7 +27,7 @@ const BasicInput: VFC<Props> = ({
   const onChangeInputValue = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(e.target.value);
-      console.log(e.target.value);
+
       if (errorText) {
         setErrorText('');
       }

@@ -5,7 +5,7 @@ import { HamburgerMenuContainer } from './style';
 interface Props {
   IsScrollTop: number;
   IsMenuActive: boolean;
-  setIsMenuActive: (e: any) => void;
+  setIsMenuActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const HamburgerMenu: VFC<Props> = ({
@@ -14,7 +14,7 @@ const HamburgerMenu: VFC<Props> = ({
   setIsMenuActive,
 }) => {
   const onClickBackground = useCallback(() => {
-    setIsMenuActive((prev: boolean) => !prev);
+    setIsMenuActive((prev) => !prev);
   }, []);
 
   const onClickClose = useCallback(() => {

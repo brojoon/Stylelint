@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { paymentBasketRequest, paymentSaveRequest } from '@typings/IRequest';
 import axios from 'axios';
 
 interface typePaymentSave {
@@ -9,7 +10,7 @@ const initialState: typePaymentSave = { status: '' }; // 초기 상태 정의
 
 export const PaymentSaveFetch = createAsyncThunk(
   'PaymentSaveFetch',
-  async (data: any) => {
+  async (data: paymentSaveRequest[] | paymentBasketRequest) => {
     const response = await axios.post('/api/payment/save', data);
     return response?.data;
   },

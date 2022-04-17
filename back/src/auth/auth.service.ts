@@ -19,7 +19,7 @@ export class AuthService {
       where: { userId },
       select: ['userId', 'password'],
     });
-    console.log('hih', user);
+
     if (!user) {
       return null;
     }

@@ -7,9 +7,18 @@ interface typePaymentRecemntSave {
 
 const initialState: typePaymentRecemntSave = { status: '' }; // 초기 상태 정의
 
+interface PaymentRecentSavRequest {
+  userId: string;
+  receiver: string;
+  total_price: number;
+  total_purchase_quantity: number;
+  address: string;
+  phone_number: string;
+}
+
 export const PaymentRecentSaveFetch = createAsyncThunk(
   'PaymentRecentSaveFetch',
-  async (data: any) => {
+  async (data: PaymentRecentSavRequest) => {
     const response = await axios.post('/api/user/payment/recent', data);
     return response?.data;
   },

@@ -4,9 +4,9 @@ import DaumPostcode from 'react-daum-postcode';
 import { DaumPostcodeContainer } from './style';
 
 interface Props {
-  setAddressInputValue: any;
-  setAddressErrorText: any;
-  setIsPostCode: any;
+  setAddressInputValue: React.Dispatch<React.SetStateAction<string>>;
+  setAddressErrorText: React.Dispatch<React.SetStateAction<string>>;
+  setIsPostCode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Postcode: VFC<Props> = ({

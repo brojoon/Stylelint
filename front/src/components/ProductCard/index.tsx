@@ -8,15 +8,11 @@ import { BasketAddFetch } from '@store/modules/basketAdd';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
-import { ModalBasketContainer } from '@components/Modals/ModalBasket/style';
-import ModalBasket from '@components/Modals/ModalBasket';
-import { asleep } from '@utils/utils/asleep';
 import { ClipLoader } from 'react-spinners';
-import { useIsTablet1024 } from '@utils/Hooks';
 
 interface Props {
   data: IProducts;
-  setIsModalBasket: any;
+  setIsModalBasket: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
@@ -34,13 +30,10 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
     error,
   } = useQuery('user', () => fetcher(`api/user/profile`));
 
-  const { data: dibs, refetch: dibsRefetch } = useQuery('user/dibs', () =>
-    fetcher(`api/user/dibs`),
-  );
+  const { data: dibs } = useQuery('user/dibs', () => fetcher(`api/user/dibs`));
 
   useEffect(() => {
     if (dibs) {
-      console.log('dibs', dibs);
       for (let i = 0; i < dibs.length; i++) {
         if (dibs[i].product_name == data.name) setIsProductDibs(true);
       }

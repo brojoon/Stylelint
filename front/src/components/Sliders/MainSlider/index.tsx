@@ -40,7 +40,6 @@ const MainSlider = () => {
         Math.floor((slidePosition / slideImgCount / 2) * -1 - 1),
       );
     }
-    console.log(slidePosition / slideImgCount / 2);
   }, [slidePosition]);
 
   const autoSlideFunc = useCallback(async () => {

@@ -1,8 +1,6 @@
 import ProductCard from '@components/ProductCard';
 import React, { useCallback, useState, VFC } from 'react';
 import { ProductCardSlideWrapper } from './style';
-import { useQuery } from 'react-query';
-import fetcher from '@utils/utils/fetcher';
 import { IProducts } from '@typings/db';
 import ModalBasket from '@components/Modals/ModalBasket';
 import { useIsMobile } from '@utils/Hooks';
@@ -51,9 +49,6 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
     setIsSlide(false);
     setIsTransition(true);
     let timeCompenstaion = 0;
-    console.log('result: ', slidePosition + savePosValue * timeCompenstaion);
-    console.log('window.innerWidth', window.innerWidth);
-
     if (slideClickedTime) {
       timeCompenstaion = +new Date() - +slideClickedTime;
     }

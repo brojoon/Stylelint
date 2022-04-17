@@ -1,14 +1,12 @@
 import HamburgerMenu from '@components/HamburgerMenu';
 import { useIsMobile, useIsTablet1024, useScroll } from '@utils/Hooks';
 import Link from 'next/link';
-import React, { useCallback, useEffect, useState, useRef } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { MainHeader, BackgroundHeader, Banner } from './style';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutFetch } from '@store/modules/logout';
 import { removeToken } from '@store/modules/login';
-import { useAppDispatch } from '@store/index';
 import { useQuery } from 'react-query';
-import fetcher from '@utils/utils/fetcher';
 import Router from 'next/router';
 
 const Header = () => {

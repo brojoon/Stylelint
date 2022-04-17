@@ -4,7 +4,9 @@ import { Container } from './style';
 
 interface Props {
   selectedProductArr: ISelecedProduct[];
-  setSelectedProductArr: any;
+  setSelectedProductArr: React.Dispatch<
+    React.SetStateAction<ISelecedProduct[]>
+  >;
 }
 
 const SelectedProductCardContainer: VFC<Props> = ({

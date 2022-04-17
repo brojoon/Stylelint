@@ -1,7 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { imageConfigDefault } from 'next/dist/server/image-config';
-import Router from 'next/router';
 
 interface typeBasketRemove {
   status: string;
