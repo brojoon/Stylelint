@@ -39,6 +39,7 @@ export class BasketController {
     return this.basketService.basketAdd(body);
   }
 
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: 200,
     description: '성공',

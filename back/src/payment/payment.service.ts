@@ -1,8 +1,13 @@
 import { Basket } from './../entities/basket/basket';
 import { Payment } from '../entities/payment/payment';
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 
 @Injectable()
 export class PaymentService {
@@ -11,6 +16,7 @@ export class PaymentService {
     private PaymentRepository: Repository<Payment>,
     @InjectRepository(Basket)
     private BasketRepository: Repository<Basket>,
+    private connection: Connection,
   ) {}
 
   async PaymentInfo() {
@@ -30,8 +36,20 @@ export class PaymentService {
           state: false,
         },
       });
+      if (result.length < 1)
+        throw new BadRequestException('결제 정보 조회중 에러가 발생했습니다.');
       return result;
-    } catch (error) {}
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('결제 정보 조회중 에러가 발생했습니다.');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async PaymentDoneInfo() {
@@ -54,22 +72,46 @@ export class PaymentService {
           state: true,
         },
       });
+      if (result.length < 1)
+        throw new BadRequestException('결제 정보 조회중 에러가 발생했습니다.');
       return result;
-    } catch (error) {}
+      return result;
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('결제 정보 조회중 에러가 발생 했습니다.');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async PaymentInfoSave(data) {
+    const queryRunner = this.connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
     try {
-      await this.PaymentRepository.delete({
+      await queryRunner.manager.getRepository(Payment).delete({
         state: false,
       });
-      await this.PaymentRepository.save(data);
-    } catch (error) {}
+      return await queryRunner.manager.getRepository(Payment).save(data);
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      await queryRunner.release();
+    }
   }
 
   async PaymentDoneUpdate(data) {
+    const queryRunner = this.connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
     try {
-      await this.PaymentRepository.update(
+      await queryRunner.manager.getRepository(Payment).update(
         {
           state: false,
         },
@@ -81,8 +123,16 @@ export class PaymentService {
           createdAt: new Date(),
         },
       );
-      const result = await this.BasketRepository.delete(data.basket_numbers);
+      const result = await queryRunner.manager
+        .getRepository(Basket)
+        .delete(data.basket_numbers);
+      await queryRunner.commitTransaction();
       return result;
-    } catch (error) {}
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      await queryRunner.release();
+    }
   }
 }

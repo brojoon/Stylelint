@@ -10,8 +10,6 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
-import bcrypt from 'bcrypt';
-import { UserLoginDto } from './dto/user.login.dto';
 
 @Injectable()
 export class UsersService {
@@ -28,7 +26,7 @@ export class UsersService {
   ) {}
 
   async userinfo(userId: string) {
-    if (!userId) return null;
+    if (!userId) return false;
     try {
       const result = await this.usersRepository.findOne({
         select: ['userId', 'password', 'address', 'email', 'phone_number'],
@@ -51,17 +49,28 @@ export class UsersService {
 
   async userInfoUpdate(data) {
     try {
-      await this.usersRepository.update(
+      const result = await this.usersRepository.update(
         {
           userId: data.userId,
         },
         data,
       );
-    } catch (error) {}
+      return result;
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('내 정보 업데이트 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async userDibsInfo(userId: string) {
-    if (!userId) return null;
+    if (!userId) return false;
 
     try {
       const result = await this.userDipsRepository.find({
@@ -69,7 +78,17 @@ export class UsersService {
         where: { userId },
       });
       return result;
-    } catch (error) {}
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('내 찜정보 가져오기 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async userDibsSave(userId: string, product_name: string) {
@@ -90,7 +109,17 @@ export class UsersService {
           dibs: product.dibs + 1,
         },
       );
-    } catch (error) {}
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('찜하기 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async userDibsDelete(userId: string, product_name: string) {
@@ -111,7 +140,17 @@ export class UsersService {
           dibs: product.dibs - 1,
         },
       );
-    } catch (error) {}
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('찜제거 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async userPaymentRecentInfo(userId) {
@@ -120,13 +159,33 @@ export class UsersService {
         userId,
       });
       return user;
-    } catch {}
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('최근 결제 내역 가져오기 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async userPaymentRecentSave(data) {
     try {
       await this.recentPaymentRepository.delete({ userId: data.userId });
       await this.recentPaymentRepository.save(data);
-    } catch {}
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('최근 결제 정보 내역 교체하기 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 }

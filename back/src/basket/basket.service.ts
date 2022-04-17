@@ -1,5 +1,10 @@
 import { Basket } from './../entities/basket/basket';
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BasketAddDto } from './dto/basket.add.dto';
@@ -27,7 +32,19 @@ export class BasketService {
         },
       });
       return result;
-    } catch (error) {}
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException(
+          '장바구니 조회 도중 에러가 발생 했습니다.',
+        );
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async basketAdd(product: BasketAddDto[]) {
@@ -66,13 +83,35 @@ export class BasketService {
           await this.BasketRepository.update(result.id, result);
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException(
+          '장바구니에 담는 도중 에러가 발생 했습니다.',
+        );
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async basketRemove(data) {
     try {
-      const reulst = await this.BasketRepository.delete(data);
-    } catch (error) {}
+      return await this.BasketRepository.delete(data);
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('상품 제거 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 
   async basketCounter(id: number, quantity: number) {
@@ -94,8 +133,19 @@ export class BasketService {
       });
       if (result) {
         result.quantity = quantity;
-        await this.BasketRepository.update(result.id, result);
+        return await this.BasketRepository.update(result.id, result);
       }
-    } catch (error) {}
+      throw new NotFoundException('상품을 찾지 못했습니다.');
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('수량 변경 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
   }
 }
