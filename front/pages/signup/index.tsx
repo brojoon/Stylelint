@@ -2,7 +2,7 @@ import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
 import React, { useCallback, useEffect, useState } from 'react';
 import { SignupContainer } from './style';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { SignupFetch } from '@store/modules/signup';
 import isPassword from '@utils/utils/regexPassword';
 import { useQuery } from 'react-query';
@@ -41,7 +41,7 @@ const signup = () => {
     else if (user) Router.push('/');
   }, [user]);
 
-  const onSubmitSinup = useCallback(() => {
+  const onSubmitSinup = useCallback(async () => {
     if (!inputIdValue) {
       setIdErrorText('아이디를 입력해주세요');
       return;
@@ -61,7 +61,7 @@ const signup = () => {
 
     if (!isPassword(inputPassword)) {
       setPasswordCheckErrorText(
-        '8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합',
+        '8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합해서 입력해주세요',
       );
       return;
     }
@@ -75,7 +75,7 @@ const signup = () => {
       setEmailErrorText('이메일 뒷자리를 입력해주세요');
       return;
     }
-    dispatch(
+    const res: any = await dispatch(
       SignupFetch({
         userId: inputIdValue,
         password: inputPassword,
@@ -83,6 +83,9 @@ const signup = () => {
         address: '',
       }),
     );
+
+    if (res?.error?.message == 'Request failed with status code 403')
+      setIdErrorText('이미 사용중인 아이디 입니다.');
   }, [
     inputIdValue,
     inputPassword,

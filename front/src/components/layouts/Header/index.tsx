@@ -8,15 +8,19 @@ import { LogoutFetch } from '@store/modules/logout';
 import { removeToken } from '@store/modules/login';
 import { useQuery } from 'react-query';
 import Router from 'next/router';
+import fetcher from '@utils/utils/fetcher';
 
 const Header = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [isMobileProfileBar, setIsMobileProfileBar] = useState(false);
   const { scrollY } = useScroll();
   const dispatch = useDispatch();
-  const isLogin = useSelector((state: any) => state.login.token);
   const isMobile = useIsMobile();
   const isTablet1024 = useIsTablet1024();
+
+  const { data: user, refetch } = useQuery('user', () =>
+    fetcher(`api/user/profile`),
+  );
 
   useEffect(() => {
     if (!isTablet1024) setIsMobileProfileBar(false);
@@ -32,30 +36,30 @@ const Header = () => {
       return;
     }
 
-    if (isLogin) {
+    if (user) {
       Router.push('/profile');
     } else {
       Router.push('/login');
     }
-  }, [isTablet1024, isLogin, isMobileProfileBar]);
+  }, [isTablet1024, user, isMobileProfileBar]);
 
   const onClickSubProfile = useCallback(() => {
     if (isTablet1024) {
       setIsMobileProfileBar(false);
     }
-    if (isLogin) {
+    if (user) {
       Router.push('/profile');
     } else {
       Router.push('/login');
     }
-  }, [isTablet1024, isLogin]);
+  }, [isTablet1024, user]);
 
   const onClickLoginBtn = useCallback(() => {
     if (isTablet1024) {
       setIsMobileProfileBar(false);
     }
     Router.push('/login');
-  }, [isTablet1024, isLogin]);
+  }, [isTablet1024, user]);
 
   const onClickSignup = useCallback(() => {
     if (isTablet1024) {
@@ -74,6 +78,7 @@ const Header = () => {
   const onClickLogout = useCallback(() => {
     dispatch(LogoutFetch());
     setIsMobileProfileBar(false);
+    refetch();
   }, [dispatch, LogoutFetch, removeToken, useQuery]);
 
   return (
@@ -123,7 +128,7 @@ const Header = () => {
                     <img width="26px" height="26px" src="/img/profile.svg" />
                   </div>
 
-                  {isLogin ? (
+                  {user ? (
                     <ul className="subBox">
                       <li onClick={onClickSubProfile}>회원정보</li>
                       <li onClick={onClickOrderHistory}>배송조회</li>
@@ -139,7 +144,7 @@ const Header = () => {
                   )}
                 </li>
                 <li>
-                  <Link href={isLogin ? '/basket' : '/login'}>
+                  <Link href={user ? '/basket' : '/login'}>
                     <div>
                       <img width="26px" height="26px" src="/img/cart.svg" />
                     </div>

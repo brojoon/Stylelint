@@ -107,6 +107,7 @@ const Basket = () => {
           else false;
         },
       );
+      if (ret.length < 1) return;
       let ret2 = [];
       for (let i = 0; i < ret.length; i++) {
         ret2.push({
@@ -121,8 +122,10 @@ const Basket = () => {
           state: false,
         });
       }
-      await dispatch(PaymentSaveFetch(ret2));
-      router.push(baseFrontUrl + '/payment');
+      const res: any = await dispatch(PaymentSaveFetch(ret2));
+      if (res.meta.requestStatus === 'fulfilled') {
+        router.push(baseFrontUrl + '/payment');
+      }
     });
   }, [data, productCardArr]);
   return (

@@ -44,12 +44,11 @@ export class Users {
   // @Column('varchar', { name: 'phoneNumber', length: 20 })
   // phoneNumber: string;
 
-  @Column('char', { name: 'email', unique: true, length: 30 })
+  @Column('char', { name: 'email', length: 30 })
   email: string;
 
   @Column('char', {
     name: 'phone_number',
-    unique: true,
     length: 15,
     nullable: true,
   })

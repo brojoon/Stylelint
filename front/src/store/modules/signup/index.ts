@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Router from 'next/router';
+import { cachedDataVersionTag } from 'v8';
 
 interface typeSingup {
   status: string;

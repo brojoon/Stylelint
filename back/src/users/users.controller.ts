@@ -24,7 +24,7 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @ApiOperation({ summary: '내정보 가져오기' })
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @ApiResponse({
     status: 200,
     description: '성공',
@@ -43,7 +43,7 @@ export class UsersController {
     return this.usersService.userInfoUpdate(Body);
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @Get('dibs')
   async getDibs(@User() user) {

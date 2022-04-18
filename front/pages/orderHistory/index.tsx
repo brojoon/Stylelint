@@ -5,7 +5,6 @@ import fetcher from '@utils/utils/fetcher';
 import Router from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useSelector } from 'react-redux';
 import { OrderHistoryContainer } from './style';
 
 const OrderHistory = () => {

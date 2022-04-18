@@ -13,10 +13,10 @@ function MemberLogin() {
   const [userPasswordInputValue, setUserPasswordInputValue] = useState('');
   const [idErrorText, setIdErrorText] = useState('');
   const [passwordErrorText, setPasswordErrorText] = useState('');
-  const [isModalNotice, setIsModalNotice] = useState(false);
+  // const [isModalNotice, setIsModalNotice] = useState(false);
   const dispatch = useDispatch();
 
-  const onSubmitLogin = useCallback(() => {
+  const onSubmitLogin = useCallback(async () => {
     if (!userIdInputValue) {
       setIdErrorText('아이디를 입력해주세요.');
       return;
@@ -26,21 +26,24 @@ function MemberLogin() {
       setPasswordErrorText('비밀번호를 입력해주세요.');
       return;
     }
-    dispatch(
+    const res: any = await dispatch(
       LoginFetch({
         userId: userIdInputValue,
         password: userPasswordInputValue,
       }),
     );
-    setIsModalNotice(true);
+
+    if (res.meta.requestStatus == 'rejected')
+      setIdErrorText('아이디 또는 패스워드를 확인해주세요');
   }, [userIdInputValue, userPasswordInputValue]);
 
   const onChangePassword = useCallback(
     (e) => {
       setUserPasswordInputValue(e.target.value);
       if (passwordErrorText) setPasswordErrorText('');
+      if (idErrorText) setIdErrorText('');
     },
-    [passwordErrorText],
+    [passwordErrorText, idErrorText],
   );
 
   const onKeyUpSubmit = useCallback(
@@ -54,14 +57,14 @@ function MemberLogin() {
   return (
     <>
       <MemberLoginContainer>
-        {isModalNotice && (
+        {/* {isModalNotice && (
           <ModalNotice
             setIsModalNotice={setIsModalNotice}
             noticeText={`
         로그인에 실패하였습니다.
         아이디 또는 패스워드를 확인해주세요.`}
           />
-        )}
+        )} */}
         <label className="w-full">
           <span className="text-[1rem]">아이디</span>
           <BasicInput

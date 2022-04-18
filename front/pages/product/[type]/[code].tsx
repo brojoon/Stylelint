@@ -208,22 +208,22 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
       return;
     }
     if (selectedProductArr) {
+      const dataArr = [];
       for (let i = 0; i < selectedProductArr.length; i++) {
-        await dispatch(
-          BasketAddFetch([
-            {
-              userId: user.userId,
-              product_name: data.name,
-              price: data.price,
-              quantity: selectedProductArr[i].quantity,
-              size: selectedProductArr[i].size,
-              color: selectedProductArr[i].color,
-              image: data.image,
-            },
-          ]),
-        );
+        dataArr.push({
+          userId: user.userId,
+          product_name: data.name,
+          price: data.price,
+          quantity: selectedProductArr[i].quantity,
+          size: selectedProductArr[i].size,
+          color: selectedProductArr[i].color,
+          image: data.image,
+        });
       }
-      setSelectedProductArr([]);
+      const res: any = await dispatch(BasketAddFetch(dataArr));
+      if (res.meta.requestStatus === 'fulfilled') {
+        setSelectedProductArr([]);
+      }
     }
   }, [selectedProductArr, user, BasketAddFetch]);
 
@@ -233,9 +233,10 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
       return;
     }
     if (selectedProductArr) {
-      await dispatch(PaymentSaveFetch(selectedProductArr));
-
-      router.push(baseFrontUrl + '/payment');
+      const res: any = await dispatch(PaymentSaveFetch(selectedProductArr));
+      if (res?.meta?.requestStatus === 'fulfilled') {
+        router.push(baseFrontUrl + '/payment');
+      }
     }
   }, [selectedProductArr, baseFrontUrl, dispatch, user, PaymentSaveFetch]);
 
