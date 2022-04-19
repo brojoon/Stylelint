@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { MemberLoginContainer } from './style';
 
 import ModalNotice from '@components/Modals/ModalNotice';
+import { baseApiUrl } from '@utils/utils/const';
 
 function MemberLogin() {
   const [userIdInputValue, setUserIdInputValue] = useState('');
@@ -52,8 +53,12 @@ function MemberLogin() {
     },
     [onSubmitLogin],
   );
-  const onClickKakaoBtn = useCallback(() => {}, []);
-  const onClickGoogleBtn = useCallback(() => {}, []);
+  const onClickKakaoBtn = useCallback(() => {
+    window.location.href = `${baseApiUrl}/api/auth/kakao`;
+  }, []);
+  const onClickGoogleBtn = useCallback(() => {
+    window.location.href = `${baseApiUrl}/api/auth/google`;
+  }, []);
   return (
     <>
       <MemberLoginContainer>

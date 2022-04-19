@@ -5,6 +5,7 @@ import {
   Get,
   HttpCode,
   Post,
+  Req,
   Res,
   UseGuards,
   UseInterceptors,
@@ -18,6 +19,8 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 import { User } from 'src/common/decorators/user.decorator';
 import { UserLoginDto } from 'src/users/dto/user.login.dto';
 import { JoinRequestDto } from 'src/users/dto/join.request.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { jwtConstants } from './constants';
 
 @ApiTags('AUTH')
 @UseInterceptors(undefinedToNullIntercepter)
@@ -61,5 +64,31 @@ export class AuthController {
     if (result) {
       return 'ok';
     }
+  }
+
+  @UseGuards(AuthGuard('google'))
+  @Get('google')
+  async googleAuthor() {}
+
+  @UseGuards(AuthGuard('google'))
+  @Get('google/redirect')
+  async googleRedirect(@Req() req, @Res() res) {
+    const token = await this.authService.login(req.user);
+    res.cookie('stylelint', token.access_token, { httpOnly: true });
+    console.log('여깅ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ');
+    res.status(302).redirect(jwtConstants.HOME);
+  }
+
+  @UseGuards(AuthGuard('kakao'))
+  @Get('kakao')
+  async kakaoAuthor() {}
+
+  @UseGuards(AuthGuard('kakao'))
+  @Get('kakao/redirect')
+  async kakaoRedirect(@Req() req, @Res() res) {
+    res.clearCookie('stylelint');
+    const token = await this.authService.login(req.user);
+    res.cookie('stylelint', token.access_token, { httpOnly: true });
+    res.status(302).redirect(jwtConstants.HOME);
   }
 }

@@ -32,11 +32,24 @@ export class Users {
     example: '123123',
     required: true,
   })
-  @Column('varchar', { name: 'password', length: 100, select: false })
+  @Column('varchar', {
+    name: 'password',
+    length: 100,
+    select: false,
+    nullable: true,
+  })
   password: string;
 
   // @Column('varchar', { name: 'zender', length: 5 })
   // zender: string;
+
+  @IsString()
+  @ApiProperty({
+    description: '유저닉네임',
+    example: '홍길동',
+  })
+  @Column('char', { name: 'userNickname', length: 30, nullable: true })
+  userNickname: string;
 
   @Column('char', { name: 'address', length: 100, nullable: true })
   address: string;
@@ -44,7 +57,7 @@ export class Users {
   // @Column('varchar', { name: 'phoneNumber', length: 20 })
   // phoneNumber: string;
 
-  @Column('char', { name: 'email', length: 30 })
+  @Column('char', { name: 'email', length: 30, nullable: true })
   email: string;
 
   @Column('char', {
