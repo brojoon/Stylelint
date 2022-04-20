@@ -43,14 +43,6 @@ export class Users {
   // @Column('varchar', { name: 'zender', length: 5 })
   // zender: string;
 
-  @IsString()
-  @ApiProperty({
-    description: '유저닉네임',
-    example: '홍길동',
-  })
-  @Column('char', { name: 'userNickname', length: 30, nullable: true })
-  userNickname: string;
-
   @Column('char', { name: 'address', length: 100, nullable: true })
   address: string;
 
@@ -66,6 +58,14 @@ export class Users {
     nullable: true,
   })
   phone_number: string;
+
+  @IsString()
+  @ApiProperty({
+    description: '유저닉네임',
+    example: '홍길동',
+  })
+  @Column('char', { name: 'nickname', length: 30 })
+  nickname: string;
 
   @CreateDateColumn()
   createdAt: Date;

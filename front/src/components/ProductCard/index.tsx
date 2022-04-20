@@ -171,7 +171,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
           <div className="flex justify-between items-center text-[#969696] text-[7.5px]">
             <div className="flex">
               <span className="flex items-center after:w-[1px] after:h-[6.25px] after:bg-[#e8e8e8] after:mx-[5px] after:inline-block">
-                구매수 {data.perchase_quantity}
+                판매수 {data.perchase_quantity}
               </span>
               <span>리뷰수 207</span>
             </div>

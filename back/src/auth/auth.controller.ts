@@ -60,6 +60,7 @@ export class AuthController {
       body.password,
       body.address,
       body.email,
+      body.userId,
     );
     if (result) {
       return 'ok';
@@ -75,7 +76,6 @@ export class AuthController {
   async googleRedirect(@Req() req, @Res() res) {
     const token = await this.authService.login(req.user);
     res.cookie('stylelint', token.access_token, { httpOnly: true });
-    console.log('여깅ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ');
     res.status(302).redirect(jwtConstants.HOME);
   }
 
@@ -86,7 +86,6 @@ export class AuthController {
   @UseGuards(AuthGuard('kakao'))
   @Get('kakao/redirect')
   async kakaoRedirect(@Req() req, @Res() res) {
-    res.clearCookie('stylelint');
     const token = await this.authService.login(req.user);
     res.cookie('stylelint', token.access_token, { httpOnly: true });
     res.status(302).redirect(jwtConstants.HOME);

@@ -26,6 +26,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
 
     const info = {
       oauthId: id,
+      userId: id,
       username: profile?.name?.givenName,
       email: profile?.emails[0]?.value,
     };
@@ -39,7 +40,8 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
       info.oauthId,
       process.env.PASSWORD,
       '',
-      info.email,
+      info?.email,
+      info?.username,
     );
     if (result) return info;
     else console.log('(google strategy validation 함수에서) result값이 false');

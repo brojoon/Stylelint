@@ -4,6 +4,7 @@ export interface IUser {
   address: string;
   email: string;
   phone_number: string;
+  nickname: string;
 }
 
 export interface IProductSubImg {

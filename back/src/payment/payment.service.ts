@@ -7,7 +7,9 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
+import { Connection, Repository, getRepository } from 'typeorm';
+import { Product } from 'src/entities/product/product.info';
+import { query } from 'express';
 
 @Injectable()
 export class PaymentService {
@@ -19,7 +21,7 @@ export class PaymentService {
     private connection: Connection,
   ) {}
 
-  async PaymentInfo() {
+  async PaymentInfo(userId) {
     try {
       const result = await this.PaymentRepository.find({
         select: [
@@ -33,6 +35,7 @@ export class PaymentService {
           'image',
         ],
         where: {
+          userId: userId,
           state: false,
         },
       });
@@ -52,7 +55,7 @@ export class PaymentService {
     }
   }
 
-  async PaymentDoneInfo() {
+  async PaymentDoneInfo(userId) {
     try {
       const result = await this.PaymentRepository.find({
         select: [
@@ -70,6 +73,7 @@ export class PaymentService {
         ],
         where: {
           state: true,
+          userId: userId,
         },
       });
       if (result.length < 1)
@@ -89,15 +93,17 @@ export class PaymentService {
     }
   }
 
-  async PaymentInfoSave(data) {
+  async PaymentInfoSave(data, userId) {
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
       await queryRunner.manager.getRepository(Payment).delete({
+        userId: userId,
         state: false,
       });
-      return await queryRunner.manager.getRepository(Payment).save(data);
+      await queryRunner.manager.getRepository(Payment).save(data);
+      await queryRunner.commitTransaction();
     } catch (error) {
       await queryRunner.rollbackTransaction();
       throw error;
@@ -106,14 +112,50 @@ export class PaymentService {
     }
   }
 
-  async PaymentDoneUpdate(data) {
+  async PaymentDoneUpdate(data, userId) {
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
+      const productsInfo = await queryRunner.manager
+        .getRepository(Payment)
+        .find({
+          state: false,
+          userId: userId,
+        });
+      const products = [];
+
+      for (let i = 0; i < productsInfo.length; i++) {
+        let isOverlap = false;
+        for (let j = 0; j < products?.length; j++) {
+          if (productsInfo[i].product_name === products[j].name) {
+            isOverlap = true;
+            products[j].perchase_quantity += productsInfo[i].quantity;
+          }
+        }
+        if (!isOverlap)
+          products.push(
+            await queryRunner.manager.getRepository(Product).findOne({
+              name: productsInfo[i].product_name,
+            }),
+          );
+      }
+      for (let i = 0; i < products.length; i++) {
+        await queryRunner.manager.getRepository(Product).update(
+          {
+            name: products[i].name,
+          },
+          {
+            perchase_quantity:
+              products[i].perchase_quantity + productsInfo[i].quantity,
+          },
+        );
+      }
+
       await queryRunner.manager.getRepository(Payment).update(
         {
           state: false,
+          userId: userId,
         },
         {
           state: true,
@@ -123,6 +165,7 @@ export class PaymentService {
           createdAt: new Date(),
         },
       );
+
       const result = await queryRunner.manager
         .getRepository(Basket)
         .delete(data.basket_numbers);

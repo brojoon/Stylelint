@@ -133,7 +133,10 @@ const Profile = () => {
       setNameErrorText('연락처를 올바르게 입력해주세요');
       return;
     }
-    if (!inputEmailHead || !inputEmailSub) {
+    if (
+      (!inputEmailHead && inputEmailSub) ||
+      (inputEmailHead && !inputEmailSub)
+    ) {
       setEmailErrorText('이메일을 입력 해주세요');
       return;
     }
@@ -153,16 +156,15 @@ const Profile = () => {
     } else {
       addressInput = addressInputValue + '/' + addressSubInputValue;
     }
-
-    dispatch(
-      UserInfoUpdateFetch({
-        userId: user.userId,
-        password: inputPassword,
-        address: addressInput,
-        email: inputEmailHead + '@' + inputEmailSub,
-        phone_number: inputPhoneNumber,
-      }),
-    );
+    const data: any = {
+      userId: user.userId,
+    };
+    if (inputPassword) data.password = inputPassword;
+    if (addressInput) data.address = addressInput;
+    if (inputEmailHead && inputEmailSub)
+      data.email = inputEmailHead + '@' + inputEmailSub;
+    if (inputPhoneNumber) data.phone_number = inputPhoneNumber;
+    dispatch(UserInfoUpdateFetch(data));
   }, [
     user,
     inputPassword,
@@ -195,41 +197,67 @@ const Profile = () => {
               <h3 className="my-title">회원정보 변경</h3>
               <div className="my-info-header">
                 <h4>
-                  <b>{user?.userId}</b>님의 회원정보
+                  <b>{user?.nickname}</b>님의 회원정보
                 </h4>
               </div>
               <div className="my-info-wrapper">
-                <div className="member-id-box">
-                  <dl>
-                    <dt>아이디</dt>
-                    <dd>{user?.userId}</dd>
-                  </dl>
-                </div>
+                {user && user?.nickname == user?.userId ? (
+                  <div className="member-id-box">
+                    <dl>
+                      <dt>아이디</dt>
+                      <dd>{user?.nickname}</dd>
+                    </dl>
+                  </div>
+                ) : null}
+
                 <label className="mb-3 mt-5">
                   <span className="text-[1rem]">비밀번호</span>
-                  <BasicInput
-                    setInputValue={setInputPassword}
-                    setErrorText={setPasswordErrorText}
-                    errorText={passwordErrorText}
-                    inputValue={inputPassword}
+                  {user && user?.id !== user?.nickname ? (
+                    <input
+                      disabled
+                      type="password"
+                      name="password"
+                      placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                      maxLength={16}
+                      className="h-[50px] w-full outline-neutral-400 rounded px-3 border "
+                    />
+                  ) : (
+                    <BasicInput
+                      setInputValue={setInputPassword}
+                      setErrorText={setPasswordErrorText}
+                      errorText={passwordErrorText}
+                      inputValue={inputPassword}
+                      type="password"
+                      name="password"
+                      placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                      maxLength={16}
+                      style="h-[50px] w-full outline-neutral-400 rounded px-3 border "
+                    />
+                  )}
+                </label>
+                {user && user?.id !== user?.nickname ? (
+                  <input
+                    disabled
                     type="password"
                     name="password"
-                    placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                    placeholder="비밀번호 확인"
                     maxLength={16}
-                    style="h-[50px] w-full outline-neutral-400 rounded px-3 border "
+                    className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
                   />
-                </label>
-                <BasicInput
-                  setInputValue={setInputPasswordCheck}
-                  errorText={passwordCheckErrorText}
-                  setErrorText={setPasswordCheckErrorText}
-                  inputValue={inputPasswordCheck}
-                  type="password"
-                  name="password"
-                  placeholder="비밀번호 확인"
-                  maxLength={16}
-                  style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
-                />
+                ) : (
+                  <BasicInput
+                    setInputValue={setInputPasswordCheck}
+                    errorText={passwordCheckErrorText}
+                    setErrorText={setPasswordCheckErrorText}
+                    inputValue={inputPasswordCheck}
+                    type="password"
+                    name="password"
+                    placeholder="비밀번호 확인"
+                    maxLength={16}
+                    style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+                  />
+                )}
+
                 <label className="mb-2.5">
                   <span className="text-[1rem]">연락처</span>
                   <input

@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { User } from 'src/common/decorators/user.decorator';
 import { PaymentService } from './payment.service';
 
 @ApiTags('PAYMENT')
@@ -23,8 +24,8 @@ export class PaymentController {
   })
   @HttpCode(200)
   @Get()
-  async getPayment() {
-    return this.paymentService.PaymentInfo();
+  async getPayment(@User() user) {
+    return this.paymentService.PaymentInfo(user?.userId);
   }
 
   @ApiOperation({ summary: '완료된 결제 정보 가져오기' })
@@ -34,8 +35,8 @@ export class PaymentController {
   })
   @HttpCode(200)
   @Get('done')
-  async getPaymentDone() {
-    return this.paymentService.PaymentDoneInfo();
+  async getPaymentDone(@User() user) {
+    return this.paymentService.PaymentDoneInfo(user?.userId);
   }
 
   @ApiOperation({ summary: '결제전 정보 저장' })
@@ -45,8 +46,8 @@ export class PaymentController {
   })
   @HttpCode(200)
   @Post('save')
-  async PaymentSave(@Body() body) {
-    return this.paymentService.PaymentInfoSave(body);
+  async PaymentSave(@Body() body, @User() user) {
+    return this.paymentService.PaymentInfoSave(body, user?.userId);
   }
 
   @ApiOperation({ summary: '결제후 정보 저장' })
@@ -56,7 +57,7 @@ export class PaymentController {
   })
   @HttpCode(200)
   @Post('save/done')
-  async PaymentDoneSave(@Body() body) {
-    return this.paymentService.PaymentDoneUpdate(body);
+  async PaymentDoneSave(@Body() body, @User() user) {
+    return this.paymentService.PaymentDoneUpdate(body, user?.userId);
   }
 }

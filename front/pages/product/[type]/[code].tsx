@@ -270,7 +270,7 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
               <table className="mt-[25px]">
                 <tbody className="text-[#333333] text-[0.875rem]">
                   <tr>
-                    <th className="pr-[1.75rem] pr-[1.75rem]">구매자수</th>
+                    <th className="pr-[1.75rem] pr-[1.75rem]">판매수량</th>
                     <td>{data?.perchase_quantity}</td>
                   </tr>
                   <tr>

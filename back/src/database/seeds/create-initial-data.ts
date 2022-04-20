@@ -15,7 +15,7 @@ export class CreateInitialData implements Seeder {
         {
           id: 1,
           userId: 'brojoon',
-          userNickname: 'brojoon',
+          nickname: 'brojoon',
           password: '123123',
           address: '서울시 송파구 송파대로 567 530동 310호',
           email: 'ydngjink1234@gmail.com',

@@ -127,7 +127,7 @@ const Basket = () => {
         router.push(baseFrontUrl + '/payment');
       }
     });
-  }, [data, productCardArr]);
+  }, [data, productCardArr, user]);
   return (
     <>
       {isLoading ? (

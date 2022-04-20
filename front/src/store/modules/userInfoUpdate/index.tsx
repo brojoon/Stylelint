@@ -13,11 +13,12 @@ interface userInfoUpdateRequest {
   address: string | null;
   email: string;
   phone_number: string;
+  nickname: string;
 }
 
 export const UserInfoUpdateFetch = createAsyncThunk(
   'user/UserInfoUpdateFetch',
-  async (data: userInfoUpdateRequest) => {
+  async (data: any) => {
     const response = await axios.post('/api/user/profile', data);
     return response?.data;
   },

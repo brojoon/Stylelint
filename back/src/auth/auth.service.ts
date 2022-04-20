@@ -32,14 +32,19 @@ export class AuthService {
   }
 
   async login(user: any) {
-    console.log('userrrrrrrrrrrrrrrrrrrrr: ', user);
     const payload = { userId: user.userId };
     return {
       access_token: this.jwtService.sign(payload),
     };
   }
 
-  async join(userId: string, password: string, address: string, email: string) {
+  async join(
+    userId: string,
+    password: string,
+    address: string,
+    email: string,
+    nickname: string,
+  ) {
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
@@ -56,6 +61,7 @@ export class AuthService {
         password: hashedPassword,
         address,
         email,
+        nickname,
       });
       await queryRunner.commitTransaction();
       return true;

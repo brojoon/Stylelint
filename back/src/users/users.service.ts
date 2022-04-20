@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
+import bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -29,7 +30,14 @@ export class UsersService {
     if (!userId) return false;
     try {
       const result = await this.usersRepository.findOne({
-        select: ['userId', 'password', 'address', 'email', 'phone_number'],
+        select: [
+          'userId',
+          'password',
+          'address',
+          'email',
+          'phone_number',
+          'nickname',
+        ],
         where: { userId },
       });
       if (!result) throw new NotFoundException('유저 정보 없음');
@@ -49,12 +57,15 @@ export class UsersService {
 
   async userInfoUpdate(data) {
     try {
+      if (data?.password) data.password = await bcrypt.hash(data.password, 12);
+
       const result = await this.usersRepository.update(
         {
           userId: data.userId,
         },
         data,
       );
+
       return result;
     } catch (error) {
       if (

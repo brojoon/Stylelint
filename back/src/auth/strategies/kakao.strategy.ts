@@ -1,7 +1,6 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-kakao';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { jwtConstants } from '../constants';
 import { AuthService } from '../auth.service';
 
 @Injectable()
@@ -23,8 +22,9 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
 
     const info = {
       oauthId: id,
+      userId: id,
       username: profile?.username,
-      email: profile._json.kakao_account?.email,
+      email: profile?._json.kakao_account?.email,
     };
     if (!info) throw new UnauthorizedException();
     const user = await this.authService.validateUser(
@@ -36,7 +36,8 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
       info.oauthId,
       process.env.PASSWORD,
       '',
-      info.email,
+      info?.email,
+      info?.username,
     );
     if (result) return info;
     else console.log('(google strategy validation 함수에서) result값이 false');

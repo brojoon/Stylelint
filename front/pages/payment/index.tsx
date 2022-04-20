@@ -136,7 +136,7 @@ const Payment = () => {
       }
       const res: any = await dispatch(PaymentDoneUpdateFetch(post));
       if (res?.meta?.requestStatus === 'fulfilled') {
-        const res2: any = dispatch(
+        const res2: any = await dispatch(
           PaymentRecentSaveFetch({
             userId: user.userId,
             receiver: postName,
@@ -146,6 +146,7 @@ const Payment = () => {
             phone_number: postPhoneNumber,
           }),
         );
+
         if (res2?.meta?.requestStatus === 'fulfilled') {
           router.push(baseFrontUrl + '/payment/result');
         }
