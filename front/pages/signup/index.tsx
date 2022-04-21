@@ -135,37 +135,42 @@ const signup = () => {
                   style="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
                 />
               </label>
-              <label>
-                <span className="text-[1rem]">비밀번호</span>
+              <form>
+                <label>
+                  <span className="text-[1rem]">비밀번호</span>
+                  <BasicInput
+                    setInputValue={setInputPassword}
+                    errorText={passwordErrorText}
+                    setErrorText={setPasswordErrorText}
+                    inputValue={inputPassword}
+                    type="password"
+                    name="password"
+                    placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                    maxLength={16}
+                    style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+                  />
+                </label>
+              </form>
+              <form>
                 <BasicInput
-                  setInputValue={setInputPassword}
-                  errorText={passwordErrorText}
-                  setErrorText={setPasswordErrorText}
-                  inputValue={inputPassword}
+                  setInputValue={setInputPasswordCheck}
+                  errorText={passwordCheckErrorText}
+                  setErrorText={setPasswordCheckErrorText}
+                  inputValue={inputPasswordCheck}
                   type="password"
                   name="password"
-                  placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                  placeholder="비밀번호 확인"
                   maxLength={16}
                   style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
                 />
-              </label>
-              <BasicInput
-                setInputValue={setInputPasswordCheck}
-                errorText={passwordCheckErrorText}
-                setErrorText={setPasswordCheckErrorText}
-                inputValue={inputPasswordCheck}
-                type="password"
-                name="password"
-                placeholder="비밀번호 확인"
-                maxLength={16}
-                style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
-              />
+              </form>
               <label>
                 이메일
                 <div className="flex items-center">
                   <input
                     onChange={onChangeEmail}
                     value={inputEmailHead}
+                    autoComplete="new-password"
                     type="text"
                     name="email"
                     placeholder="이메일 앞자리"
@@ -176,6 +181,7 @@ const signup = () => {
                   <input
                     onChange={onChangeSubEmail}
                     value={inputEmailSub}
+                    autoComplete="new-password"
                     type="text"
                     name="emailsub"
                     placeholder="이메일 뒷자리"

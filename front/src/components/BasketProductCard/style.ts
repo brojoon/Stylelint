@@ -101,14 +101,14 @@ export const BasketProductContainer = styled.section<{
   .basket-product-count > button:nth-child(1) {
     width: 21px;
     height: 21px;
-    background: url('./img/basket_product_count.png') no-repeat;
+    background: url('/img/basket_product_count.png') no-repeat;
     background-position: 0 0;
   }
 
   .basket-product-count > button:nth-child(3) {
     width: 21px;
     height: 21px;
-    background: url('./img/basket_product_count.png') no-repeat;
+    background: url('/img/basket_product_count.png') no-repeat;
     background-position: -26px 0;
   }
 
@@ -139,7 +139,7 @@ export const BasketProductContainer = styled.section<{
     height: 14px;
     ${(props) => (props.IsTablet1024 ? 'margin-left:0;' : 'margin-left: 14px;')}
     ${(props) => (props.IsTablet1024 ? 'margin-top: 8px;' : '')}
-    background: url('./img/basket_product_count.png') no-repeat;
+    background: url('/img/basket_product_count.png') no-repeat;
     background-position: -102px -60px;
   }
 

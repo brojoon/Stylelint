@@ -80,8 +80,8 @@ const Header = () => {
     Router.push('/orderHistory');
   }, [isTablet1024]);
 
-  const onClickLogout = useCallback(() => {
-    dispatch(LogoutFetch());
+  const onClickLogout = useCallback(async () => {
+    await dispatch(LogoutFetch());
     setIsMobileProfileBar(false);
     refetch();
   }, [dispatch, LogoutFetch, removeToken, useQuery]);

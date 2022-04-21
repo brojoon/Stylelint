@@ -84,27 +84,31 @@ function MemberLogin() {
             style="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
           />
         </label>
-        <label className="w-full">
-          <span className="text-[1rem]">비밀번호</span>
-          <input
-            onChange={onChangePassword}
-            value={userPasswordInputValue}
-            onKeyUp={onKeyUpSubmit}
-            type="password"
-            name="password"
-            placeholder="비밀번호를 입력해 주세요."
-            maxLength={16}
-            className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border"
-          />
-          {passwordErrorText && (
-            <p className="error-text">{passwordErrorText}</p>
-          )}
-        </label>
+        <form>
+          <label className="w-full">
+            <span className="text-[1rem]">비밀번호</span>
+            <input
+              onChange={onChangePassword}
+              value={userPasswordInputValue}
+              onKeyUp={onKeyUpSubmit}
+              type="password"
+              name="password"
+              placeholder="비밀번호를 입력해 주세요."
+              maxLength={16}
+              className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border"
+              autoComplete="new-password"
+            />
+            {passwordErrorText && (
+              <p className="error-text">{passwordErrorText}</p>
+            )}
+          </label>
+        </form>
 
         <div className="flex justify-between items-center w-[100%] mb-8">
           <label className="flex justify-center items-center cursor-pointer text-sm">
             <input
               className="cursor-pointer w-[0.9rem] h-[0.9rem]"
+              autoComplete="new-password"
               type="checkbox"
               value="아이디 저장"
             />

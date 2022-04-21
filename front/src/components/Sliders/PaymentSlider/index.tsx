@@ -1,9 +1,16 @@
 import { useIsTablet } from '@utils/Hooks';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { PaymentSliderContainer } from './style';
 
 const PaymentSlider = () => {
   const [slideIndex, setSlideIndex] = useState(1);
+  const cardInfoArray = useRef([
+    ['신한카드', '9410 61** **** 3323'],
+    ['토스', '4402 61** **** 3323'],
+    ['우리은행', '1002 *** 242312'],
+    ['카카오뱅크', '1020 **** 82213'],
+    ['SK페이', '9410 61** **** 3323'],
+  ]);
   const onClickPrev = useCallback(() => {
     setSlideIndex((prev) => prev - 1);
   }, []);
@@ -22,47 +29,17 @@ const PaymentSlider = () => {
         </div>
         <div className="slide-container">
           <ul>
-            <li>
-              <div>
+            {cardInfoArray.current?.map((data: string[], index: number) => (
+              <li key={index}>
                 <div>
-                  <p>신한카드</p>
-                  <p>9410 61** **** 3323</p>
+                  <div>
+                    <p>{data[0]}</p>
+                    <p>{data[1]}</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div>
-                  <p>토스</p>
-                  <p>4402 61** **** 3323</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div>
-                  <p>우리은행</p>
-                  <p>1002***242312</p>
-                </div>
-              </div>
-            </li>
+              </li>
+            ))}
 
-            <li>
-              <div>
-                <div>
-                  <p>카카오뱅크</p>
-                  <p>1020****82213</p>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div>
-                <div>
-                  <p>SK페이</p>
-                  <p>9410 61** **** 3323</p>
-                </div>
-              </div>
-            </li>
             {/* <li>
               <div>
                 <button>카드 등록</button>

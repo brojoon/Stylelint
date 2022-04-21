@@ -1,4 +1,3 @@
-import { ProductSearchCardContainer } from '@components/ProductSearchCard/style';
 import { useIsMobile } from '@utils/Hooks';
 import Link from 'next/link';
 import React, { useCallback, useState, VFC } from 'react';
@@ -10,6 +9,14 @@ interface Props {
 
 const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
   const StarCount = 5;
+  const StarText = [
+    '선택하세요',
+    '(별로에요)',
+    '(그저그래요)',
+    '(괜찮아요)',
+    '(좋아요)',
+    '(최고예요)',
+  ];
   const [textValue, setTextValue] = useState('');
   const [reviewStarIndex, setReviewStarIndex] = useState(0);
   const [reviewStarIndexSave, setReviewStarIndexSave] = useState(0);
@@ -63,18 +70,27 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
             onClick={onClickModalClose}
           ></button>
           <div>
+            <h3>상품은 만족하셨나요?</h3>
             <div className="start-img-wrapper" onClick={onClickReviewStart}>
               {[...new Array(StarCount)].map((data, index) => (
                 <span
+                  key={index}
                   id={`start-${index + 1}`}
                   onMouseEnter={onMouseEnterReviewStar}
                   onMouseLeave={onMouseLeaveReviewStar}
                 ></span>
               ))}
             </div>
-            <h3>상품은 만족하셨나요?</h3>
+            <div className="review-start-text-wrapper">
+              {reviewStarIndex ? <span>{reviewStarIndex}점</span> : null}
+              <span>{StarText[reviewStarIndex]}</span>
+            </div>
             <div className="modal-text-wrapper">
-              <textarea onChange={onChangeReviewText} value={textValue} />
+              <textarea
+                placeholder="50자 이내로 입력해주세요"
+                onChange={onChangeReviewText}
+                value={textValue}
+              />
             </div>
             <button>등록</button>
           </div>

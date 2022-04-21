@@ -113,7 +113,7 @@ export const OrderHistoryProductContainer = styled.section<{
     width: 14px;
     height: 14px;
     margin-left: 14px;
-    background: url('./img/basket_product_count.png') no-repeat;
+    background: url('/img/basket_product_count.png') no-repeat;
     background-position: -102px -60px;
   }
 `;

@@ -11,11 +11,12 @@ interface Props {
 }
 
 const ProductDetailSlider: VFC<Props> = ({ ssrProductData }) => {
-  const [productSlideIndex, setProductSlideIndex] = useState(2);
+  const startSlideIndex = 2;
+  const endSlideIndex = 9;
+  const [productSlideIndex, setProductSlideIndex] = useState(startSlideIndex);
   const [productSubSlidePosX, setProductSubSlidePosX] = useState('0');
   const router = useRouter();
   const { type, code } = router.query;
-
   const { data, isLoading, error } = useQuery(
     'productDetailInfo',
     () => fetcher(`api/product/${code}`),
@@ -25,28 +26,28 @@ const ProductDetailSlider: VFC<Props> = ({ ssrProductData }) => {
   );
   const onClickProductSlideLeft = useCallback(() => {
     setProductSlideIndex((prev) => {
-      if (prev == 2) {
-        setProductSlideIndex(9);
+      if (prev == startSlideIndex) {
+        setProductSlideIndex(endSlideIndex);
         setProductSubSlidePosX('-37.5');
       } else if (prev == 5) {
         setProductSlideIndex(4);
         setProductSubSlidePosX('0');
       }
-      return prev <= 2 ? 9 : prev - 1;
+      return prev <= startSlideIndex ? endSlideIndex : prev - 1;
     });
-  }, []);
+  }, [startSlideIndex, endSlideIndex]);
   const onClickProductSlideRight = useCallback(() => {
     setProductSlideIndex((prev) => {
       if (prev == 6) {
         setProductSlideIndex(7);
         setProductSubSlidePosX('-37.5');
-      } else if (prev == 9) {
-        setProductSlideIndex(2);
+      } else if (prev == endSlideIndex) {
+        setProductSlideIndex(startSlideIndex);
         setProductSubSlidePosX('0');
       }
-      return prev >= 9 ? 2 : prev + 1;
+      return prev >= endSlideIndex ? startSlideIndex : prev + 1;
     });
-  }, []);
+  }, [startSlideIndex, endSlideIndex]);
 
   const onClickSubSlideLeftBtn = useCallback(() => {
     setProductSubSlidePosX('0');
@@ -65,7 +66,8 @@ const ProductDetailSlider: VFC<Props> = ({ ssrProductData }) => {
         {data && (
           <img
             src={`${
-              baseApiUrl + data.productSubImg[productSlideIndex - 2]?.subimage
+              baseApiUrl +
+              data.productSubImg[productSlideIndex - startSlideIndex]?.subimage
             }`}
           />
         )}
@@ -96,10 +98,10 @@ const ProductDetailSlider: VFC<Props> = ({ ssrProductData }) => {
                 {data?.productSubImg?.map((subImg: any, index: number) => {
                   if (index > 7) return;
                   return (
-                    <div>
+                    <div key={index}>
                       <img
                         onClick={onClickSubSlideImg}
-                        data-index={`${index + 2}`}
+                        data-index={`${index + startSlideIndex}`}
                         src={`${baseApiUrl + subImg.subimage}`}
                       />
                     </div>

@@ -1,6 +1,6 @@
 import { IProducts } from '@typings/db';
 import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
-import React, { useCallback, useEffect, useState, VFC } from 'react';
+import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 import { ProductCardContainer, ProductCardIconWrapper } from './style';
 import Router, { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -23,6 +23,20 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
   const [isProductDibs, setIsProductDibs] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  // const cardDecoColorRef = useRef([
+  //   '#EBCBBD',
+  //   '#4A8FA9',
+  //   '#DA3737',
+  //   '#B6E0EF',
+  //   '#464646',
+  //   '#923B55',
+  //   '#79B0E4',
+  //   '#E0A564',
+  //   '#BF95C7',
+  //   '#FFF5A0',
+  //   '#FFFDF0',
+  //   '#E4CBAD',
+  // ]);
 
   const {
     data: user,
@@ -108,20 +122,20 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
     [router, baseFrontUrl, data, isClickProductImg],
   );
 
-  const CardDecoColor = [
-    '#EBCBBD',
-    '#4A8FA9',
-    '#DA3737',
-    '#B6E0EF',
-    '#464646',
-    '#923B55',
-    '#79B0E4',
-    '#E0A564',
-    '#BF95C7',
-    '#FFF5A0',
-    '#FFFDF0',
-    '#E4CBAD',
-  ];
+  // const CardDecoColor = [
+  //   '#EBCBBD',
+  //   '#4A8FA9',
+  //   '#DA3737',
+  //   '#B6E0EF',
+  //   '#464646',
+  //   '#923B55',
+  //   '#79B0E4',
+  //   '#E0A564',
+  //   '#BF95C7',
+  //   '#FFF5A0',
+  //   '#FFFDF0',
+  //   '#E4CBAD',
+  // ];
 
   return (
     <>
@@ -153,13 +167,42 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
         </div>
         <div>
           <div className="flex mt-[10px] mb-[5px]">
-            {CardDecoColor.map((color) => {
-              return (
-                <span
-                  className={`w-[17px] h-[9px] ml-[3px] bg-[${color}] border border-[#efefef] rounded-[3px] block`}
-                ></span>
-              );
-            })}
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#EBCBBD] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#4A8FA9] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#DA3737] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#B6E0EF] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#464646] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#923B55] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#79B0E4] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#E0A564] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#BF95C7] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#FFF5A0] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#FFFDF0] border border-[#efefef] rounded-[3px] block`}
+            ></span>
+            <span
+              className={`w-[17px] h-[9px] ml-[3px] bg-[#E4CBAD] border border-[#efefef] rounded-[3px] block`}
+            ></span>
           </div>
           <h3 className="text-[#969696] text-[0.75rem]">
             스타일린트[자체제작]

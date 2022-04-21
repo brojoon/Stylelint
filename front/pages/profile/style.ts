@@ -135,7 +135,7 @@ export const ProfileContainer = styled.div`
     height: 24px;
     overflow: hidden;
     display: inline-block;
-    background: url(./img/g_sprite__checkout.png) no-repeat;
+    background: url(/img/g_sprite__checkout.png) no-repeat;
     background-position: -52px -26px;
     font-size: 0;
     background-size: 300px auto;

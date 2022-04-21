@@ -25,7 +25,7 @@ export const BasketContainer = styled.section<{
     margin: 20px 0;
     ${(props) => (props.IsMobile ? 'text-indent: -9999px;' : '')}
 
-    background: url(./img/purchase_pagenation.png) right -25px no-repeat;
+    background: url(/img/purchase_pagenation.png) right -25px no-repeat;
   }
 
   & .basket-tab-container {
@@ -141,7 +141,7 @@ export const BasketContainer = styled.section<{
     padding-left: 25px;
     display: inline-block;
     cursor: pointer;
-    background: url(./img/input_checkbox_custom.png) no-repeat;
+    background: url(/img/input_checkbox_custom.png) no-repeat;
     background-position: ${(props) =>
       props.IsCheckedAll ? '0px -24px' : '0px 0'};
   }

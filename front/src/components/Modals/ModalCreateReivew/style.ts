@@ -124,7 +124,7 @@ export const ModalBasketContainer = styled.div<{
 
 
   .modal-wrapper > div > h3 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-weight: 600;
     font-size: 1.5rem;
   }

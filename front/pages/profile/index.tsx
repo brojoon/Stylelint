@@ -209,54 +209,57 @@ const Profile = () => {
                     </dl>
                   </div>
                 ) : null}
-
-                <label className="mb-3 mt-5">
-                  <span className="text-[1rem]">비밀번호</span>
-                  {user && user?.id !== user?.nickname ? (
+                <form className="mb-3 mt-5">
+                  <label>
+                    <span className="text-[1rem]">비밀번호</span>
+                    {user && user?.userId !== user?.nickname ? (
+                      <input
+                        disabled
+                        name="password"
+                        placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                        maxLength={16}
+                        className="h-[50px] w-full outline-neutral-400 rounded px-3 border "
+                        autoComplete="new-password"
+                      />
+                    ) : (
+                      <BasicInput
+                        setInputValue={setInputPassword}
+                        setErrorText={setPasswordErrorText}
+                        errorText={passwordErrorText}
+                        inputValue={inputPassword}
+                        type="password"
+                        name="password"
+                        placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                        maxLength={16}
+                        style="h-[50px] w-full outline-neutral-400 rounded px-3 border "
+                      />
+                    )}
+                  </label>
+                </form>
+                <form className="mb-2.5">
+                  {user && user?.userId !== user?.nickname ? (
                     <input
                       disabled
-                      type="password"
                       name="password"
-                      placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                      placeholder="비밀번호 확인"
                       maxLength={16}
-                      className="h-[50px] w-full outline-neutral-400 rounded px-3 border "
+                      className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+                      autoComplete="new-password"
                     />
                   ) : (
                     <BasicInput
-                      setInputValue={setInputPassword}
-                      setErrorText={setPasswordErrorText}
-                      errorText={passwordErrorText}
-                      inputValue={inputPassword}
+                      setInputValue={setInputPasswordCheck}
+                      errorText={passwordCheckErrorText}
+                      setErrorText={setPasswordCheckErrorText}
+                      inputValue={inputPasswordCheck}
                       type="password"
                       name="password"
-                      placeholder="8 ~ 16자 영문, 숫자, 특수문자를 최소 한가지씩 조합"
+                      placeholder="비밀번호 확인"
                       maxLength={16}
-                      style="h-[50px] w-full outline-neutral-400 rounded px-3 border "
+                      style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
                     />
                   )}
-                </label>
-                {user && user?.id !== user?.nickname ? (
-                  <input
-                    disabled
-                    type="password"
-                    name="password"
-                    placeholder="비밀번호 확인"
-                    maxLength={16}
-                    className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
-                  />
-                ) : (
-                  <BasicInput
-                    setInputValue={setInputPasswordCheck}
-                    errorText={passwordCheckErrorText}
-                    setErrorText={setPasswordCheckErrorText}
-                    inputValue={inputPasswordCheck}
-                    type="password"
-                    name="password"
-                    placeholder="비밀번호 확인"
-                    maxLength={16}
-                    style="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
-                  />
-                )}
+                </form>
 
                 <label className="mb-2.5">
                   <span className="text-[1rem]">연락처</span>
@@ -267,6 +270,7 @@ const Profile = () => {
                     maxLength={13}
                     placeholder="-을 제외하고 입력해주세요"
                     className="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
+                    autoComplete="new-password"
                   />
                   {nameErrorText && (
                     <p className="error-text">{nameErrorText}</p>
@@ -284,6 +288,7 @@ const Profile = () => {
                       placeholder="이메일 앞자리"
                       maxLength={15}
                       className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+                      autoComplete="new-password"
                     />
                     <span className="px-2.5">@</span>
                     <input
@@ -294,6 +299,7 @@ const Profile = () => {
                       placeholder="이메일 뒷자리"
                       maxLength={15}
                       className="h-[50px] w-full mb-2.5 outline-neutral-400 rounded px-3 border "
+                      autoComplete="new-password"
                     />
                   </div>
                   {emailErrorText && (
@@ -324,13 +330,19 @@ const Profile = () => {
                     </div>
                     <div>
                       <div className="payment-address-text">
-                        <input type="text" disabled value={addressInputValue} />
+                        <input
+                          type="text"
+                          disabled
+                          value={addressInputValue}
+                          autoComplete="new-password"
+                        />
                         <input
                           type="text"
                           onChange={onChangeSubInput}
                           value={addressSubInputValue}
                           placeholder="상세주소"
                           maxLength={50}
+                          autoComplete="new-password"
                         />
                         {addressErrorText && (
                           <p className="error-text">{addressErrorText}</p>

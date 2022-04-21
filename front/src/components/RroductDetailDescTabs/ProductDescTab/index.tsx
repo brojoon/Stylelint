@@ -23,7 +23,7 @@ const ProductDescTab = () => {
             if (index <= 7) return;
 
             return (
-              <div>
+              <div key={subimg.subimage}>
                 <img
                   src={`${baseApiUrl + subimg.subimage}`}
                   alt={`상품 이미지 ${index}`}

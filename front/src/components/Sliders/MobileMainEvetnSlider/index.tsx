@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { MainEventSliderContainer } from './style';
 
 const MobileMainEventSlider = () => {
+  const slideImgCount = useRef(8);
+  const slideImgRatio = useRef(100 / slideImgCount.current);
   const [paginationIndex, setPaginationIndex] = useState(1);
-  const slideImgCount = 8;
-  const slideImgRatio = 100 / slideImgCount;
   const [slidePosition, setSlidePosition] = useState(0);
   const [isSlide, setIsSlide] = useState(false);
   const [slideStartX, setSlideStartX] = useState(0);
@@ -21,12 +21,14 @@ const MobileMainEventSlider = () => {
     (e) => {
       if (isSlide) {
         setSlidePosition(
-          ((slideStartX - e.clientX) / window.innerWidth) * -slideImgRatio +
+          ((slideStartX - e.clientX) / window.innerWidth) *
+            -slideImgRatio.current +
             slidePosition -
             savePosValue,
         );
         setSavePosValue(
-          ((slideStartX - e.clientX) / window.innerWidth) * -slideImgRatio,
+          ((slideStartX - e.clientX) / window.innerWidth) *
+            -slideImgRatio.current,
         );
       }
     },
@@ -36,27 +38,27 @@ const MobileMainEventSlider = () => {
   const onMouseUpSlide = useCallback(async () => {
     setIsSlide(false);
     setIsTransition(true);
-    const curPage = Math.floor(slidePosition / slideImgRatio);
+    const curPage = Math.floor(slidePosition / slideImgRatio.current);
     if (savePosValue > 2) {
-      if (slidePosition + slideImgRatio >= -5) {
+      if (slidePosition + slideImgRatio.current >= -5) {
         setSlidePosition(0);
         setPaginationIndex(1);
       } else {
-        setSlidePosition((curPage + 1) * slideImgRatio);
+        setSlidePosition((curPage + 1) * slideImgRatio.current);
         setPaginationIndex(curPage * -1);
       }
     } else if (savePosValue < -2) {
-      if (slidePosition - slideImgRatio < -87.5) {
+      if (slidePosition - slideImgRatio.current < -87.5) {
         setSlidePosition(-87.5);
-        setPaginationIndex(slideImgCount);
+        setPaginationIndex(slideImgCount.current);
       } else {
-        setSlidePosition(curPage * slideImgRatio);
+        setSlidePosition(curPage * slideImgRatio.current);
         setPaginationIndex((curPage - 1) * -1);
       }
     } else {
       savePosValue <= 0
-        ? setSlidePosition((curPage + 1) * slideImgRatio)
-        : setSlidePosition(curPage * slideImgRatio);
+        ? setSlidePosition((curPage + 1) * slideImgRatio.current)
+        : setSlidePosition(curPage * slideImgRatio.current);
     }
     setSavePosValue(0);
   }, [savePosValue, slidePosition]);
@@ -72,13 +74,13 @@ const MobileMainEventSlider = () => {
       if (isSlide) {
         setSlidePosition(
           ((slideStartX - e.changedTouches[0].clientX) / window.innerWidth) *
-            -slideImgRatio +
+            -slideImgRatio.current +
             slidePosition -
             savePosValue,
         );
         setSavePosValue(
           ((slideStartX - e.changedTouches[0].clientX) / window.innerWidth) *
-            -slideImgRatio,
+            -slideImgRatio.current,
         );
       }
     },
@@ -91,7 +93,9 @@ const MobileMainEventSlider = () => {
 
   const onChangePaginationIndex = useCallback((e) => {
     setPaginationIndex(Number(e.target.id.substr(-1)));
-    setSlidePosition((Number(e.target.id.substr(-1)) - 1) * -slideImgRatio);
+    setSlidePosition(
+      (Number(e.target.id.substr(-1)) - 1) * -slideImgRatio.current,
+    );
   }, []);
 
   return (
@@ -100,75 +104,23 @@ const MobileMainEventSlider = () => {
       SlideIndex={paginationIndex}
       posX={`${slidePosition}`}
       IsTransition={isTransition}
-      onChange={onChangePaginationIndex}
     >
-      <input
-        type="radio"
-        name="event-slide-radios"
-        className="slide-radio"
-        id="event-slide-radio-1"
-        checked={paginationIndex == 1 ? true : false}
-      />
-      <input
-        type="radio"
-        name="event-slide-radios"
-        className="slide-radio"
-        id="event-slide-radio-2"
-        checked={paginationIndex == 2 ? true : false}
-      />
-      <input
-        type="radio"
-        name="event-slide-radios"
-        className="slide-radio"
-        id="event-slide-radio-3"
-        checked={paginationIndex == 3 ? true : false}
-      />
-      <input
-        type="radio"
-        name="event-slide-radios"
-        className="slide-radio"
-        id="event-slide-radio-4"
-        checked={paginationIndex == 4 ? true : false}
-      />
-      <input
-        type="radio"
-        name="event-slide-radios"
-        className="slide-radio"
-        id="event-slide-radio-5"
-        checked={paginationIndex == 5 ? true : false}
-      />
-      <input
-        type="radio"
-        name="event-slide-radios"
-        className="slide-radio"
-        id="event-slide-radio-6"
-        checked={paginationIndex == 6 ? true : false}
-      />
-      <input
-        type="radio"
-        name="event-slide-radios"
-        className="slide-radio"
-        id="event-slide-radio-7"
-        checked={paginationIndex == 7 ? true : false}
-      />
-
-      <input
-        type="radio"
-        name="event-slide-radios"
-        className="slide-radio"
-        id="event-slide-radio-8"
-        checked={paginationIndex == 8 ? true : false}
-      />
+      {[...new Array(slideImgCount.current)].map((data, index) => (
+        <input
+          key={index}
+          onChange={onChangePaginationIndex}
+          type="radio"
+          name="event-slide-radios"
+          className="slide-radio"
+          id={`event-slide-radio-${index + 1}`}
+          checked={paginationIndex == index + 1 ? true : false}
+        />
+      ))}
 
       <div className="pagination">
-        <label htmlFor="event-slide-radio-1"></label>
-        <label htmlFor="event-slide-radio-2"></label>
-        <label htmlFor="event-slide-radio-3"></label>
-        <label htmlFor="event-slide-radio-4"></label>
-        <label htmlFor="event-slide-radio-5"></label>
-        <label htmlFor="event-slide-radio-6"></label>
-        <label htmlFor="event-slide-radio-7"></label>
-        <label htmlFor="event-slide-radio-8"></label>
+        {[...new Array(slideImgCount.current)].map((data, index) => (
+          <label key={index} htmlFor={`event-slide-radio-${index + 1}`}></label>
+        ))}
       </div>
       <div
         className="event-slide-wrapper"
@@ -179,14 +131,9 @@ const MobileMainEventSlider = () => {
         onTouchMove={onTouchMoveSlide}
         onTouchEnd={onTouchUpSlide}
       >
-        <div className="slide-img-wrapper1"></div>
-        <div className="slide-img-wrapper2"></div>
-        <div className="slide-img-wrapper3"></div>
-        <div className="slide-img-wrapper4"></div>
-        <div className="slide-img-wrapper5"></div>
-        <div className="slide-img-wrapper6"></div>
-        <div className="slide-img-wrapper7"></div>
-        <div className="slide-img-wrapper8"></div>
+        {[...new Array(slideImgCount.current)].map((data, index) => (
+          <div key={index} className={`slide-img-wrapper${index + 1}`}></div>
+        ))}
       </div>
     </MainEventSliderContainer>
   );

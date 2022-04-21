@@ -21,7 +21,7 @@ export const PaymentContainer = styled.section<{
     letter-spacing: -1px;
     width: 100%;
     margin: 20px 0;
-    background: url(./img/purchase_pagenation.png) right -120px no-repeat;
+    background: url(/img/purchase_pagenation.png) right -120px no-repeat;
     ${(props) => (props.IsMobile ? 'text-indent: -9999px;' : '')}
   }
 
@@ -80,7 +80,7 @@ export const PaymentContainer = styled.section<{
     height: 24px;
     overflow: hidden;
     display: inline-block;
-    background: url(./img/g_sprite__checkout.png)
+    background: url(/img/g_sprite__checkout.png)
       no-repeat;
     background-position: -52px -26px;
     font-size: 0;

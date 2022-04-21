@@ -203,6 +203,7 @@ const Payment = () => {
                                   value={postName}
                                   placeholder="이름"
                                   maxLength={15}
+                                  autoComplete="new-password"
                                 />
                                 <input
                                   type="text"
@@ -210,6 +211,7 @@ const Payment = () => {
                                   maxLength={13}
                                   value={postPhoneNumber}
                                   placeholder="연락처"
+                                  autoComplete="new-password"
                                 />
                                 {nameErrorText && (
                                   <p className="error-text">{nameErrorText}</p>
@@ -220,6 +222,7 @@ const Payment = () => {
                                   type="text"
                                   disabled
                                   value={addressInputValue}
+                                  autoComplete="new-password"
                                 />
                                 <input
                                   type="text"
@@ -227,6 +230,7 @@ const Payment = () => {
                                   value={addressSubInputValue}
                                   placeholder="상세주소"
                                   maxLength={50}
+                                  autoComplete="new-password"
                                 />
                                 {addressErrorText && (
                                   <p className="error-text">
@@ -279,9 +283,12 @@ const Payment = () => {
                               <h3>주문상품 {totaLQuantity}개</h3>
                             </div>
                             <div>
-                              {data?.map((product: any) => {
+                              {data?.map((product: any, index: number) => {
                                 return (
-                                  <div className="payment-purchase-info">
+                                  <div
+                                    key={index}
+                                    className="payment-purchase-info"
+                                  >
                                     <div>
                                       <img src={baseApiUrl + product.image} />
                                     </div>

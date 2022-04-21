@@ -42,7 +42,7 @@ export const ProductCardContainer = styled.div`
     height: 60px;
     display: block;
     cursor: pointer;
-    background-image: url(https://atimg.sonyunara.com/2021/renewal/main/main_icon_pc.png?a=16) !important;
+    background-image: url(/img/imags.png) !important;
     background-repeat: no-repeat;
     margin-left: auto;
   }

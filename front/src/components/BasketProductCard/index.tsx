@@ -138,6 +138,7 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
                     id="product-check-box"
                     checked={productCardArr[index] == 1 ? true : false}
                     type="checkbox"
+                    autoComplete="new-password"
                   />
                 </label>
               </span>
@@ -164,6 +165,7 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
                   <input
                     onChange={onChangeProductCount}
                     type="number"
+                    autoComplete="new-password"
                     value={productCount}
                     onBlur={onFocustOut}
                   />

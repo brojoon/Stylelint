@@ -33,7 +33,7 @@ export const SignupContainer = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 35px;
+    top: 18px;
   }
 
   & .icoArrow img {

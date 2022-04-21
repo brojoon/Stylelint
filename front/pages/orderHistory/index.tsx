@@ -28,8 +28,10 @@ const OrderHistory = () => {
           {data?.length > 0 ? (
             <div className="order-history-wrapper">
               <h3 className="title">주문/배송 조회</h3>
-              {[...data].reverse().map((history: IPaymentsDoneInfo) => {
-                return <OrderHistoryCard orderHistoryProduct={history} />;
+              {[...data].reverse().map((history: IPaymentsDoneInfo, index) => {
+                return (
+                  <OrderHistoryCard key={index} orderHistoryProduct={history} />
+                );
               })}
             </div>
           ) : (

@@ -45,6 +45,7 @@ const BasicInput: VFC<Props> = ({
         placeholder={placeholder}
         onChange={onChangeInputValue}
         maxLength={maxLength}
+        autoComplete="new-password"
       />
       {errorText && <p className="error-text">{errorText}</p>}
     </InputContainer>

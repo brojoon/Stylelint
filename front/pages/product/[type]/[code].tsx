@@ -232,7 +232,8 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
       Router.push('/login');
       return;
     }
-    if (selectedProductArr) {
+
+    if (selectedProductArr.length > 0) {
       const res: any = await dispatch(PaymentSaveFetch(selectedProductArr));
       if (res?.meta?.requestStatus === 'fulfilled') {
         router.push(baseFrontUrl + '/payment');
@@ -298,7 +299,7 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
                     value={selectSize}
                     name="사이즈"
                   >
-                    <option disabled value="default" selected>
+                    <option disabled value="default">
                       사이즈
                     </option>
                     <option value="S">S</option>
@@ -316,7 +317,7 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
                     value={selectColor}
                     name="색상"
                   >
-                    <option disabled value="default" selected>
+                    <option disabled value="default">
                       색상
                     </option>
                     <option value="Black">Black</option>

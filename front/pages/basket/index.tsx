@@ -165,6 +165,7 @@ const Basket = () => {
                               <input
                                 onChange={onCheckedAllSelect}
                                 checked={isCheckedAll}
+                                autoComplete="new-password"
                                 type="checkbox"
                                 id="전체선택"
                               />

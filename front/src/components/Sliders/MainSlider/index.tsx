@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { SlideContainer, SlideWrapper } from './style';
 import { asleep } from '@utils/utils/asleep';
 import { useIsMobile } from '@utils/Hooks';
 
 const MainSlider = () => {
-  const slideImgCount = 7;
-  const slideImgRatio = 100 / slideImgCount;
-  const [slidePosition, setSlidePosition] = useState(-slideImgRatio);
+  const slideImgCount = useRef(7);
+  const slideImgRatio = useRef(100 / slideImgCount.current);
+  const slidePageNationCount = useRef(5);
+  const [slidePosition, setSlidePosition] = useState(-slideImgRatio.current);
   const [isSlide, setIsSlide] = useState(false);
   const [slideStartX, setSlideStartX] = useState(0);
   const [isTransition, setIsTransition] = useState(true);
@@ -18,69 +19,77 @@ const MainSlider = () => {
 
   const onChangePaginationIndex = useCallback((e) => {
     setPaginationIndex(Number(e.target.id.substr(-1)));
-    setSlidePosition(Number(e.target.id.substr(-1)) * -1 * slideImgRatio);
+    setSlidePosition(
+      Number(e.target.id.substr(-1)) * -1 * slideImgRatio.current,
+    );
   }, []);
 
   const onClickPrev = useCallback(async () => {
-    if (slidePosition + slideImgRatio >= -5) {
+    if (slidePosition + slideImgRatio.current >= -5) {
       setSlidePosition(
-        (Math.floor(slidePosition / slideImgCount / 2) + 2) * slideImgRatio,
+        (Math.floor(slidePosition / slideImgCount.current / 2) + 2) *
+          slideImgRatio.current,
       );
       setPaginationIndex(5);
       await asleep(1000, '성공');
       setIsTransition(false);
-      setSlidePosition(-(slideImgRatio * 5));
+      setSlidePosition(-(slideImgRatio.current * 5));
       await asleep(100, '성공');
       setIsTransition(true);
     } else {
       setSlidePosition(
-        (Math.floor(slidePosition / slideImgCount / 2) + 2) * slideImgRatio,
+        (Math.floor(slidePosition / slideImgCount.current / 2) + 2) *
+          slideImgRatio.current,
       );
       setPaginationIndex(
-        Math.floor((slidePosition / slideImgCount / 2) * -1 - 1),
+        Math.floor((slidePosition / slideImgCount.current / 2) * -1 - 1),
       );
     }
   }, [slidePosition]);
 
   const autoSlideFunc = useCallback(async () => {
     if (isMouseEnter) return;
-    if (slidePosition - slideImgRatio < -80) {
+    if (slidePosition - slideImgRatio.current < -80) {
       setSlidePosition(
-        Math.floor(slidePosition / slideImgCount / 2) * slideImgRatio,
+        Math.floor(slidePosition / slideImgCount.current / 2) *
+          slideImgRatio.current,
       );
       setPaginationIndex(1);
       await asleep(1000, '성공');
       setIsTransition(false);
-      setSlidePosition(-slideImgRatio);
+      setSlidePosition(-slideImgRatio.current);
       await asleep(100, '성공');
       setIsTransition(true);
     } else {
       setSlidePosition(
-        Math.floor(slidePosition / slideImgCount / 2) * slideImgRatio,
+        Math.floor(slidePosition / slideImgCount.current / 2) *
+          slideImgRatio.current,
       );
       setPaginationIndex(
-        Math.floor((slidePosition / slideImgCount / 2) * -1 + 1),
+        Math.floor((slidePosition / slideImgCount.current / 2) * -1 + 1),
       );
     }
   }, [slidePosition, isMouseEnter]);
 
   const onClickNext = useCallback(async () => {
-    if (slidePosition - slideImgRatio < -80) {
+    if (slidePosition - slideImgRatio.current < -80) {
       setSlidePosition(
-        Math.floor(slidePosition / slideImgCount / 2) * slideImgRatio,
+        Math.floor(slidePosition / slideImgCount.current / 2) *
+          slideImgRatio.current,
       );
       setPaginationIndex(1);
       await asleep(1000, '성공');
       setIsTransition(false);
-      setSlidePosition(-slideImgRatio);
+      setSlidePosition(-slideImgRatio.current);
       await asleep(100, '성공');
       setIsTransition(true);
     } else {
       setSlidePosition(
-        Math.floor(slidePosition / slideImgCount / 2) * slideImgRatio,
+        Math.floor(slidePosition / slideImgCount.current / 2) *
+          slideImgRatio.current,
       );
       setPaginationIndex(
-        Math.floor((slidePosition / slideImgCount / 2) * -1 + 1),
+        Math.floor((slidePosition / slideImgCount.current / 2) * -1 + 1),
       );
     }
   }, [slidePosition, isMouseEnter]);
@@ -95,12 +104,14 @@ const MainSlider = () => {
     (e) => {
       if (isSlide) {
         setSlidePosition(
-          ((slideStartX - e.clientX) / window.innerWidth) * -slideImgRatio +
+          ((slideStartX - e.clientX) / window.innerWidth) *
+            -slideImgRatio.current +
             slidePosition -
             savePosValue,
         );
         setSavePosValue(
-          ((slideStartX - e.clientX) / window.innerWidth) * -slideImgRatio,
+          ((slideStartX - e.clientX) / window.innerWidth) *
+            -slideImgRatio.current,
         );
       }
     },
@@ -110,41 +121,41 @@ const MainSlider = () => {
   const onMouseUpSlide = useCallback(async () => {
     setIsSlide(false);
     setIsTransition(true);
-    const curPage = Math.floor(slidePosition / slideImgCount / 2);
+    const curPage = Math.floor(slidePosition / slideImgCount.current / 2);
 
     if (savePosValue > 2) {
-      if (slidePosition + slideImgRatio >= -5) {
-        setSlidePosition((curPage + 1) * slideImgRatio);
+      if (slidePosition + slideImgRatio.current >= -5) {
+        setSlidePosition((curPage + 1) * slideImgRatio.current);
         setPaginationIndex(5);
         await asleep(1000, '성공');
         setIsTransition(false);
-        setSlidePosition(-(slideImgRatio * 5));
+        setSlidePosition(-(slideImgRatio.current * 5));
         await asleep(100, '성공');
         setIsTransition(true);
       } else {
-        setSlidePosition((curPage + 1) * slideImgRatio);
+        setSlidePosition((curPage + 1) * slideImgRatio.current);
         setPaginationIndex(
-          Math.floor((slidePosition / slideImgCount / 2) * -1),
+          Math.floor((slidePosition / slideImgCount.current / 2) * -1),
         );
       }
     } else if (savePosValue < -2) {
-      if (slidePosition - slideImgRatio < -80) {
-        setSlidePosition(curPage * slideImgRatio);
+      if (slidePosition - slideImgRatio.current < -80) {
+        setSlidePosition(curPage * slideImgRatio.current);
         setPaginationIndex(1);
         await asleep(1000, '성공');
         setIsTransition(false);
-        setSlidePosition(-slideImgRatio);
+        setSlidePosition(-slideImgRatio.current);
         await asleep(100, '성공');
       } else {
-        setSlidePosition(curPage * slideImgRatio);
+        setSlidePosition(curPage * slideImgRatio.current);
         setPaginationIndex(
-          Math.floor((slidePosition / slideImgCount / 2) * -1 + 1),
+          Math.floor((slidePosition / slideImgCount.current / 2) * -1 + 1),
         );
       }
     } else {
       savePosValue <= 0
-        ? setSlidePosition((curPage + 1) * slideImgRatio)
-        : setSlidePosition(curPage * slideImgRatio);
+        ? setSlidePosition((curPage + 1) * slideImgRatio.current)
+        : setSlidePosition(curPage * slideImgRatio.current);
     }
     setSavePosValue(0);
   }, [savePosValue, slidePosition]);
@@ -158,17 +169,17 @@ const MainSlider = () => {
   const onTouchMoveSlide = useCallback(
     (e) => {
       if (isSlide) {
-        const curPage = Math.floor(slidePosition / slideImgCount / 2);
+        const curPage = Math.floor(slidePosition / slideImgCount.current / 2);
 
         setSlidePosition(
           ((slideStartX - e.changedTouches[0].clientX) / window.innerWidth) *
-            -slideImgRatio +
+            -slideImgRatio.current +
             slidePosition -
             savePosValue,
         );
         setSavePosValue(
           ((slideStartX - e.changedTouches[0].clientX) / window.innerWidth) *
-            -slideImgRatio,
+            -slideImgRatio.current,
         );
       }
     },
@@ -199,51 +210,23 @@ const MainSlider = () => {
   }, [autoSlideFunc]);
 
   return (
-    <SlideContainer
-      className="relative w-[700%] h-[40vw]"
-      onChange={onChangePaginationIndex}
-    >
-      <input
-        type="radio"
-        name="slide-radios"
-        className="slide-radio"
-        id="slide-radio-1"
-        checked={paginationIndex == 1 ? true : false}
-      />
-      <input
-        type="radio"
-        name="slide-radios"
-        className="slide-radio"
-        id="slide-radio-2"
-        checked={paginationIndex == 2 ? true : false}
-      />
-      <input
-        type="radio"
-        name="slide-radios"
-        className="slide-radio"
-        id="slide-radio-3"
-        checked={paginationIndex == 3 ? true : false}
-      />
-      <input
-        type="radio"
-        name="slide-radios"
-        className="slide-radio"
-        id="slide-radio-4"
-        checked={paginationIndex == 4 ? true : false}
-      />
-      <input
-        type="radio"
-        name="slide-radios"
-        className="slide-radio"
-        id="slide-radio-5"
-        checked={paginationIndex == 5 ? true : false}
-      />
+    <SlideContainer className="relative w-[700%] h-[40vw]">
+      {[...new Array(slidePageNationCount.current)].map((data, index) => (
+        <input
+          key={index}
+          onChange={onChangePaginationIndex}
+          type="radio"
+          name="slide-radios"
+          className="slide-radio"
+          id={`slide-radio-${index + 1}`}
+          checked={paginationIndex == index + 1 ? true : false}
+        />
+      ))}
+
       <div className="pagination">
-        <label htmlFor="slide-radio-1"></label>
-        <label htmlFor="slide-radio-2"></label>
-        <label htmlFor="slide-radio-3"></label>
-        <label htmlFor="slide-radio-4"></label>
-        <label htmlFor="slide-radio-5"></label>
+        {[...new Array(slidePageNationCount.current)].map((data, index) => (
+          <label key={index} htmlFor={`slide-radio-${index + 1}`}></label>
+        ))}
       </div>
       {!isMobile && (
         <button
@@ -265,44 +248,26 @@ const MainSlider = () => {
         posX={`${slidePosition}`}
         IsTransition={isTransition}
       >
-        <div className="w-full relative  bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page4.webp')]">
+        <div className="w-full relative  bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page5.webp')]">
           <div className="slide-img-text"></div>
         </div>
-        <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  bg-[url('~@../../../public/img/page1.webp')]">
+        {[...new Array(slidePageNationCount.current)].map((data, index) => (
           <div
-            className={`slide-img-text ${
-              Math.floor(slidePosition / 7 / 2) == -2 ? 'active' : ''
-            }`}
-          ></div>
-        </div>
-        <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page2.webp')]">
-          <div
-            className={`slide-img-text ${
-              Math.floor(slidePosition / 7 / 2) == -3 ? 'active' : ''
-            }`}
-          ></div>
-        </div>
-        <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page3.webp')]">
-          <div
-            className={`slide-img-text ${
-              Math.floor(slidePosition / 7 / 2) == -4 ? 'active' : ''
-            }`}
-          ></div>
-        </div>
-        <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page5.webp')]">
-          <div
-            className={`slide-img-text ${
-              Math.floor(slidePosition / 7 / 2) == -5 ? 'active' : ''
-            }`}
-          ></div>
-        </div>
-        <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page4.webp')]">
-          <div
-            className={`slide-img-text ${
-              Math.floor(slidePosition / 7 / 2) == -6 ? 'active' : ''
-            }`}
-          ></div>
-        </div>
+            key={index}
+            className={`w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  bg-[url('~@../../../public/img/page${
+              index + 1
+            }.webp')]`}
+          >
+            <div
+              className={`slide-img-text ${
+                Math.floor(slidePosition / slideImgCount.current / 2) ==
+                -2 - index
+                  ? 'active'
+                  : ''
+              }`}
+            ></div>
+          </div>
+        ))}
         <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  bg-[url('~@../../../public/img/page1.webp')]">
           <div className={`slide-img-text`}></div>
         </div>

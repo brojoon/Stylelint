@@ -14,8 +14,8 @@ const ProductCard2Wrapper: VFC<Props> = ({ products }) => {
     <ProductCard2Container>
       {isTablet1024 ? (
         <div>
-          {products.map((product) => {
-            return <ProductCard2 data={product} />;
+          {products.map((product, index) => {
+            return <ProductCard2 key={index} data={product} />;
           })}
         </div>
       ) : (

@@ -25,7 +25,10 @@ const SelectedProductCardContainer: VFC<Props> = ({
       <ul>
         {selectedProductArr?.map((product: ISelecedProduct, index) => {
           return (
-            <li className="selected-list">
+            <li
+              key={product.size + product.color + product.price + index}
+              className="selected-list"
+            >
               <div>
                 <span>
                   {product.product_name + ' ' + product.quantity + '개'}{' '}
