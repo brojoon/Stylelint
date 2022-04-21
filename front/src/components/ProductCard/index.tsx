@@ -108,6 +108,21 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
     [router, baseFrontUrl, data, isClickProductImg],
   );
 
+  const CardDecoColor = [
+    '#EBCBBD',
+    '#4A8FA9',
+    '#DA3737',
+    '#B6E0EF',
+    '#464646',
+    '#923B55',
+    '#79B0E4',
+    '#E0A564',
+    '#BF95C7',
+    '#FFF5A0',
+    '#FFFDF0',
+    '#E4CBAD',
+  ];
+
   return (
     <>
       <ProductCardContainer>
@@ -138,18 +153,13 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
         </div>
         <div>
           <div className="flex mt-[10px] mb-[5px]">
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#EBCBBD] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#4A8FA9] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#DA3737] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#B6E0EF] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#464646] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#923B55] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#79B0E4] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#E0A564] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#BF95C7] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#FFF5A0] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#FFFDF0] border border-[#efefef] rounded-[3px] block"></span>
-            <span className="w-[17px] h-[9px] ml-[3px] bg-[#E4CBAD] border border-[#efefef] rounded-[3px] block"></span>
+            {CardDecoColor.map((color) => {
+              return (
+                <span
+                  className={`w-[17px] h-[9px] ml-[3px] bg-[${color}] border border-[#efefef] rounded-[3px] block`}
+                ></span>
+              );
+            })}
           </div>
           <h3 className="text-[#969696] text-[0.75rem]">
             스타일린트[자체제작]
@@ -157,7 +167,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
           <div className="text-[#212121] text-[0.85rem] tracking-[-0.5px] product-desc">
             {data.name}
           </div>
-          <div className="flex tracking-[-0.5px] justify-between my-[10px] py-[12px] border-b-[1px] border-[#F7F7F7]">
+          <div className="flex items-center tracking-[-0.5px] justify-between my-[10px] py-[12px] border-b-[1px] border-[#F7F7F7]">
             <div className="">
               <span className="font-semibold">
                 {data.price.toLocaleString()}

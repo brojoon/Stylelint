@@ -100,12 +100,12 @@ const MobileMainEventSlider = () => {
       SlideIndex={paginationIndex}
       posX={`${slidePosition}`}
       IsTransition={isTransition}
+      onChange={onChangePaginationIndex}
     >
       <input
         type="radio"
         name="event-slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="event-slide-radio-1"
         checked={paginationIndex == 1 ? true : false}
       />
@@ -113,7 +113,6 @@ const MobileMainEventSlider = () => {
         type="radio"
         name="event-slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="event-slide-radio-2"
         checked={paginationIndex == 2 ? true : false}
       />
@@ -121,7 +120,6 @@ const MobileMainEventSlider = () => {
         type="radio"
         name="event-slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="event-slide-radio-3"
         checked={paginationIndex == 3 ? true : false}
       />
@@ -129,7 +127,6 @@ const MobileMainEventSlider = () => {
         type="radio"
         name="event-slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="event-slide-radio-4"
         checked={paginationIndex == 4 ? true : false}
       />
@@ -137,7 +134,6 @@ const MobileMainEventSlider = () => {
         type="radio"
         name="event-slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="event-slide-radio-5"
         checked={paginationIndex == 5 ? true : false}
       />
@@ -145,7 +141,6 @@ const MobileMainEventSlider = () => {
         type="radio"
         name="event-slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="event-slide-radio-6"
         checked={paginationIndex == 6 ? true : false}
       />
@@ -153,7 +148,6 @@ const MobileMainEventSlider = () => {
         type="radio"
         name="event-slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="event-slide-radio-7"
         checked={paginationIndex == 7 ? true : false}
       />
@@ -162,7 +156,6 @@ const MobileMainEventSlider = () => {
         type="radio"
         name="event-slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="event-slide-radio-8"
         checked={paginationIndex == 8 ? true : false}
       />

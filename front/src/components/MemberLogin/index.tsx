@@ -6,7 +6,7 @@ import { LoginFetch } from '@store/modules/login';
 import { useDispatch } from 'react-redux';
 import { MemberLoginContainer } from './style';
 
-import ModalNotice from '@components/Modals/ModalNotice';
+import ModalNotice from '@components/Modals/ModalCreateReivew';
 import { baseApiUrl } from '@utils/utils/const';
 
 function MemberLogin() {

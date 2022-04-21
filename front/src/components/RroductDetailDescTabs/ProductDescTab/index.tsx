@@ -24,7 +24,10 @@ const ProductDescTab = () => {
 
             return (
               <div>
-                <img src={`${baseApiUrl + subimg.subimage}`} />
+                <img
+                  src={`${baseApiUrl + subimg.subimage}`}
+                  alt={`상품 이미지 ${index}`}
+                />
               </div>
             );
           })}

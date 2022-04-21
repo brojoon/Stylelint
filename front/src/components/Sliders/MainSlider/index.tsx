@@ -199,12 +199,14 @@ const MainSlider = () => {
   }, [autoSlideFunc]);
 
   return (
-    <SlideContainer className="relative w-[700%] h-[40vw]">
+    <SlideContainer
+      className="relative w-[700%] h-[40vw]"
+      onChange={onChangePaginationIndex}
+    >
       <input
         type="radio"
         name="slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="slide-radio-1"
         checked={paginationIndex == 1 ? true : false}
       />
@@ -212,7 +214,6 @@ const MainSlider = () => {
         type="radio"
         name="slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="slide-radio-2"
         checked={paginationIndex == 2 ? true : false}
       />
@@ -220,7 +221,6 @@ const MainSlider = () => {
         type="radio"
         name="slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="slide-radio-3"
         checked={paginationIndex == 3 ? true : false}
       />
@@ -228,7 +228,6 @@ const MainSlider = () => {
         type="radio"
         name="slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="slide-radio-4"
         checked={paginationIndex == 4 ? true : false}
       />
@@ -236,7 +235,6 @@ const MainSlider = () => {
         type="radio"
         name="slide-radios"
         className="slide-radio"
-        onChange={onChangePaginationIndex}
         id="slide-radio-5"
         checked={paginationIndex == 5 ? true : false}
       />
@@ -275,50 +273,35 @@ const MainSlider = () => {
             className={`slide-img-text ${
               Math.floor(slidePosition / 7 / 2) == -2 ? 'active' : ''
             }`}
-          >
-            <p>가볍고 트렌디한</p>
-            <p>언발런스 코튼 셔츠</p>
-          </div>
+          ></div>
         </div>
         <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page2.webp')]">
           <div
             className={`slide-img-text ${
               Math.floor(slidePosition / 7 / 2) == -3 ? 'active' : ''
             }`}
-          >
-            <p>산뜻하게 즐기는</p>
-            <p>봄 스타일링 </p>
-          </div>
+          ></div>
         </div>
         <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page3.webp')]">
           <div
             className={`slide-img-text ${
               Math.floor(slidePosition / 7 / 2) == -4 ? 'active' : ''
             }`}
-          >
-            <p>숨어있던 라인을 찾다</p>
-            <p>오픈 카라 블라우스</p>
-          </div>
+          ></div>
         </div>
         <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page5.webp')]">
           <div
             className={`slide-img-text ${
               Math.floor(slidePosition / 7 / 2) == -5 ? 'active' : ''
             }`}
-          >
-            <p>자연스러움을 지향하는</p>
-            <p>데일리 감성 룩</p>
-          </div>
+          ></div>
         </div>
         <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page4.webp')]">
           <div
             className={`slide-img-text ${
               Math.floor(slidePosition / 7 / 2) == -6 ? 'active' : ''
             }`}
-          >
-            <p>다채로운 코디룩</p>
-            <p>7컬러 루즈핏</p>
-          </div>
+          ></div>
         </div>
         <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  bg-[url('~@../../../public/img/page1.webp')]">
           <div className={`slide-img-text`}></div>

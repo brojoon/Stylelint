@@ -1,3 +1,4 @@
+import ProductReviewContainer from '@components/ProductReviewContainer';
 import ProductDescTab from '@components/RroductDetailDescTabs/ProductDescTab';
 import React, { useCallback, useState } from 'react';
 import { ProductDetailDescWrapper } from './style';
@@ -32,7 +33,11 @@ const ProductDetailDesc = () => {
       </div>
       <div className="product-desc-content-container">
         <div className="product-desc-content-wrapper">
-          <ProductDescTab />
+          {productDescNavIndex == '1' ? (
+            <ProductDescTab />
+          ) : (
+            <ProductReviewContainer />
+          )}
         </div>
       </div>
     </ProductDetailDescWrapper>

@@ -13,6 +13,7 @@ import fetcher from '@utils/utils/fetcher';
 const Header = () => {
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [isMobileProfileBar, setIsMobileProfileBar] = useState(false);
+  const [isSearchModal, setIsSearchModal] = useState(false);
   const { scrollY } = useScroll();
   const dispatch = useDispatch();
   const isMobile = useIsMobile();
@@ -28,6 +29,10 @@ const Header = () => {
 
   const onClickMenuBtn = useCallback(() => {
     setIsMenuActive((prev) => !prev);
+  }, []);
+
+  const onClickSearch = useCallback(() => {
+    setIsSearchModal(true);
   }, []);
 
   const onClickProfile = useCallback(() => {
@@ -83,83 +88,85 @@ const Header = () => {
 
   return (
     <>
-      <Banner>
-        <span>
-          스타일린트는 <b>당일배송</b>이 원칙입니다
-        </span>
-      </Banner>
-      <BackgroundHeader />
-      <MainHeader
-        IsScrollTop={scrollY}
-        IsMobile={isMobile}
-        IsTablet1024={isTablet1024}
-        IsMobileProfileBar={isMobileProfileBar}
-      >
-        <div className="wrapper">
-          <div className="container">
-            <div className="logo-wrapper">
-              <button
-                className={`all-menu ${isMenuActive ? 'active' : 'none'}`}
-                onClick={onClickMenuBtn}
-              >
-                <span></span>
-                <span></span>
-                <span></span>
-              </button>
-              <div className="logo">
-                <Link href="/">
-                  <h1>
-                    <img src="/img/logo.png" />
-                  </h1>
-                </Link>
+      <>
+        <Banner>
+          <span>
+            스타일린트는 <b>당일배송</b>이 원칙입니다
+          </span>
+        </Banner>
+        <BackgroundHeader />
+        <MainHeader
+          IsScrollTop={scrollY}
+          IsMobile={isMobile}
+          IsTablet1024={isTablet1024}
+          IsMobileProfileBar={isMobileProfileBar}
+        >
+          <div className="wrapper">
+            <div className="container">
+              <div className="logo-wrapper">
+                <button
+                  className={`all-menu ${isMenuActive ? 'active' : 'none'}`}
+                  onClick={onClickMenuBtn}
+                >
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
+                <div className="logo">
+                  <Link href="/">
+                    <h1>
+                      <img src="/img/logo.png" />
+                    </h1>
+                  </Link>
+                </div>
+              </div>
+              <div className="info">
+                <ul>
+                  <li>
+                    {!isMobile && (
+                      <div>
+                        <img width="26px" height="26px" src="/img/search.svg" />
+                      </div>
+                    )}
+                  </li>
+                  <li>
+                    <div onClick={onClickProfile}>
+                      <img width="26px" height="26px" src="/img/profile.svg" />
+                    </div>
+
+                    {user ? (
+                      <ul className="subBox">
+                        <li onClick={onClickSubProfile}>회원정보</li>
+                        <li onClick={onClickOrderHistory}>배송조회</li>
+                        <li>
+                          <button onClick={onClickLogout}>로그아웃</button>
+                        </li>
+                      </ul>
+                    ) : (
+                      <ul className="subBox">
+                        <li onClick={onClickLoginBtn}>로그인</li>
+                        <li onClick={onClickSignup}>회원가입</li>
+                      </ul>
+                    )}
+                  </li>
+                  <li>
+                    <Link href={user ? '/basket' : '/login'}>
+                      <div>
+                        <img width="26px" height="26px" src="/img/cart.svg" />
+                      </div>
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div className="info">
-              <ul>
-                <li>
-                  {!isMobile && (
-                    <div>
-                      <img width="26px" height="26px" src="/img/search.svg" />
-                    </div>
-                  )}
-                </li>
-                <li>
-                  <div onClick={onClickProfile}>
-                    <img width="26px" height="26px" src="/img/profile.svg" />
-                  </div>
-
-                  {user ? (
-                    <ul className="subBox">
-                      <li onClick={onClickSubProfile}>회원정보</li>
-                      <li onClick={onClickOrderHistory}>배송조회</li>
-                      <li>
-                        <button onClick={onClickLogout}>로그아웃</button>
-                      </li>
-                    </ul>
-                  ) : (
-                    <ul className="subBox">
-                      <li onClick={onClickLoginBtn}>로그인</li>
-                      <li onClick={onClickSignup}>회원가입</li>
-                    </ul>
-                  )}
-                </li>
-                <li>
-                  <Link href={user ? '/basket' : '/login'}>
-                    <div>
-                      <img width="26px" height="26px" src="/img/cart.svg" />
-                    </div>
-                  </Link>
-                </li>
-              </ul>
-            </div>
           </div>
-        </div>
-        <HamburgerMenu
-          IsScrollTop={scrollY}
-          IsMenuActive={isMenuActive}
-          setIsMenuActive={setIsMenuActive}
-        />
-      </MainHeader>
+          <HamburgerMenu
+            IsScrollTop={scrollY}
+            IsMenuActive={isMenuActive}
+            setIsMenuActive={setIsMenuActive}
+          />
+        </MainHeader>
+      </>
     </>
   );
 };

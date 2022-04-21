@@ -24,11 +24,13 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
   ): Promise<any> {
     const { id } = profile;
 
+    const email = profile?.emails[0]?.value;
+
     const info = {
       oauthId: id,
       userId: id,
-      username: profile?.name?.givenName,
-      email: profile?.emails[0]?.value,
+      username: email?.slice(0, email.indexOf('@')),
+      email: email,
     };
     if (!info) throw new UnauthorizedException();
     const user = await this.authService.validateUser(
