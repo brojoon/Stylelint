@@ -126,7 +126,7 @@ export const ModalBasketContainer = styled.div<{
   .modal-wrapper > div > h3 {
     margin-bottom: 10px;
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
 
@@ -143,6 +143,16 @@ export const ModalBasketContainer = styled.div<{
     padding: 10px;
   }
 
+  .review-start-text-wrapper {
+    margin: 8px 0 12px;    
+    color: #fd0303;
+  }
+  
+  .review-start-text-wrapper > .start-score {
+    font-weight: 600;
+  }
+
+
   .modal-wrapper > div > button {
     margin-top: 20px;
     background-color: #2563EB;
@@ -152,6 +162,7 @@ export const ModalBasketContainer = styled.div<{
     height: 50px;
   }
 
+ 
   
 
 `;

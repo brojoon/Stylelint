@@ -12,6 +12,7 @@ import paymentSave from './paymentSave';
 import paymentDoneUpdate from './paymentDoneUpdate';
 import paymentRecentSave from './paymentRecentSave';
 import basketProductsSelectArr from './basketProductSelectArr';
+import productReviewAdd from './productReviewAdd';
 
 const persistConfig = {
   key: 'root',
@@ -32,6 +33,7 @@ export const rootReducer = (state: any, action: any) => {
     paymentDoneUpdate,
     paymentRecentSave,
     basketProductsSelectArr,
+    productReviewAdd,
     // 여기에추가
   })(state, action);
 };

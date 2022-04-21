@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from 'src/entities/product/product.info';
+import { ProductReview } from 'src/entities/product/product.review';
 import { Connection, getRepository, Repository } from 'typeorm';
 
 @Injectable()
@@ -13,6 +14,7 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private productsRepository: Repository<Product>,
+    private productsReview: Repository<ProductReview>,
     private connection: Connection,
   ) {}
 
@@ -27,6 +29,46 @@ export class ProductsService {
         (error.response.statusCode !== 403 && error.response.statusCode !== 404)
       )
         throw new BadRequestException('상품 정보 조회 실패');
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
+  }
+
+  async productReviewAdd(body) {
+    try {
+      return await this.productsReview.save(body);
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException(
+          '리뷰를 등록하는 도중 에러가 발생했습니다.',
+        );
+      else if (error.response.statusCode === 403)
+        throw new ForbiddenException(error.response.message);
+      else if (error.response.statusCode === 404)
+        throw new NotFoundException(error.response.message);
+    }
+  }
+
+  async getProductReview(code) {
+    try {
+      const ret = await this.productsReview.find({
+        where: {
+          product_code: code,
+        },
+      });
+      if (!ret) throw new BadRequestException('상품 리뷰 조회 실패');
+      return ret;
+    } catch (error) {
+      if (
+        error.errno !== undefined ||
+        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
+      )
+        throw new BadRequestException('상품 리뷰 조회 실패');
       else if (error.response.statusCode === 403)
         throw new ForbiddenException(error.response.message);
       else if (error.response.statusCode === 404)

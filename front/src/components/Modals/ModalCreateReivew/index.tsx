@@ -1,6 +1,11 @@
+import { ProductReviewAddFetch } from '@store/modules/productReviewAdd';
 import { useIsMobile } from '@utils/Hooks';
+import fetcher from '@utils/utils/fetcher';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useCallback, useState, VFC } from 'react';
+import { useQuery } from 'react-query';
+import { useDispatch } from 'react-redux';
 import { ModalBackground, ModalBasketContainer } from './style';
 
 interface Props {
@@ -23,6 +28,11 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
   const onClickModalClose = useCallback(() => {
     setIsCreateReivewModal(false);
   }, []);
+  const { data: user } = useQuery('user', () => fetcher(`api/user/profile`));
+  const router = useRouter();
+  const { type, code } = router.query;
+
+  const dispatch = useDispatch();
 
   const onChangeReviewText = useCallback((e) => {
     if (e.target.value.length > 50) {
@@ -54,6 +64,23 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
     [reviewStarIndexSave],
   );
 
+  const onClickReviewSubmit = useCallback(async () => {
+    if (textValue?.length > 0 && reviewStarIndexSave > 0 && code && user) {
+      const res: any = await dispatch(
+        ProductReviewAddFetch({
+          product_code: code,
+          userId: user?.useId,
+          nickname: user?.nickname,
+          review_text: textValue,
+          score: reviewStarIndexSave,
+        }),
+      );
+      if (res.meta.requestStatus === 'fulfilled') {
+        setIsCreateReivewModal(false);
+      }
+    }
+  }, [reviewStarIndexSave, textValue, code, user]);
+
   const isMobile = useIsMobile();
   console.log(textValue);
 
@@ -82,7 +109,9 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
               ))}
             </div>
             <div className="review-start-text-wrapper">
-              {reviewStarIndex ? <span>{reviewStarIndex}점</span> : null}
+              {reviewStarIndex ? (
+                <span className="start-score">{reviewStarIndex}점 </span>
+              ) : null}
               <span>{StarText[reviewStarIndex]}</span>
             </div>
             <div className="modal-text-wrapper">
@@ -92,7 +121,7 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
                 value={textValue}
               />
             </div>
-            <button>등록</button>
+            <button onClick={onClickReviewSubmit}>등록</button>
           </div>
 
           {/* <button className="bottom-close-btn">확인</button> */}
@@ -103,7 +132,3 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
 };
 
 export default ModalCreateReivew;
-
-// .modal-text-wrapper > textarea::-webkit-scrollbar {
-//   display: none; /* Chrome, Safari, Opera*/
-// }
