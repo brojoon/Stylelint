@@ -70,7 +70,7 @@ export const ModalBasketContainer = styled.div<{
   }
 
   .start-img-wrapper > span:nth-child(1) {
-    background-image: url(/img/reivew-start.svg);
+    background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
       props.ReviewStarIndex >= 1 ? '-128px -112px' : '-76px -112px'};
@@ -82,7 +82,7 @@ export const ModalBasketContainer = styled.div<{
   }
 
   .start-img-wrapper > span:nth-child(2) {
-    background-image: url(/img/reivew-start.svg);
+    background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
       props.ReviewStarIndex >= 2 ? '-128px -112px' : '-76px -112px'};
@@ -92,7 +92,7 @@ export const ModalBasketContainer = styled.div<{
   }
 
   .start-img-wrapper > span:nth-child(3) {
-    background-image: url(/img/reivew-start.svg);
+    background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
       props.ReviewStarIndex >= 3 ? '-128px -112px' : '-76px -112px'};
@@ -102,7 +102,7 @@ export const ModalBasketContainer = styled.div<{
   }
 
   .start-img-wrapper > span:nth-child(4) {
-    background-image: url(/img/reivew-start.svg);
+    background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
       props.ReviewStarIndex >= 4 ? '-128px -112px' : '-76px -112px'};
@@ -112,7 +112,7 @@ export const ModalBasketContainer = styled.div<{
   }
 
   .start-img-wrapper > span:nth-child(5) {
-    background-image: url(/img/reivew-start.svg);
+    background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
       props.ReviewStarIndex >= 5 ? '-128px -112px' : '-76px -112px'};

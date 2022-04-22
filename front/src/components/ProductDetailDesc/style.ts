@@ -40,6 +40,12 @@ export const ProductDetailDescWrapper = styled.section<{
     padding: 0.4375rem 1.4375rem 0.5625rem;
   }
 
+  & .product-desc-nav-wrapper > ul > li > span > span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    vertical-align: 0.125rem;
+  }
+
   &
     .product-desc-nav-wrapper
     > ul

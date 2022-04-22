@@ -75,6 +75,36 @@ export const SlideWrapper = styled.section<{
     display: none;
   }
 
+  .slide-img-bg-1 {
+    background: url(/img/page1.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .slide-img-bg-2 {
+    background: url(/img/page2.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .slide-img-bg-3 {
+    background: url(/img/page3.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .slide-img-bg-4 {
+    background: url(/img/page4.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .slide-img-bg-5 {
+    background: url(/img/page5.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
   & > div:nth-child(6) p {
     color: #fcf951;
   }

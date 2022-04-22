@@ -40,9 +40,11 @@ export class Product {
   @Column('int', { name: 'dibs' })
   dibs: number;
 
-  @IsNotEmpty()
   @Column('int', { name: 'perchase_quantity' })
   perchase_quantity: number;
+
+  @Column('int', { name: 'review_count' })
+  review_count: number;
 
   @IsString()
   @IsNotEmpty()

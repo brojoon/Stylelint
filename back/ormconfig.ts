@@ -9,6 +9,7 @@ import { Product } from './src/entities/product/product.info';
 import { ProductSailInfo } from './src/entities/product/product.sale.info';
 import { ProductSubImg } from './src/entities/product/product.sub.img';
 import { Basket } from './src/entities/basket/basket';
+import { ProductReview } from './src/entities/product/product.review';
 
 // import { ProductSailInfo } from './src/entities/product/product.sale.info';
 
@@ -33,6 +34,7 @@ const config: TypeOrmModuleOptions = {
     Payment,
     UserDips,
     UserPaymentRecent,
+    ProductReview,
   ],
   migrations: [__dirname + '/src/migrations/*.ts'],
   cli: { migrationsDir: 'src/migrations' },

@@ -21,6 +21,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
   const [isDibLoading, setIsDibLoading] = useState(false);
   const [isBasketLoading, setIsBasketLoading] = useState(false);
   const [isProductDibs, setIsProductDibs] = useState(false);
+
   const router = useRouter();
   const dispatch = useDispatch();
   // const cardDecoColorRef = useRef([
@@ -226,7 +227,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
               <span className="flex items-center after:w-[1px] after:h-[6.25px] after:bg-[#e8e8e8] after:mx-[5px] after:inline-block">
                 판매수 {data.perchase_quantity}
               </span>
-              <span>리뷰수 207</span>
+              <span>리뷰수 {data?.review_count}</span>
             </div>
             <ProductCardIconWrapper
               IsProductDibs={isProductDibs}

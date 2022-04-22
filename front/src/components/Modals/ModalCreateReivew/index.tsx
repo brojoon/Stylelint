@@ -31,6 +31,10 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
   const { data: user } = useQuery('user', () => fetcher(`api/user/profile`));
   const router = useRouter();
   const { type, code } = router.query;
+  const { data: productReviewList, refetch } = useQuery(
+    'productReviewList',
+    () => fetcher(`api/product/${code}/review`),
+  );
 
   const dispatch = useDispatch();
 
@@ -69,14 +73,16 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
       const res: any = await dispatch(
         ProductReviewAddFetch({
           product_code: code,
-          userId: user?.useId,
+          userId: user?.userId,
           nickname: user?.nickname,
           review_text: textValue,
           score: reviewStarIndexSave,
         }),
       );
       if (res.meta.requestStatus === 'fulfilled') {
-        setIsCreateReivewModal(false);
+        refetch().then(() => {
+          setIsCreateReivewModal(false);
+        });
       }
     }
   }, [reviewStarIndexSave, textValue, code, user]);

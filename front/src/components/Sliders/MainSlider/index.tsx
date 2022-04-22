@@ -254,9 +254,9 @@ const MainSlider = () => {
         {[...new Array(slidePageNationCount.current)].map((data, index) => (
           <div
             key={index}
-            className={`w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  bg-[url('~@../../../public/img/page${
+            className={`w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  slide-img-bg-${
               index + 1
-            }.webp')]`}
+            }`}
           >
             <div
               className={`slide-img-text ${

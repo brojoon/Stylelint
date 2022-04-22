@@ -19,6 +19,7 @@ export interface IProducts {
   price: number;
   dibs: number;
   perchase_quantity: number;
+  review_count: number;
   image: string;
   createdAt: Date;
   updatedAt: Date;
@@ -68,5 +69,14 @@ export interface IPaymentsDoneInfo {
   phone_number: string;
   receiver: string;
   image: string;
+  createdAt: Date;
+}
+
+export interface IReviewInfo {
+  product_code: string;
+  userId: string;
+  nickname: string;
+  review_text: string;
+  score: number;
   createdAt: Date;
 }

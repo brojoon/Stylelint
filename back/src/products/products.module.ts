@@ -1,3 +1,4 @@
+import { ProductReview } from 'src/entities/product/product.review';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { ProductsService } from './products.service';
@@ -8,7 +9,12 @@ import { ProductSailInfo } from 'src/entities/product/product.sale.info';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Product, ProductSubImg, ProductSailInfo]),
+    TypeOrmModule.forFeature([
+      Product,
+      ProductSubImg,
+      ProductSailInfo,
+      ProductReview,
+    ]),
   ],
   providers: [ProductsService],
   controllers: [ProductsController],

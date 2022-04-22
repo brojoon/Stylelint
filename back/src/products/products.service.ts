@@ -14,6 +14,7 @@ export class ProductsService {
   constructor(
     @InjectRepository(Product)
     private productsRepository: Repository<Product>,
+    @InjectRepository(ProductReview)
     private productsReview: Repository<ProductReview>,
     private connection: Connection,
   ) {}
@@ -37,20 +38,32 @@ export class ProductsService {
   }
 
   async productReviewAdd(body) {
+    const queryRunner = this.connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
     try {
-      return await this.productsReview.save(body);
-    } catch (error) {
-      if (
-        error.errno !== undefined ||
-        (error.response.statusCode !== 403 && error.response.statusCode !== 404)
-      )
-        throw new BadRequestException(
-          '리뷰를 등록하는 도중 에러가 발생했습니다.',
+      const product = await queryRunner.manager.getRepository(Product).findOne({
+        code: body.product_code,
+      });
+      if (!product)
+        throw new BadRequestException('리뷰 등록 도중 상품 조회 실패!!');
+
+      await queryRunner.manager
+        .getRepository(Product)
+        .update(
+          { code: product?.code },
+          { review_count: product?.review_count + 1 },
         );
-      else if (error.response.statusCode === 403)
-        throw new ForbiddenException(error.response.message);
-      else if (error.response.statusCode === 404)
-        throw new NotFoundException(error.response.message);
+      const result = await queryRunner.manager
+        .getRepository(ProductReview)
+        .save(body);
+      await queryRunner.commitTransaction();
+      return result;
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      await queryRunner.release();
     }
   }
 
@@ -93,6 +106,7 @@ export class ProductsService {
           'p.dibs',
           'p.image',
           'p.perchase_quantity',
+          'p.review_count',
           'sailInfo.color',
           'sailInfo.size',
           'sailInfo.quantity',

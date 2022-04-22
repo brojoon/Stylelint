@@ -39,6 +39,7 @@ export class CreateInitialData implements Seeder {
           price: 23000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/blouse/bs4691/main.gif',
         },
         {
@@ -49,6 +50,7 @@ export class CreateInitialData implements Seeder {
           price: 21000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/blouse/bs5039/main.gif',
         },
         {
@@ -59,6 +61,7 @@ export class CreateInitialData implements Seeder {
           price: 32000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/blouse/bs6704/main.gif',
         },
         {
@@ -69,6 +72,7 @@ export class CreateInitialData implements Seeder {
           price: 25000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/blouse/bs6709/main.gif',
         },
         {
@@ -79,6 +83,7 @@ export class CreateInitialData implements Seeder {
           price: 28000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/blouse/bs6714/main.gif',
         },
         {
@@ -89,6 +94,7 @@ export class CreateInitialData implements Seeder {
           price: 38000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/jacket/jk1296/main.gif',
         },
         {
@@ -99,6 +105,7 @@ export class CreateInitialData implements Seeder {
           price: 35000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/jacket/jk1442/main.gif',
         },
         {
@@ -109,6 +116,7 @@ export class CreateInitialData implements Seeder {
           price: 45000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/jacket/jk1962/main.gif',
         },
         {
@@ -119,6 +127,7 @@ export class CreateInitialData implements Seeder {
           price: 42000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/jacket/jk1989/main.gif',
         },
         {
@@ -129,6 +138,7 @@ export class CreateInitialData implements Seeder {
           price: 39000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/jacket/jk2091/main.gif',
         },
         {
@@ -139,6 +149,7 @@ export class CreateInitialData implements Seeder {
           price: 39000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/shirts/ts1935/main.gif',
         },
         {
@@ -149,6 +160,7 @@ export class CreateInitialData implements Seeder {
           price: 20000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/shirts/ts2747/main.gif',
         },
         {
@@ -159,6 +171,7 @@ export class CreateInitialData implements Seeder {
           price: 21000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/shirts/ts2967/main.gif',
         },
         {
@@ -169,6 +182,7 @@ export class CreateInitialData implements Seeder {
           price: 23000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/shirts/ts2985/main.gif',
         },
         {
@@ -179,6 +193,7 @@ export class CreateInitialData implements Seeder {
           price: 25000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/shirts/ts3097/main.gif',
         },
         {
@@ -189,6 +204,7 @@ export class CreateInitialData implements Seeder {
           price: 28000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/skirt/ps3732/main.gif',
         },
         {
@@ -199,6 +215,7 @@ export class CreateInitialData implements Seeder {
           price: 23000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/skirt/ps3800/main.gif',
         },
         {
@@ -209,6 +226,7 @@ export class CreateInitialData implements Seeder {
           price: 29000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/skirt/sk5413/main.gif',
         },
         {
@@ -219,6 +237,7 @@ export class CreateInitialData implements Seeder {
           price: 35000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/skirt/sk5580/main.gif',
         },
         {
@@ -229,6 +248,7 @@ export class CreateInitialData implements Seeder {
           price: 36000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/skirt/sk5592/main.gif',
         },
         {
@@ -239,6 +259,7 @@ export class CreateInitialData implements Seeder {
           price: 43000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/dress/op13507/main.gif',
         },
         {
@@ -249,6 +270,7 @@ export class CreateInitialData implements Seeder {
           price: 45000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/dress/op13547/main.gif',
         },
         {
@@ -259,6 +281,7 @@ export class CreateInitialData implements Seeder {
           price: 48000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/dress/op13550/main.gif',
         },
         {
@@ -269,6 +292,7 @@ export class CreateInitialData implements Seeder {
           price: 40000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/dress/op13561/main.gif',
         },
         {
@@ -279,6 +303,7 @@ export class CreateInitialData implements Seeder {
           price: 47000,
           dibs: 0,
           perchase_quantity: 0,
+          review_count: 0,
           image: '/imgs/Products/dress/op13616/main.gif',
         },
       ])

@@ -1,25 +1,60 @@
-import React from 'react';
+import { IReviewInfo } from '@typings/db';
+import fetcher from '@utils/utils/fetcher';
+import dayjs from 'dayjs';
+import { useRouter } from 'next/router';
+import React, { useState, VFC } from 'react';
+import { useQuery } from 'react-query';
 import { ProductReviewCardWrapper } from './style';
 
-const ProductReviewCard = () => {
+interface Props {
+  reviewInfo: IReviewInfo;
+}
+
+const ProductReviewCard: VFC<Props> = ({ reviewInfo }) => {
+  const [reviewStarIndex, setReviewStarIndex] = useState(reviewInfo?.score);
+
   return (
-    <ProductReviewCardWrapper>
-      <div>
-        <span>
-          좋아요 가격대비 짱입니다좋아요 가격대비 짱입니다좋아요 가격대비
-        </span>
-      </div>
-      <div>
-        <div>
-          <span>작성자 :</span>
-          <span>her****</span>
-        </div>
-        <div>
-          <span>등록일 :</span>
-          <span>2022.03.03</span>
-        </div>
-      </div>
-    </ProductReviewCardWrapper>
+    <>
+      {reviewInfo && (
+        <ProductReviewCardWrapper ReviewStarIndex={reviewStarIndex}>
+          <div>
+            <div className="start-wrapper">
+              <span>
+                <span></span>
+              </span>
+
+              <strong>{reviewInfo?.score}</strong>
+            </div>
+            <div className="review-info">
+              <span>
+                {reviewInfo?.nickname.substring(
+                  0,
+                  Math.floor(reviewInfo?.nickname?.length / 2),
+                ) +
+                  [
+                    ...new Array(
+                      Math.ceil(reviewInfo?.nickname?.length / 2),
+                    ).fill('*'),
+                  ].reduce((acc, value) => {
+                    return acc + '*';
+                  })}
+              </span>
+              <span>
+                {dayjs(reviewInfo?.createdAt).year() +
+                  '.' +
+                  Number(dayjs(reviewInfo?.createdAt).month() + 1) +
+                  '.' +
+                  dayjs(reviewInfo?.createdAt).date() +
+                  '.'}
+              </span>
+            </div>
+          </div>
+          <div className="review-text">
+            <span>{reviewInfo?.review_text}</span>
+          </div>
+        </ProductReviewCardWrapper>
+      )}
+    </>
   );
 };
 

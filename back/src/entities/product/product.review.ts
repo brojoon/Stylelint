@@ -9,9 +9,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ProductSailInfo } from './product.sale.info';
-
-import { ProductSubImg } from './product.sub.img';
 
 @Entity({ schema: 'stylelint', name: 'productReview' })
 export class ProductReview {
@@ -20,17 +17,12 @@ export class ProductReview {
 
   @IsString()
   @IsNotEmpty()
-  @Column('char', { name: 'product_code', length: 10, unique: true })
-  code: string;
+  @Column('char', { name: 'product_code', length: 10 })
+  product_code: string;
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({
-    description: '유저아이디',
-    example: 'brojoon',
-    required: true,
-  })
-  @Column('char', { name: 'userId', unique: true, length: 30 })
+  @Column('char', { name: 'userId', length: 30 })
   userId: string;
 
   @IsString()

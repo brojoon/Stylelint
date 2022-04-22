@@ -1,10 +1,18 @@
 import ProductReviewContainer from '@components/ProductReviewContainer';
 import ProductDescTab from '@components/RroductDetailDescTabs/ProductDescTab';
+import fetcher from '@utils/utils/fetcher';
+import { useRouter } from 'next/router';
 import React, { useCallback, useState } from 'react';
+import { useQuery } from 'react-query';
 import { ProductDetailDescWrapper } from './style';
 
 const ProductDetailDesc = () => {
   const [productDescNavIndex, setProductDescNavIndex] = useState('1');
+  const router = useRouter();
+  const { type, code } = router.query;
+  const { data, refetch } = useQuery('productReviewList', () =>
+    fetcher(`api/product/${code}/review`),
+  );
   const onClickProductDescNav = useCallback((e) => {
     setProductDescNavIndex(e.target.dataset.index);
   }, []);
@@ -20,14 +28,14 @@ const ProductDetailDesc = () => {
             </li>
             <li>
               <span onClick={onClickProductDescNav} data-index="2">
-                상품평
+                상품평<span> {data?.length}</span>
               </span>
             </li>
-            <li>
+            {/* <li>
               <span onClick={onClickProductDescNav} data-index="3">
                 상품문의
               </span>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
