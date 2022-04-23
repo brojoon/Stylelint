@@ -33,7 +33,7 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
     );
     if (user) return user;
     const result = await this.authService.join(
-      info.oauthId,
+      'kakao_' + info.oauthId,
       process.env.PASSWORD,
       '',
       info?.email,

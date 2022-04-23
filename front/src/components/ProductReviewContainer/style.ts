@@ -26,4 +26,14 @@ export const ProductReviewWrapper = styled.div`
     color: #2e8de5;
     vertical-align: baseline;
   }
+
+  .review-modal-btn {
+    display: block;
+    text-align: center;
+    border: 1px solid #ddd;
+    width: 80px;
+    height: 29px;
+    color: #424242;
+    font-size: 13px;
+  }
 `;

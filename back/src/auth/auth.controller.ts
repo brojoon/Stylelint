@@ -35,7 +35,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Body() body: UserLoginDto, @Res() res) {
-    const token = await this.authService.login(body);
+    const token = await this.authService.login(body.userId);
     res.cookie('stylelint', token.access_token, { httpOnly: true });
     res.send(token.access_token);
   }
@@ -74,7 +74,7 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   @Get('google/redirect')
   async googleRedirect(@Req() req, @Res() res) {
-    const token = await this.authService.login(req.user);
+    const token = await this.authService.login('google_' + req.user.userId);
     res.cookie('stylelint', token.access_token, { httpOnly: true });
     res.status(302).redirect(jwtConstants.HOME);
   }
@@ -86,7 +86,7 @@ export class AuthController {
   @UseGuards(AuthGuard('kakao'))
   @Get('kakao/redirect')
   async kakaoRedirect(@Req() req, @Res() res) {
-    const token = await this.authService.login(req.user);
+    const token = await this.authService.login('kakao_' + req.user.userId);
     res.cookie('stylelint', token.access_token, { httpOnly: true });
     res.status(302).redirect(jwtConstants.HOME);
   }

@@ -39,7 +39,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
     );
     if (user) return user;
     const result = await this.authService.join(
-      info.oauthId,
+      'google_' + info.oauthId,
       process.env.PASSWORD,
       '',
       info?.email,

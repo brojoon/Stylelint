@@ -2,7 +2,7 @@ import { IReviewInfo } from '@typings/db';
 import fetcher from '@utils/utils/fetcher';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import React, { useState, VFC } from 'react';
+import React, { useEffect, useState, VFC } from 'react';
 import { useQuery } from 'react-query';
 import { ProductReviewCardWrapper } from './style';
 
@@ -12,6 +12,12 @@ interface Props {
 
 const ProductReviewCard: VFC<Props> = ({ reviewInfo }) => {
   const [reviewStarIndex, setReviewStarIndex] = useState(reviewInfo?.score);
+
+  useEffect(() => {
+    if (reviewInfo) {
+      setReviewStarIndex(reviewInfo?.score);
+    }
+  }, [reviewInfo]);
 
   return (
     <>

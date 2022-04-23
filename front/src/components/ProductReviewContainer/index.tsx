@@ -41,7 +41,9 @@ const ProductReviewContainer = () => {
           <h3>
             일반 상품평<span>{reverseData?.length}</span>
           </h3>
-          <button onClick={onClickCreateReivew}>리뷰 작성</button>
+          <button className="review-modal-btn" onClick={onClickCreateReivew}>
+            리뷰 작성
+          </button>
         </div>
         {[...reverseData]
           .slice(page * perPage, page * perPage + perPage)
