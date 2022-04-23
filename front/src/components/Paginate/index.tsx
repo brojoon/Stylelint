@@ -1,24 +1,34 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState, VFC } from 'react';
 
 import ReactPaginate from 'react-paginate';
-import { MyPaginate } from './style';
+import { PaginateContainer } from './style';
 
-const Paginate = () => {
-  const [page, setPage] = useState(1);
+interface Props {
+  totalCount: number;
+  setPage: (selected: number) => void;
+  perPage: number;
+}
+
+const Paginate: VFC<Props> = ({ setPage, totalCount, perPage }) => {
+  const onChangePaginate = useCallback(({ selected }) => {
+    setPage(selected);
+  }, []);
 
   return (
-    <MyPaginate
-      pageCount={10}
-      pageRangeDisplayed={10}
-      marginPagesDisplayed={0}
-      breakLabel={''}
-      previousLabel={'이전'}
-      nextLabel={'다음'}
-      containerClassName={'pagination'}
-      activeClassName={'currentPage'}
-      previousClassName={'pageLabel-btn'}
-      nextClassName={'pageLabel-btn'}
-    />
+    <PaginateContainer>
+      <ReactPaginate
+        previousLabel={'이전'}
+        nextLabel={'다음'}
+        breakLabel={'...'}
+        onPageChange={onChangePaginate}
+        breakClassName={'break-me'}
+        pageCount={Math.ceil(totalCount / perPage)}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={1}
+        containerClassName={'pagination'}
+        activeClassName={'active'}
+      />
+    </PaginateContainer>
   );
 };
 export default Paginate;

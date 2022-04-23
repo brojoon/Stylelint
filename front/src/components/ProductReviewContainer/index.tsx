@@ -11,6 +11,10 @@ import { ProductReviewWrapper } from './style';
 const ProductReviewContainer = () => {
   const router = useRouter();
   const { type, code } = router.query;
+  const [page, setPage] = useState(0);
+  const [reverseData, setReverseData] = useState([]);
+  const perPage = 5;
+
   const { data, refetch } = useQuery('productReviewList', () =>
     fetcher(`api/product/${code}/review`),
   );
@@ -20,29 +24,39 @@ const ProductReviewContainer = () => {
     setIsCreateReivewModal(true);
   }, []);
 
-  useEffect(() => {});
+  useEffect(() => {
+    if (data) {
+      setReverseData(data.reverse());
+    }
+  }, [data]);
+  console.log(page);
   return (
     <>
       {isCreateReivewModal && (
         <ModalCreateReivew setIsCreateReivewModal={setIsCreateReivewModal} />
       )}
-      {data && (
-        <ProductReviewWrapper>
-          <div className="header-wrapper">
-            <h3>
-              일반 상품평<span>{data?.length}</span>
-            </h3>
-            <button onClick={onClickCreateReivew}>리뷰 작성</button>
-          </div>
-          {[...data].reverse().map((reviewInfo: IReviewInfo) => (
+
+      <ProductReviewWrapper>
+        <div className="header-wrapper">
+          <h3>
+            일반 상품평<span>{reverseData?.length}</span>
+          </h3>
+          <button onClick={onClickCreateReivew}>리뷰 작성</button>
+        </div>
+        {[...reverseData]
+          .slice(page * perPage, page * perPage + perPage)
+          .map((reviewInfo: IReviewInfo) => (
             <ProductReivewCard
               key={reviewInfo.review_text + reviewInfo.createdAt}
               reviewInfo={reviewInfo}
             />
           ))}
-          <Paginate />
-        </ProductReviewWrapper>
-      )}
+        <Paginate
+          setPage={setPage}
+          totalCount={reverseData?.length}
+          perPage={perPage}
+        />
+      </ProductReviewWrapper>
     </>
   );
 };

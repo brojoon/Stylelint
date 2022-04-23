@@ -1,34 +1,91 @@
 import styled from 'styled-components';
-import ReactPaginate from 'react-paginate';
-export const MyPaginate = styled(ReactPaginate)`
-  margin-bottom: 2rem;
+
+export const PaginateContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  list-style-type: none;
-  padding: 0 5rem;
-  li a {
-    border-radius: 7px;
-    padding: 0.1rem 1rem;
-    border: gray 1px solid;
+  justify-content: center;
+  margin-top: 40px;
+  .pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pagination a {
     cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #dee2e6;
+    line-height: 1.25;
+    color: #777;
+    background-color: #fff;
   }
-  li.previous a,
-  li.next a,
-  li.break a {
-    border-color: transparent;
+
+  .pagination a:hover {
+    color: #6c757d;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
   }
-  li.active a {
-    background-color: #0366d6;
-    border-color: transparent;
-    color: white;
-    min-width: 32px;
+
+  .pagination li:first-child a {
+    margin-left: 0;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
   }
-  li.disabled a {
-    color: grey;
+
+  .pagination li:last-child a {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
   }
-  li.disable,
-  li.disabled a {
-    cursor: default;
+
+  .pagination .active a {
+    color: #fff;
+    background-color: #777;
+    border-color: #777;
+  }
+
+  .disabled a {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+  }
+
+  .list-group {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    padding-left: 0;
+    border-radius: 0.25rem;
+  }
+
+  .list-group-item {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  .list-group-item:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+
+  .list-group-item:last-child {
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+  }
+
+  .list-group-item + .list-group-item {
+    border-top-width: 0;
+  }
+
+  .pagination .active:hover {
+    color: #fff;
+    background-color: #777;
+    border-color: #777;
   }
 `;
