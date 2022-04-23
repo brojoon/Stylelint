@@ -19,17 +19,30 @@ const ProductReviewContainer = () => {
     fetcher(`api/product/${code}/review`),
   );
 
+  const { data: user } = useQuery('user', () => fetcher(`api/user/profile`));
+
   const [isCreateReivewModal, setIsCreateReivewModal] = useState(false);
   const onClickCreateReivew = useCallback(() => {
-    setIsCreateReivewModal(true);
-  }, []);
+    if (!user) {
+      alert('로그인후 이용 가능합니다.');
+      return;
+    } else {
+      for (let i = 0; i < data.length; i++) {
+        if (data.userId == user.userId) {
+          alert('이미 리뷰를 작성 하셨습니다.');
+          return;
+        }
+      }
+      setIsCreateReivewModal(true);
+    }
+  }, [user, data]);
 
   useEffect(() => {
     if (data) {
       setReverseData(data.reverse());
     }
   }, [data]);
-  console.log(page);
+
   return (
     <>
       {isCreateReivewModal && (
