@@ -64,4 +64,4 @@ const ProductReviewCard: VFC<Props> = ({ reviewInfo }) => {
   );
 };
 
-export default ProductReviewCard;
+export default React.memo(ProductReviewCard);

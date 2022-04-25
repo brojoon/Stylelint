@@ -36,4 +36,4 @@ const ProductDescTab = () => {
     </ProductDescTabContainer>
   );
 };
-export default ProductDescTab;
+export default React.memo(ProductDescTab);

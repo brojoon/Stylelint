@@ -88,7 +88,6 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
   }, [reviewStarIndexSave, textValue, code, user]);
 
   const isMobile = useIsMobile();
-  console.log(textValue);
 
   return (
     <>

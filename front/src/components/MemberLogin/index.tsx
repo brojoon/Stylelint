@@ -1,12 +1,18 @@
 import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
-import React, { useCallback, useState } from 'react';
+import React, {
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import Link from 'next/link';
 import { LoginFetch } from '@store/modules/login';
 import { useDispatch } from 'react-redux';
 import { MemberLoginContainer } from './style';
 
-import ModalNotice from '@components/Modals/ModalCreateReivew';
 import { baseApiUrl } from '@utils/utils/const';
 
 function MemberLogin() {
@@ -16,6 +22,12 @@ function MemberLogin() {
   const [passwordErrorText, setPasswordErrorText] = useState('');
   // const [isModalNotice, setIsModalNotice] = useState(false);
   const dispatch = useDispatch();
+
+  const inputFocus = useRef<any>(null);
+
+  useEffect(() => {
+    inputFocus?.current?.focus();
+  }, [inputFocus]);
 
   const onSubmitLogin = useCallback(async () => {
     if (!userIdInputValue) {
@@ -47,6 +59,14 @@ function MemberLogin() {
     [passwordErrorText, idErrorText],
   );
 
+  const onChangeId = useCallback(
+    (e) => {
+      setUserIdInputValue(e.target.value);
+      if (idErrorText) setIdErrorText('');
+    },
+    [idErrorText],
+  );
+
   const onKeyUpSubmit = useCallback(
     (e) => {
       if (e.keyCode == 13) onSubmitLogin();
@@ -72,16 +92,15 @@ function MemberLogin() {
         )} */}
         <label className="w-full">
           <span className="text-[1rem]">아이디</span>
-          <BasicInput
-            setInputValue={setUserIdInputValue}
-            errorText={idErrorText}
-            setErrorText={setIdErrorText}
-            inputValue={userIdInputValue}
+          <input
+            ref={inputFocus}
+            onChange={onChangeId}
+            value={userIdInputValue}
             type="text"
             name="id"
             placeholder="아이디를 입력해 주세요."
             maxLength={15}
-            style="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
+            className="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
           />
         </label>
         <form>

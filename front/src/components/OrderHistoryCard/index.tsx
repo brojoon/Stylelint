@@ -65,4 +65,4 @@ const OrderHistoryCard: VFC<Props> = ({ orderHistoryProduct }) => {
   );
 };
 
-export default OrderHistoryCard;
+export default React.memo(OrderHistoryCard);
