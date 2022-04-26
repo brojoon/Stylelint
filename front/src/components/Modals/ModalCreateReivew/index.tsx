@@ -47,14 +47,12 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
   }, []);
 
   const onClickReviewStart = useCallback((e) => {
-    console.log('click!!', Number(e.target.id.substr(-1)));
     setReviewStarIndexSave(Number(e.target.id.substr(-1)));
     setReviewStarIndex(Number(e.target.id.substr(-1)));
   }, []);
 
   const onMouseEnterReviewStar = useCallback(
     (e) => {
-      console.log('enter!!', Number(e.target.id.substr(-1)));
       if (reviewStarIndex < Number(e.target.id.substr(-1)))
         setReviewStarIndex(Number(e.target.id.substr(-1)));
     },
@@ -69,7 +67,24 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
   );
 
   const onClickReviewSubmit = useCallback(async () => {
-    if (textValue?.length > 0 && reviewStarIndexSave > 0 && code && user) {
+    if (!user) {
+      alert('로그인후 이용 가능합니다.');
+      return;
+    } else if (productReviewList) {
+      for (let i = 0; i < productReviewList.length; i++) {
+        if (productReviewList[i].userId == user.userId) {
+          alert('이미 리뷰를 작성 하셨습니다.');
+          return;
+        }
+      }
+    }
+    if (
+      textValue?.length > 0 &&
+      textValue?.length <= 50 &&
+      reviewStarIndexSave > 0 &&
+      code &&
+      user
+    ) {
       const res: any = await dispatch(
         ProductReviewAddFetch({
           product_code: code,
@@ -85,7 +100,7 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
         });
       }
     }
-  }, [reviewStarIndexSave, textValue, code, user]);
+  }, [reviewStarIndexSave, textValue, code, user, productReviewList]);
 
   const isMobile = useIsMobile();
 

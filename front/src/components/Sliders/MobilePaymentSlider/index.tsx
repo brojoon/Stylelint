@@ -137,4 +137,4 @@ const MobilePaymentSlider = () => {
   );
 };
 
-export default MobilePaymentSlider;
+export default React.memo(MobilePaymentSlider);

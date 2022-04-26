@@ -223,6 +223,8 @@ export const ProfileContainer = styled.div`
   .info-submit {
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 62px;
     margin-top: 35px;
   }
   .info-submit > button {

@@ -284,4 +284,4 @@ const MainSlider = () => {
   );
 };
 
-export default MainSlider;
+export default React.memo(MainSlider);

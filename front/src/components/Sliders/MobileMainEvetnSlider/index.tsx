@@ -139,4 +139,4 @@ const MobileMainEventSlider = () => {
   );
 };
 
-export default MobileMainEventSlider;
+export default React.memo(MobileMainEventSlider);

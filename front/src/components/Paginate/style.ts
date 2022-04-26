@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PaginateContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin: 40px 0;
   .pagination {
     list-style: none;
     display: flex;

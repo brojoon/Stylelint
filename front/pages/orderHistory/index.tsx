@@ -38,7 +38,7 @@ const OrderHistory = () => {
                   .map((history: IPaymentsDoneInfo, index) => {
                     return (
                       <OrderHistoryCard
-                        key={index}
+                        key={history.id}
                         orderHistoryProduct={history}
                       />
                     );

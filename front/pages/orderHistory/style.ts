@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const OrderHistoryContainer = styled.section`
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 15px 60px;
 
   .order-history-wrapper {
     margin-bottom: 30px;

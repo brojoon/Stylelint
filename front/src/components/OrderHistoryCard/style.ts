@@ -89,6 +89,7 @@ export const OrderHistoryProductContainer = styled.section<{
     align-items: center;
     font-size: 16px;
     font-weight: 600;
+    color: #444;
   }
 
   .order-user-info > div {

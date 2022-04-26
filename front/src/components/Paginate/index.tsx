@@ -1,3 +1,4 @@
+import { useIsTablet } from '@utils/Hooks';
 import React, { useCallback, useState, VFC } from 'react';
 
 import ReactPaginate from 'react-paginate';
@@ -14,6 +15,7 @@ const Paginate: VFC<Props> = ({ setPage, totalCount, perPage }) => {
     setPage(selected);
   }, []);
 
+  const isTablet = useIsTablet();
   return (
     <PaginateContainer>
       <ReactPaginate
@@ -23,8 +25,8 @@ const Paginate: VFC<Props> = ({ setPage, totalCount, perPage }) => {
         onPageChange={onChangePaginate}
         breakClassName={'break-me'}
         pageCount={Math.ceil(totalCount / perPage)}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={1}
+        marginPagesDisplayed={1}
+        pageRangeDisplayed={isTablet ? 1 : 2}
         containerClassName={'pagination'}
         activeClassName={'active'}
       />

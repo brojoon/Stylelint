@@ -48,8 +48,9 @@ export const MainHeader = styled.header<{
   }
   .container {
     width: 100%;
+    padding-right: 1rem;
+    max-width: 100%;
     display: flex;
-   
     justify-content: space-between;
   }
 
@@ -125,7 +126,7 @@ export const MainHeader = styled.header<{
   .info > ul > li:nth-child(2) {
     margin-left: 2rem;
     position: relative;
-    padding: ${(props) => (props.IsScrollTop > 60 ? '19px 0' : '32px 0')};
+    padding: ${(props) => (props.IsScrollTop > 60 ? '19.5px 0' : '32px 0')};
   }
 
 

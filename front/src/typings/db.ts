@@ -73,6 +73,7 @@ export interface IPaymentsDoneInfo {
 }
 
 export interface IReviewInfo {
+  id: number;
   product_code: string;
   userId: string;
   nickname: string;

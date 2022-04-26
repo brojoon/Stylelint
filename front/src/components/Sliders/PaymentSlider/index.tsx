@@ -54,4 +54,4 @@ const PaymentSlider = () => {
   );
 };
 
-export default PaymentSlider;
+export default React.memo(PaymentSlider);

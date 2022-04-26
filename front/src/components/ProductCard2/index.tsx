@@ -3,7 +3,7 @@ import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
 import React, { useCallback, useState, VFC } from 'react';
 import { ProductCardContainer } from './style';
 import { useRouter } from 'next/router';
-import { useIsTablet } from '@utils/Hooks';
+import { useIsMobile, useIsTablet } from '@utils/Hooks';
 
 interface Props {
   data: IProducts;
@@ -13,6 +13,7 @@ const ProductCard2: VFC<Props> = ({ data }) => {
   const [quickview, setQuickview] = useState(false);
   const router = useRouter();
   const IsTablet = useIsTablet();
+  const isMobile = useIsMobile();
 
   const onClickProductCardImg = useCallback(() => {
     router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
@@ -40,7 +41,7 @@ const ProductCard2: VFC<Props> = ({ data }) => {
                 />
                 <div
                   className={`${
-                    quickview ? 'flex' : 'hidden'
+                    isMobile ? 'hidden' : quickview ? 'flex' : 'hidden'
                   } items-center justify-center absolute left-[0] top-[0] w-[100%] h-[100%] rounded-[10px] bg-white-rgba`}
                 >
                   <div className=" h-[34px] w-[120px] bg-[position:-113px_-229px] bg-no-repeat bg-[url('/img/imags.png')]"></div>

@@ -127,6 +127,7 @@ export class PaymentService {
 
       for (let i = 0; i < productsInfo.length; i++) {
         let isOverlap = false;
+
         for (let j = 0; j < products?.length; j++) {
           if (productsInfo[i].product_name === products[j].name) {
             isOverlap = true;

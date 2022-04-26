@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { MemberLoginContainer } from './style';
 
 import { baseApiUrl } from '@utils/utils/const';
+import BasicInputFocus from '@components/Basic/BasicInputFocus';
 
 function MemberLogin() {
   const [userIdInputValue, setUserIdInputValue] = useState('');
@@ -59,14 +60,6 @@ function MemberLogin() {
     [passwordErrorText, idErrorText],
   );
 
-  const onChangeId = useCallback(
-    (e) => {
-      setUserIdInputValue(e.target.value);
-      if (idErrorText) setIdErrorText('');
-    },
-    [idErrorText],
-  );
-
   const onKeyUpSubmit = useCallback(
     (e) => {
       if (e.keyCode == 13) onSubmitLogin();
@@ -92,15 +85,16 @@ function MemberLogin() {
         )} */}
         <label className="w-full">
           <span className="text-[1rem]">아이디</span>
-          <input
-            ref={inputFocus}
-            onChange={onChangeId}
-            value={userIdInputValue}
+          <BasicInputFocus
             type="text"
             name="id"
             placeholder="아이디를 입력해 주세요."
             maxLength={15}
-            className="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
+            inputValue={userIdInputValue}
+            setInputValue={setUserIdInputValue}
+            setErrorText={setIdErrorText}
+            errorText={idErrorText}
+            style="h-[50px] w-full mb-2.5 outline-neutral-400 border rounded px-3"
           />
         </label>
         <form>
@@ -156,7 +150,9 @@ function MemberLogin() {
           Content="구글 로그인"
           style="flex justify-center items-center w-full bg-indigo-50  border rounded text-black py-3 font-semibold before:bg-[url('~@../../../public/img/google-logo.png')] before:bg-cover before:w-[1.875rem] before:h-[1.875rem] before:inline-block"
         />
-        <p className="font-medium text-[#8E929F] mt-10">© StyleLint Corp.</p>
+        <p className="font-medium text-[#8E929F] text-center mt-10">
+          © StyleLint Corp.
+        </p>
       </MemberLoginContainer>
     </>
   );

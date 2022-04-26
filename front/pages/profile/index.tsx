@@ -8,6 +8,7 @@ import Router from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 import { ProfileContainer } from './style';
 
 const Profile = () => {
@@ -25,7 +26,7 @@ const Profile = () => {
   const [nameErrorText, setNameErrorText] = useState('');
   const [addressErrorText, setAddressErrorText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
   const { data: user } = useQuery('user', () => fetcher(`/api/user/profile`));
 
   const dispatch = useDispatch();
@@ -104,7 +105,7 @@ const Profile = () => {
     [addressErrorText],
   );
 
-  const onClickUserInfoUpdateBtn = useCallback(() => {
+  const onClickUserInfoUpdateBtn = useCallback(async () => {
     if (!inputPassword && inputPasswordCheck) {
       setPasswordErrorText('비밀번호를 입력해주세요');
       return;
@@ -164,7 +165,9 @@ const Profile = () => {
     if (inputEmailHead && inputEmailSub)
       data.email = inputEmailHead + '@' + inputEmailSub;
     if (inputPhoneNumber) data.phone_number = inputPhoneNumber;
-    dispatch(UserInfoUpdateFetch(data));
+    setIsSubmitLoading(true);
+    await dispatch(UserInfoUpdateFetch(data));
+    setIsSubmitLoading(false);
   }, [
     user,
     inputPassword,
@@ -356,9 +359,13 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="info-submit">
-                    <button onClick={onClickUserInfoUpdateBtn}>
-                      저장 하기
-                    </button>
+                    {isSubmitLoading ? (
+                      <ClipLoader color={'#D3D3D3'} size={36} />
+                    ) : (
+                      <button onClick={onClickUserInfoUpdateBtn}>
+                        저장 하기
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

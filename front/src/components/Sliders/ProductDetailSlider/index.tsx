@@ -120,4 +120,4 @@ const ProductDetailSlider: VFC<Props> = ({ ssrProductData }) => {
   );
 };
 
-export default ProductDetailSlider;
+export default React.memo(ProductDetailSlider);

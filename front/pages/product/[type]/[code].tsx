@@ -103,7 +103,7 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
 
   const onClickProductDibs = useCallback(async () => {
     if (!user) {
-      Router.push('/login');
+      alert('로그인 후 찜하기가 가능합니다.');
       return;
     }
     setIsDibLoading(true);
@@ -204,7 +204,7 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
 
   const onClickProductsBasket = useCallback(async () => {
     if (!user) {
-      Router.push('/login');
+      alert('로그인 후 장바구니 이용이 가능합니다.');
       return;
     }
     if (selectedProductArr) {

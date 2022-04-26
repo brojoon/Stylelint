@@ -21,19 +21,18 @@ export class KakaoStrategy extends PassportStrategy(Strategy) {
     const { id } = profile;
 
     const info = {
-      oauthId: id,
-      userId: id,
+      userId: 'kakao_' + id,
       username: profile?.username,
       email: profile?._json.kakao_account?.email,
     };
     if (!info) throw new UnauthorizedException();
     const user = await this.authService.validateUser(
-      String(info.oauthId),
+      String(info.userId),
       process.env.PASSWORD,
     );
     if (user) return user;
     const result = await this.authService.join(
-      'kakao_' + info.oauthId,
+      info.userId,
       process.env.PASSWORD,
       '',
       info?.email,

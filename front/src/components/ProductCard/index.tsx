@@ -57,7 +57,8 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
 
   const onClickProductBasket = useCallback(async () => {
     if (!user) {
-      Router.push('/login');
+      alert('로그인 후 장바구니 이용이 가능합니다.');
+      return;
     } else {
       setIsBasketLoading(true);
       const res: any = await dispatch(
@@ -82,7 +83,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
 
   const onClickProductDibs = useCallback(async () => {
     if (!user) {
-      Router.push('/login');
+      alert('로그인 후 찜하기가 가능합니다.');
       return;
     }
     setIsDibLoading(true);

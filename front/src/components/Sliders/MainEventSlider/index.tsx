@@ -39,4 +39,4 @@ const MainEventSlider = () => {
   );
 };
 
-export default MainEventSlider;
+export default React.memo(MainEventSlider);

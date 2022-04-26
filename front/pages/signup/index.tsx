@@ -9,6 +9,7 @@ import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import Router from 'next/router';
 import LoadingCircle from '@components/LoadingCircle';
+import BasicInputFocus from '@components/Basic/BasicInputFocus';
 
 // interface signupRequest {
 //   userId: string;
@@ -45,6 +46,9 @@ const signup = () => {
     if (!inputIdValue) {
       setIdErrorText('아이디를 입력해주세요');
       return;
+    }
+    if (inputIdValue.length < 3) {
+      setIdErrorText('아이디를 3자 이상 입력해주세요');
     }
     if (!inputPassword) {
       setPasswordErrorText('비밀번호를 입력해주세요');
@@ -123,7 +127,7 @@ const signup = () => {
             <section className="flex flex-col">
               <label>
                 <span className="text-[1rem]">아이디</span>
-                <BasicInput
+                <BasicInputFocus
                   setInputValue={setInputIdValue}
                   errorText={idErrorText}
                   setErrorText={setIdErrorText}

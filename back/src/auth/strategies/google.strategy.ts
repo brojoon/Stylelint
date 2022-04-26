@@ -27,19 +27,18 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
     const email = profile?.emails[0]?.value;
 
     const info = {
-      oauthId: id,
-      userId: id,
+      userId: 'google_' + id,
       username: email?.slice(0, email.indexOf('@')),
       email: email,
     };
     if (!info) throw new UnauthorizedException();
     const user = await this.authService.validateUser(
-      String(info.oauthId),
+      String(info.userId),
       process.env.PASSWORD,
     );
     if (user) return user;
     const result = await this.authService.join(
-      'google_' + info.oauthId,
+      info.userId,
       process.env.PASSWORD,
       '',
       info?.email,
