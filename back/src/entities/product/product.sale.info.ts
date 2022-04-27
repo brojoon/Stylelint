@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 import { Product } from './product.info';
 
-@Entity({ schema: 'stylelint', name: 'productSaleInfo' })
+@Entity({ schema: 'stylelint', name: 'product_sale_info' })
 export class ProductSailInfo {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;

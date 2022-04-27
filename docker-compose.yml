@@ -1,0 +1,43 @@
+version: "3"
+services:
+  mysqld:
+    image: mysql:5.7
+    container_name: mysqld
+    restart: always
+    ports:
+      - "3307:3306"
+    networks:
+      - database
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      TZ: "Asia/Seoul"
+    volumes:
+      # - mysql-data:/var/lib/data/mysql
+      # - ./postgresql:/var/lib/postgresql/data
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: back
+    restart: always
+    ports:
+      - 3095:3095
+    depends_on:
+      - mysqld
+    networks:
+      - database
+      - frontApp
+    # volumes:
+    #   - ./back:/usr/src/app
+
+# volumes:
+#   mysql-data:
+
+networks:
+  database:
+    driver: bridge
+  frontApp:
+    driver: bridge

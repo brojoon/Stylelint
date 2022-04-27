@@ -60,6 +60,10 @@ function MemberLogin() {
     [passwordErrorText, idErrorText],
   );
 
+  const onKeyDown = useCallback((e) => {
+    if (e.keyCode == 13) e.preventDefault();
+  }, []);
+
   const onKeyUpSubmit = useCallback(
     (e) => {
       if (e.keyCode == 13) onSubmitLogin();
@@ -104,6 +108,7 @@ function MemberLogin() {
               onChange={onChangePassword}
               value={userPasswordInputValue}
               onKeyUp={onKeyUpSubmit}
+              onKeyDown={onKeyDown}
               type="password"
               name="password"
               placeholder="비밀번호를 입력해 주세요."

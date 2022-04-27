@@ -10,7 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'stylelint', name: 'productReview' })
+@Entity({ schema: 'stylelint', name: 'product_review' })
 export class ProductReview {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;

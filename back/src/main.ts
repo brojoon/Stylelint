@@ -24,14 +24,14 @@ async function bootstrap() {
   app.useStaticAssets(path.join(__dirname, '..', 'imgs'), {
     prefix: '/imgs',
   });
-  const config = new DocumentBuilder()
-    .setTitle('API')
-    .setDescription('개발을 위한 API 문서입니다.')
-    .setVersion('1.0')
-    .addCookieAuth('connect.sid')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  // const config = new DocumentBuilder()
+  //   .setTitle('API')
+  //   .setDescription('개발을 위한 API 문서입니다.')
+  //   .setVersion('1.0')
+  //   .addCookieAuth('connect.sid')
+  //   .build();
+  // const document = SwaggerModule.createDocument(app, config);
+  // SwaggerModule.setup('api', app, document);
   // app.use(cookieParser());
   // app.use(
   //   session({
@@ -46,7 +46,7 @@ async function bootstrap() {
   // app.use(passport.initialize());
   // app.use(passport.session);
   await app.listen(port);
-  console.log(`listening on port ${port}`);
+  // console.log(`listening on port ${port}`);
 
   if (module.hot) {
     module.hot.accept();

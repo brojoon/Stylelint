@@ -16,10 +16,10 @@ import { ProductReview } from './src/entities/product/product.review';
 dotenv.config();
 const config: TypeOrmModuleOptions = {
   type: 'mysql',
-  host:
-    process.env.NODE_ENV === 'production'
-      ? process.env.DB_PROD_HOST
-      : process.env.DB_DEV_HOST,
+  host: 'mysqld',
+  // 배포용
+  // host: 'localhost',
+  // 로컬용
   port: +process.env.DB_PORT,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
@@ -39,10 +39,11 @@ const config: TypeOrmModuleOptions = {
   migrations: [__dirname + '/src/migrations/*.ts'],
   cli: { migrationsDir: 'src/migrations' },
   autoLoadEntities: false,
-  charset: 'utf8mb4',
+  // charset: 'utf8mb4',
   synchronize: false,
   logging: true,
   keepConnectionAlive: true,
+  retryAttempts: 2,
   // dropSchema: true,
 };
 

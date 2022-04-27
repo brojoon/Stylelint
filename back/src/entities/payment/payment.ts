@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
-@Entity({ schema: 'stylelint', name: 'Payment' })
+@Entity({ schema: 'stylelint', name: 'payment' })
 export class Payment {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
