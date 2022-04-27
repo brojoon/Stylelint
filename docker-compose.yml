@@ -33,6 +33,32 @@ services:
     # volumes:
     #   - ./back:/usr/src/app
 
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: front
+    restart: always
+    ports:
+      - 3000:3000
+    # depends_on:
+    #   - back
+    networks:
+      - frontApp
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - front
+    networks:
+      - frontApp
+
 # volumes:
 #   mysql-data:
 
