@@ -1,7 +1,18 @@
 {
-  "presets": ["next/babel"],
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-react": {
+          "runtime": "automatic",
+          "importSource": "@emotion/react"
+        }
+      }
+    ]
+  ],
   "plugins": [
     //...
+    // ["styled-components", { "ssr": true }],
     [
       "module-resolver",
       {
@@ -16,7 +27,6 @@
           "@pages": "./pages"
         }
       }
-    ],
-    ["styled-components", { "ssr": true }]
+    ]
   ]
 }

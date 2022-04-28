@@ -118,10 +118,9 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
 
   const onMouseUpSlide = useCallback(
     (e) => {
-      if (isClickProductImg)
-        router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
+      if (isClickProductImg) router.push(`/product/${data.type}/${data.code}`);
     },
-    [router, baseFrontUrl, data, isClickProductImg],
+    [router, data, isClickProductImg],
   );
 
   // const CardDecoColor = [

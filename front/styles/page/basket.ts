@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-
+import styled from '@emotion/styled';
 export const BasketContainer = styled.section<{
   IsCheckedAll: boolean;
   IsTablet1024: boolean;

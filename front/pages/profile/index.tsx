@@ -9,7 +9,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
-import { ProfileContainer } from './style';
+import { ProfileContainer } from 'styles/page/profile';
 
 const Profile = () => {
   const [isPostCode, setIsPostCode] = useState(false);

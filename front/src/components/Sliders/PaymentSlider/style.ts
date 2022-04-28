@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-
+import styled from '@emotion/styled';
 export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
   width: 100%;
   background-color: #ffffff;

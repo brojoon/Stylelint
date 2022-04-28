@@ -11,6 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
 COPY ./init.sh ./
 
 EXPOSE 3000

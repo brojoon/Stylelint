@@ -5,8 +5,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { ResultContainer } from './style';
-
+import { ResultContainer } from 'styles/page/result';
 const Result = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { data: recentPaymemt } = useQuery('userRecentPayment', () =>

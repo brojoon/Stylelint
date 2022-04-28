@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const ProductReviewWrapper = styled.div`
   padding: 50px 20px 50px;

@@ -2,7 +2,7 @@ import ProductsGridWrapper from '@components/ProductCardsGridWrapper';
 import { useIsTablet } from '@utils/Hooks';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { SelectedTypeProductsContainer } from './style';
+import { SelectedTypeProductsContainer } from 'styles/page/product';
 
 const SelectedTypeProducts = () => {
   const router: any = useRouter();

@@ -1,1 +1,1 @@
-npm run dev;
+npm run build:ssr && npm run start;

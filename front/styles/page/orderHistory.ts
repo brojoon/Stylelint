@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const OrderHistoryContainer = styled.section`
   max-width: 1300px;

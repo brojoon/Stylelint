@@ -14,7 +14,10 @@ import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { ClipLoader } from 'react-spinners';
-import { ProductDetailContainer, ProductPurchaseWrapper } from './[code]style';
+import {
+  ProductDetailContainer,
+  ProductPurchaseWrapper,
+} from 'styles/page/[code]';
 
 export interface ISelecedProduct {
   userId: string;
@@ -236,10 +239,10 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
     if (selectedProductArr.length > 0) {
       const res: any = await dispatch(PaymentSaveFetch(selectedProductArr));
       if (res?.meta?.requestStatus === 'fulfilled') {
-        router.push(baseFrontUrl + '/payment');
+        router.push('/payment');
       }
     }
-  }, [selectedProductArr, baseFrontUrl, dispatch, user, PaymentSaveFetch]);
+  }, [selectedProductArr, dispatch, user, PaymentSaveFetch]);
 
   return (
     <>

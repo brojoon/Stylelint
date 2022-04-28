@@ -11,7 +11,7 @@ import Router, { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { BasketContainer } from './style';
+import { BasketContainer } from 'styles/page/basket';
 
 interface IDeleteProductsId {
   id: number;
@@ -124,7 +124,7 @@ const Basket = () => {
       }
       const res: any = await dispatch(PaymentSaveFetch(ret2));
       if (res.meta.requestStatus === 'fulfilled') {
-        router.push(baseFrontUrl + '/payment');
+        router.push('/payment');
       }
     });
   }, [data, productCardArr, user]);

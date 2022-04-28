@@ -1,7 +1,6 @@
 import BasicBtn from '@components/Basic/BasicBtn';
 import BasicInput from '@components/Basic/BasicInput';
 import React, { useCallback, useEffect, useState } from 'react';
-import { SignupContainer } from './style';
 import { useDispatch } from 'react-redux';
 import { SignupFetch } from '@store/modules/signup';
 import isPassword from '@utils/utils/regexPassword';
@@ -10,6 +9,7 @@ import fetcher from '@utils/utils/fetcher';
 import Router from 'next/router';
 import LoadingCircle from '@components/LoadingCircle';
 import BasicInputFocus from '@components/Basic/BasicInputFocus';
+import { SignupContainer } from 'styles/page/signup';
 
 // interface signupRequest {
 //   userId: string;

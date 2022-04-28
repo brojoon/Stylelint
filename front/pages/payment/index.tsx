@@ -1,6 +1,6 @@
 import Postcode from '@components/Modals/PostcodeModal';
 import React, { useCallback, useEffect, useState } from 'react';
-import { PaymentContainer } from './style';
+
 import PaymentSlider from '@components/Sliders/PaymentSlider';
 import fetcher from '@utils/utils/fetcher';
 import { useQuery } from 'react-query';
@@ -13,6 +13,7 @@ import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 import MobilePaymentSlider from '@components/Sliders/MobilePaymentSlider';
 import LoadingCircle from '@components/LoadingCircle';
 import { IPostType } from '@typings/IRequest';
+import { PaymentContainer } from 'styles/page/payment';
 
 const Payment = () => {
   const [isPostCode, setIsPostCode] = useState(false);
@@ -148,7 +149,7 @@ const Payment = () => {
         );
 
         if (res2?.meta?.requestStatus === 'fulfilled') {
-          router.push(baseFrontUrl + '/payment/result');
+          router.push('/payment/result');
         }
       }
     }

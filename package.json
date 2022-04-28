@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "raw-loader": "^4.0.2",
+    "tailwindcss-cli": "^0.1.2"
+  },
+  "dependencies": {
+    "@emotion/babel-plugin": "^11.9.2",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1"
+  }
+}

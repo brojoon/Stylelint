@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-
+import styled from '@emotion/styled';
 export const MainEventSliderContainer = styled.div<{
   PaginationIndex: number;
   SlideIndex: number;

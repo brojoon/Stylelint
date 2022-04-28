@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const ProductsGridContainer = styled.div<{ IsTablet: boolean }>`
   display: grid;

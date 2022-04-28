@@ -16,7 +16,7 @@ const ProductCard2: VFC<Props> = ({ data }) => {
   const isMobile = useIsMobile();
 
   const onClickProductCardImg = useCallback(() => {
-    router.push(baseFrontUrl + `/product/${data.type}/${data.code}`);
+    router.push(`/product/${data.type}/${data.code}`);
   }, [data, router, baseFrontUrl]);
 
   return (

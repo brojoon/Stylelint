@@ -6,7 +6,7 @@ import fetcher from '@utils/utils/fetcher';
 import Router from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { OrderHistoryContainer } from './style';
+import { OrderHistoryContainer } from 'styles/page/orderHistory';
 
 const OrderHistory = () => {
   const [isLoading, setIsLoading] = useState(true);
