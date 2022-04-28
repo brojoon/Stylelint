@@ -27,18 +27,18 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  // app.useStaticAssets(path.join(__dirname, '..', '/imgs'), {
-  //   prefix: '/imgs',
-  // });
-  // dev 이미지 경로
-  app.useStaticAssets(path.join(__dirname, '..', '../imgs'), {
+  app.useStaticAssets(path.join(__dirname, '..', '/imgs'), {
     prefix: '/imgs',
   });
+  // dev 이미지 경로
+
   // prod 이미지 경로
   // const config = new DocumentBuilder()
   //   .setTitle('API')
   //   .setDescription('개발을 위한 API 문서입니다.')
-  //   .setVersion('1.0')
+  //   .setVersion('1.0')  // app.useStaticAssets(path.join(__dirname, '..', '../imgs'), {
+  //   prefix: '/imgs',
+  // });
   //   .addCookieAuth('connect.sid')
   //   .build();
   // const document = SwaggerModule.createDocument(app, config);
