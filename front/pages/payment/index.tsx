@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import PaymentSlider from '@components/Sliders/PaymentSlider';
 import fetcher from '@utils/utils/fetcher';
 import { useQuery } from 'react-query';
-import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
+import { baseApiUrl } from '@utils/utils/const';
 import { useDispatch } from 'react-redux';
 import { PaymentDoneUpdateFetch } from '@store/modules/paymentDoneUpdate';
 import Router, { useRouter } from 'next/router';
