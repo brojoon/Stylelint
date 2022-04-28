@@ -1,5 +1,5 @@
 import { IProducts } from '@typings/db';
-import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
+import { baseApiUrl } from '@utils/utils/const';
 import React, { useCallback, useEffect, useRef, useState, VFC } from 'react';
 import { ProductCardContainer, ProductCardIconWrapper } from './style';
 import Router, { useRouter } from 'next/router';

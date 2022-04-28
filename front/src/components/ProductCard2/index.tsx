@@ -1,5 +1,5 @@
 import { IProducts } from '@typings/db';
-import { baseApiUrl, baseFrontUrl } from '@utils/utils/const';
+import { baseApiUrl } from '@utils/utils/const';
 import React, { useCallback, useState, VFC } from 'react';
 import { ProductCardContainer } from './style';
 import { useRouter } from 'next/router';
@@ -17,7 +17,7 @@ const ProductCard2: VFC<Props> = ({ data }) => {
 
   const onClickProductCardImg = useCallback(() => {
     router.push(`/product/${data.type}/${data.code}`);
-  }, [data, router, baseFrontUrl]);
+  }, [data, router]);
 
   return (
     <>

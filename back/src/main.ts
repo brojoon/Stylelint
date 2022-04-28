@@ -14,8 +14,14 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const port = process.env.PORT || 3095;
 
+  // app.enableCors({
+  //   origin: 'http://localhost:3000',
+  //   credentials: true,
+  // });
+  //local
+
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: 'http://stylelint.ml',
     credentials: true,
   });
 

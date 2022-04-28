@@ -5,7 +5,7 @@ import { BasketAddFetch } from '@store/modules/basketAdd';
 import { PaymentSaveFetch } from '@store/modules/paymentSave';
 import { IProductDetailInfo } from '@typings/db';
 import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
-import { baseApiUrl, baseFrontUrl, days, months } from '@utils/utils/const';
+import { baseApiUrl, days, months } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
 import { GetServerSideProps } from 'next';

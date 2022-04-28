@@ -47,17 +47,27 @@ services:
       - frontApp
 
   nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    container_name: nginx
-    restart: always
+    image: nginx:latest
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/log:/var/log/nginx
+      - ./www:/var/www/html
     ports:
       - 80:80
-    depends_on:
-      - front
+      - 443:443
     networks:
       - frontApp
+
+  certbot:
+    depends_on:
+      - nginx
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/etc:/etc/letsencrypt
+      - ./certbot/var:/var/lib/letsencrypt
+      - ./www:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html --email ydngjink1234@gmail.com --agree-tos --no-eff-email --force-renewal -d stylelint.ml
 
 # volumes:
 #   mysql-data:

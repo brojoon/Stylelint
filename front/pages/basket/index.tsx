@@ -5,7 +5,6 @@ import { BasketRemoveFetch } from '@store/modules/basketRemove';
 import { PaymentSaveFetch } from '@store/modules/paymentSave';
 import { IBasketProduct } from '@typings/db';
 import { useIsMobile, useIsTablet1024 } from '@utils/Hooks';
-import { baseFrontUrl } from '@utils/utils/const';
 import fetcher from '@utils/utils/fetcher';
 import Router, { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
