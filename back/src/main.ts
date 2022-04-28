@@ -15,16 +15,16 @@ async function bootstrap() {
   const port = process.env.PORT || 3095;
 
   // app.enableCors({
-  //   origin: 'http://localhost:3000',
+  //   origin: 'http://front:3000',
   //   credentials: true,
   // });
-  //local
+  // //local
 
   app.enableCors({
     origin: 'http://stylelint.ml',
     credentials: true,
   });
-
+  // 배포용
   app.useGlobalPipes(new ValidationPipe());
 
   app.useStaticAssets(path.join(__dirname, '..', '/imgs'), {
