@@ -58,7 +58,7 @@ services:
     networks:
       - frontApp
 
-  certbot:
+   certbot:
     depends_on:
       - nginx
     image: certbot/certbot
@@ -67,7 +67,7 @@ services:
       - ./certbot/etc:/etc/letsencrypt
       - ./certbot/var:/var/lib/letsencrypt
       - ./www:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email ydngjink1234@gmail.com --agree-tos --no-eff-email --force-renewal -d stylelint.ml
+    command: certonly --webroot --webroot-path=/var/www/html --email ydngjink1234@gmail.com --agree-tos --no-eff-email --force-renewal -d stylelint.ml -d www.stylelint.ml
 
 # volumes:
 #   mysql-data:
