@@ -249,7 +249,9 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
       <ProductDetailContainer IsTablet1024={isTablet1024} IsTablet={isTablet}>
         <div className="product-Deital-wrapper">
           <div className="product-slide-wrapper flex flex-col w-[50%]">
-            <ProductDetailSlider ssrProductData={ssrProductData} />
+            {ssrProductData && (
+              <ProductDetailSlider ssrProductData={ssrProductData} />
+            )}
           </div>
           <div className="product-purchase-wrapper ">
             <div>
@@ -354,11 +356,12 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
                     </div>
                   </div>
                 )}
-
-                <SelectedProductCardContainer
-                  selectedProductArr={selectedProductArr}
-                  setSelectedProductArr={setSelectedProductArr}
-                />
+                {selectedProductArr?.length > 1 && (
+                  <SelectedProductCardContainer
+                    selectedProductArr={selectedProductArr}
+                    setSelectedProductArr={setSelectedProductArr}
+                  />
+                )}
                 <div className="product-purchase-payment">
                   <div className="purchase-result">
                     <span>총 상품금액</span>

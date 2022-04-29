@@ -46,7 +46,7 @@ const OrderHistory = () => {
               </div>
               <Paginate
                 setPage={setPage}
-                totalCount={data?.length}
+                totalCount={data?.length ? data?.length : 0}
                 perPage={perPage}
               />
             </>

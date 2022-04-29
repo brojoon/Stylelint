@@ -72,9 +72,10 @@ const ProductReviewContainer = () => {
                   reviewInfo={reviewInfo}
                 />
               ))}
+
             <Paginate
               setPage={setPage}
-              totalCount={reverseData?.length}
+              totalCount={reverseData?.length ? reverseData?.length : 0}
               perPage={perPage}
             />
           </ProductReviewWrapper>

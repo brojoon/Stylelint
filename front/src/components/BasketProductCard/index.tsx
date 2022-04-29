@@ -58,7 +58,6 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
       if (res.meta.requestStatus === 'fulfilled') {
         setProductCount((prev) => +prev + 1);
       }
-      await asleep(100, '성공');
       setIsCounterLoading(false);
       refetch();
     },
@@ -78,7 +77,6 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
       if (res.meta.requestStatus === 'fulfilled') {
         setProductCount((prev) => +prev - 1);
       }
-      await asleep(100, '성공');
       setIsCounterLoading(false);
       refetch();
     },
@@ -93,7 +91,7 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
         const data = { id: basketProduct.id, quantity: 99 };
         const res: any = await dispatch(BasketCounterFetch(data));
         setProductCount(99);
-        await asleep(100, '성공');
+
         setIsCounterLoading(false);
         refetch();
       } else if (e.target.value < 1) {
@@ -102,7 +100,7 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
         const data = { id: basketProduct.id, quantity: 1 };
         const res: any = await dispatch(BasketCounterFetch(data));
         setProductCount(1);
-        await asleep(100, '성공');
+
         setIsCounterLoading(false);
         refetch();
       } else if (e.target.value[0] == 0) {
@@ -115,7 +113,7 @@ const BasketProductCard: VFC<Props> = ({ index, basketProduct, refetch }) => {
         if (res.meta.requestStatus === 'fulfilled') {
           setProductCount(e.target.value);
         }
-        await asleep(100, '성공');
+
         setIsCounterLoading(false);
         refetch();
       }

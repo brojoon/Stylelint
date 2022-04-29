@@ -39,17 +39,14 @@ export const PaymentContainer = styled.section<{
     display: flex;
     justify-content: space-between;
     ${(props) => (props.IsTablet1024 ? 'flex-direction: column; ' : '')}
-
   }
 
   .payment-section-flex-wrapper > div:nth-child(1) {
     ${(props) => (props.IsTablet1024 ? '' : 'margin-right: 25px;')}
     width: 100%;
-  -
   }
 
   .payment-section-flex-wrapper > div:nth-child(2) {
-
   }
 
   .payment-info-card {
@@ -80,8 +77,7 @@ export const PaymentContainer = styled.section<{
     height: 24px;
     overflow: hidden;
     display: inline-block;
-    background: url(/img/g_sprite__checkout.png)
-      no-repeat;
+    background: url(/img/g_sprite__checkout.png) no-repeat;
     background-position: -52px -26px;
     font-size: 0;
     background-size: 300px auto;
@@ -105,7 +101,6 @@ export const PaymentContainer = styled.section<{
     border-left: 1px solid #dbdbdb;
     border-top: 1px solid #dbdbdb;
     border-bottom: 1px solid #dbdbdb;
-
   }
 
   .payment-info-text > input:nth-child(2) {
@@ -119,7 +114,6 @@ export const PaymentContainer = styled.section<{
     outline-color: #a3a3a3;
   }
 
-
   .payment-address-text {
     margin-top: 5px;
     font-size: 16px;
@@ -127,7 +121,6 @@ export const PaymentContainer = styled.section<{
     color: #222222;
     font-weight: 500;
     letter-spacing: -0.16px;
-
   }
 
   .payment-address-text > input:nth-child(1) {
@@ -139,7 +132,6 @@ export const PaymentContainer = styled.section<{
     border-top: 1px solid #dbdbdb;
     border-right: 1px solid #dbdbdb;
   }
-
 
   .payment-address-text > input:nth-child(2) {
     padding: 10px;
@@ -213,8 +205,7 @@ export const PaymentContainer = styled.section<{
     transition: 0.3s;
   }
 
-\
-  .payment-purchase-card {
+  \ .payment-purchase-card {
     background-color: #ffffff;
     padding: 20px;
     position: relative;
@@ -244,7 +235,6 @@ export const PaymentContainer = styled.section<{
     display: flex;
     align-items: center;
     width: 100%;
-  
   }
 
   .payment-purchase-info h3 {
@@ -252,8 +242,6 @@ export const PaymentContainer = styled.section<{
     font-weight: bold;
     opacity: 0.9;
   }
-
-
 
   .payment-purchase-info img {
     width: 86px;
@@ -299,7 +287,6 @@ export const PaymentContainer = styled.section<{
     line-height: 24px;
     color: #000;
     vertical-align: bottom;
-}
   }
 
   .payment-purchase-price {
@@ -342,7 +329,6 @@ export const PaymentContainer = styled.section<{
     line-height: 30px;
     letter-spacing: -0.3px;
     font-weight: 700;
-}
   }
 
   .payment-purchas-btn > button {
