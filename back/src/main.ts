@@ -21,7 +21,7 @@ async function bootstrap() {
   // //local
 
   app.enableCors({
-    origin: 'http://stylelint.ml',
+    origin: 'https://stylelint.ml',
     credentials: true,
   });
   // 배포용

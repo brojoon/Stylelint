@@ -1,5 +1,5 @@
 // export const baseApiUrl = 'http://localhost';
-export const baseApiUrl = 'http://stylelint.ml';
+export const baseApiUrl = 'https://stylelint.ml';
 
 // export const baseFrontUrl = 'http://localhost:3000';
 
