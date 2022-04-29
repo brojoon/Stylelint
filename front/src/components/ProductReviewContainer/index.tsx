@@ -12,8 +12,8 @@ const ProductReviewContainer = () => {
   const router = useRouter();
   const { type, code } = router.query;
   const [page, setPage] = useState(0);
+  const [perPage, _] = useState(5);
   const [reverseData, setReverseData] = useState([]);
-  const perPage = 5;
 
   const { data, refetch } = useQuery('productReviewList', () =>
     fetcher(`api/product/${code}/review`),

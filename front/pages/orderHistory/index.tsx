@@ -11,7 +11,7 @@ import { OrderHistoryContainer } from 'styles/page/orderHistory';
 const OrderHistory = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
-  const perPage = 5;
+  const [perPage, _] = useState(5);
   const { data } = useQuery('paymentList', () => fetcher(`/api/payment/done`));
   const { data: user } = useQuery<IUser | false | null>('user', () =>
     fetcher(`/api/user/profile`),

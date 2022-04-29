@@ -249,9 +249,7 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
       <ProductDetailContainer IsTablet1024={isTablet1024} IsTablet={isTablet}>
         <div className="product-Deital-wrapper">
           <div className="product-slide-wrapper flex flex-col w-[50%]">
-            {ssrProductData && (
-              <ProductDetailSlider ssrProductData={ssrProductData} />
-            )}
+            <ProductDetailSlider ssrProductData={ssrProductData} />
           </div>
           <div className="product-purchase-wrapper ">
             <div>
