@@ -466,32 +466,32 @@ export class CreateInitialData implements Seeder {
 
     /////// ProductSailInfo
 
-    const PaymentDoneInfo = [];
-    const Receivers = ['나루토', '사스케', '사쿠라', '지라이야', '이타치'];
-    for (let i = 0; i < 5; i++) {
-      for (let j = 0; j < 10; j++) {
-        PaymentDoneInfo.push({
-          userId: '333',
-          product_name: 'bs4691',
-          price: '30000',
-          quantity: 3,
-          size: 'L',
-          color: 'Red',
-          image: '/imgs/Products/blouse/bs5039/main.gif',
-          address: '송파대로 567 531동 310호',
-          receiver: Receivers[i],
-          phone_number: '010-4422-3311',
-          state: true,
-        });
-      }
-    }
+    // const PaymentDoneInfo = [];
+    // const Receivers = ['나루토', '사스케', '사쿠라', '지라이야', '이타치'];
+    // for (let i = 0; i < 5; i++) {
+    //   for (let j = 0; j < 10; j++) {
+    //     PaymentDoneInfo.push({
+    //       userId: '333',
+    //       product_name: 'bs4691',
+    //       price: '30000',
+    //       quantity: 3,
+    //       size: 'L',
+    //       color: 'Red',
+    //       image: '/imgs/Products/blouse/bs5039/main.gif',
+    //       address: '송파대로 567 531동 310호',
+    //       receiver: Receivers[i],
+    //       phone_number: '010-4422-3311',
+    //       state: true,
+    //     });
+    //   }
+    // }
 
-    await connection
-      .createQueryBuilder()
-      .insert()
-      .into(Payment)
-      .values(PaymentDoneInfo)
-      .execute();
+    // await connection
+    //   .createQueryBuilder()
+    //   .insert()
+    //   .into(Payment)
+    //   .values(PaymentDoneInfo)
+    //   .execute();
 
     // paymentInfo
   }

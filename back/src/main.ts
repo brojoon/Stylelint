@@ -30,8 +30,11 @@ async function bootstrap() {
   app.useStaticAssets(path.join(__dirname, '..', '/imgs'), {
     prefix: '/imgs',
   });
-  // dev 이미지 경로
+  // dev 이미지 경로0
 
+  app.useStaticAssets(path.join(__dirname, '../..', '/imgs'), {
+    prefix: '/imgs',
+  });
   // prod 이미지 경로
   // const config = new DocumentBuilder()
   //   .setTitle('API')
