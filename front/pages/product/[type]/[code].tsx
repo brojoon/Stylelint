@@ -354,12 +354,12 @@ const ProductDetails: VFC<Props> = ({ ssrProductData }) => {
                     </div>
                   </div>
                 )}
-                {selectedProductArr?.length > 1 && (
-                  <SelectedProductCardContainer
-                    selectedProductArr={selectedProductArr}
-                    setSelectedProductArr={setSelectedProductArr}
-                  />
-                )}
+
+                <SelectedProductCardContainer
+                  selectedProductArr={selectedProductArr}
+                  setSelectedProductArr={setSelectedProductArr}
+                />
+
                 <div className="product-purchase-payment">
                   <div className="purchase-result">
                     <span>총 상품금액</span>
