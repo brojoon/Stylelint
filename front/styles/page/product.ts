@@ -10,7 +10,7 @@ export const SelectedTypeProductsContainer = styled.section`
 
   .products-header-wrapper > div {
     max-width: 1300px;
-    margin 0 auto;
+    margin: 0 auto;
     padding: 0 15px;
   }
   

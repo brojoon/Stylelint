@@ -33,33 +33,33 @@ services:
     # volumes:
     #   - ./back:/usr/src/app
 
-  front:
-    build:
-      context: ./front
-      dockerfile: Dockerfile
-    container_name: front
-    restart: always
-    ports:
-      - 3000:3000
-    depends_on:
-      - back
-    networks:
-      - frontApp
+  # front:
+  #   build:
+  #     context: ./front
+  #     dockerfile: Dockerfile
+  #   container_name: front
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - back
+  #   networks:
+  #     - frontApp
 
-  nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/log:/var/log/nginx
-      - ./certbot/etc:/etc/letsencrypt
-      - ./www:/var/www/html
-    depends_on:
-      - back
-    ports:
-      - 80:80
-      - 443:443
-    networks:
-      - frontApp
+  # nginx:
+  #   image: nginx:latest
+  #   volumes:
+  #     - ./nginx/conf.d:/etc/nginx/conf.d
+  #     - ./nginx/log:/var/log/nginx
+  #     - ./certbot/etc:/etc/letsencrypt
+  #     - ./www:/var/www/html
+  #   depends_on:
+  #     - back
+  #   ports:
+  #     - 80:80
+  #     - 443:443
+  #   networks:
+  #     - frontApp
 
   # certbot:
   #   depends_on:

@@ -49,6 +49,7 @@ const ProductReviewContainer = () => {
         <>
           {isCreateReivewModal && (
             <ModalCreateReivew
+              setPage={setPage}
               setIsCreateReivewModal={setIsCreateReivewModal}
             />
           )}
@@ -72,13 +73,13 @@ const ProductReviewContainer = () => {
                   reviewInfo={reviewInfo}
                 />
               ))}
-
-            <Paginate
-              setPage={setPage}
-              totalCount={reverseData?.length ? reverseData?.length : 0}
-              perPage={perPage}
-            />
           </ProductReviewWrapper>
+          <Paginate
+            page={page}
+            setPage={setPage}
+            totalCount={reverseData?.length ? reverseData?.length : 0}
+            perPage={perPage}
+          />
         </>
       )}
     </>

@@ -14,16 +14,16 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const port = process.env.PORT || 3095;
 
-  // app.enableCors({
-  //   origin: 'http://front:3000',
-  //   credentials: true,
-  // });
-  // //local
-
   app.enableCors({
-    origin: 'https://stylelint.ml',
+    origin: 'http://localhost:3000',
     credentials: true,
   });
+  // //local
+
+  // app.enableCors({
+  //   origin: 'https://stylelint.ml',
+  //   credentials: true,
+  // });
   // 배포용
   app.useGlobalPipes(new ValidationPipe());
 
@@ -32,9 +32,9 @@ async function bootstrap() {
   });
   // dev 이미지 경로0
 
-  app.useStaticAssets(path.join(__dirname, '../..', '/imgs'), {
-    prefix: '/imgs',
-  });
+  // app.useStaticAssets(path.join(__dirname, '../..', '/imgs'), {
+  //   prefix: '/imgs',
+  // });
   // prod 이미지 경로
   // const config = new DocumentBuilder()
   //   .setTitle('API')

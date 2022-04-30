@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 export const ProductReviewWrapper = styled.div`
   padding: 50px 20px 50px;
   width: 100%;
-
+  min-height: 500px;
   .header-wrapper {
     height: 50px;
     display: flex;

@@ -88,4 +88,9 @@ export const PaginateContainer = styled.div`
     background-color: #777;
     border-color: #777;
   }
+
+  .break {
+    pointer-events: none;
+    cursor: default;
+  }
 `;

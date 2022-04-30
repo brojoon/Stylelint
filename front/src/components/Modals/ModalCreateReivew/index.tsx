@@ -10,9 +10,10 @@ import { ModalBackground, ModalBasketContainer } from './style';
 
 interface Props {
   setIsCreateReivewModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
+const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal, setPage }) => {
   const StarCount = 5;
   const StarText = [
     '선택하세요',
@@ -96,6 +97,7 @@ const ModalCreateReivew: VFC<Props> = ({ setIsCreateReivewModal }) => {
       );
       if (res.meta.requestStatus === 'fulfilled') {
         refetch().then(() => {
+          setPage(0);
           setIsCreateReivewModal(false);
         });
       }
