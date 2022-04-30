@@ -69,7 +69,7 @@ export const ModalBasketContainer = styled.div<{
     margin: 0 5px;
   }
 
-  .start-img-wrapper > span:nth-child(1) {
+  .start-img-wrapper > span:nth-of-type(1) {
     background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
@@ -81,7 +81,7 @@ export const ModalBasketContainer = styled.div<{
 
   }
 
-  .start-img-wrapper > span:nth-child(2) {
+  .start-img-wrapper > span:nth-of-type(2) {
     background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
@@ -91,7 +91,7 @@ export const ModalBasketContainer = styled.div<{
     display: block;
   }
 
-  .start-img-wrapper > span:nth-child(3) {
+  .start-img-wrapper > span:nth-of-type(3) {
     background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
@@ -101,7 +101,7 @@ export const ModalBasketContainer = styled.div<{
     display: block;
   }
 
-  .start-img-wrapper > span:nth-child(4) {
+  .start-img-wrapper > span:nth-of-type(4) {
     background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>
@@ -111,7 +111,7 @@ export const ModalBasketContainer = styled.div<{
     display: block;
   }
 
-  .start-img-wrapper > span:nth-child(5) {
+  .start-img-wrapper > span:nth-of-type(5) {
     background-image: url(/img/reivew-star-modal.svg);
     background-size: 293px 282px;
     background-position: ${(props) =>

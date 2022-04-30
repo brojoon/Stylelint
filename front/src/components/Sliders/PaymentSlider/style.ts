@@ -64,21 +64,21 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
     bottom: 10%;
     left: 10%;
   }
-  .slide-container > ul > li > div > div > p:nth-child(1) {
+  .slide-container > ul > li > div > div > p:nth-of-type(1) {
     font-size: 15px;
     line-height: 15px;
     font-weight: bold;
     color: #fff;
     text-shadow: 0 1px 1px rgb(0 0 0 / 15%);
   }
-  .slide-container > ul > li > div > div > p:nth-child(2) {
+  .slide-container > ul > li > div > div > p:nth-of-type(2) {
     font-size: 14px;
     color: #fff;
     text-shadow: 0 1px 1px rgb(0 0 0 / 15%);
     letter-spacing: 2px;
   }
 
-  .slide-container > ul > li:nth-child(1) > div {
+  .slide-container > ul > li:nth-of-type(1) > div {
     width: 287px;
     min-height: 177px;
     background: url(/img/payment_card.png) no-repeat;
@@ -86,60 +86,35 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
     background-position: -1168px 0;
   }
 
-  .slide-container > ul > li:nth-child(2) > div {
+  .slide-container > ul > li:nth-of-type(2) > div {
     width: 287px;
     min-height: 177px;
     background: url(/img/payment_card.png) no-repeat;
     background-size: 1455px auto;
     background-position: 0px -1820px;
   }
-  .slide-container > ul > li:nth-child(3) > div {
+  .slide-container > ul > li:nth-of-type(3) > div {
     width: 287px;
     min-height: 177px;
     background: url(/img/payment_card.png) no-repeat;
     background-size: 1455px auto;
     background-position: 0px -1092px;
   }
-  .slide-container > ul > li:nth-child(4) > div {
+  .slide-container > ul > li:nth-of-type(4) > div {
     width: 287px;
     min-height: 177px;
     background: url(/img/payment_card.png) no-repeat;
     background-size: 1455px auto;
     background-position: -1168px -1638px;
   }
-  .slide-container > ul > li:nth-child(5) > div {
+  .slide-container > ul > li:nth-of-type(5) > div {
     width: 287px;
     min-height: 177px;
     background: url(/img/payment_card.png) no-repeat;
     background-size: 1455px auto;
   }
-  .slide-container > ul > li:last-child {
-    background-color: white;
-  }
-  .slide-container > ul > li:last-child button {
-    width: 287px;
-    height: 177px;
-    border-radius: 8px;
-    border: solid 1px #000;
-    background: #fff;
-    font-size: 15px;
-    font-weight: 500;
-    color: #000;
-    text-align: center;
-  }
-  .slide-container > ul > li:last-child button:before {
-    overflow: hidden;
-    display: inline-block;
-    background: url(/img/sprite__checkout.png) no-repeat;
-    background-size: 300px auto;
-    content: '';
-    display: block;
-    width: 50px;
-    height: 50px;
-    margin: 0 auto 12px;
-    background-position: 0 -183px;
-  }
-  .slide-container > button:nth-child(2) {
+
+  .slide-container > button:nth-of-type(1) {
     content: '';
     overflow: hidden;
     display: ${(props) => {
@@ -157,7 +132,7 @@ export const PaymentSliderContainer = styled.div<{ SlideIndex: number }>`
     width: 32px;
     height: 32px;
   }
-  .slide-container > button:nth-child(3) {
+  .slide-container > button:nth-of-type(2) {
     content: '';
     display: ${(props) => {
       return props.SlideIndex <= 0 ? 'none' : 'inline-block';

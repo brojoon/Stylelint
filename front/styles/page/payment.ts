@@ -41,12 +41,12 @@ export const PaymentContainer = styled.section<{
     ${(props) => (props.IsTablet1024 ? 'flex-direction: column; ' : '')}
   }
 
-  .payment-section-flex-wrapper > div:nth-child(1) {
+  .payment-section-flex-wrapper > div:nth-of-type(1) {
     ${(props) => (props.IsTablet1024 ? '' : 'margin-right: 25px;')}
     width: 100%;
   }
 
-  .payment-section-flex-wrapper > div:nth-child(2) {
+  .payment-section-flex-wrapper > div:nth-of-type(2) {
   }
 
   .payment-info-card {
@@ -93,7 +93,7 @@ export const PaymentContainer = styled.section<{
     letter-spacing: -0.16px;
   }
 
-  .payment-info-text > input:nth-child(1) {
+  .payment-info-text > input:nth-of-type(1) {
     padding: 10px;
 
     border-radius: 5px 0 0 5px;
@@ -103,7 +103,7 @@ export const PaymentContainer = styled.section<{
     border-bottom: 1px solid #dbdbdb;
   }
 
-  .payment-info-text > input:nth-child(2) {
+  .payment-info-text > input:nth-of-type(2) {
     padding: 10px;
     border-radius: 0 5px 5px 0;
     width: 50%;
@@ -123,7 +123,7 @@ export const PaymentContainer = styled.section<{
     letter-spacing: -0.16px;
   }
 
-  .payment-address-text > input:nth-child(1) {
+  .payment-address-text > input:nth-of-type(1) {
     padding: 10px;
     background: #f5f5f5;
     border-radius: 5px 5px 0 0;
@@ -133,14 +133,14 @@ export const PaymentContainer = styled.section<{
     border-right: 1px solid #dbdbdb;
   }
 
-  .payment-address-text > input:nth-child(2) {
+  .payment-address-text > input:nth-of-type(2) {
     padding: 10px;
     border-radius: 0 0 5px 5px;
     width: 100%;
     border: 1px solid #dbdbdb;
   }
 
-  .payment-address-text > input:nth-child(2):focus {
+  .payment-address-text > input:nth-of-type(2):focus {
     outline-color: #a3a3a3;
   }
 
@@ -249,28 +249,32 @@ export const PaymentContainer = styled.section<{
     cursor: pointer;
   }
 
-  .payment-purchase-info > div:nth-child(2) {
+  .payment-purchase-info > div:nth-of-type(2) {
     margin-left: 15px;
   }
 
-  .payment-purchase-info > div:nth-child(2) > div:nth-child(2) {
+  .payment-purchase-info > div:nth-of-type(2) > div:nth-of-type(1) {
     margin-top: 4px;
   }
 
-  .payment-purchase-info-detail-wrapper > div:nth-child(1) > span {
+  .payment-purchase-info-detail-wrapper > div:nth-of-type(1) > span {
     color: #233549;
     opacity: 0.8;
     font-size: 0.825rem;
   }
 
-  .payment-purchase-info-detail-wrapper > div:nth-child(2) > span:nth-child(1) {
+  .payment-purchase-info-detail-wrapper
+    > div:nth-of-type(2)
+    > span:nth-of-type(1) {
     font-size: 18px;
     line-height: 24px;
     color: #000;
     font-weight: bold;
   }
 
-  .payment-purchase-info-detail-wrapper > div:nth-child(2) > span:nth-child(2) {
+  .payment-purchase-info-detail-wrapper
+    > div:nth-of-type(2)
+    > span:nth-of-type(2) {
     display: inline-block;
     font-size: 15px;
     line-height: 24px;
@@ -280,7 +284,7 @@ export const PaymentContainer = styled.section<{
     font-weight: bold;
   }
 
-  .payment-purchase-info-detail-wrapper > span:nth-child(3) {
+  .payment-purchase-info-detail-wrapper > span:nth-of-type(3) {
     margin-left: 5px;
     display: inline-block;
     font-size: 15px;
@@ -297,13 +301,13 @@ export const PaymentContainer = styled.section<{
     padding: 20px 0;
   }
 
-  .payment-purchase-price > span:nth-child(1) {
+  .payment-purchase-price > span:nth-of-type(1) {
     font-size: 16px;
     line-height: 27px;
     color: #616161;
   }
 
-  .payment-purchase-price > span:nth-child(2) {
+  .payment-purchase-price > span:nth-of-type(2) {
     float: right;
     line-height: 27px;
     font-size: 17px;
@@ -316,14 +320,14 @@ export const PaymentContainer = styled.section<{
     padding: 20px 0;
   }
 
-  .payment-purchas-total > span:nth-child(1) {
+  .payment-purchas-total > span:nth-of-type(1) {
     font-size: 18px;
     line-height: 30px;
     color: #000;
     letter-spacing: -0.3px;
   }
 
-  .payment-purchas-total > span:nth-child(2) {
+  .payment-purchas-total > span:nth-of-type(2) {
     font-size: 30px;
     color: #000;
     line-height: 30px;

@@ -6,14 +6,17 @@ import { PaginateContainer } from './style';
 
 interface Props {
   totalCount: number;
-  setPage: (selected: number) => void;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
   perPage: number;
 }
 
 const Paginate: VFC<Props> = ({ setPage, totalCount, perPage }) => {
-  const onChangePaginate = useCallback(({ selected }) => {
-    setPage(selected);
-  }, []);
+  const onChangePaginate = useCallback(
+    ({ selected }) => {
+      setPage(selected);
+    },
+    [setPage],
+  );
 
   const isTablet = useIsTablet();
   return (

@@ -39,7 +39,7 @@ export const BasketContainer = styled.section<{
     margin: 0 auto;
     display: flex;
   }
-  .basket-tab-wrapper > span:nth-child(1) {
+  .basket-tab-wrapper > span:nth-of-type(1) {
     font-weight: bold;
     color: #067dfd;
     display: block;
@@ -110,7 +110,7 @@ export const BasketContainer = styled.section<{
     font-size: 14px;
   }
 
-  .basket-option-wrapper > ul > li:nth-child(2):before {
+  .basket-option-wrapper > ul > li:nth-of-type(2):before {
     content: '';
     position: absolute;
     background: #d8d8d8;
@@ -183,28 +183,28 @@ export const BasketContainer = styled.section<{
     margin-bottom: 15px;
   }
 
-  .basket-product-order-wrapper > ul > li:nth-child(1) > span {
+  .basket-product-order-wrapper > ul > li:nth-of-type(1) > span {
     color: #7f8590;
     font-size: 14px;
   }
 
-  .basket-product-order-wrapper > ul > li:nth-child(1) > div > span {
+  .basket-product-order-wrapper > ul > li:nth-of-type(1) > div > span {
     color: #444444;
     font-size: 14px;
   }
 
-  .basket-product-order-wrapper > ul > li:nth-child(2) > span {
+  .basket-product-order-wrapper > ul > li:nth-of-type(2) > span {
     color: #000000;
     font-size: 16px;
     letter-spacing: -0.5px;
   }
 
-  .basket-product-order-wrapper > ul > li:nth-child(2) {
+  .basket-product-order-wrapper > ul > li:nth-of-type(2) {
     display: flex;
     align-items: center;
   }
 
-  .basket-product-order-wrapper > ul > li:nth-child(2) > div {
+  .basket-product-order-wrapper > ul > li:nth-of-type(2) > div {
     color: #000000;
     display: flex;
     align-items: center;
@@ -212,9 +212,9 @@ export const BasketContainer = styled.section<{
 
   .basket-product-order-wrapper
     > ul
-    > li:nth-child(2)
+    > li:nth-of-type(2)
     > div
-    > span:nth-child(1) {
+    > span:nth-of-type(1) {
     font-size: 30px;
     color: #000;
     letter-spacing: -0.7px;
@@ -223,9 +223,9 @@ export const BasketContainer = styled.section<{
 
   .basket-product-order-wrapper
     > ul
-    > li:nth-child(2)
+    > li:nth-of-type(2)
     > div
-    > span:nth-child(2) {
+    > span:nth-of-type(2) {
     font-weight: normal;
     vertical-align: top;
     margin-top: 9px;

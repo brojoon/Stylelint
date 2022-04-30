@@ -16,7 +16,7 @@ export const ProductDetailSlide = styled.div`
     width: 100%;
   }
 
-  & > div > img:nth-child(1) {
+  & > div > img:nth-of-type(1) {
     width: 30px;
     height: 40px;
     position: absolute;
@@ -26,7 +26,7 @@ export const ProductDetailSlide = styled.div`
     cursor: pointer;
   }
 
-  & > div > img:nth-child(2) {
+  & > div > img:nth-of-type(2) {
     width: 30px;
     height: 40px;
     left: auto;
@@ -88,7 +88,7 @@ export const ProductDetailSubSlide = styled.div<{
 
   &
     .sub-slide-img-wrapper
-    > div:nth-child(${(props) => props.ProductSlideIndex - 1}):after {
+    > div:nth-of-type(${(props) => props.ProductSlideIndex - 1}):after {
     content: '';
     width: 100%;
     height: 100%;

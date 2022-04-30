@@ -134,14 +134,14 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
     appearance: none;
   }
 
-  .basket-product-count > button:nth-child(1) {
+  .basket-product-count > button:nth-of-type(1) {
     width: 21px;
     height: 21px;
     background: url('/img/basket_product_count.png') no-repeat;
     background-position: 0 0;
   }
 
-  .basket-product-count > button:nth-child(3) {
+  .basket-product-count > button:nth-of-type(2) {
     width: 21px;
     height: 21px;
     background: url(' /img/basket_product_count.png') no-repeat;
@@ -180,7 +180,7 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
     width: 15%;
   }
 
-  & .purchase-button > button:nth-child(1) {
+  & .purchase-button > button:nth-of-type(1) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -191,14 +191,14 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
     width: 15%;
   }
 
-  & .purchase-button > button:nth-child(2) {
+  & .purchase-button > button:nth-of-type(2) {
     width: 43%;
     border: 1px solid #dbdbdb;
 
     margin-left: 0.3125rem;
   }
 
-  & .purchase-button > button:nth-child(3) {
+  & .purchase-button > button:nth-of-type(3) {
     width: 43%;
     border: 1px solid #b095eb;
     margin-left: 0.3125rem;
@@ -241,14 +241,14 @@ export const ProductPurchaseWrapper = styled.div<{ IsProductDibs: boolean }>`
     align-items: center;
   }
 
-  & .purchase-result span:nth-child(1) {
+  & .purchase-result span:nth-of-type(1) {
     font-size: 16px;
     line-height: 22px;
     color: #5e636d;
     letter-spacing: -1px;
   }
 
-  & .purchase-result span:nth-child(2) {
+  & .purchase-result span:nth-of-type(2) {
     line-height: 38px;
     font-size: 24px;
     color: #000;

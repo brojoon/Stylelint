@@ -248,29 +248,16 @@ const MainSlider = () => {
         posX={`${slidePosition}`}
         IsTransition={isTransition}
       >
-        <div className="w-full relative  bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page5.webp')]">
-          <div className="slide-img-text"></div>
-        </div>
+        <div className="w-full relative  bg-no-repeat bg-contain bg-[length:100%_100%] bg-[url('~@../../../public/img/page5.webp')]"></div>
         {[...new Array(slidePageNationCount.current)].map((data, index) => (
           <div
             key={index}
             className={`w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  slide-img-bg-${
               index + 1
             }`}
-          >
-            <div
-              className={`slide-img-text ${
-                Math.floor(slidePosition / slideImgCount.current / 2) ==
-                -2 - index
-                  ? 'active'
-                  : ''
-              }`}
-            ></div>
-          </div>
+          ></div>
         ))}
-        <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  bg-[url('~@../../../public/img/page1.webp')]">
-          <div className={`slide-img-text`}></div>
-        </div>
+        <div className="w-full relative bg-no-repeat bg-contain bg-[length:100%_100%]  bg-[url('~@../../../public/img/page1.webp')]"></div>
       </SlideWrapper>
       {!isMobile && (
         <button

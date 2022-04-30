@@ -74,27 +74,27 @@ export const MainHeader = styled.header<{
     background: #3c3c3c;
     transition-duration: 0.4s;
   }
-  button.all-menu.active span:nth-child(1) {
+  button.all-menu.active span:nth-of-type(1) {
     top: 19px;
     width: 23px;
     transform: rotate(45deg);
   }
-  button.all-menu.active span:nth-child(2) {
+  button.all-menu.active span:nth-of-type(2) {
     opacity: 0;
     transform: translateX(-30px);
   }
-  button.all-menu.active span:nth-child(3) {
+  button.all-menu.active span:nth-of-type(3) {
     top: 19px;
     width: 23px;
     transform: rotate(-45deg);
   }
-  button.all-menu span:nth-child(1) {
+  button.all-menu span:nth-of-type(1) {
     top: 11px;
   }
-  button.all-menu span:nth-child(2) {
+  button.all-menu span:nth-of-type(2) {
     top: 19px;
   }
-  button.all-menu span:nth-child(3) {
+  button.all-menu span:nth-of-type(3) {
     top: 27px;
   }
   .logo {
@@ -120,17 +120,17 @@ export const MainHeader = styled.header<{
   .info > ul > li {
     cursor: pointer;
   }
-  .info > ul > li:nth-child(3) {
+  .info > ul > li:nth-of-type(3) {
     margin-left: 2rem;
   }
-  .info > ul > li:nth-child(2) {
+  .info > ul > li:nth-of-type(2) {
     margin-left: 2rem;
     position: relative;
     padding: ${(props) => (props.IsScrollTop > 60 ? '19.5px 0' : '32px 0')};
   }
 
 
-  .info > ul > li:nth-child(2):hover {
+  .info > ul > li:nth-of-type(2):hover {
     .subBox {
       ${(props) => (props.IsTablet1024 ? '' : 'display: flex;')}
     }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export const BasketProductContainer = styled.section<{
   IsChecked: boolean;
@@ -58,12 +58,12 @@ export const BasketProductContainer = styled.section<{
     ${(props) => (props.IsTablet1024 ? 'margin-top: 10px;' : '')}
   }
 
-  .basket-product-desc span:nth-child(1) {
+  .basket-product-desc span:nth-of-type(1) {
     font-weight: bold;
     color: #233549;
   }
 
-  .basket-product-desc span:nth-child(2) {
+  .basket-product-desc span:nth-of-type(2) {
     color: #233549;
     opacity: 0.8;
     font-size: 12px;
@@ -98,14 +98,14 @@ export const BasketProductContainer = styled.section<{
     appearance: none;
   }
 
-  .basket-product-count > button:nth-child(1) {
+  .basket-product-count > button:nth-of-type(1) {
     width: 21px;
     height: 21px;
     background: url('/img/basket_product_count.png') no-repeat;
     background-position: 0 0;
   }
 
-  .basket-product-count > button:nth-child(3) {
+  .basket-product-count > button:nth-of-type(2) {
     width: 21px;
     height: 21px;
     background: url('/img/basket_product_count.png') no-repeat;

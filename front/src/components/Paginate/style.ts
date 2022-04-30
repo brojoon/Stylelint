@@ -27,13 +27,13 @@ export const PaginateContainer = styled.div`
     border-color: #dee2e6;
   }
 
-  .pagination li:first-child a {
+  .pagination li:first-of-type a {
     margin-left: 0;
     border-top-left-radius: 0.25rem;
     border-bottom-left-radius: 0.25rem;
   }
 
-  .pagination li:last-child a {
+  .pagination li:last-of-type a {
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
   }
@@ -69,12 +69,12 @@ export const PaginateContainer = styled.div`
     border: 1px solid rgba(0, 0, 0, 0.125);
   }
 
-  .list-group-item:first-child {
+  .list-group-item:first-of-type {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
   }
 
-  .list-group-item:last-child {
+  .list-group-item:last-of-type {
     border-bottom-right-radius: inherit;
     border-bottom-left-radius: inherit;
   }

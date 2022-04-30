@@ -39,12 +39,12 @@ export const ResultContainer = styled.section<{ IsMobile: boolean }>`
     font-size: 28px;
   }
 
-  & .body-info > p:nth-child(1) {
+  & .body-info > p:nth-of-type(1) {
     font-weight: bold;
     margin-bottom: 10px;
   }
 
-  & .body-info > p:nth-child(1) > span {
+  & .body-info > p:nth-of-type(1) > span {
     color: #966e46;
   }
 
@@ -82,7 +82,7 @@ export const ResultContainer = styled.section<{ IsMobile: boolean }>`
     width: 100%;
   }
 
-  .order-table-tbody > tr:nth-child(1) > td:nth-child(1) {
+  .order-table-tbody > tr:nth-of-type(1) > td:nth-of-type(1) {
     background-color: #f7f7f7;
 
     padding: 13px 20px;
@@ -90,22 +90,22 @@ export const ResultContainer = styled.section<{ IsMobile: boolean }>`
     border-right: 1px solid #f1f1f1;
   }
 
-  .order-table-tbody > tr:nth-child(1) > td:nth-child(1) p {
+  .order-table-tbody > tr:nth-of-type(1) > td:nth-of-type(1) p {
     display: flex;
     background: url(/img/dot_2x2_777.png) no-repeat 20px 10px;
     color: #676767;
   }
 
-  .order-table-tbody > tr:nth-child(1) > td:nth-child(1) span {
+  .order-table-tbody > tr:nth-of-type(1) > td:nth-of-type(1) span {
     padding-left: 30px;
     font-weight: bold;
   }
 
-  .order-table-tbody > tr:nth-child(1) > td:nth-child(2) {
+  .order-table-tbody > tr:nth-of-type(1) > td:nth-of-type(2) {
     background-color: #f7f7f7;
   }
 
-  .order-table-tbody > tr:nth-child(1) > td:nth-child(2) p {
+  .order-table-tbody > tr:nth-of-type(1) > td:nth-of-type(2) p {
     display: block;
     padding: 13px 20px;
     color: #3371c9;
@@ -114,18 +114,18 @@ export const ResultContainer = styled.section<{ IsMobile: boolean }>`
     font-weight: 600;
   }
 
-  .order-table-tbody > tr:nth-child(2) > td {
+  .order-table-tbody > tr:nth-of-type(2) > td {
     background-color: #f7f7f7;
     padding: 13px 20px;
     border-bottom: 1px solid #f1f1f1;
     border-top: 1px solid #f1f1f1;
   }
 
-  .order-table-tbody > tr:nth-child(2) > td > div {
+  .order-table-tbody > tr:nth-of-type(2) > td > div {
     color: #ef2705;
   }
 
-  .order-table-tbody > tr:nth-child(2) > td > div > span:nth-child(1) {
+  .order-table-tbody > tr:nth-of-type(2) > td > div > span:nth-of-type(1) {
     font-size: 33px;
     font-family: Tahoma;
     letter-spacing: -1px;
@@ -133,31 +133,31 @@ export const ResultContainer = styled.section<{ IsMobile: boolean }>`
     margin-right: 3px;
   }
 
-  .order-table-tbody > tr:nth-child(2) > td > div > span:nth-child(1) {
+  .order-table-tbody > tr:nth-of-type(2) > td > div > span:nth-of-type(1) {
     margin-top: 16px;
     padding-left: 3px;
     font-size: 30px;
     white-space: nowrap;
   }
 
-  .order-table-tbody > tr:nth-child(3) > td:nth-child(1) {
+  .order-table-tbody > tr:nth-of-type(3) > td:nth-of-type(1) {
     padding: 13px 20px;
   }
 
-  .order-table-tbody > tr:nth-child(3) > td:nth-child(1) > p {
+  .order-table-tbody > tr:nth-of-type(3) > td:nth-of-type(1) > p {
     background: url(/img/dot_2x2_777.png) no-repeat 20px 10px;
     padding-left: 30px;
     font-weight: 600;
     color: #676767;
   }
 
-  .order-table-tbody > tr:nth-child(3) > td:nth-child(2) {
+  .order-table-tbody > tr:nth-of-type(3) > td:nth-of-type(2) {
     padding: 13px 20px;
 
     border-left: 1px solid #f1f1f1;
   }
 
-  .order-table-tbody > tr:nth-child(3) > td:nth-child(2) > p {
+  .order-table-tbody > tr:nth-of-type(3) > td:nth-of-type(2) > p {
     line-height: 24px;
     color: #777;
     display: flex;

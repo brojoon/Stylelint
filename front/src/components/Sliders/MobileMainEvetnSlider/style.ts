@@ -57,14 +57,14 @@ export const MainEventSliderContainer = styled.div<{
     background: #000;
   }
 
-  #event-slide-radio-1: checked ~.pagination label:nth-child(1),
-  #event-slide-radio-2: checked ~.pagination label:nth-child(2),
-  #event-slide-radio-3: checked ~.pagination label:nth-child(3),
-  #event-slide-radio-4: checked ~.pagination label:nth-child(4),
-  #event-slide-radio-5: checked ~.pagination label:nth-child(5),
-  #event-slide-radio-6: checked ~.pagination label:nth-child(6),
-  #event-slide-radio-7: checked ~.pagination label:nth-child(7),
-  #event-slide-radio-8: checked ~.pagination label:nth-child(8) {
+  #event-slide-radio-1: checked ~.pagination label:nth-of-type(1),
+  #event-slide-radio-2: checked ~.pagination label:nth-of-type(2),
+  #event-slide-radio-3: checked ~.pagination label:nth-of-type(3),
+  #event-slide-radio-4: checked ~.pagination label:nth-of-type(4),
+  #event-slide-radio-5: checked ~.pagination label:nth-of-type(5),
+  #event-slide-radio-6: checked ~.pagination label:nth-of-type(6),
+  #event-slide-radio-7: checked ~.pagination label:nth-of-type(7),
+  #event-slide-radio-8: checked ~.pagination label:nth-of-type(8) {
     opacity: 0.8;
   }
 

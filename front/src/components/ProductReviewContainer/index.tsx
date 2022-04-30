@@ -45,7 +45,7 @@ const ProductReviewContainer = () => {
 
   return (
     <>
-      {reverseData.length > 1 && (
+      {data && reverseData.length > 1 && (
         <>
           {isCreateReivewModal && (
             <ModalCreateReivew

@@ -151,23 +151,6 @@ export const ProfileContainer = styled.div`
     letter-spacing: -0.16px;
   }
 
-  .payment-info-text > input:nth-child(1) {
-    padding: 10px;
-
-    border-radius: 5px 0 0 5px;
-    width: 50%;
-    border-left: 1px solid #dbdbdb;
-    border-top: 1px solid #dbdbdb;
-    border-bottom: 1px solid #dbdbdb;
-  }
-
-  .payment-info-text > input:nth-child(2) {
-    padding: 10px;
-    border-radius: 0 5px 5px 0;
-    width: 50%;
-    border: 1px solid #dbdbdb;
-  }
-
   .payment-info-text > input:focus {
     outline-color: #a3a3a3;
   }
@@ -181,7 +164,7 @@ export const ProfileContainer = styled.div`
     letter-spacing: -0.16px;
   }
 
-  .payment-address-text > input:nth-child(1) {
+  .payment-address-text > input:nth-of-type(1) {
     padding: 10px;
     background: #f5f5f5;
     border-radius: 5px 5px 0 0;
@@ -191,14 +174,14 @@ export const ProfileContainer = styled.div`
     border-right: 1px solid #dbdbdb;
   }
 
-  .payment-address-text > input:nth-child(2) {
+  .payment-address-text > input:nth-of-type(2) {
     padding: 10px;
     border-radius: 0 0 5px 5px;
     width: 100%;
     border: 1px solid #dbdbdb;
   }
 
-  .payment-address-text > input:nth-child(2):focus {
+  .payment-address-text > input:nth-of-type(2):focus {
     outline-color: #a3a3a3;
   }
 

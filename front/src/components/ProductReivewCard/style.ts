@@ -14,7 +14,7 @@ export const ProductReviewCardWrapper = styled.div<{ ReviewStarIndex: number }>`
     align-items: center;
   }
 
-  .start-wrapper > span:nth-child(1) {
+  .start-wrapper > span:nth-of-type(1) {
     background-image: url(/img/review-star-text.svg);
     background-size: 708px 690px;
     background-position: -601px -79px;
@@ -25,7 +25,7 @@ export const ProductReviewCardWrapper = styled.div<{ ReviewStarIndex: number }>`
     vertical-align: top;
   }
 
-  .start-wrapper > span:nth-child(1) > span {
+  .start-wrapper > span:nth-of-type(1) > span {
     background-image: url(/img/review-star-text.svg);
     background-size: 708px 690px;
     background-position: -601px -101px;
@@ -37,11 +37,10 @@ export const ProductReviewCardWrapper = styled.div<{ ReviewStarIndex: number }>`
   .start-wrapper > strong {
     margin-left: 5px;
   }
-  & > div:nth-child(2) {
+  & > div:nth-of-type(2) {
     display: flex;
     color: #999999;
     align-items: center;
-
   }
 
   .review-info > span {
@@ -51,7 +50,7 @@ export const ProductReviewCardWrapper = styled.div<{ ReviewStarIndex: number }>`
   }
 
 
-  .review-info > span:nth-child(2):before {
+  .review-info > span:nth-of-type(2):before {
     display: inline-block;
     width: 2px;
     height: 2px;

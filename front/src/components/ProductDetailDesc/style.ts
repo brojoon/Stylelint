@@ -49,7 +49,7 @@ export const ProductDetailDescWrapper = styled.section<{
   &
     .product-desc-nav-wrapper
     > ul
-    > li:nth-child(${(props) => props.ProductDescNavIndex})
+    > li:nth-of-type(${(props) => props.ProductDescNavIndex})
     > span {
     background: #858f9a;
     border-radius: 3.125rem;

@@ -23,7 +23,7 @@ export const ProductCardIconWrapper = styled.div<{ IsProductDibs: boolean }>`
     }
   }
 
-  & > span:nth-child(1) {
+  & > span:nth-of-type(1) {
     ${(props) =>
       props.IsProductDibs
         ? `    background-position: -85px -177px;

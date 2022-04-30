@@ -27,7 +27,7 @@ export const Container = styled.div`
     font-size: 14px;
   }
 
-  .product-info > div:nth-child(2) {
+  .product-info > div:nth-of-type(2) {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -8,11 +8,11 @@ export const ProductCardContainer = styled.div`
   margin: 15px 15px 15px 0;
   border-radius: 6px;
 
-  & > div:nth-child(1) {
+  & > div:nth-of-type(1) {
     width: 100%;
     display: flex;
   }
-  & > div:nth-child(1) > div {
+  & > div:nth-of-type(1) > div {
     max-width: 150px;
     max-height: 171px;
     margin-right: 10px;
@@ -24,7 +24,7 @@ export const ProductCardContainer = styled.div`
     justify-content: space-between;
   }
 
-  & .btn-wrapper > span:nth-child(1) {
+  & .btn-wrapper > span:nth-of-type(1) {
     color: #9f9f9f;
     border-color: #9f9f9f;
     font-size: 0.7rem;
@@ -36,7 +36,7 @@ export const ProductCardContainer = styled.div`
     margin-left: auto;
   }
 
-  & .btn-wrapper > span:nth-child(2) {
+  & .btn-wrapper > span:nth-of-type(2) {
     background-position: -530px -167px;
     width: 60px;
     height: 60px;
@@ -66,7 +66,7 @@ export const ProductCardIconWrapper = styled.div<{ IsProductDibs: boolean }>`
     }
   }
 
-  & > span:nth-child(1) {
+  & > span:nth-of-type(1) {
     ${(props) =>
       props.IsProductDibs
         ? `    background-position: -85px -177px;

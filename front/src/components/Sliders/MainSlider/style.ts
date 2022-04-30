@@ -42,11 +42,11 @@ export const SlideContainer = styled.div`
   }
 
 
-  #slide-radio-1: checked ~.pagination label:nth-child(1),
-  #slide-radio-2: checked ~.pagination label:nth-child(2),
-  #slide-radio-3: checked ~.pagination label:nth-child(3),
-  #slide-radio-4: checked ~.pagination label:nth-child(4),
-  #slide-radio-5: checked ~.pagination label:nth-child(5) {
+  #slide-radio-1: checked ~.pagination label:nth-of-type(1),
+  #slide-radio-2: checked ~.pagination label:nth-of-type(2),
+  #slide-radio-3: checked ~.pagination label:nth-of-type(3),
+  #slide-radio-4: checked ~.pagination label:nth-of-type(4),
+  #slide-radio-5: checked ~.pagination label:nth-of-type(5) {
     opacity: 0.8;
   }
 
@@ -64,16 +64,6 @@ export const SlideWrapper = styled.section<{
   transform: ${(props) => `translateX(${props.posX}%)`};
   transition: ${(props) =>
     props.IsTransition ? 'transform cubic-bezier(0.85, 0, 0.15, 1) 1s' : ''};
-
-  .slide-img-text {
-    font-size: 52px;
-    top: 1%;
-    left: 50%;
-    position: absolute;
-    color: #222222;
-    opacity: 0;
-    display: none;
-  }
 
   .slide-img-bg-1 {
     background: url(/img/page1.webp);
@@ -105,18 +95,10 @@ export const SlideWrapper = styled.section<{
     background-size: 100% 100%;
   }
 
-  & > div:nth-child(6) p {
-    color: #fcf951;
-  }
-
   .active {
     opacity: 1;
     transform: translateY(-5%);
     transition: all ease-in 0.4s;
     transition-delay: 0.6s;
-  }
-  .slide-img-text > p:nth-child(1) {
-    font-weight: 200;
-    line-height: 60px;
   }
 `;

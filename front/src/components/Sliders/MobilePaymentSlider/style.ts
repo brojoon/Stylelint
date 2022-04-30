@@ -63,7 +63,7 @@ export const PaymentSliderContainer = styled.div<{
     z-index: 1000;
   }
 
-  .slide-container > div > div:nth-child(1) {
+  .slide-container > div > div:nth-of-type(1) {
     position: absolute;
     top: 0;
     left: 0;
@@ -73,7 +73,7 @@ export const PaymentSliderContainer = styled.div<{
     background-size: 100% 100%;
   }
 
-  .slide-container > div > div:nth-child(2) {
+  .slide-container > div > div:nth-of-type(2) {
     position: absolute;
     top: 0;
     left: 20%;
@@ -83,7 +83,7 @@ export const PaymentSliderContainer = styled.div<{
     background-size: 100% 100%;
   }
 
-  .slide-container > div > div:nth-child(3) {
+  .slide-container > div > div:nth-of-type(3) {
     position: absolute;
     top: 0;
     left: 40%;
@@ -93,7 +93,7 @@ export const PaymentSliderContainer = styled.div<{
     background-size: 100% 100%;
   }
 
-  .slide-container > div > div:nth-child(4) {
+  .slide-container > div > div:nth-of-type(4) {
     position: absolute;
     top: 0;
     left: 60%;
@@ -103,7 +103,7 @@ export const PaymentSliderContainer = styled.div<{
     background-size: 100% 100%;
   }
 
-  .slide-container > div > div:nth-child(5) {
+  .slide-container > div > div:nth-of-type(5) {
     position: absolute;
     top: 0;
     left: 80%;

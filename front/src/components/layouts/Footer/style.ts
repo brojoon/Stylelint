@@ -42,15 +42,15 @@ export const FooterContainer = styled.footer<{ IsMobile: boolean }>`
     display: ${(Props) => (Props.IsMobile ? 'none' : '')};
   }
 
-  .footer-utility > li:nth-child(1) {
+  .footer-utility > li:nth-of-type(1) {
     padding-left: 0;
   }
 
-  .footer-utility > li:nth-child(1):before {
+  .footer-utility > li:nth-of-type(1):before {
     display: none;
   }
 
-  .footer-utility > li:nth-child(4) {
+  .footer-utility > li:nth-of-type(4) {
     font-weight: 800;
   }
 
@@ -82,7 +82,7 @@ export const FooterContainer = styled.footer<{ IsMobile: boolean }>`
     color: #94989f;
   }
 
-  .footer-legal-info > div > ul:nth-child(1) > li:nth-child(1) {
+  .footer-legal-info > div > ul:nth-of-type(1) > li:nth-of-type(1) {
     margin-right: 10px;
   }
 
@@ -98,11 +98,11 @@ export const FooterContainer = styled.footer<{ IsMobile: boolean }>`
     text-indent: -9999px;
   }
 
-  .footer-legal-info > div:nth-child(1) > ul > li:nth-child(2):after {
+  .footer-legal-info > div:nth-of-type(1) > ul > li:nth-of-type(2):after {
     display: none;
   }
 
-  .footer-legal-info > div:nth-child(1) > ul {
+  .footer-legal-info > div:nth-of-type(1) > ul {
     margin-bottom: 2px;
   }
 

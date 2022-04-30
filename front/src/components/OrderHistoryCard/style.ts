@@ -60,12 +60,12 @@ export const OrderHistoryProductContainer = styled.section<{
     ${(props) => (props.IsTable1024 ? 'margin-bottom: 10px' : '')}
   }
 
-  .order-product-desc span:nth-child(1) {
+  .order-product-desc span:nth-of-type(1) {
     font-weight: bold;
     color: #233549;
   }
 
-  .order-product-desc span:nth-child(2) {
+  .order-product-desc span:nth-of-type(2) {
     color: #233549;
     opacity: 0.8;
     font-size: 14px;
