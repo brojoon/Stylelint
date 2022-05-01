@@ -145,11 +145,15 @@ function MemberLogin() {
           Content="로그인"
           style="w-full bg-blue-600 rounded text-white py-3 font-semibold"
         />
-        <BasicBtn
-          onClickBtn={onClickKakaoBtn}
-          Content="카카오 로그인"
-          style="flex justify-center items-center w-full bg-[#fee500]  rounded text-black my-3 text-white py-3 font-semibold before:bg-[url('~@../../../public/img/kakao-logo.png')] before:w-[1.875rem] before:h-[1.875rem] before:bg-[length:60px_30px] before:inline-block"
-        />
+
+        <button
+          onClick={onClickKakaoBtn}
+          className="flex justify-center items-center w-full bg-[#fee500]  rounded text-black my-3 text-white py-3 font-semibold"
+        >
+          <span className="kakao-logo"></span>
+          <span className="kakao-text">카카오 로그인</span>
+        </button>
+        {/* <BasicBtn onClickBtn={onClickKakaoBtn} Content="카카오 로그인" /> */}
         <BasicBtn
           onClickBtn={onClickGoogleBtn}
           Content="구글 로그인"

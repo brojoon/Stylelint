@@ -38,6 +38,7 @@ export const BasketContainer = styled.section<{
     padding: 0 15px;
     margin: 0 auto;
     display: flex;
+    align-items: center;
   }
   .basket-tab-wrapper > span:nth-of-type(1) {
     font-weight: bold;
@@ -52,13 +53,13 @@ export const BasketContainer = styled.section<{
     height: 20px;
     display: inline-block;
     background: #e6f1fd;
-    line-height: 20px;
     float: left;
     border-radius: 50%;
-    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 6px;
-    line-height: 1;
-    margin-top: 20px;
   }
 
   .basket-count > em {
@@ -66,7 +67,6 @@ export const BasketContainer = styled.section<{
     letter-spacing: -0.5px;
     text-align: center;
     display: block;
-    line-height: 20px;
     font-weight: inherit;
     font-weight: bold;
     color: #067dfd;

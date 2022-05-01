@@ -21,13 +21,28 @@ const ProductsGridWrapper = () => {
       {isModalBasket && <ModalBasket setIsModalBasket={setIsModalBasket} />}
       <ProductsGridContainer IsTablet={isTablet}>
         {/* <div className=" grid grid-flow-col grid-rows-4 sm:grid-rows-2 md:grid-rows-2 lg:grid-rows-1 gap-[20px] p-[15px] w-[100%} h-[100%]"> */}
-        {data?.map((product: IProducts) => {
+        {data &&
+          [...new Array(8)].map((_, index) => {
+            return data?.map((product: IProducts) => {
+              if (product.type === type)
+                return (
+                  <ProductCard
+                    key={product.id}
+                    data={product}
+                    setIsModalBasket={setIsModalBasket}
+                    visibility={true}
+                  />
+                );
+            });
+          })}
+        {/* data?.map((product: IProducts) => {
           if (product.type === type)
             return (
               <ProductCard
                 key={product.id}
                 data={product}
                 setIsModalBasket={setIsModalBasket}
+                visibility={true}
               />
             );
         })}
@@ -100,7 +115,7 @@ const ProductsGridWrapper = () => {
                 setIsModalBasket={setIsModalBasket}
               />
             );
-        })}
+        })} */}
       </ProductsGridContainer>
     </>
   );

@@ -1,6 +1,11 @@
 import styled from '@emotion/styled';
 
-export const ProductCardContainer = styled.div<{ IsMobile: boolean }>`
+export const ProductCardContainer = styled.div<{
+  IsMobile: boolean;
+  Visibility: boolean;
+}>`
+  opacity: ${(props) => (props.Visibility ? '1' : '0')};
+  transition: all 400ms ease;
   .product-desc {
     text-overflow: ellipsis;
     white-space: nowrap;

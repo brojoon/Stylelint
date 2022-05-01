@@ -144,34 +144,22 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
       >
         <div>
           {products &&
-            products.map((product) => {
-              return (
-                <ProductCard
-                  key={product.code}
-                  data={product}
-                  setIsModalBasket={setIsModalBasket}
-                />
-              );
-            })}
-          {products &&
-            products.map((product) => {
-              return (
-                <ProductCard
-                  key={product.code}
-                  data={product}
-                  setIsModalBasket={setIsModalBasket}
-                />
-              );
-            })}
-          {products &&
-            products.map((product) => {
-              return (
-                <ProductCard
-                  key={product.code}
-                  data={product}
-                  setIsModalBasket={setIsModalBasket}
-                />
-              );
+            [...new Array(3)].map((data, index) => {
+              return products.map((product, index2) => {
+                return (
+                  <ProductCard
+                    key={product.code}
+                    data={product}
+                    setIsModalBasket={setIsModalBasket}
+                    visibility={
+                      slidePosition + 20 * (index * 5 + index2) + 30 < 115 &&
+                      slidePosition + 20 * (index * 5 + index2) + 30 > 1
+                        ? true
+                        : false
+                    }
+                  />
+                );
+              });
             })}
         </div>
       </ProductCardSlideWrapper>

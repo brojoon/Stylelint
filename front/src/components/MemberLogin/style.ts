@@ -4,15 +4,21 @@ export const MemberLoginContainer = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items; cetner;
-  
-  .error-text {
-   color: #F45452;
-   font-size: 12px;
-   display: flex;
-   align-items: center;
-   margin-bottom: 3px;
+  align-items: cetner;
 
+  .kakao-logo {
+    width: 1.875rem;
+    height: 1.875rem;
+    background: url(./img/kakao-logo.png) no-repeat;
+    background-size: 3.75rem 1.875rem;
+  }
+
+  .error-text {
+    color: #f45452;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3px;
   }
 
   .error-text::before {

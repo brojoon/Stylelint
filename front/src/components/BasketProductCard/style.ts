@@ -94,8 +94,14 @@ export const BasketProductContainer = styled.section<{
     margin: 0 6px;
   }
 
-  .basket-product-count > input::-webkit-inner-spin-button {
+  .basket-product-count > input::-webkit-inner-spin-button,
+  .basket-product-count > input::-webkit-outer-spin-button {
     appearance: none;
+    margin: 0;
+  }
+
+  .basket-product-count > input[type='number'] {
+    -moz-appearance: textfield;
   }
 
   .basket-product-count > button:nth-of-type(1) {

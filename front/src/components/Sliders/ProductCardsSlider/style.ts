@@ -8,7 +8,6 @@ export const ProductCardSlideWrapper = styled.section<{
   width: 1300px;
   margin: 0 auto;
   overflow: hidden;
-
   & > div {
     margin: 1.6rem;
     width: ${(props) => (props.IsMobile ? '800px' : '1300px')};
