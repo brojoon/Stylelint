@@ -1,9 +1,9 @@
 import ProductCard from '@components/ProductCard';
-import React, { useCallback, useState, VFC } from 'react';
+import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { ProductCardSlideWrapper } from './style';
 import { IProducts } from '@typings/db';
 import ModalBasket from '@components/Modals/ModalBasket';
-import { useIsMobile } from '@utils/Hooks';
+import { useIsMobile, useIsTablet } from '@utils/Hooks';
 
 interface Props {
   products: IProducts[];
@@ -19,7 +19,15 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
   const [slideStartX, setSlideStartX] = useState(0);
   const [slideClickedTime, setSlideClickedTime] = useState<Date>();
   const [isModalBasket, setIsModalBasket] = useState(false);
+  const [productCardRepeatCount, setProductCardRepeatCount] = useState(0);
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+
+  useEffect(() => {
+    if (!isTablet && !isTablet) setProductCardRepeatCount(3);
+    if (isTablet && !isMobile) setProductCardRepeatCount(2);
+    if (isMobile) setProductCardRepeatCount(1);
+  }, [isMobile, isTablet]);
 
   const onMouseDownSlide = useCallback((e) => {
     setSlideClickedTime(new Date());
@@ -49,6 +57,7 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
     setIsSlide(false);
     setIsTransition(true);
     let timeCompenstaion = 0;
+
     if (slideClickedTime) {
       timeCompenstaion = +new Date() - +slideClickedTime;
     }
@@ -57,26 +66,34 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
     if (timeCompenstaion) timeCompenstaion = (500 - timeCompenstaion) / 60;
 
     if (slidePosition + savePosValue * timeCompenstaion > 0) {
+      // 왼쪽 범위 넘어갔을떄
       setSlidePosition(0);
     } else if (
-      // 228
       window.innerWidth > 1300 &&
       slidePosition + savePosValue * timeCompenstaion < -228
     ) {
+      // PC
       setSlidePosition(-228);
     } else if (
-      // 228
-      window.innerWidth <= 480 &&
+      isMobile &&
       slidePosition + savePosValue * timeCompenstaion <
-        -328 + window.innerWidth / 9
+        -115 + window.innerWidth / 8
     ) {
-      setSlidePosition(-328 + window.innerWidth / 9);
+      // 모바일
+      setSlidePosition(-115 + window.innerWidth / 8);
     } else if (
-      // 228
+      isTablet &&
+      slidePosition + savePosValue * timeCompenstaion <
+        -219 + window.innerWidth / 13
+    ) {
+      // 테블릿
+      setSlidePosition(-219 + window.innerWidth / 13);
+    } else if (
       window.innerWidth <= 1300 &&
       slidePosition + savePosValue * timeCompenstaion <
         -328 + window.innerWidth / 13
     ) {
+      // 태블릿 ~ PC 사이
       setSlidePosition(-328 + window.innerWidth / 13);
     } else if (savePosValue > 0) {
       setSlidePosition(slidePosition + savePosValue * timeCompenstaion);
@@ -144,11 +161,11 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
       >
         <div>
           {products &&
-            [...new Array(3)].map((data, index) => {
+            [...new Array(productCardRepeatCount)].map((data, index) => {
               return products.map((product, index2) => {
                 return (
                   <ProductCard
-                    key={product.code}
+                    key={index + product.name + index2}
                     data={product}
                     setIsModalBasket={setIsModalBasket}
                     visibility={
