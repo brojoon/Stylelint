@@ -48,6 +48,7 @@ const OrderHistory = () => {
                 setPage={setPage}
                 totalCount={data?.length ? data?.length : 0}
                 perPage={perPage}
+                page={page}
               />
             </>
           ) : (
