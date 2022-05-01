@@ -9,6 +9,7 @@ import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
+import { useIsMobile } from '@utils/Hooks';
 
 interface Props {
   data: IProducts;
@@ -24,6 +25,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
 
   const router = useRouter();
   const dispatch = useDispatch();
+  const isMobile = useIsMobile();
   // const cardDecoColorRef = useRef([
   //   '#EBCBBD',
   //   '#4A8FA9',
@@ -140,7 +142,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
 
   return (
     <>
-      <ProductCardContainer>
+      <ProductCardContainer IsMobile={isMobile}>
         <div
           // onClick={onClickProductCardImg}
           className="relative z-10 rounded-[10px] w-[100%]"
@@ -208,7 +210,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
           <h3 className="text-[#969696] text-[0.75rem]">
             스타일린트[자체제작]
           </h3>
-          <div className="text-[#212121] text-[0.85rem] tracking-[-0.5px] product-desc">
+          <div className="text-[#212121] text-[0.89rem] tracking-[-0.5px] product-desc">
             {data.name}
           </div>
           <div className="flex items-center tracking-[-0.5px] justify-between my-[10px] py-[12px] border-b-[1px] border-[#F7F7F7]">
@@ -222,10 +224,13 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
               <span className="text-[0.75rem]">무료배송</span>
             </span>
           </div>
-          <div className="flex justify-between items-center text-[#969696] text-[7.5px]">
-            <div className="flex">
-              <span className="flex items-center after:w-[1px] after:h-[6.25px] after:bg-[#e8e8e8] after:mx-[5px] after:inline-block">
-                판매수 {data.perchase_quantity}
+          <div className="flex justify-between items-center text-[#969696] text-[0.46rem]">
+            <div className="flex purchase-info-wrapper">
+              <span className="flex items-center">
+                판매수{' '}
+                {data.perchase_quantity > 99999
+                  ? 99999
+                  : data.perchase_quantity}
               </span>
               <span>리뷰수 {data?.review_count}</span>
             </div>

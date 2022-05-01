@@ -1,12 +1,25 @@
 import styled from '@emotion/styled';
 
-export const ProductCardContainer = styled.div`
+export const ProductCardContainer = styled.div<{ IsMobile: boolean }>`
   display: flex;
   justify-content: space-between;
   background: #fafafa;
   padding: 15px 20px;
   margin: 15px 15px 15px 0;
   border-radius: 6px;
+
+  .purchase-info-wrapper {
+    flex-direction: ${(props) => (props.IsMobile ? 'column' : 'row')};
+  }
+
+  .purchase-info-wrapper > span:nth-of-type(1):after {
+    content: '';
+    width: 1px;
+    background-color: #e8e8e8;
+    height: 0.39rem;
+    margin: 0 5px;
+    display: ${(props) => (props.IsMobile ? 'none' : 'inline-block')};
+  }
 
   & > div:nth-of-type(1) {
     width: 100%;

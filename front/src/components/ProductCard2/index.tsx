@@ -23,7 +23,7 @@ const ProductCard2: VFC<Props> = ({ data }) => {
     <>
       <>
         {data && (
-          <ProductCardContainer>
+          <ProductCardContainer IsMobile={isMobile}>
             <div>
               <div
                 onClick={onClickProductCardImg}
@@ -48,7 +48,7 @@ const ProductCard2: VFC<Props> = ({ data }) => {
                 </div>
               </div>
               <div>
-                <div className="text-[#212121] text-[0.85rem] tracking-[-0.5px] product-desc">
+                <div className="text-[#212121] text-[0.89rem] tracking-[-0.5px] product-desc">
                   {data?.name}
                 </div>
                 <div className="flex tracking-[-0.5px] justify-between my-[10px] py-[12px] border-b-[1px] border-[#F7F7F7]">
@@ -68,11 +68,14 @@ const ProductCard2: VFC<Props> = ({ data }) => {
                     </span>
                   )}
                 </div>
-                <div className="text-[#969696] text-[7.5px]">스타일린트</div>
-                <div className="flex justify-between items-center text-[#969696] text-[7.5px]">
-                  <div className="flex">
-                    <span className="flex items-center after:w-[1px] after:h-[6.25px] after:bg-[#e8e8e8] after:mx-[5px] after:inline-block">
-                      구매수 {data.perchase_quantity}
+                <div className="text-[#969696] text-[0.6rem]">스타일린트</div>
+                <div className="flex justify-between items-center text-[#969696] text-[0.46rem] mt-[2px] ">
+                  <div className="flex purchase-info-wrapper">
+                    <span className="flex items-center">
+                      판매수{' '}
+                      {data.perchase_quantity > 99999
+                        ? 99999
+                        : data.perchase_quantity}
                     </span>
                     <span>리뷰수 {data?.review_count}</span>
                   </div>
