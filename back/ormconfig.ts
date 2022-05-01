@@ -16,9 +16,9 @@ import { ProductReview } from './src/entities/product/product.review';
 dotenv.config();
 const config: TypeOrmModuleOptions = {
   type: 'mysql',
-  // host: 'mysqld',
+  host: 'mysqld',
   // 배포용
-  host: 'localhost',
+  // host: 'localhost',
   // 로컬용
   port: +process.env.DB_PORT,
   username: process.env.DB_USERNAME,
