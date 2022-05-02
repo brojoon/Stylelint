@@ -29,20 +29,18 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
     if (isMobile) {
       //70
       setSlideViewRightMax(window.innerWidth / 8 + 16);
-    } else if (isTablet) {
-      setSlideViewRightMax(window.innerWidth / 11 + 14);
     } else if (isTablet1024) {
-      setSlideViewRightMax(window.innerWidth / 13 + 12);
+      setSlideViewRightMax(window.innerWidth / 11 + 14);
     } else {
       setSlideViewRightMax(115);
     }
-  }, [isMobile, isTablet, isTablet1024]);
+  }, [isMobile, isTablet1024]);
   useEffect(() => {
     if (isMobile) setProductCardRepeatCount(1);
-    else if (isTablet) setProductCardRepeatCount(2);
+    else if (isTablet1024) setProductCardRepeatCount(2);
     else setProductCardRepeatCount(3);
     setSlidePosition(0);
-  }, [isMobile, isTablet]);
+  }, [isMobile, isTablet1024]);
 
   const onMouseDownSlide = useCallback((e) => {
     setSlideClickedTime(new Date());
@@ -97,12 +95,12 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
       // 모바일
       setSlidePosition(-115 + window.innerWidth / 8);
     } else if (
-      isTablet &&
+      isTablet1024 &&
       slidePosition + savePosValue * timeCompenstaion <
         -219 + window.innerWidth / 13
     ) {
       // 테블릿
-      setSlidePosition(-219 + window.innerWidth / 13);
+      setSlidePosition(-220 + window.innerWidth / 13);
     } else if (
       window.innerWidth <= 1300 &&
       slidePosition + savePosValue * timeCompenstaion <
@@ -116,7 +114,7 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
       setSlidePosition(slidePosition + savePosValue * timeCompenstaion);
     }
     setSavePosValue(0);
-  }, [savePosValue, slidePosition, slideClickedTime]);
+  }, [savePosValue, slidePosition, slideClickedTime, isTablet1024, isMobile]);
 
   const onTouchDownSlide = useCallback((e) => {
     setIsTransition(false);

@@ -18,7 +18,7 @@ async function bootstrap() {
   //   origin: 'http://localhost:3000',
   //   credentials: true,
   // });
-  // //local
+  //local
 
   app.enableCors({
     origin: 'https://stylelint.ml',
