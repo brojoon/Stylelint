@@ -38,9 +38,9 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
     }
   }, [isMobile, isTablet, isTablet1024]);
   useEffect(() => {
-    if (!isTablet && !isTablet) setProductCardRepeatCount(3);
-    if (isTablet && !isMobile) setProductCardRepeatCount(2);
     if (isMobile) setProductCardRepeatCount(1);
+    else if (isTablet) setProductCardRepeatCount(2);
+    else setProductCardRepeatCount(3);
     setSlidePosition(0);
   }, [isMobile, isTablet]);
 
