@@ -1,18 +1,14 @@
 import Link from 'next/link';
-
-import Header from '@components/layouts/Header';
 import MainSlider from '@components/Sliders/MainSlider';
-import ProductsGridWrapper from '@components/ProductCardsGridWrapper';
 import ProductsCardSlider from '@components/Sliders/ProductCardsSlider';
 import { HomeContainer } from '../public/style';
 import MainEventSlider from '@components/Sliders/MainEventSlider';
-import axios from 'axios';
 import { useQuery } from 'react-query';
 import fetcher from '@utils/utils/fetcher';
 import { GetServerSideProps } from 'next';
 import { baseApiUrl } from '@utils/utils/const';
 import { VFC } from 'react';
-import { useIsMobile, useIsTablet } from '@utils/Hooks';
+import { useIsTablet } from '@utils/Hooks';
 import MobileMainEventSlider from '@components/Sliders/MobileMainEvetnSlider';
 import ProductCard2Wrapper from '@components/ProductCard2Wrapper';
 import { IProducts } from '@typings/db';
@@ -29,7 +25,7 @@ const IndexPage: VFC<Props> = ({ ssrProducstData }) => {
       initialData: ssrProducstData,
     },
   );
-  const isMobile = useIsMobile();
+
   const isTablet = useIsTablet();
 
   return (
@@ -47,6 +43,7 @@ const IndexPage: VFC<Props> = ({ ssrProducstData }) => {
                 <a>더보기</a>
               </Link>
             </div>
+
             <div>
               <h3>러블리한 봄신상!🌷 할인까지!?</h3>
             </div>
@@ -56,6 +53,7 @@ const IndexPage: VFC<Props> = ({ ssrProducstData }) => {
                 <a>더보기</a>
               </Link>
             </div>
+
             <div>
               <h3>내일 뭐 입지? 역대급 빠른배송🤩</h3>
             </div>
@@ -65,6 +63,7 @@ const IndexPage: VFC<Props> = ({ ssrProducstData }) => {
                 <a>더보기</a>
               </Link>
             </div>
+
             <div>
               <h3>어떤 걸 구매해도 실패 없는 자체브랜드🙆‍♀️</h3>
             </div>

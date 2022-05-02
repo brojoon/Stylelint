@@ -6,9 +6,9 @@ export const HomeContainer = styled.section`
     overflow: hidden;
     margin: 0 auto;
   }
-  .home-wrapper > div h3 {
-    font-weight: 600;
 
+  .home-wrapper > div > h3 {
+    font-weight: 600;
     display: inline-block;
     margin: 20px 0 15px 20px;
     font-size: 20px;

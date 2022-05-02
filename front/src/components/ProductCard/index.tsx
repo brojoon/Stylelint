@@ -265,4 +265,4 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket, visibility }) => {
   );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);

@@ -11,22 +11,21 @@ export function useScroll() {
   // const [scrollX, setScrollX] = useState(bodyOffset.left);
   // const [scrollDirection, setScrollDirection] = useState();
 
-  const listener = () => {
-    // setBodyOffset(document.body.getBoundingClientRect());
-    setScrollY(window.pageYOffset);
-    // setScrollX(bodyOffset.left);
-    // setScrollDirection(lastScrollTop > -bodyOffset.top ? 'down' : 'up');
-    // setLastScrollTop(-bodyOffset.top);
-  };
-
-  const delay = 30;
-
   useEffect(() => {
-    window.addEventListener('scroll', debounce(listener, delay));
-    return () => {
-      window.removeEventListener('scroll', listener);
+    const listener = () => {
+      // setBodyOffset(document.body.getBoundingClientRect());
+      setScrollY(window.pageYOffset);
+      // setScrollX(bodyOffset.left);
+      // setScrollDirection(lastScrollTop > -bodyOffset.top ? 'down' : 'up');
+      // setLastScrollTop(-bodyOffset.top);
     };
-  });
+    const delay = 30;
+    const debouncedFn = debounce(listener, delay);
+    window.addEventListener('scroll', debouncedFn);
+    return () => {
+      window.removeEventListener('scroll', debouncedFn);
+    };
+  }, []);
 
   return {
     scrollY,

@@ -127,7 +127,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/blouse/bs4691/main.gif',
+          image: '/imgs/Products/blouse/bs4691/sub1.jpg',
         },
         {
           id: 2,
@@ -138,7 +138,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/blouse/bs5039/main.gif',
+          image: '/imgs/Products/blouse/bs5039/sub1.jpg',
         },
         {
           id: 3,
@@ -149,7 +149,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/blouse/bs6704/main.gif',
+          image: '/imgs/Products/blouse/bs6704/sub1.jpg',
         },
         {
           id: 4,
@@ -160,7 +160,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/blouse/bs6709/main.gif',
+          image: '/imgs/Products/blouse/bs6709/sub1.jpg',
         },
         {
           id: 5,
@@ -171,7 +171,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/blouse/bs6714/main.gif',
+          image: '/imgs/Products/blouse/bs6714/sub1.jpg',
         },
         {
           id: 6,
@@ -182,7 +182,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/jacket/jk1296/main.gif',
+          image: '/imgs/Products/jacket/jk1296/sub1.jpg',
         },
         {
           id: 7,
@@ -193,7 +193,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/jacket/jk1442/main.gif',
+          image: '/imgs/Products/jacket/jk1442/sub1.jpg',
         },
         {
           id: 8,
@@ -204,7 +204,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/jacket/jk1962/main.gif',
+          image: '/imgs/Products/jacket/jk1962/sub1.jpg',
         },
         {
           id: 9,
@@ -215,7 +215,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/jacket/jk1989/main.gif',
+          image: '/imgs/Products/jacket/jk1989/sub1.jpg',
         },
         {
           id: 10,
@@ -226,7 +226,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/jacket/jk2091/main.gif',
+          image: '/imgs/Products/jacket/jk2091/sub1.jpg',
         },
         {
           id: 11,
@@ -237,7 +237,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/shirts/ts1935/main.gif',
+          image: '/imgs/Products/shirts/ts1935/sub1.jpg',
         },
         {
           id: 12,
@@ -248,7 +248,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/shirts/ts2747/main.gif',
+          image: '/imgs/Products/shirts/ts2747/sub1.jpg',
         },
         {
           id: 13,
@@ -259,7 +259,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/shirts/ts2967/main.gif',
+          image: '/imgs/Products/shirts/ts2967/sub1.jpg',
         },
         {
           id: 14,
@@ -270,7 +270,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/shirts/ts2985/main.gif',
+          image: '/imgs/Products/shirts/ts2985/sub1.jpg',
         },
         {
           id: 15,
@@ -281,7 +281,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/shirts/ts3097/main.gif',
+          image: '/imgs/Products/shirts/ts3097/sub1.jpg',
         },
         {
           id: 16,
@@ -292,7 +292,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/skirt/ps3732/main.gif',
+          image: '/imgs/Products/skirt/ps3732/sub1.jpg',
         },
         {
           id: 17,
@@ -303,7 +303,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/skirt/ps3800/main.gif',
+          image: '/imgs/Products/skirt/ps3800/sub1.jpg',
         },
         {
           id: 18,
@@ -314,7 +314,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/skirt/sk5413/main.gif',
+          image: '/imgs/Products/skirt/sk5413/sub1.jpg',
         },
         {
           id: 19,
@@ -325,7 +325,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/skirt/sk5580/main.gif',
+          image: '/imgs/Products/skirt/sk5580/sub1.jpg',
         },
         {
           id: 20,
@@ -336,7 +336,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/skirt/sk5592/main.gif',
+          image: '/imgs/Products/skirt/sk5592/sub1.jpg',
         },
         {
           id: 21,
@@ -347,7 +347,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/dress/op13507/main.gif',
+          image: '/imgs/Products/dress/op13507/sub1.jpg',
         },
         {
           id: 22,
@@ -358,7 +358,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/dress/op13547/main.gif',
+          image: '/imgs/Products/dress/op13547/sub1.jpg',
         },
         {
           id: 23,
@@ -369,7 +369,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/dress/op13550/main.gif',
+          image: '/imgs/Products/dress/op13550/sub1.jpg',
         },
         {
           id: 24,
@@ -380,7 +380,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/dress/op13561/main.gif',
+          image: '/imgs/Products/dress/op13561/sub1.jpg',
         },
         {
           id: 25,
@@ -391,7 +391,7 @@ export class CreateInitialData implements Seeder {
           dibs: 0,
           perchase_quantity: nickname.length * reviewText.length,
           review_count: nickname.length * reviewText.length,
-          image: '/imgs/Products/dress/op13616/main.gif',
+          image: '/imgs/Products/dress/op13616/sub1.jpg',
         },
       ])
       .execute();
@@ -477,7 +477,7 @@ export class CreateInitialData implements Seeder {
     //       quantity: 3,
     //       size: 'L',
     //       color: 'Red',
-    //       image: '/imgs/Products/blouse/bs5039/main.gif',
+    //       image: '/imgs/Products/blouse/bs5039/sub1.jpg',
     //       address: '송파대로 567 531동 310호',
     //       receiver: Receivers[i],
     //       phone_number: '010-4422-3311',

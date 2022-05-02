@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState, VFC } from 'react';
 import { ProductCardSlideWrapper } from './style';
 import { IProducts } from '@typings/db';
 import ModalBasket from '@components/Modals/ModalBasket';
-import { useIsMobile, useIsTablet } from '@utils/Hooks';
+import { useIsMobile, useIsTablet, useIsTablet1024 } from '@utils/Hooks';
 
 interface Props {
   products: IProducts[];
@@ -20,13 +20,28 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
   const [slideClickedTime, setSlideClickedTime] = useState<Date>();
   const [isModalBasket, setIsModalBasket] = useState(false);
   const [productCardRepeatCount, setProductCardRepeatCount] = useState(0);
+  const [slideViewRightMax, setSlideViewRightMax] = useState(0);
+
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
-
+  const isTablet1024 = useIsTablet1024();
+  useEffect(() => {
+    if (isMobile) {
+      //70
+      setSlideViewRightMax(window.innerWidth / 8 + 16);
+    } else if (isTablet) {
+      setSlideViewRightMax(window.innerWidth / 11 + 14);
+    } else if (isTablet1024) {
+      setSlideViewRightMax(window.innerWidth / 13 + 12);
+    } else {
+      setSlideViewRightMax(115);
+    }
+  }, [isMobile, isTablet, isTablet1024]);
   useEffect(() => {
     if (!isTablet && !isTablet) setProductCardRepeatCount(3);
     if (isTablet && !isMobile) setProductCardRepeatCount(2);
     if (isMobile) setProductCardRepeatCount(1);
+    setSlidePosition(0);
   }, [isMobile, isTablet]);
 
   const onMouseDownSlide = useCallback((e) => {
@@ -169,7 +184,8 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
                     data={product}
                     setIsModalBasket={setIsModalBasket}
                     visibility={
-                      slidePosition + 20 * (index * 5 + index2) + 30 < 115 &&
+                      slidePosition + 20 * (index * 5 + index2) + 30 <
+                        slideViewRightMax &&
                       slidePosition + 20 * (index * 5 + index2) + 30 > 1
                         ? true
                         : false
