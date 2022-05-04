@@ -1,5 +1,6 @@
 <h2 align=center > Stylelint 여성 의류 쇼핑몰 👚 </h2>
 </br>
+<p align=center> 📆 2022.02.4 ~ 2022.05.3</p>
 <div align=center>
    <img src="https://img.shields.io/badge/4.5.5-Typescript-3178C6?style=for=flat&logo=TypeScript&logoColor=3178C6">
    <img src="https://img.shields.io/badge/17.0.2-React-61DAFB?style=for=flat&logo=react&logoColor=61DAFB">
@@ -14,20 +15,31 @@
    <img src="https://img.shields.io/badge/5.67.0-NGINX-009639?style=flat&logo=NGINX&logoColor=009639"/>
 
 </div>
-
-<p align=center> 📆 2022.02.4 ~ 2022.05.3</p>
-
-
 <h2 align=center>preview</h2>
+   <img src="https://user-images.githubusercontent.com/52714837/166839502-62948c96-2cec-4b6a-abcc-f162ea0cc1fc.jpg"/>
+
 
 ## 프로젝트 살펴보기 🔎
-
-
-<br>
+### 🙎‍♂️ 팀 구성 
+|김형준|
+| :---: |
+|<img src=https://github.com/brojoon.png width=200 height=200 />|
+|[brojoon](https://github.com/brojoon)|
+|Front-End, Back-End|
 <hr/>
 
+### 🎯 Object
+프론트엔드, 백엔드, 배포를 모두 혼자서 진행 해보며 웹개발에 대한 시야를 넓힙니다.
 
-### 🚀 서비스 소개
+### 
+
+### ⭐️ 주요 기능
+ * [x] 장바구니
+ * [x] 결제하기
+ * [x] 상품 리뷰
+ * [x] 배송 조회
+ * [x] 회원 정보 변경
+
 
 
 ### 🗄️ DB구조
@@ -46,13 +58,7 @@
  ┃ ┣ 📂src
  ┃ ┃ ┣ 📂auth
  ┃ ┃ ┃ ┣ 📂guards
- ┃ ┃ ┃ ┃ ┣ 📜jwt-auth.guard.ts
- ┃ ┃ ┃ ┃ ┗ 📜local-auth.guard.ts
  ┃ ┃ ┃ ┣ 📂strategies
- ┃ ┃ ┃ ┃ ┣ 📜google.strategy.ts
- ┃ ┃ ┃ ┃ ┣ 📜jwt.strategy.ts
- ┃ ┃ ┃ ┃ ┣ 📜kakao.strategy.ts
- ┃ ┃ ┃ ┃ ┗ 📜local.strategy.ts
  ┃ ┃ ┃ ┣ 📜auth.controller.ts
  ┃ ┃ ┃ ┣ 📜auth.module.ts
  ┃ ┃ ┃ ┣ 📜auth.service.spec.ts
@@ -60,92 +66,39 @@
  ┃ ┃ ┃ ┗ 📜constants.ts
  ┃ ┃ ┣ 📂basket
  ┃ ┃ ┣ 📂common
- ┃ ┃ ┃ ┣ 📂decorators
- ┃ ┃ ┃ ┃ ┣ 📜token.decorator.ts
- ┃ ┃ ┃ ┃ ┗ 📜user.decorator.ts
- ┃ ┃ ┃ ┣ 📂dto
- ┃ ┃ ┃ ┃ ┗ 📜userinfo.dto.ts
- ┃ ┃ ┃ ┗ 📂interceptors
- ┃ ┃ ┃ ┃ ┗ 📜undefinedToNull.interceptor.ts
  ┃ ┃ ┣ 📂database
  ┃ ┃ ┣ 📂entities
  ┃ ┃ ┣ 📂middlewares
- ┃ ┃ ┃ ┗ 📜logger.middleware.ts
  ┃ ┃ ┣ 📂payment
  ┃ ┃ ┣ 📂products
  ┃ ┃ ┣ 📂users
- ┃ ┃ ┣ 📜app.controller.spec.ts
  ┃ ┃ ┣ 📜app.controller.ts
  ┃ ┃ ┣ 📜app.module.ts
  ┃ ┃ ┣ 📜app.service.ts
  ┃ ┃ ┗ 📜main.ts
- ┃ ┣ 📂test
- ┃ ┣ 📜.dockerignore
- ┃ ┣ 📜.env
- ┃ ┣ 📜.env.development
- ┃ ┣ 📜.env.production
- ┃ ┣ 📜.eslintrc.js
- ┃ ┣ 📜.prettierrc
  ┃ ┣ 📜docker-entrypoint.sh
  ┃ ┣ 📜Dockerfile
  ┃ ┣ 📜http-exception.filter.ts
  ┃ ┣ 📜nest-cli.json
  ┃ ┣ 📜ormconfig.ts
- ┃ ┣ 📜package-lock.json
- ┃ ┣ 📜package.json
- ┃ ┣ 📜README.md
- ┃ ┣ 📜tsconfig.build.json
- ┃ ┣ 📜tsconfig.json
  ┃ ┣ 📜user.info.ts
- ┃ ┗ 📜webpack-hmr.config.js
  ┣ 📂front
  ┃ ┣ 📂pages
- ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┣ 📜_app.tsx
- ┃ ┃ ┗ 📜_documents.tsx
  ┃ ┣ 📂public
- ┃ ┃ ┣ 📂img
- ┃ ┃ ┣ 📜favicon.ico
- ┃ ┃ ┣ 📜style.ts
- ┃ ┃ ┗ 📜vercel.svg
  ┃ ┣ 📂src
  ┃ ┃ ┣ 📂components
  ┃ ┃ ┣ 📂store
- ┃ ┃ ┃ ┣ 📂modules
- ┃ ┃ ┃ ┗ 📜index.ts
  ┃ ┃ ┣ 📂typings
  ┃ ┃ ┗ 📂utils
  ┃ ┣ 📂styles
- ┃ ┃ ┣ 📂page
- ┃ ┃ ┣ 📜globals.css
- ┃ ┃ ┗ 📜Home.module.css
- ┃ ┣ 📜.babelrc
- ┃ ┣ 📜.dockerignore
  ┃ ┣ 📜.eslintrc.json
- ┃ ┣ 📜.prettierrc
  ┃ ┣ 📜Dockerfile
  ┃ ┣ 📜init.sh
- ┃ ┣ 📜next-env.d.ts
- ┃ ┣ 📜next.config.js
- ┃ ┣ 📜package-lock.json
- ┃ ┣ 📜package.json
- ┃ ┣ 📜postcss.config.js
- ┃ ┣ 📜README.md
- ┃ ┣ 📜tailwind.config.js
- ┃ ┣ 📜tsconfig.json
- ┃ ┣ 📜tsconfig.tsbuildinfo
- ┃ ┗ 📜yarn.lock
  ┣ 📂nginx
  ┃ ┣ 📂conf.d
- ┃ ┣ 📂log
- ┃ ┃ ┣ 📜access.log
- ┃ ┃ ┗ 📜error.log
  ┃ ┣ 📜Dockerfile
  ┃ ┗ 📜init.sh
- ┣ 📂www
- ┣ 📜.env
  ┣ 📜.gitignore
  ┣ 📜db.sql
  ┣ 📜docker-compose.yml
- ┗ 📜README.md
 ```
