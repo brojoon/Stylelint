@@ -29,6 +29,11 @@
 
 ### 🚀 서비스 소개
 
+
+### 🗄️ DB구조
+![Stylelint-ERD](https://user-images.githubusercontent.com/52714837/166616618-55ce1e57-20df-44d2-88f8-8589825dbf0a.jpg)
+
+
 > #### 📁 프로젝트 구조
 ``` ts
 📦Stylelint
