@@ -52,28 +52,30 @@
 
 #### 프론트엔드
 
-React, NextJS (SSR)
+* React
 
-Redux-toolkit (상태관리, 비동기 요청)
+* NextJS (SSR)
 
-React-query (요청 캐싱)
+* Redux-toolkit (상태관리, 비동기 요청)
 
-Tailwind, Emotion (CSS)
+* React-query (요청 캐싱)
+
+* Tailwind, Emotion (CSS)
 
 
 #### 백엔드
-NestJS
+* NestJS
 
-Typeorm (orm)
+* Typeorm (orm)
 
-MySQL (db)
+* MySQL (db)
 
 #### 배포
-Docker (배포 자동화)
+* Docker (배포 자동화)
 
-AWS EC2
+* AWS EC2
 
-Nginx
+* Nginx
 
 
 
