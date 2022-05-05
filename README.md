@@ -17,7 +17,7 @@
 </div>
 <h2 align=center>preview</h2>
 <div align=center>
-   <a href="http://42transcendence.ml">
+   <a href="https://stylelint.ml">
    <img src="https://user-images.githubusercontent.com/52714837/166839502-62948c96-2cec-4b6a-abcc-f162ea0cc1fc.jpg"/>
    </a>
    <a href="https://stylelint.ml">
@@ -46,6 +46,39 @@
  * [x] 상품 리뷰
  * [x] 배송 조회
  * [x] 회원 정보 수정
+
+### 💻 기술 스택
+<hr />
+
+#### 프론트엔드
+
+React, NextJS (SSR)
+
+Redux-toolkit (상태관리, 비동기 요청)
+
+React-query (요청 캐싱)
+
+Tailwind, Emotion (CSS)
+
+
+#### 백엔드
+NestJS
+
+Typeorm (orm)
+
+MySQL (db)
+
+#### 배포
+Docker (배포 자동화)
+
+AWS EC2
+
+Nginx
+
+
+
+
+
 
 
 ### 📜 HTTPS, SSL 적용
