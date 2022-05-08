@@ -41,95 +41,24 @@ const ProductsGridWrapper = () => {
                     key={product.id}
                     data={product}
                     setIsModalBasket={setIsModalBasket}
-                    visibility={true}
                   />
                 );
             });
           })}
-        {/* data?.map((product: IProducts) => {
-          if (product.type === type)
-            return (
-              <ProductCard
-                key={product.id}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-                visibility={true}
-              />
-            );
-        })}
-        {data?.map((product: IProducts) => {
-          if (product.type === type)
-            return (
-              <ProductCard
-                key={product.id}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-        })}
-        {data?.map((product: IProducts) => {
-          if (product.type === type)
-            return (
-              <ProductCard
-                key={product.id}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-        })}
-        {data?.map((product: IProducts) => {
-          if (product.type === type)
-            return (
-              <ProductCard
-                key={product.id}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-        })}
-        {data?.map((product: IProducts) => {
-          if (product.type === type)
-            return (
-              <ProductCard
-                key={product.id}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-        })}
-        {data?.map((product: IProducts) => {
-          if (product.type === type)
-            return (
-              <ProductCard
-                key={product.id}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-        })}
-        {data?.map((product: IProducts) => {
-          if (product.type === type)
-            return (
-              <ProductCard
-                key={product.id}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-        })}
-        {data?.map((product: IProducts) => {
-          if (product.type === type)
-            return (
-              <ProductCard
-                key={product.id}
-                data={product}
-                setIsModalBasket={setIsModalBasket}
-              />
-            );
-        })} */}
       </ProductsGridContainer>
     </>
   );
 };
 
 export default ProductsGridWrapper;
+
+// {data?.map((product: IProducts) => {
+//   if (product.type === type)
+//     return (
+//       <ProductCard
+//         key={product.id}
+//         data={product}
+//         setIsModalBasket={setIsModalBasket}
+//       />
+//     );
+// })} */}

@@ -14,10 +14,10 @@ import { useIsMobile } from '@utils/Hooks';
 interface Props {
   data: IProducts;
   setIsModalBasket: React.Dispatch<React.SetStateAction<boolean>>;
-  visibility: boolean;
+  // visibility: boolean;
 }
 
-const ProductCard: VFC<Props> = ({ data, setIsModalBasket, visibility }) => {
+const ProductCard: VFC<Props> = ({ data, setIsModalBasket }) => {
   const [quickview, setQuickview] = useState(false);
   const [isClickProductImg, setIsClickProductImg] = useState(false);
   const [isDibLoading, setIsDibLoading] = useState(false);
@@ -143,7 +143,7 @@ const ProductCard: VFC<Props> = ({ data, setIsModalBasket, visibility }) => {
 
   return (
     <>
-      <ProductCardContainer IsMobile={isMobile} Visibility={visibility}>
+      <ProductCardContainer IsMobile={isMobile}>
         <div
           // onClick={onClickProductCardImg}
           className="relative z-10 rounded-[10px] w-[100%]"

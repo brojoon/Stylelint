@@ -20,21 +20,21 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
   const [slideClickedTime, setSlideClickedTime] = useState<Date>();
   const [isModalBasket, setIsModalBasket] = useState(false);
   const [productCardRepeatCount, setProductCardRepeatCount] = useState(0);
-  const [slideViewRightMax, setSlideViewRightMax] = useState(0);
+  // const [slideViewRightMax, setSlideViewRightMax] = useState(0);
 
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
   const isTablet1024 = useIsTablet1024();
-  useEffect(() => {
-    if (isMobile) {
-      //70
-      setSlideViewRightMax(window.innerWidth / 8 + 16);
-    } else if (isTablet1024) {
-      setSlideViewRightMax(window.innerWidth / 11 + 14);
-    } else {
-      setSlideViewRightMax(115);
-    }
-  }, [isMobile, isTablet1024]);
+  // useEffect(() => {
+  //   if (isMobile) {
+  //     //70
+  //     setSlideViewRightMax(window.innerWidth / 8 + 16);
+  //   } else if (isTablet1024) {
+  //     setSlideViewRightMax(window.innerWidth / 11 + 14);
+  //   } else {
+  //     setSlideViewRightMax(115);
+  //   }
+  // }, [isMobile, isTablet1024]);
   useEffect(() => {
     if (isMobile) setProductCardRepeatCount(1);
     else if (isTablet1024) setProductCardRepeatCount(2);
@@ -181,13 +181,6 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
                     key={index + product.name + index2}
                     data={product}
                     setIsModalBasket={setIsModalBasket}
-                    visibility={
-                      slidePosition + 20 * (index * 5 + index2) + 30 <
-                        slideViewRightMax &&
-                      slidePosition + 20 * (index * 5 + index2) + 30 > 1
-                        ? true
-                        : false
-                    }
                   />
                 );
               });
@@ -199,3 +192,15 @@ const ProductsCardSlider: VFC<Props> = ({ products }) => {
 };
 
 export default ProductsCardSlider;
+
+// visibility={
+//   slidePosition + 20 * (index * 5 + index2) + 30 <
+//     slideViewRightMax &&
+//   slidePosition + 20 * (index * 5 + index2) + 30 > 1
+//     ? true
+//     : false
+// }
+
+// opacity: ${(props) => (props.Visibility ? '1' : '0')};
+
+// transition: all 400ms ease;
