@@ -201,13 +201,13 @@ const MainSlider = () => {
     setSavePosValue(0);
   }, []);
 
-  // useEffect(() => {
-  //   const slideTimer = setInterval(autoSlideFunc, 3000);
+  useEffect(() => {
+    const slideTimer = setInterval(autoSlideFunc, 3000);
 
-  //   return () => {
-  //     clearInterval(slideTimer);
-  //   };
-  // }, [autoSlideFunc]);
+    return () => {
+      clearInterval(slideTimer);
+    };
+  }, [autoSlideFunc]);
 
   return (
     <SlideContainer className="relative w-[700%] h-[40vw]">
