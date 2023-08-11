@@ -17,12 +17,7 @@
 </div>
 <h2 align=center>preview</h2>
 <div align=center>
-   <a href="https://stylelint.ml">
    <img src="https://user-images.githubusercontent.com/52714837/166839502-62948c96-2cec-4b6a-abcc-f162ea0cc1fc.jpg"/>
-   </a>
-   <a href="https://stylelint.ml">
-      이미지 클릭시 배포된 사이트로 이동
-   </a>
  </div>
 
 ## 프로젝트 살펴보기 🔎
